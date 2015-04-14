@@ -1,0 +1,52 @@
+{
+    "name": "yiisoft/yii2-app-advanced",
+    "description": "Yii 2 Advanced Application Template",
+    "keywords": ["yii2", "framework", "advanced", "application template"],
+    "homepage": "http://www.yiiframework.com/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+        "forum": "http://www.yiiframework.com/forum/",
+        "wiki": "http://www.yiiframework.com/wiki/",
+        "irc": "irc://irc.freenode.net/yii",
+        "source": "https://github.com/yiisoft/yii2"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap": "*",
+        "yiisoft/yii2-swiftmailer": "*",
+        "yiisoft/yii2-authclient": "*",
+        "kartik-v/yii2-widgets": "*",
+        "kartik-v/yii2-grid": "*",
+        "mihaildev/yii2-ckeditor": "*",
+        "mihaildev/yii2-elfinder": "*",
+        "2amigos/yii2-file-upload-widget": "*",
+        "creocoder/yii2-nested-sets": "*",
+        "gilek/yii2-gtreetable": "*",
+        "dektrium/yii2-user": "*",
+        "mdmsoft/yii2-admin": "*",
+        "pheme/yii2-settings": "*",
+        "omnilight/yii2-shopping-cart": "*",
+        "c006/yii2-migration-utility": "dev-master",
+        "starark/star-matter": "*"
+    },
+    "require-dev": {
+        "yiisoft/yii2-codeception": "*",
+        "yiisoft/yii2-debug": "*",
+        "yiisoft/yii2-gii": "*",
+        "yiisoft/yii2-faker": "*"
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}
