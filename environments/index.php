@@ -29,33 +29,33 @@ return [
     'Development' => [
         'path' => 'dev',
         'setWritable' => [
-            'backend/runtime',
-            'backend/web/assets',
-            'front-home/runtime',
-            'front-home/web/assets',
+            'star-core/runtime',
+            'star-core/web/assets',
+            'star-home/runtime',
+            'star-home/web/assets',
         ],
         'setExecutable' => [
             'yii',
         ],
         'setCookieValidationKey' => [
-            'backend/config/main-local.php',
-            'front-home/config/main-local.php',
+            'star-core/config/main-local.php',
+            'star-home/config/main-local.php',
         ],
     ],
     'Production' => [
         'path' => 'prod',
         'setWritable' => [
-            'backend/runtime',
-            'backend/web/assets',
-            'front-home/runtime',
-            'front-home/web/assets',
+            'star-core/runtime',
+            'star-core/web/assets',
+            'star-home/runtime',
+            'star-home/web/assets',
         ],
         'setExecutable' => [
             'yii',
         ],
         'setCookieValidationKey' => [
-            'backend/config/main-local.php',
-            'front-home/config/main-local.php',
+            'star-core/config/main-local.php',
+            'star-home/config/main-local.php',
         ],
     ],
 ];
