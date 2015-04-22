@@ -29,6 +29,8 @@ return [
     'Development' => [
         'path' => 'dev',
         'setWritable' => [
+            'star-cluster/runtime',
+            'star-cluster/web/assets',
             'star-core/runtime',
             'star-core/web/assets',
             'star-home/runtime',
@@ -38,6 +40,7 @@ return [
             'yii',
         ],
         'setCookieValidationKey' => [
+            'star-cluster/config/main-local.php',
             'star-core/config/main-local.php',
             'star-home/config/main-local.php',
         ],
@@ -45,6 +48,8 @@ return [
     'Production' => [
         'path' => 'prod',
         'setWritable' => [
+            'star-cluster/runtime',
+            'star-cluster/web/assets',
             'star-core/runtime',
             'star-core/web/assets',
             'star-home/runtime',
@@ -54,6 +59,7 @@ return [
             'yii',
         ],
         'setCookieValidationKey' => [
+            'star-cluster/config/main-local.php',
             'star-core/config/main-local.php',
             'star-home/config/main-local.php',
         ],

@@ -19,15 +19,15 @@ Yincart Galaxy System
 虚拟域名配置说明
 ----------------
 
-core.dev 对应star-core目录
+star-core.dev 对应star-core目录
 
-home.dev 对应star-home
+star-home.dev 对应star-home
 
-cluster.dev 对应star-cluster
+star-cluster.dev 对应star-cluster
 
 ....
 
-命名规则为xxx.dev对应star-xxx
+命名规则为star-xxx.dev对应star-xxx
 
 DIRECTORY STRUCTURE
 -------------------

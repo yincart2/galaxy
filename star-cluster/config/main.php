@@ -7,11 +7,32 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'star-home',
+    'id' => 'core',
     'basePath' => dirname(__DIR__),
-    'controllerNamespace' => 'home\controllers',
+    'controllerNamespace' => 'core\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu', // default to null. other avaliable value 'right-menu' and 'top-menu'
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'dektrium\user\models\User',
+                    'idField' => 'id'
+                ]
+            ],
+            'menus' => [
+                'assignment' => [
+                    'label' => 'Grand Access' // change label
+                ],
+                'route' => null, // disable menu
+            ],
+            'mainLayout' => '@core/views/layouts/main.php',
+        ],
+        'station' => [
+            'class' => 'core\modules\station\Module',
+        ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ]

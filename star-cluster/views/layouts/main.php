@@ -1,10 +1,9 @@
 <?php
+use core\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use home\assets\AppAsset;
-use home\widgets\Alert;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -26,42 +25,59 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'Galaxy Core Center',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
+
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register']];
-                $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
+                $menuItems[] = ['label' => 'Login', 'url' => ['/site/security/login']];
             } else {
-                $menuItems[] = ['label' => 'User', 'url' => ['/user/admin/index']];
-                $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
+                $menuItems[] = [
+                    'label' => 'Blog', 'url' => ['/blog/core/post/index'],
+                ];
+                $menuItems[] = [
+                    'label' => 'Tree', 'url' => ['/tree/index'],
+                ];
+                $menuItems[] = [
+                    'label' => 'Station', 'url' => ['/station/default/index'],
+                ];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/user/security/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
             }
+
+//            $callback = function($menu){
+//                $data = eval($menu['data']);
+//                return [
+//                    'label' => $menu['name'],
+//                    'url' => [$menu['route']],
+//                    'options' => $data,
+//                    'items' => $menu['children']
+//                ];
+//            };
+
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $menuItems,
+                'items' =>  $menuItems,
             ]);
             NavBar::end();
         ?>
 
-        <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+        <div class="container" style="width: 100%">
+            <div class="col-sm-12">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= $content ?>
+            </div>
         </div>
     </div>
 
