@@ -1,7 +1,9 @@
 <?php
 Yii::setAlias('common', dirname(__DIR__));
+Yii::setAlias('cluster', dirname(dirname(__DIR__)) . '/star-cluster');
 Yii::setAlias('home', dirname(dirname(__DIR__)) . '/star-home');
 Yii::setAlias('core', dirname(dirname(__DIR__)) . '/star-core');
+Yii::setAlias('wechat', dirname(dirname(__DIR__)) . '/star-wechat');
 Yii::setAlias('matter', dirname(dirname(__DIR__)) . '/star-matter');
 Yii::setAlias('star', dirname(dirname(__DIR__)) . '/star-modules');
 Yii::setAlias('console', dirname(dirname(__DIR__)) . '/console');
