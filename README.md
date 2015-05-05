@@ -1,11 +1,17 @@
-Yincart Galaxy System
+Yincart2 Galaxy System
 ===================================
 
-星系系统，可以根据自己的实际需求选择单商户版本或者多商户版本，同时我们还提供多种其他电商的解决方案
+电商星系系统，提供零售、批发、特卖、垂直电商、分销、O2O、C2C、移动电商、微信电商、社交电商、P2P、众筹等电商解决方案，根据需要选择不同的模块组合
+
+结构说明
+-----------
+### star citizen
+
+用户中心
 
 ### star cluster
 
-垂直电商门户平台
+垂直电商
 
 ### star core
 
@@ -13,23 +19,30 @@ Yincart Galaxy System
 
 ### star home
 
-站点主页
+单商户/店铺 主站
 
+### star matter
+
+公用的一些类库
+
+### star wechat
+
+微信商城
 
 虚拟域名配置说明
 ----------------
 
-star-core.dev 对应star-core目录
+core.dev 对应star-core目录
 
-star-home.dev 对应star-home
+home.dev 对应star-home
 
-star-cluster.dev 对应star-cluster
+cluster.dev 对应star-cluster
 
 ....
 
-命名规则为star-xxx.dev对应star-xxx
+命名规则为xxx.dev对应star-xxx
 
-DIRECTORY STRUCTURE
+YII2 DIRECTORY STRUCTURE
 -------------------
 
 ```
