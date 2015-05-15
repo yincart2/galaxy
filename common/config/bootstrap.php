@@ -6,4 +6,5 @@ Yii::setAlias('core', dirname(dirname(__DIR__)) . '/star-core');
 Yii::setAlias('wechat', dirname(dirname(__DIR__)) . '/star-wechat');
 Yii::setAlias('matter', dirname(dirname(__DIR__)) . '/star-matter');
 Yii::setAlias('star', dirname(dirname(__DIR__)) . '/star-modules');
+Yii::setAlias('theme', dirname(dirname(__DIR__)) . '/star-themes');
 Yii::setAlias('console', dirname(dirname(__DIR__)) . '/console');

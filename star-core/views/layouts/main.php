@@ -39,7 +39,13 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/security/login']];
             } else {
                 $menuItems[] = [
+                    'label' => 'User', 'url' => ['/user/admin/index'],
+                ];
+                $menuItems[] = [
                     'label' => 'Blog', 'url' => ['/blog/core/post/index'],
+                ];
+                $menuItems[] = [
+                    'label' => 'Catalog', 'url' => ['/catalog/core/default/index'],
                 ];
                 $menuItems[] = [
                     'label' => 'Tree', 'url' => ['/tree/index'],

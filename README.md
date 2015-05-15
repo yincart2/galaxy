@@ -42,6 +42,11 @@ cluster.dev 对应star-cluster
 
 命名规则为xxx.dev对应star-xxx
 
+数据库
+-------
+
+数据库位于console/data/galaxy_latest.sql
+
 YII2 DIRECTORY STRUCTURE
 -------------------
 
