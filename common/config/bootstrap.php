@@ -8,3 +8,4 @@ Yii::setAlias('matter', dirname(dirname(__DIR__)) . '/star-matter');
 Yii::setAlias('star', dirname(dirname(__DIR__)) . '/star-modules');
 Yii::setAlias('theme', dirname(dirname(__DIR__)) . '/star-themes');
 Yii::setAlias('console', dirname(dirname(__DIR__)) . '/console');
+Yii::setAlias('image', dirname(dirname(__DIR__)) . '/star-image');

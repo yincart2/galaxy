@@ -4,6 +4,7 @@ namespace star\catalog\models;
 
 use Yii;
 use common\models\Tree;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%item}}".
@@ -42,6 +43,7 @@ use common\models\Tree;
  */
 class Item extends \yii\db\ActiveRecord
 {
+    public $images;
     /**
      * @inheritdoc
      */
@@ -56,16 +58,26 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'title', 'stock', 'price', 'currency', 'props', 'props_name', 'desc', 'review_count', 'deal_count', 'create_time', 'update_time', 'language', 'country', 'state', 'city'], 'required'],
+//            [['category_id', 'title', 'stock', 'price', 'currency', 'props', 'props_name', 'desc', 'review_count', 'deal_count', 'create_time', 'update_time', 'language', 'country', 'state', 'city'], 'required'],
             [['category_id', 'stock', 'min_number', 'is_show', 'is_promote', 'is_new', 'is_hot', 'is_best', 'click_count', 'wish_count', 'review_count', 'deal_count', 'create_time', 'update_time', 'country', 'state', 'city'], 'integer'],
             [['price', 'shipping_fee'], 'number'],
             [['props', 'props_name', 'desc'], 'string'],
             [['outer_id', 'language'], 'string', 'max' => 45],
             [['title'], 'string', 'max' => 255],
-            [['currency'], 'string', 'max' => 20]
+            [['currency'], 'string', 'max' => 20],
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ]
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -95,7 +107,7 @@ class Item extends \yii\db\ActiveRecord
             'deal_count' => Yii::t('catalog', 'Deal Count'),
             'create_time' => Yii::t('catalog', '创建时间'),
             'update_time' => Yii::t('catalog', '更新时间'),
-            'language' => Yii::t('catalog', 'Language'),
+            'language' => Yii::t('catalog', '语言'),
             'country' => Yii::t('catalog', 'Country'),
             'state' => Yii::t('catalog', 'State'),
             'city' => Yii::t('catalog', 'City'),
@@ -133,4 +145,38 @@ class Item extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Sku::className(), ['item_id' => 'item_id']);
     }
+
+
+    public function loadUploadImages($model){
+        $images = [];
+        foreach ($_FILES[$model] as $key => $info) {
+            foreach($info as $attributes => $v){
+                foreach($v as $num=>$value){
+                    $images[$attributes][$num][$key] = $value;
+                }
+            }
+        }
+        return $images;
+    }
+
+    public function saveImage($image){
+        if(!in_array($image['type'],['image/jpeg','image/png','image/gif'])){
+            $this->addError('images',Yii::t('catalog',$image['type'] .'Type is wrong'));
+        }
+
+        $imageName = time().$image['name'];
+        $path = Yii::getAlias('@image');
+
+        if (file_exists( $path.'/'. $imageName)){
+            $this->addError('images',Yii::t('catalog','Image already exists.'));
+        }
+        if(!move_uploaded_file($image["tmp_name"],$path .'/'. $imageName)){
+            $this->addError('images',Yii::t('catalog','Remove image fail.'));
+        }
+
+        return $path .'/'. $imageName;
+    }
+
+
+
 }

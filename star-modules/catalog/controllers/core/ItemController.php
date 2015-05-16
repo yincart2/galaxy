@@ -5,9 +5,12 @@ namespace star\catalog\controllers\core;
 use Yii;
 use star\catalog\models\Item;
 use star\catalog\models\ItemSearch;
+use yii\base\ErrorException;
+use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -64,8 +67,21 @@ class ItemController extends Controller
     public function actionCreate()
     {
         $model = new Item();
+        if ($model->load(Yii::$app->request->post()) ) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $images = $model->loadUploadImages('Item');
+            $imagesArray = [];
+            foreach($images['images'] as $image){
+                $imagesArray[] = $model ->saveImage($image);
+            }
+
+
+            if($model->hasErrors()){
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            };
+             $model->save();
             return $this->redirect(['view', 'id' => $model->item_id]);
         } else {
             return $this->render('create', [
@@ -120,5 +136,22 @@ class ItemController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionUploadImage(){
+        // get the uploaded file instance. for multiple file uploads
+        // the following data will return an array (you may need to use
+        // getInstances method)
+        $model = new Item();
+        $image = UploadedFile::getInstance($model, 'itemImgs');
+
+        // if no image was uploaded abort the upload
+        if (empty($image)) {
+            return json_encode(['error'=>Yii::t('catalog','There is no image')]);
+        }
+        $imageName = $image->baseName . time() . '.' . $image->extension;
+        $image->saveAs(\Yii::getAlias('@image/') . $imageName);
+        list($path, $link) = Yii::$app->getAssetManager()->publish('@image');
+        return json_encode(['initialPreview'=>"<img src='".$link.'/' .$imageName. "' class='file-preview-image' alt='Desert' title='Desert'>",'initialPreviewConfig'=>['caption'=>$imageName,'key'=>$imageName]]);
     }
 }

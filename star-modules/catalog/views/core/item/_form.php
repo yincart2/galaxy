@@ -3,7 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Tree;
-
+use yii\bootstrap\Tabs;
+use mihaildev\ckeditor\CKEditor;
+use yii\helpers\Url;
+use kartik\file\FileInput;
 /* @var $this yii\web\View */
 /* @var $model star\catalog\models\Item */
 /* @var $form yii\widgets\ActiveForm */
@@ -11,59 +14,62 @@ use common\models\Tree;
 
 <div class="item-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options'=>['enctype'=>'multipart/form-data']
+    ]);
 
-    <?= $form->field($model, 'category_id')->dropDownList(Tree::getTreesByName('商品分类')) ?>
+    $fieldGroups = [];
+    $fields = [];
+    $fields[] = $form->field($model, 'title')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'price')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'currency')->dropDownList(['Chinese']);
+    $fields[] = $form->field($model, 'language')->dropDownList(['Chinese']);
+    $fieldGroups[] = ['label' => Yii::t('catalog','Base Info'), 'content' => implode('', $fields)];
 
-    <?= $form->field($model, 'outer_id')->textInput(['maxlength' => 45]) ?>
+    $fields = [];
+    $fields[] = $form->field($model, 'desc')->widget(CKEditor::className(), ['editorOptions' => ['filebrowserBrowseUrl' => Url::to(['elfinder/manager'])]]);
+    $fieldGroups[] = ['label' => Yii::t('catalog','Detailed Info'), 'content' => implode('', $fields)];
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
+    $fields = [];
+    $fields[] = $form->field($model, 'shipping_fee')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'is_show')->radioList(['Yes','No']);
+    $fields[] = $form->field($model, 'is_promote')->radioList(['Yes','No']);
+    $fields[] = $form->field($model, 'is_new')->radioList(['Yes','No']);
+    $fields[] = $form->field($model, 'is_hot')->radioList(['Yes','No']);
+    $fields[] = $form->field($model, 'is_best')->radioList(['Yes','No']);
 
-    <?= $form->field($model, 'stock')->textInput(['maxlength' => 10]) ?>
+    $fieldGroups[] = ['label' => Yii::t('catalog','Other Info'), 'content' => implode('', $fields)];
 
-    <?= $form->field($model, 'min_number')->textInput(['maxlength' => 10]) ?>
+    $fields = [];
+    $fields[] = $form->field($model, 'outer_id')->textInput(['maxlength' => 255]);
 
-    <?= $form->field($model, 'price')->textInput(['maxlength' => 10]) ?>
+    $fieldGroups[] = ['label' => Yii::t('catalog','Product Info'), 'content' => implode('', $fields)];
 
-    <?= $form->field($model, 'currency')->textInput(['maxlength' => 20]) ?>
-
-    <?= $form->field($model, 'props')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'props_name')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'desc')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'shipping_fee')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'is_show')->textInput() ?>
-
-    <?= $form->field($model, 'is_promote')->textInput() ?>
-
-    <?= $form->field($model, 'is_new')->textInput() ?>
-
-    <?= $form->field($model, 'is_hot')->textInput() ?>
-
-    <?= $form->field($model, 'is_best')->textInput() ?>
-
-    <?= $form->field($model, 'click_count')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'wish_count')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'review_count')->textInput() ?>
-
-    <?= $form->field($model, 'deal_count')->textInput() ?>
-
-    <?= $form->field($model, 'create_time')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'update_time')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'language')->textInput(['maxlength' => 45]) ?>
-
-    <?= $form->field($model, 'country')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'state')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'city')->textInput(['maxlength' => 10]) ?>
+    $fields = [];
+    if($model->isNewRecord){
+        $fields[] = $form->field($model, 'images[]')->widget(FileInput::classname(), [
+            'options' => ['accept' => 'image/*', 'multiple'=>true],
+            'pluginOptions' => [
+                'allowedFileExtensions'=>['jpg','gif','png']
+            ]
+        ]);
+    }else{
+        $fields[] = $form->field($model, 'images[]')->widget(FileInput::classname(), [
+            'options' => ['accept' => 'image/*', 'multiple'=>true],
+            'pluginOptions' => [
+                'uploadUrl' => Url::to(['/catalog/core/item/upload-image']),
+                'uploadExtraData' => [
+                    'album_id' => 20,
+                    'cat_id' => 'Nature'
+                ],
+                'maxFileCount' => 10,
+                'allowedFileExtensions'=>['jpg','gif','png']
+            ]
+        ]);
+    }
+    $fieldGroups[] = ['label' => Yii::t('catalog','Product Image'), 'content' => implode('', $fields)];
+    echo Tabs::widget(['items' => $fieldGroups]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

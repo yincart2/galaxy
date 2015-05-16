@@ -95,7 +95,7 @@ AppAsset::register($this);
                         'heading' => $heading,
                         'items' => [
                             ['label' => '类目属性', 'icon' => 'book', 'url' => Url::to('/catalog/core/item-prop/index', $type), 'active' => ($item == 'props')],
-                            ['label' => '商品列表', 'icon' => 'tags', 'url' => Url::to('/catalog/core/item/index', $type), 'active' => ($item == 'items')],
+                            ['label' => '商品列表', 'icon' => 'tags', 'url' => Url::to(['/catalog/core/item/index'], $type), 'active' => ($item == 'items')],
                         ],
                     ]);
                     ?>
