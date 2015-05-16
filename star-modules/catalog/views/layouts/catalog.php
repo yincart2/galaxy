@@ -25,7 +25,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Galaxy Core Center',
+        'brandLabel' => Yii::t('app','Galaxy Core Center'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -33,25 +33,25 @@ AppAsset::register($this);
     ]);
 
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => Yii::t('app','Home'), 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/security/login']];
+        $menuItems[] = ['label' => Yii::t('app','Login'), 'url' => ['/site/security/login']];
     } else {
         $menuItems[] = [
-            'label' => 'Blog', 'url' => ['/blog/core/post/index'],
+            'label' => Yii::t('app','Blog'), 'url' => ['/blog/core/post/index'],
         ];
         $menuItems[] = [
-            'label' => 'Catalog', 'url' => ['/catalog/core/default/index'],
+            'label' => Yii::t('app','Catalog'), 'url' => ['/catalog/core/default/index'],
         ];
         $menuItems[] = [
-            'label' => 'Tree', 'url' => ['/tree/index'],
+            'label' => Yii::t('app','Tree'), 'url' => ['/tree/index'],
         ];
         $menuItems[] = [
-            'label' => 'Station', 'url' => ['/station/default/index'],
+            'label' => Yii::t('app','Station'), 'url' => ['/station/default/index'],
         ];
         $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+            'label' => Yii::t('app','Logout').' (' . Yii::$app->user->identity->username . ')',
             'url' => ['/user/security/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];
@@ -86,7 +86,7 @@ AppAsset::register($this);
                     use yii\helpers\Url;
 
                     $type = 'http';
-                    $heading = 'Catalog';
+                    $heading = Yii::t('app','Catalog');
                     $item = 'home';
 
                     echo SideNav::widget([
@@ -94,8 +94,8 @@ AppAsset::register($this);
                         'encodeLabels' => false,
                         'heading' => $heading,
                         'items' => [
-                            ['label' => '类目属性', 'icon' => 'book', 'url' => Url::to('/catalog/core/item-prop/index', $type), 'active' => ($item == 'props')],
-                            ['label' => '商品列表', 'icon' => 'tags', 'url' => Url::to(['/catalog/core/item/index'], $type), 'active' => ($item == 'items')],
+                            ['label' => Yii::t('app','类目属性'), 'icon' => 'book', 'url' => Url::to(['/catalog/core/item-prop/index', $type]), 'active' => ($item == 'props')],
+                            ['label' => Yii::t('app','商品列表'), 'icon' => 'tags', 'url' => Url::to(['/catalog/core/item/index', $type]), 'active' => ($item == 'items')],
                         ],
                     ]);
                     ?>

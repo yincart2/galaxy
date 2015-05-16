@@ -86,5 +86,4 @@ class ItemProp extends \yii\db\ActiveRecord
         return $this->hasOne(Tree::className(), ['id' => 'category_id']);
     }
 
-
 }
