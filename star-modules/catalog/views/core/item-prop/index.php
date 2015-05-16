@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel star\catalog\models\ItemPropSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Item Props';
+$this->title = Yii::t('app','Item Props');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-prop-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Item Prop', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app','Create Item Prop'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

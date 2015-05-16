@@ -2,6 +2,7 @@
 
 namespace star\catalog\controllers\core;
 
+use star\catalog\models\PropValue;
 use Yii;
 use star\catalog\models\ItemProp;
 use star\catalog\models\ItemPropSearch;
@@ -66,6 +67,7 @@ class ItemPropController extends Controller
         $model = new ItemProp();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->savePropValue($model->prop_id);
             return $this->redirect(['view', 'id' => $model->prop_id]);
         } else {
             return $this->render('create', [
@@ -85,6 +87,7 @@ class ItemPropController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->savePropValue($model->prop_id);
             return $this->redirect(['view', 'id' => $model->prop_id]);
         } else {
             return $this->render('update', [
@@ -101,6 +104,7 @@ class ItemPropController extends Controller
      */
     public function actionDelete($id)
     {
+        PropValue::deleteAll(['prop_id' => $id]);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -119,6 +123,47 @@ class ItemPropController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function savePropValue($prop_id)
+    {
+        if (isset($_POST['PropValue'])) {
+            $propValues = $_POST['PropValue'];
+            unset($_POST['PropValue']);
+            if (is_array($propValues['value_name']) && $count = count($propValues['value_name'])) {
+                for ($i = 0; $i < $count; $i++) {
+                    $propValue = new PropValue();
+                    $propValue->setAttributes(array(
+                        'prop_id' => $prop_id,
+                        'value_name' => $propValues['value_name'][$i],
+                        'sort_order' => $i,
+                        'value_alias' => $propValues['value_name'][$i],
+                        'status' => 1,
+                    ));
+                    if(isset($propValues['value_id'][$i]) && $propValues['value_id'][$i]) {
+                        $propValue->value_id = $propValues['value_id'][$i];
+                        $propValue->update();
+                    } else {
+                        $propValue->save();
+                    }
+                    $propValues['value_id'][$i] = $propValue->value_id;
+                }
+                //删除
+                $models = PropValue::findAll(['prop_id' => $prop_id]);
+                $delArr = array();
+                foreach ($models as $k1 => $v1) {
+                    if (!in_array($v1->value_id, $propValues['value_id'])) {
+                        $delArr[] = $v1->value_id;
+                    }
+                }
+                if (count($delArr)) {
+                    PropValue::deleteAll('value_id IN (' . implode(', ', $delArr) . ')');
+                }
+            } else {
+                //已经没有属性了，要清除数据表内容
+                PropValue::deleteAll('prop_id = ' . $prop_id);
+            }
         }
     }
 }
