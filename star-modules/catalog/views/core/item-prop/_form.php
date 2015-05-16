@@ -190,7 +190,7 @@ use common\models\Tree;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(Tree::getTreesByName('商品分类')) ?>
+<!--    --><?//= $form->field($model, 'category_id')->dropDownList(Tree::getTreesByName('商品分类')) ?>
 
     <?= $form->field($model, 'prop_name')->textInput(['maxlength' => 100]) ?>
 
@@ -227,7 +227,8 @@ use common\models\Tree;
                     <tr id="add-template">
                         <td class="icons">
                             <img class="drag-handle"
-                                 src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images//small_icons/drag.png"
+                                 <?php list($path,$url) = Yii::$app->assetManager->publish('@star/catalog/assets')?>
+                                 src="<?= $url ?>/img/drag.png"
                                  alt="click and drag to rearrange"/>
                         </td>
                         <td>
@@ -235,12 +236,12 @@ use common\models\Tree;
                         </td>
                         <td class="icons">
                             <img class="row-cloner"
-                                 src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images//small_icons/clone.png"
+                                 src="<?= $url ?>/img/clone.png"
                                  alt="Clone Row"/>
                         </td>
                         <td class="icons">
                             <img class="row-remover"
-                                 src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images//small_icons/remove.png"
+                                 src="<?= $url ?>/img/remove.png"
                                  alt="Remove Row"/>
                         </td>
                     </tr>
