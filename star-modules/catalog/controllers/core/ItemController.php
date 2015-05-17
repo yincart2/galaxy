@@ -146,5 +146,27 @@ class ItemController extends Controller
         }
     }
 
-
+    public function actionItemManager(){
+        if(Yii::$app->request->isPost){
+            $action = Yii::$app->request->post('act');
+            $selection=(array)Yii::$app->request->post('selection');
+            $tmpAction = [
+                'is_show'=>['is_show',1],'un_show'=>['is_show',0],
+                'is_promote'=>['is_promote',1],'un_promote'=>['is_promote',0],
+                'is_new'=>['is_new',1],'un_new'=>['is_new',0],
+                'is_hot'=>['is_hot',1],'un_hot'=>['is_hot',0],
+                'is_best'=>['is_best',1],'un_best'=>['is_best',0]
+            ];
+            foreach($selection as $value){
+                $model = $this->findModel($value);
+               if($action == 'delete'){
+                   $model->delete();
+               }else{
+                   $model->$tmpAction[$action][0] = $tmpAction[$action][1];
+                   $model->save();
+               }
+            }
+        }
+        return $this->redirect(['index']);
+    }
 }

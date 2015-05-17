@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel star\catalog\models\ItemSearch */
@@ -11,18 +12,18 @@ $this->title = 'Items';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Item', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+    <?php $form = ActiveForm::begin([
+        'action' =>['/catalog/core/item/item-manager'],
+        'method' => 'post'
+    ]);?>
     <?= GridView::widget([
+        'export'=>false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            [
+                'class' => '\kartik\grid\CheckboxColumn',
+            ],
             ['class' => 'yii\grid\SerialColumn'],
 //            'item_id',
             [
@@ -41,11 +42,31 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'props_name:ntext',
             // 'desc:ntext',
             // 'shipping_fee',
-            // 'is_show',
-            // 'is_promote',
-            // 'is_new',
-            // 'is_hot',
-            // 'is_best',
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_show',
+                'vAlign'=>'middle'
+            ],
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_promote',
+                'vAlign'=>'middle'
+            ],
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_new',
+                'vAlign'=>'middle'
+            ],
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_hot',
+                'vAlign'=>'middle'
+            ],
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_best',
+                'vAlign'=>'middle'
+            ],
             // 'click_count',
             // 'wish_count',
             // 'review_count',
@@ -57,8 +78,46 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'state',
             // 'city',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'kartik\grid\ActionColumn',
+                'dropdown'=>true,
+                'dropdownOptions'=>['class'=>'pull-right'],
+                'headerOptions'=>['class'=>'kartik-sheet-style'],
+            ],
         ],
+        'panel'=>[
+            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Items</h3>',
+            'type'=>'success',
+            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create Items', ['create'], ['class' => 'btn btn-success']),
+            'footer'=>false
+        ],
+        'toolbar' => [
+            [
+                'content'=>
+                    Html::submitButton('Save', ['class' => 'btn btn-success']) . '  '.
+                    Html::dropDownList('act','',
+                        [
+                            ''  =>'选择操作',
+                        'delete' => '删除产品',
+                        'is_show' => '上架',
+                        'un_show' => '下架',
+                        'is_promote' => '促销',
+                        'un_promote' => '取消促销',
+                        'is_new' => '新品',
+                        'un_new' => '取消新品',
+                        'is_hot' => '热卖',
+                        'un_hot' => '取消热卖',
+                        'is_best' => '精品',
+                        'un_best' => '取消精品',
+                    ],['class' => 'btn btn-default']) ,
+                'options' => ['class' => 'btn-group-sm']
+            ],
+            '{export}',
+            '{toggleData}'
+        ],
+        'toggleDataContainer' => ['class' => 'btn-group-sm'],
+        'exportContainer' => ['class' => 'btn-group-sm']
     ]); ?>
 
+    <?php ActiveForm::end(); ?>
 </div>

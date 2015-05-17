@@ -22,6 +22,14 @@ return [
         'utility' => [
             'class' => 'c006\utility\migration\Module',
         ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module',
+            'i18n' => [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => '@kvgrid/messages',
+                'forceTranslation' => true
+            ]
+        ]
     ],
     'components' => [
         'user' => [
