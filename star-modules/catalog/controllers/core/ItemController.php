@@ -2,6 +2,7 @@
 
 namespace star\catalog\controllers\core;
 
+use star\catalog\models\ItemImg;
 use Yii;
 use star\catalog\models\Item;
 use star\catalog\models\ItemSearch;
@@ -68,6 +69,7 @@ class ItemController extends Controller
     {
         $model = new Item();
         if ($model->load(Yii::$app->request->post()) ) {
+            $transaction=Yii::$app->db->beginTransaction();
 
             $images = $model->loadUploadImages('Item');
             $imagesArray = [];
@@ -75,19 +77,29 @@ class ItemController extends Controller
                 $imagesArray[] = $model ->saveImage($image);
             }
 
-
-            if($model->hasErrors()){
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            };
-             $model->save();
-            return $this->redirect(['view', 'id' => $model->item_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if($model->save()){
+                foreach($imagesArray as $num=> $image){
+                    $itemImg = new ItemImg();
+                    $itemImg->item_id = $model->item_id;
+                    $itemImg->pic = $image;
+                    $itemImg->position = $num;
+                    $itemImg->create_time = time();
+                   if(!$itemImg->save()) {
+                       $model->addError('images',Yii::t('catalog','save images to database fail.'));
+                   }
+                }
+            }
+            if(!$model->hasErrors()){
+                $transaction->commit();
+                return $this->redirect(['view', 'id' => $model->item_id]);
+            }
+            $transaction->rollBack();
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+
     }
 
     /**
