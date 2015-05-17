@@ -54,13 +54,20 @@ use kartik\file\FileInput;
             ]
         ]);
     }else{
+        $itemImages = $model->itemImgs;
+        $imagesTemplate =[];
+        foreach($itemImages as $itemImage){
+            $imagesTemplate[] = "<img src='".Yii::$app->params['imageDomain'].'/'.$itemImage->pic."' class='file-preview-image'>";
+        }
         $fields[] = $form->field($model, 'images[]')->widget(FileInput::classname(), [
-            'options' => ['accept' => 'image/*', 'multiple'=>true],
+            'options' => [ 'accept' => 'image/*', 'multiple'=>true],
             'pluginOptions' => [
-                'uploadUrl' => Url::to(['/catalog/core/item/upload-image']),
+                'initialPreview'=>$imagesTemplate,
+                'overwriteInitial'=>false,
+                'uploadUrl' => Url::to(['/catalog/core/item-img/create']),
                 'uploadExtraData' => [
-                    'album_id' => 20,
-                    'cat_id' => 'Nature'
+                    'item_id' => $model->item_id,
+                    'position' => count($itemImages)//TODO:  js
                 ],
                 'maxFileCount' => 10,
                 'allowedFileExtensions'=>['jpg','gif','png']

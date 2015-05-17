@@ -71,11 +71,7 @@ class ItemController extends Controller
         if ($model->load(Yii::$app->request->post()) ) {
             $transaction=Yii::$app->db->beginTransaction();
 
-            $images = $model->loadUploadImages('Item');
-            $imagesArray = [];
-            foreach($images['images'] as $image){
-                $imagesArray[] = $model ->saveImage($image);
-            }
+            $imagesArray = $model->getUploadImages();
 
             if($model->save()){
                 foreach($imagesArray as $num=> $image){
@@ -150,20 +146,5 @@ class ItemController extends Controller
         }
     }
 
-    public function actionUploadImage(){
-        // get the uploaded file instance. for multiple file uploads
-        // the following data will return an array (you may need to use
-        // getInstances method)
-        $model = new Item();
-        $image = UploadedFile::getInstance($model, 'itemImgs');
 
-        // if no image was uploaded abort the upload
-        if (empty($image)) {
-            return json_encode(['error'=>Yii::t('catalog','There is no image')]);
-        }
-        $imageName = $image->baseName . time() . '.' . $image->extension;
-        $image->saveAs(\Yii::getAlias('@image/') . $imageName);
-        list($path, $link) = Yii::$app->getAssetManager()->publish('@image');
-        return json_encode(['initialPreview'=>"<img src='".$link.'/' .$imageName. "' class='file-preview-image' alt='Desert' title='Desert'>",'initialPreviewConfig'=>['caption'=>$imageName,'key'=>$imageName]]);
-    }
 }

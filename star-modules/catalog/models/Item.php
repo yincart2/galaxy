@@ -147,9 +147,18 @@ class Item extends \yii\db\ActiveRecord
     }
 
 
-    public function loadUploadImages($model){
+    public function getUploadImages(){
+        $images = $this->loadUploadImages('Item');
+        $imagesArray = [];
+        foreach($images['images'] as $image){
+            $imagesArray[] = $this ->saveImage($image);
+        }
+        return $imagesArray;
+    }
+
+    public function loadUploadImages($file){
         $images = [];
-        foreach ($_FILES[$model] as $key => $info) {
+        foreach ($_FILES[$file] as $key => $info) {
             foreach($info as $attributes => $v){
                 foreach($v as $num=>$value){
                     $images[$attributes][$num][$key] = $value;
@@ -159,7 +168,7 @@ class Item extends \yii\db\ActiveRecord
         return $images;
     }
 
-    public function saveImage($image){
+    protected function saveImage($image){
         if(!in_array($image['type'],['image/jpeg','image/png','image/gif'])){
             $this->addError('images',Yii::t('catalog',$image['type'] .'Type is wrong'));
         }
@@ -174,7 +183,7 @@ class Item extends \yii\db\ActiveRecord
             $this->addError('images',Yii::t('catalog','Remove image fail.'));
         }
 
-        return $path .'/'. $imageName;
+        return  $imageName;
     }
 
 
