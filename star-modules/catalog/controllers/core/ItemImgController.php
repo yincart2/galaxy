@@ -57,9 +57,11 @@ class ItemImgController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(!$this->findModel($id)->delete()){
+            return json_encode(['error',Yii::t('catalog','delete image fail')]);
+        }
 
-        return $this->redirect(['index']);
+        return json_encode([]);
     }
 
     /**
