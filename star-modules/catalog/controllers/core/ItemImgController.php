@@ -36,10 +36,11 @@ class ItemImgController extends Controller
     {
         $itemModel = new Item();
         $imagesArray = $itemModel->getUploadImages();
-        foreach($imagesArray as $num=> $image){
+        foreach($imagesArray as  $image){
             $itemImg = new ItemImg();
             $itemImg->item_id = Yii::$app->request->post('item_id');
-            $itemImg->pic = $image;
+            $itemImg->pic = $image['pic'];
+            $itemImg->title = $image['title'];
             $itemImg->position = Yii::$app->request->post('position');
             $itemImg->create_time = time();
             if(!$itemImg->save()) {

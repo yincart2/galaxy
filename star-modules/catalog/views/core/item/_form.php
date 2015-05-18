@@ -59,6 +59,7 @@ use kartik\file\FileInput;
         foreach($itemImages as $itemImage){
             $initialPreview[] = "<img src='".Yii::$app->params['imageDomain'].'/'.$itemImage->pic."' class='file-preview-image'>";
             $initialPreviewConfig[] = [
+                'caption'=>$itemImage->title,
                 'url'=>Url::to(['/catalog/core/item-img/delete','id'=>$itemImage->img_id]),
             ];
         }

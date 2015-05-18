@@ -10,6 +10,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $img_id
  * @property string $item_id
  * @property string $pic
+ * @property string $title
  * @property integer $position
  * @property string $create_time
  *
@@ -31,9 +32,9 @@ class ItemImg extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_id', 'pic', 'position', 'create_time'], 'required'],
+            [['item_id', 'pic', 'position','title', 'create_time'], 'required'],
             [['item_id', 'position', 'create_time'], 'integer'],
-            [['pic'], 'string', 'max' => 255]
+            [['pic','title'], 'string', 'max' => 255]
         ];
     }
 

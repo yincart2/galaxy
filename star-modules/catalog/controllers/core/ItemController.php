@@ -77,7 +77,8 @@ class ItemController extends Controller
                 foreach($imagesArray as $num=> $image){
                     $itemImg = new ItemImg();
                     $itemImg->item_id = $model->item_id;
-                    $itemImg->pic = $image;
+                    $itemImg->pic = $image['pic'];
+                    $itemImg->title = $image['title'];
                     $itemImg->position = $num;
                     $itemImg->create_time = time();
                    if(!$itemImg->save()) {
