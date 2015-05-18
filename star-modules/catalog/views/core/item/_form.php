@@ -35,11 +35,11 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
 
     $fields = [];
     $fields[] = $form->field($model, 'shipping_fee')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'is_show')->radioList(['Yes','No']);
-    $fields[] = $form->field($model, 'is_promote')->radioList(['Yes','No']);
-    $fields[] = $form->field($model, 'is_new')->radioList(['Yes','No']);
-    $fields[] = $form->field($model, 'is_hot')->radioList(['Yes','No']);
-    $fields[] = $form->field($model, 'is_best')->radioList(['Yes','No']);
+    $fields[] = $form->field($model, 'is_show')->radioList(['No','Yes']);
+    $fields[] = $form->field($model, 'is_promote')->radioList(['No','Yes']);
+    $fields[] = $form->field($model, 'is_new')->radioList(['No','Yes']);
+    $fields[] = $form->field($model, 'is_hot')->radioList(['No','Yes']);
+    $fields[] = $form->field($model, 'is_best')->radioList(['No','Yes']);
 
     $fieldGroups[] = ['label' => Yii::t('catalog','Other Info'), 'content' => implode('', $fields)];
 
@@ -66,6 +66,7 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
         foreach($itemImages as $itemImage){
             $initialPreview[] = "<img src='".Yii::$app->params['imageDomain'].'/'.$itemImage->pic."' class='file-preview-image'>";
             $initialPreviewConfig[] = [
+                'caption'=>$itemImage->title,
                 'url'=>Url::to(['/catalog/core/item-img/delete','id'=>$itemImage->img_id]),
             ];
         }
@@ -91,7 +92,7 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
     ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ?Yii::t('catalog','Create')  : Yii::t('catalog','Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

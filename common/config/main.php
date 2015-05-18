@@ -22,6 +22,14 @@ return [
         'utility' => [
             'class' => 'c006\utility\migration\Module',
         ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module',
+            'i18n' => [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => '@kvgrid/messages',
+                'forceTranslation' => true
+            ]
+        ]
     ],
     'components' => [
         'user' => [
@@ -39,6 +47,11 @@ return [
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@common/modules/blog/messages',
                 ],
+                'catalog' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/catalog/messages',
+                ]
             ],
         ],
         'urlManager' => [

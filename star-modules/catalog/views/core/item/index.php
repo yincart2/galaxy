@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel star\catalog\models\ItemSearch */
@@ -11,18 +12,18 @@ $this->title = 'Items';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Item', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+    <?php $form = ActiveForm::begin([
+        'action' =>['/catalog/core/item/bulk'],
+        'method' => 'post'
+    ]);?>
     <?= GridView::widget([
+        'export'=>false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            [
+                'class' => '\kartik\grid\CheckboxColumn',
+            ],
             ['class' => 'yii\grid\SerialColumn'],
 //            'item_id',
             [
@@ -41,11 +42,31 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'props_name:ntext',
             // 'desc:ntext',
             // 'shipping_fee',
-            // 'is_show',
-            // 'is_promote',
-            // 'is_new',
-            // 'is_hot',
-            // 'is_best',
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_show',
+                'vAlign'=>'middle'
+            ],
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_promote',
+                'vAlign'=>'middle'
+            ],
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_new',
+                'vAlign'=>'middle'
+            ],
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_hot',
+                'vAlign'=>'middle'
+            ],
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_best',
+                'vAlign'=>'middle'
+            ],
             // 'click_count',
             // 'wish_count',
             // 'review_count',
@@ -57,8 +78,45 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'state',
             // 'city',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'kartik\grid\ActionColumn',
+                'dropdown'=>true,
+                'dropdownOptions'=>['class'=>'pull-right'],
+                'headerOptions'=>['class'=>'kartik-sheet-style'],
+            ],
         ],
+        'panel'=>[
+            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> '.Yii::t('catalog','Items').'</h3>',
+            'type'=>'success',
+            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i>'.Yii::t('catalog','Create Items') , ['create'], ['class' => 'btn btn-success']),
+            'footer'=>false
+        ],
+        'toolbar' => [
+            [
+                'content'=>
+                    Html::dropDownList('act','',
+                        [
+                            ''  =>'选择操作',
+                        'delete' => Yii::t('catalog','delete'),
+                        'is_show' => Yii::t('catalog','show'),
+                        'un_show' => Yii::t('catalog','un_show'),
+                        'is_promote' => Yii::t('catalog','promote'),
+                        'un_promote' => Yii::t('catalog','un_promote'),
+                        'is_new' => Yii::t('catalog','new'),
+                        'un_new' => Yii::t('catalog','un_new'),
+                        'is_hot' => Yii::t('catalog','hot'),
+                        'un_hot' =>Yii::t('catalog','un_hot'),
+                        'is_best' => Yii::t('catalog','best'),
+                        'un_best' => Yii::t('catalog','un_best'),
+                    ],['class' => 'btn btn-default','style'=>'margin-right:10px']). Html::submitButton(Yii::t('catalog','Save'), ['class' => 'btn btn-success'])  ,
+                'options' => ['class' => 'btn-group-sm']
+            ],
+            '{export}',
+            '{toggleData}'
+        ],
+        'toggleDataContainer' => ['class' => 'btn-group-sm'],
+        'exportContainer' => ['class' => 'btn-group-sm']
     ]); ?>
 
+    <?php ActiveForm::end(); ?>
 </div>

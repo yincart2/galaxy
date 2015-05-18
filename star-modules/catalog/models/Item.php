@@ -111,6 +111,7 @@ class Item extends \yii\db\ActiveRecord
             'country' => Yii::t('catalog', 'Country'),
             'state' => Yii::t('catalog', 'State'),
             'city' => Yii::t('catalog', 'City'),
+            'images' => Yii::t('catalog', '图片'),
         ];
     }
 
@@ -147,6 +148,11 @@ class Item extends \yii\db\ActiveRecord
     }
 
 
+    /**
+     * save images to server and get path
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @return array
+     */
     public function getUploadImages(){
         $images = $this->loadUploadImages('Item');
         $imagesArray = [];
@@ -156,6 +162,12 @@ class Item extends \yii\db\ActiveRecord
         return $imagesArray;
     }
 
+    /**
+     * Creates serializable array from $_FILE recursively.
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @param $file
+     * @return array
+     */
     public function loadUploadImages($file){
         $images = [];
         foreach ($_FILES[$file] as $key => $info) {
@@ -168,24 +180,35 @@ class Item extends \yii\db\ActiveRecord
         return $images;
     }
 
-    protected function saveImage($image){
-        if(!in_array($image['type'],['image/jpeg','image/png','image/gif'])){
-            $this->addError('images',Yii::t('catalog',$image['type'] .'Type is wrong'));
+    /**
+     *  save images
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @param $image
+     * @return array
+     */
+    protected function saveImage($image)
+    {
+        if (!in_array($image['type'], ['image/jpeg', 'image/png', 'image/gif'])) {
+            $this->addError('images', Yii::t('catalog', $image['type'] . 'Type is wrong'));
+            return [];
         }
 
-        $imageName = time().$image['name'];
+        $suffix = end(explode('.', $image['name']));
+        $shaImage = sha1(file_get_contents($image["tmp_name"]));
+        $md5Image = md5($shaImage);
+        $md5Path = substr($md5Image, 0, 3) . '/' . substr($md5Image, 3, 3);
+        $pic = $md5Path . '/' . $shaImage . '.' . $suffix;
         $path = Yii::getAlias('@image');
 
-        if (file_exists( $path.'/'. $imageName)){
-            $this->addError('images',Yii::t('catalog','Image already exists.'));
+        if (!is_dir($path . '/' . $md5Path) && !mkdir($path . '/' . $md5Path, 0777, true) && chmod($path . '/' . $md5Path, 0777)) {
+            $this->addError('images', Yii::t('catalog', 'Create image dir fail.'));
         }
-        if(!move_uploaded_file($image["tmp_name"],$path .'/'. $imageName)){
-            $this->addError('images',Yii::t('catalog','Remove image fail.'));
+        if (!move_uploaded_file($image["tmp_name"], $path . '/' . $pic)) {
+            $this->addError('images', Yii::t('catalog', 'Remove image fail.'));
         }
 
-        return  $imageName;
+        return ['pic'=>$pic,'title'=>$image['name']];
     }
-
 
 
 }
