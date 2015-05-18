@@ -146,10 +146,14 @@ class ItemController extends Controller
         }
     }
 
-    public function actionItemManager(){
+
+    public function actionBulk(){
         if(Yii::$app->request->isPost){
             $action = Yii::$app->request->post('act');
             $selection=(array)Yii::$app->request->post('selection');
+            /**
+             * actionName => [ 'attribute' , 'value']
+             */
             $tmpAction = [
                 'is_show'=>['is_show',1],'un_show'=>['is_show',0],
                 'is_promote'=>['is_promote',1],'un_promote'=>['is_promote',0],
@@ -159,12 +163,14 @@ class ItemController extends Controller
             ];
             foreach($selection as $value){
                 $model = $this->findModel($value);
-               if($action == 'delete'){
-                   $model->delete();
-               }else{
-                   $model->$tmpAction[$action][0] = $tmpAction[$action][1];
-                   $model->save();
-               }
+                if($model){
+                    if($action == 'delete'){
+                        $model->delete();
+                    }else{
+                        $model->$tmpAction[$action][0] = $tmpAction[$action][1];
+                        $model->save();
+                    }
+                }
             }
         }
         return $this->redirect(['index']);

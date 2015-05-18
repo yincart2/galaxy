@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">
     <?php $form = ActiveForm::begin([
-        'action' =>['/catalog/core/item/item-manager'],
+        'action' =>['/catalog/core/item/bulk'],
         'method' => 'post'
     ]);?>
     <?= GridView::widget([
@@ -88,13 +88,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel'=>[
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Items</h3>',
             'type'=>'success',
-            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create Items', ['create'], ['class' => 'btn btn-success']),
+            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i>'.Yii::t('catalog','Create Items') , ['create'], ['class' => 'btn btn-success']),
             'footer'=>false
         ],
         'toolbar' => [
             [
                 'content'=>
-                    Html::submitButton('Save', ['class' => 'btn btn-success']) . '  '.
                     Html::dropDownList('act','',
                         [
                             ''  =>'选择操作',
@@ -109,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'un_hot' => '取消热卖',
                         'is_best' => '精品',
                         'un_best' => '取消精品',
-                    ],['class' => 'btn btn-default']) ,
+                    ],['class' => 'btn btn-default','style'=>'margin-right:10px']). Html::submitButton(Yii::t('catalog','Save'), ['class' => 'btn btn-success'])  ,
                 'options' => ['class' => 'btn-group-sm']
             ],
             '{export}',

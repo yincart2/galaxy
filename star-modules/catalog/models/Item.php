@@ -147,6 +147,11 @@ class Item extends \yii\db\ActiveRecord
     }
 
 
+    /**
+     * save images to server and get path
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @return array
+     */
     public function getUploadImages(){
         $images = $this->loadUploadImages('Item');
         $imagesArray = [];
@@ -156,6 +161,12 @@ class Item extends \yii\db\ActiveRecord
         return $imagesArray;
     }
 
+    /**
+     * Creates serializable array from $_FILE recursively.
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @param $file
+     * @return array
+     */
     public function loadUploadImages($file){
         $images = [];
         foreach ($_FILES[$file] as $key => $info) {
@@ -168,6 +179,12 @@ class Item extends \yii\db\ActiveRecord
         return $images;
     }
 
+    /**
+     * save images
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @param $image
+     * @return string
+     */
     protected function saveImage($image){
         if(!in_array($image['type'],['image/jpeg','image/png','image/gif'])){
             $this->addError('images',Yii::t('catalog',$image['type'] .'Type is wrong'));
