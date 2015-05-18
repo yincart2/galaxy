@@ -111,6 +111,7 @@ class Item extends \yii\db\ActiveRecord
             'country' => Yii::t('catalog', 'Country'),
             'state' => Yii::t('catalog', 'State'),
             'city' => Yii::t('catalog', 'City'),
+            'images' => Yii::t('catalog', '图片'),
         ];
     }
 

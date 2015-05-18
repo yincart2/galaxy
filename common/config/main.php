@@ -47,6 +47,11 @@ return [
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@common/modules/blog/messages',
                 ],
+                'catalog' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/catalog/messages',
+                ]
             ],
         ],
         'urlManager' => [
