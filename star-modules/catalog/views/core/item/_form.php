@@ -10,6 +10,9 @@ use kartik\file\FileInput;
 /* @var $this yii\web\View */
 /* @var $model star\catalog\models\Item */
 /* @var $form yii\widgets\ActiveForm */
+
+list($path,$url) = Yii::$app->assetManager->publish('@star/catalog/assets/js');
+$this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::className()]]);
 ?>
 
 <div class="item-form">
@@ -41,7 +44,11 @@ use kartik\file\FileInput;
     $fieldGroups[] = ['label' => Yii::t('catalog','Other Info'), 'content' => implode('', $fields)];
 
     $fields = [];
-    $fields[] = $form->field($model, 'outer_id')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'category_id')->dropDownList(Tree::getTreesByName('商品分类'),[
+        'data-url' => Url::to(['/catalog/core/item/item-props']),
+        'data-item_id' => $model->item_id,
+    ]);
+    $fields[] = $this->render('_form_prop',['model' => $model]);
 
     $fieldGroups[] = ['label' => Yii::t('catalog','Product Info'), 'content' => implode('', $fields)];
 

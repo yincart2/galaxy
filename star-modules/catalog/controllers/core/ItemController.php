@@ -3,6 +3,7 @@
 namespace star\catalog\controllers\core;
 
 use star\catalog\models\ItemImg;
+use star\catalog\models\ItemProp;
 use Yii;
 use star\catalog\models\Item;
 use star\catalog\models\ItemSearch;
@@ -146,5 +147,32 @@ class ItemController extends Controller
         }
     }
 
+    public function actionItemProps($category_id, $item_id)
+    {
+        $itemProps = ItemProp::findAll(['category_id' => $category_id]);
+        $model = Item::findOne(['item_id' => $item_id]);
+        return $this->renderPartial('_form_prop', array('itemProps' => $itemProps, 'model' => $model));
+    }
 
+    public function actionAjaxSkus()
+    {
+
+        if (!Yii::$app->request->isAjax && empty($_POST['item_id'])) {
+            return;
+        }
+        $skus = \star\catalog\models\Sku::findAll(["item_id" => $_POST["item_id"]]);
+        $data = array();
+        foreach ($skus as $sku) {
+            $arr = array();
+            $arr['sku_id'] = $sku->sku_id;
+            $arr['props'] = F::convert_props_js_id($sku->props);
+//            $arr['props'] = str_replace(":","-",$arr['props']);
+            $arr['price'] = $sku->price;
+            $arr['stock'] = $sku->quantity;
+            $arr['outer_id'] = $sku->outer_id;
+            $arr['tag'] = $sku->tag;
+            $data[] = $arr;
+        }
+        echo json_encode($data);
+    }
 }
