@@ -96,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content'=>
                     Html::dropDownList('act','',
                         [
-                            ''  =>'选择操作',
+                            ''  =>Yii::t('catalog','Choose Action'),
                         'delete' => Yii::t('catalog','delete'),
                         'is_show' => Yii::t('catalog','show'),
                         'un_show' => Yii::t('catalog','un_show'),

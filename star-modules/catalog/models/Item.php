@@ -164,6 +164,21 @@ class Item extends \yii\db\ActiveRecord
 
     /**
      * Creates serializable array from $_FILE recursively.
+     * if you post Items[images] with multiple files,
+     * like $model->loadUploadImages('Items')
+     * it should be return
+     * [
+     *      'images'=> [
+     *              [
+     *                 'name'=>xxx,
+     *                 'type'=>xxx,
+     *                 'size'=>xxx,
+     *                 'tmp_name' =>xx,
+     *                 'error'=>xx
+     *              ]
+     *              ...
+     *      ]
+     * ]
      * @author cangzhou.wu(wucangzhou@gmail.com)
      * @param $file
      * @return array
@@ -181,7 +196,8 @@ class Item extends \yii\db\ActiveRecord
     }
 
     /**
-     *  save images
+     *  save  image
+     *
      * @author cangzhou.wu(wucangzhou@gmail.com)
      * @param $image
      * @return array
