@@ -4,11 +4,13 @@ namespace star\catalog\controllers\core;
 
 use star\catalog\models\ItemImg;
 use star\catalog\models\ItemProp;
+use star\catalog\models\PropValue;
 use Yii;
 use star\catalog\models\Item;
 use star\catalog\models\ItemSearch;
 use yii\base\ErrorException;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -110,7 +112,9 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model = $this->handlePostData($model);
+            $model->save();
             return $this->redirect(['view', 'id' => $model->item_id]);
         } else {
             return $this->render('update', [
@@ -203,5 +207,68 @@ class ItemController extends Controller
             }
         }
         return $this->redirect(['index']);
+    }
+
+    /**
+     * format post props value
+     * @author Lujie.Zhou(gao_lujie@live.cn, qq:821293064).
+     */
+    protected function handlePostData($item)
+    {
+        $stock = null;
+        $itemProps = array();
+        if (isset($_POST['ItemProp']) && is_array($_POST['ItemProp'])) {
+            $itemProps = $_POST['ItemProp'];
+            unset($_POST['ItemProp']);
+        }
+        if (isset($_POST['Item']['skus']['checkbox']) && is_array($_POST['Item']['skus']['checkbox'])) {
+            $itemProps = ArrayHelper::merge($itemProps, $_POST['Item']['skus']['checkbox']);
+        }
+        list($item->props, $item->props_name) = $this->handleItemProps($itemProps);
+
+        if (isset($_POST['Item']['skus']['table']) && is_array($_POST['Item']['skus']['table'])) {
+            $skus = array();
+            foreach ($_POST['Item']['skus']['table'] as $pid => $sku) {
+                list($sku['props'], $sku['props_name']) = $this->handleItemProps($sku['props']);
+                $stock = $sku['stock'] + $stock;
+                $skus[] = $sku;
+            }
+//            $item->skus = $skus;
+            $item->stock = $stock;
+        }
+        return $item;
+    }
+
+    /**
+     * format item prop data to json format from post
+     * @param $itemProps
+     * @return array
+     * @author Lujie.Zhou(gao_lujie@live.cn, qq:821293064).
+     */
+    protected function handleItemProps($itemProps)
+    {
+        $props = array();
+        $props_name = array();
+        foreach ($itemProps as $pid => $vid) {
+            $itemProp = ItemProp::findOne(['prop_id' => $pid]);
+            $pname = $itemProp->prop_name;
+            if (is_array($vid)) {
+                $props[$pid] = array();
+                $props_name[$pname] = array();
+                foreach ($vid as $v) {
+                    $props[$pid][] = $pid . ':' . $v;
+                    $propValue = PropValue::findOne(['value_id' => $v]);
+                    $vname = $propValue ? $propValue->value_name : $v;
+                    $props_name[$pname][] = $pname . ':' . $vname;
+
+                }
+            } else {
+                $props[$pid] = $pid . ':' . $vid;
+                $propValue = PropValue::findOne(['value_id' => $vid]);
+                $vname = $propValue ? $propValue->value_name : $vid;
+                $props_name[$pname] = $pname . ':' . $vname;
+            }
+        }
+        return array(json_encode($props), json_encode($props_name));
     }
 }
