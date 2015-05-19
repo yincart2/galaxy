@@ -80,8 +80,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'kartik\grid\ActionColumn',
-                'dropdown'=>true,
-                'dropdownOptions'=>['class'=>'pull-right'],
                 'headerOptions'=>['class'=>'kartik-sheet-style'],
             ],
         ],
