@@ -46,9 +46,10 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
     $fields = [];
     $fields[] = $form->field($model, 'category_id')->dropDownList(Tree::getTreesByName('商品分类'),[
         'data-url' => Url::to(['/catalog/core/item/item-props']),
-        'data-item_id' => $model->item_id,
+        'data-item' => $model->item_id,
+        'data-tree_id' => $model->category_id ? $model->category_id : key(Tree::getTreesByName('商品分类')),
     ]);
-    $fields[] = $this->render('_form_prop',['model' => $model]);
+    $fields[] = $this->render('_form_prop',['model' => $model, 'tree_id' => $model->category_id ? $model->category_id : key(Tree::getTreesByName('商品分类'))]);
 
     $fieldGroups[] = ['label' => Yii::t('catalog','Product Info'), 'content' => implode('', $fields)];
 

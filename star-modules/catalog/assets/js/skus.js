@@ -291,7 +291,8 @@ $(document).ready(function () {
         $.get($('#item-category_id').data('url'),
             {
                 "category_id": $("#item-category_id").select().val(),
-                "item_id": $("#item-category_id").data('item_id')
+                "item_id": $("#item-category_id").data('item_id'),
+                "tree_id": $("#item-category_id").data('tree_id')
             }, function (response) {
                 $('#item_prop_values').remove();
                 $('.field-item-category_id').after(response);
