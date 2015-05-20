@@ -242,13 +242,13 @@ class Item extends \yii\db\ActiveRecord
                 $skuModel->quantity = $sku['stock'];
                 $skuModel->price = $sku['price'];
                 $skuModel->outer_id = $sku['outer_id'];
-                if (isset($sku['outer_id']) && $sku['outer_id']) {
-                    $skuModel->sku_id = $sku['outer_id'];
+                if (isset($sku['sku_id']) && $sku['sku_id']) {
+                    $skuModel->sku_id = $sku['sku_id'];
                     $skuModel->update();
-                    $skuArray[$i] = $skuModel->sku_id;
                 } else {
                     $skuModel->save();
                 }
+                $skuArray[$i] = $skuModel->sku_id;
             }
             //删除
             $models = Sku::findAll(['item_id' => $item_id]);
