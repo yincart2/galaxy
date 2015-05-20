@@ -7,6 +7,9 @@ use yii\bootstrap\Tabs;
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Url;
 use kartik\file\FileInput;
+use star\catalog\models\Language;
+use star\catalog\models\Currency;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model star\catalog\models\Item */
 /* @var $form yii\widgets\ActiveForm */
@@ -25,8 +28,10 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
     $fields = [];
     $fields[] = $form->field($model, 'title')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'price')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'currency')->dropDownList(['Chinese']);
-    $fields[] = $form->field($model, 'language')->dropDownList(['Chinese']);
+    $currency = Currency::find()->all();
+    $fields[] = $form->field($model, 'currency')->dropDownList(ArrayHelper::map($currency, 'currency_id', 'name'));
+    $language = Language::find()->all();
+    $fields[] = $form->field($model, 'language')->dropDownList(ArrayHelper::map($language, 'language_id', 'name'));
     $fieldGroups[] = ['label' => Yii::t('catalog','Base Info'), 'content' => implode('', $fields)];
 
     $fields = [];

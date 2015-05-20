@@ -59,7 +59,7 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['category_id', 'title', 'stock', 'price', 'currency', 'props', 'props_name', 'desc', 'review_count', 'deal_count', 'create_time', 'update_time', 'language', 'country', 'state', 'city'], 'required'],
+            [['category_id', 'title', 'stock', 'price', 'currency', 'props', 'props_name', 'desc', 'review_count', 'deal_count', 'create_time', 'update_time', 'language', 'country', 'state', 'city'], 'required'],
             [['category_id', 'stock', 'min_number', 'is_show', 'is_promote', 'is_new', 'is_hot', 'is_best', 'click_count', 'wish_count', 'review_count', 'deal_count', 'create_time', 'update_time', 'country', 'state', 'city'], 'integer'],
             [['price', 'shipping_fee'], 'number'],
             [['props', 'props_name', 'desc'], 'string'],
