@@ -5,6 +5,7 @@ namespace star\catalog\models;
 use Yii;
 use common\models\Tree;
 use yii\behaviors\TimestampBehavior;
+use yii\imagine\Image;
 
 /**
  * This is the model class for table "{{%item}}".
@@ -58,7 +59,7 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['category_id', 'title', 'stock', 'price', 'currency', 'props', 'props_name', 'desc', 'review_count', 'deal_count', 'create_time', 'update_time', 'language', 'country', 'state', 'city'], 'required'],
+            [['category_id', 'title', 'stock', 'price', 'currency', 'props', 'props_name', 'desc', 'review_count', 'deal_count', 'create_time', 'update_time', 'language', 'country', 'state', 'city'], 'required'],
             [['category_id', 'stock', 'min_number', 'is_show', 'is_promote', 'is_new', 'is_hot', 'is_best', 'click_count', 'wish_count', 'review_count', 'deal_count', 'create_time', 'update_time', 'country', 'state', 'city'], 'integer'],
             [['price', 'shipping_fee'], 'number'],
             [['props', 'props_name', 'desc'], 'string'],
@@ -202,7 +203,7 @@ class Item extends \yii\db\ActiveRecord
      * @param $image
      * @return array
      */
-    protected function saveImage($image)
+    public function saveImage($image)
     {
         if (!in_array($image['type'], ['image/jpeg', 'image/png', 'image/gif'])) {
             $this->addError('images', Yii::t('catalog', $image['type'] . 'Type is wrong'));
@@ -222,6 +223,10 @@ class Item extends \yii\db\ActiveRecord
         if (!move_uploaded_file($image["tmp_name"], $path . '/' . $pic)) {
             $this->addError('images', Yii::t('catalog', 'Remove image fail.'));
         }
+
+        //save thumbnails
+//        Image::thumbnail($path . '/' . $pic,400,400)->save($path . '/' . $md5Path . '/' .'thumb-md-'. $shaImage . '.' . $suffix ,['quality' => 80]);
+//        Image::thumbnail($path . '/' . $pic,100,100)->save($path . '/' . $md5Path . '/' .'thumb-sm-'. $shaImage . '.' . $suffix ,['quality' => 50]);
 
         return ['pic'=>$pic,'title'=>$image['name']];
     }

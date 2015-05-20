@@ -43,4 +43,12 @@ return [
     'Remove image fail.' => '移动文件夹失败',
     'save images to database fail.' => '保存图片到数据库失败',
     'delete image fail' => '删除图片失败',
+    'Item Props'=>'商品属性',
+    'Create Item Props'=>'创建商品属性',
+    'Create Item Prop' =>'创建商品属性',
+    'Update Item Prop'=>'更新商品属性',
+    'Catalog' => '商品管理',
+    'Item List' => '商品列表',
+    'Create Item'=>'创建商品',
+    'Update Item: '=>'更新商品： '
 ];

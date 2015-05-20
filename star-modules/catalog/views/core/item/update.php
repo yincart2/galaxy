@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model star\catalog\models\Item */
 
-$this->title = 'Update Item: ' . ' ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
+$this->title = Yii::t('catalog','Update Item: ') . ' ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('catalog','Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->item_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('catalog','Update');
 ?>
 <div class="item-update">
 

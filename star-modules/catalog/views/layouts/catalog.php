@@ -86,7 +86,7 @@ AppAsset::register($this);
                     use yii\helpers\Url;
 
                     $type = 'http';
-                    $heading = Yii::t('app','Catalog');
+                    $heading = Yii::t('catalog','Catalog');
                     $item = 'home';
 
                     echo SideNav::widget([
@@ -94,8 +94,8 @@ AppAsset::register($this);
                         'encodeLabels' => false,
                         'heading' => $heading,
                         'items' => [
-                            ['label' => Yii::t('app','类目属性'), 'icon' => 'book', 'url' => Url::to(['/catalog/core/item-prop/index', $type]), 'active' => ($item == 'props')],
-                            ['label' => Yii::t('app','商品列表'), 'icon' => 'tags', 'url' => Url::to(['/catalog/core/item/index', $type]), 'active' => ($item == 'items')],
+                            ['label' => Yii::t('catalog','Item Props'), 'icon' => 'book', 'url' => Url::to(['/catalog/core/item-prop/index', $type]), 'active' => ($item == 'props')],
+                            ['label' => Yii::t('catalog','Item List'), 'icon' => 'tags', 'url' => Url::to(['/catalog/core/item/index', $type]), 'active' => ($item == 'items')],
                         ],
                     ]);
                     ?>

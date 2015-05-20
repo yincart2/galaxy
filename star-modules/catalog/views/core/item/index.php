@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel star\catalog\models\ItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Items';
+$this->title = Yii::t('catalog','Items');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">

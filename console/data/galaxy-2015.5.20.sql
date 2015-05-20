@@ -480,6 +480,9 @@ CREATE TABLE IF NOT EXISTS `tree` (
   KEY `level` (`level`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
 
+
+INSERT INTO `tree` VALUES (1, 1, 1, 4, 1, '1', 'root');
+INSERT INTO `tree` VALUES (2, 1, 2, 3, 2, 'default', '商品分类');
 -- --------------------------------------------------------
 
 --
@@ -503,6 +506,43 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `user_unique_username` (`username`),
   UNIQUE KEY `user_unique_email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=157 ;
+
+CREATE TABLE `currency` (
+  `currency_id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(8) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `sign` varchar(5) DEFAULT NULL,
+  `rate` decimal(10,4) DEFAULT NULL,
+  `is_default` tinyint(1) DEFAULT '0',
+  `enabled` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`currency_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of currency
+-- ----------------------------
+INSERT INTO `currency` VALUES ('1', 'CNY', '人民币', '￥', '0.0000', '1', '1');
+INSERT INTO `currency` VALUES ('2', 'USD', '美元', '$', '0.0000', '0', '1');
+INSERT INTO `currency` VALUES ('3', 'EUR', '欧元', '€', '0.0000', '0', '1');
+
+
+
+CREATE TABLE `language` (
+  `language_id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(10) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`language_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of language
+-- ----------------------------
+INSERT INTO `language` VALUES ('1', 'zh-cn', 'Chinese');
+INSERT INTO `language` VALUES ('2', 'en', 'English');
+INSERT INTO `language` VALUES ('3', 'de', 'German');
+INSERT INTO `language` VALUES ('4', 'ru', 'Russian');
+INSERT INTO `language` VALUES ('5', 'it', 'Italian');
+
 
 --
 -- 限制导出的表
