@@ -91,9 +91,8 @@ class ItemController extends Controller
                        }
                     }
                 }
-            }else{
-                var_dump($model->getErrors());exit;
             }
+
             if(!$model->hasErrors()){
                 $transaction->commit();
                 return $this->redirect(['view', 'id' => $model->item_id]);

@@ -159,7 +159,9 @@ class Item extends \yii\db\ActiveRecord
         $images = $this->loadUploadImages('Item');
         $imagesArray = [];
         foreach($images['images'] as $image){
-            $imagesArray[] = $this ->saveImage($image);
+            if($image['size']){
+                $imagesArray[] = $this ->saveImage($image);
+            }
         }
         return $imagesArray;
     }
