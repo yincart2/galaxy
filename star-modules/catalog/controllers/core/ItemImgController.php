@@ -20,7 +20,7 @@ class ItemImgController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['delete'],
                 ],
             ],
         ];
@@ -58,7 +58,8 @@ class ItemImgController extends Controller
      */
     public function actionDelete($id)
     {
-        if(!$this->findModel($id)->delete()){
+        $model = $this->findModel($id);
+        if(!$model->delete() || unlink(Yii::getAlias('@image').'/'.$model->pic)){
             return json_encode(['error',Yii::t('catalog','delete image fail')]);
         }
 
