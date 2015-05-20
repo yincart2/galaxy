@@ -35,7 +35,7 @@ class Sku extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_id', 'tag', 'props', 'props_name', 'quantity', 'price', 'outer_id'], 'required'],
+            [['item_id', 'props', 'props_name', 'quantity', 'price', 'outer_id'], 'required'],
             [['item_id', 'quantity', 'status'], 'integer'],
             [['props', 'props_name'], 'string'],
             [['price'], 'number'],
