@@ -75,7 +75,7 @@ class ItemController extends Controller
             $transaction=Yii::$app->db->beginTransaction();
 
             $imagesArray = $model->getUploadImages();
-exit();
+
             if($model->save()){
                 foreach($imagesArray as $num=> $image){
                     $itemImg = new ItemImg();
