@@ -9,8 +9,6 @@ use star\catalog\models\Sku;
 use Yii;
 use star\catalog\models\Item;
 use star\catalog\models\ItemSearch;
-use yii\base\ErrorException;
-use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -75,19 +73,23 @@ class ItemController extends Controller
         if ($model->load(Yii::$app->request->post()) ) {
             $transaction=Yii::$app->db->beginTransaction();
 
-            $imagesArray = $model->getUploadImages();
-
+            $itemData = $this->handlePostData($model);
+            /** @var  $model  \star\catalog\models\Item  */
+            $model = $itemData[0];
             if($model->save()){
+                $imagesArray = $model->getUploadImages();
                 foreach($imagesArray as $num=> $image){
-                    $itemImg = new ItemImg();
-                    $itemImg->item_id = $model->item_id;
-                    $itemImg->pic = $image['pic'];
-                    $itemImg->title = $image['title'];
-                    $itemImg->position = $num;
-                    $itemImg->create_time = time();
-                   if(!$itemImg->save()) {
-                       $model->addError('images',Yii::t('catalog','save images to database fail.'));
-                   }
+                    if($image){
+                        $itemImg = new ItemImg();
+                        $itemImg->item_id = $model->item_id;
+                        $itemImg->pic = $image['pic'];
+                        $itemImg->title = $image['title'];
+                        $itemImg->position = $num;
+                        $itemImg->create_time = time();
+                       if(!$itemImg->save()) {
+                           $model->addError('images',Yii::t('catalog','save images to database fail.'));
+                       }
+                    }
                 }
             }else{
                 var_dump($model->getErrors());exit;
