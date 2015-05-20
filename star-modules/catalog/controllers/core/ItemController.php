@@ -5,6 +5,7 @@ namespace star\catalog\controllers\core;
 use star\catalog\models\ItemImg;
 use star\catalog\models\ItemProp;
 use star\catalog\models\PropValue;
+use star\catalog\models\Sku;
 use Yii;
 use star\catalog\models\Item;
 use star\catalog\models\ItemSearch;
@@ -113,8 +114,12 @@ class ItemController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model = $this->handlePostData($model);
+            $itemData = $this->handlePostData($model);
+            $model = $itemData[0];
             $model->save();
+            $skus = $itemData[1];
+            $model->saveSkus($model->item_id,$skus);
+
             return $this->redirect(['view', 'id' => $model->item_id]);
         } else {
             return $this->render('update', [
@@ -236,7 +241,7 @@ class ItemController extends Controller
 //            $item->skus = $skus;
             $item->stock = $stock;
         }
-        return $item;
+        return array($item,$skus);
     }
 
     /**

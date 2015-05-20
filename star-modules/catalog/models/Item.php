@@ -227,4 +227,40 @@ class Item extends \yii\db\ActiveRecord
     }
 
 
+    public function saveSkus($item_id,$skus)
+    {
+        if (is_array($skus) && count($skus)) {
+            $skuArray = array();
+            foreach ($skus as $i => $sku) {
+                $skuModel = new Sku();
+                $skuModel->item_id = $item_id;
+                $skuModel->props = $sku['props'];
+                $skuModel->props_name = $sku['props_name'];
+                $skuModel->quantity = $sku['stock'];
+                $skuModel->price = $sku['price'];
+                $skuModel->outer_id = $sku['outer_id'];
+                if (isset($sku['outer_id']) && $sku['outer_id']) {
+                    $skuModel->sku_id = $sku['outer_id'];
+                    $skuModel->update();
+                    $skuArray[$i] = $skuModel->sku_id;
+                } else {
+                    $skuModel->save();
+                }
+            }
+            //删除
+            $models = Sku::findAll(['item_id' => $item_id]);
+            $delArr = array();
+            foreach ($models as $k1 => $v1) {
+                if (!in_array($v1->sku_id, $skuArray)) {
+                    $delArr[] = $v1->sku_id;
+                }
+            }
+            if (count($delArr)) {
+                Sku::deleteAll('sku_id IN (' . implode(', ', $delArr) . ')');
+            }
+        } else {
+            //已经没有SKU了，要清除数据表内容
+            Sku::deleteAll(['item_id' => $item_id]);
+        }
+    }
 }
