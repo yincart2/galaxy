@@ -152,11 +152,11 @@ class ItemController extends Controller
         }
     }
 
-    public function actionItemProps($category_id, $item_id)
+    public function actionItemProps($category_id,$item_id = 0, $tree_id)
     {
         $itemProps = ItemProp::findAll(['category_id' => $category_id]);
         $model = Item::findOne(['item_id' => $item_id]);
-        return $this->renderPartial('_form_prop', array('itemProps' => $itemProps, 'model' => $model));
+        return $this->renderPartial('_form_prop', array('itemProps' => $itemProps,'model' => $model, 'tree_id' => $tree_id));
     }
 
     public function actionAjaxSkus()

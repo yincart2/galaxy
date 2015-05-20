@@ -3,7 +3,7 @@
     use yii\helpers\Html;
 
     if (!isset($itemProps)) {
-        $itemProps = \star\catalog\models\ItemProp::findAll(['category_id' => $model->category_id]);
+        $itemProps = \star\catalog\models\ItemProp::findAll(['category_id' => $tree_id]);
     }
     $i = 0;
     /** @var \star\catalog\models\ItemProp $itemProp */
@@ -82,6 +82,8 @@
 
 
     <input type="hidden" id="currentRow" value="0"/>
-    <input type="hidden" id="skus_info" data-id="<?php echo ($model->item_id) ? $model->item_id : 0; ?>"
+    <input type="hidden" id="skus_info" data-id="<?php if($model) {
+        echo ($model->item_id) ? $model->item_id : 0;
+    } ?>"
            data-url="<?= \yii\helpers\Url::to(['/catalog/core/item/ajax-skus']); ?>" value=""/>
 </div>
