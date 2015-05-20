@@ -5,6 +5,7 @@ namespace star\catalog\models;
 use Yii;
 use common\models\Tree;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Json;
 use yii\imagine\Image;
 
 /**
@@ -246,7 +247,9 @@ class Item extends \yii\db\ActiveRecord
                     $skuModel->sku_id = $sku['sku_id'];
                     $skuModel->update();
                 } else {
-                    $skuModel->save();
+                    if(!$skuModel->save()){
+                        $this->addError('category_id',Json::encode($skuModel->getErrors()));
+                    }
                 }
                 $skuArray[$i] = $skuModel->sku_id;
             }

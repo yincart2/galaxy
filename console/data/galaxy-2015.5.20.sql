@@ -363,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `prop_value` (
 CREATE TABLE IF NOT EXISTS `sku` (
   `sku_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'SKU ID',
   `item_id` int(10) unsigned NOT NULL COMMENT 'Item ID',
-  `tag` varchar(45) NOT NULL,
+  `tag` varchar(45)  NULL,
   `props` longtext NOT NULL COMMENT 'sku的销售属性组合字符串（颜色，大小，等等，可通过类目API获取某类目下的销售属性）,格式是p1:v1;p2:v2',
   `props_name` longtext NOT NULL COMMENT 'sku所对应的销售属性的中文名字串，格式如：pid1:vid1:pid_name1:vid_name1;pid2:vid2:pid_name2:vid_name2……',
   `quantity` int(10) unsigned NOT NULL COMMENT 'sku商品库存',

@@ -14,6 +14,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\helpers\Json;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -76,7 +77,12 @@ class ItemController extends Controller
             $itemData = $this->handlePostData($model);
             /** @var  $model  \star\catalog\models\Item  */
             $model = $itemData[0];
+            $skus = $itemData[1];
+
             if($model->save()){
+
+                $model->saveSkus($model->item_id,$skus);
+
                 $imagesArray = $model->getUploadImages();
                 foreach($imagesArray as $num=> $image){
                     if($image){
@@ -118,6 +124,7 @@ class ItemController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $itemData = $this->handlePostData($model);
+            /** @var  $model  \star\catalog\models\Item  */
             $model = $itemData[0];
             $model->save();
             $skus = $itemData[1];
@@ -177,8 +184,8 @@ class ItemController extends Controller
         foreach ($skus as $sku) {
             $arr = array();
             $arr['sku_id'] = $sku->sku_id;
-            $arr['props'] = F::convert_props_js_id($sku->props);
-//            $arr['props'] = str_replace(":","-",$arr['props']);
+            $json = JSON::decode($sku->props);
+            $arr['props'] = implode("_", $json);
             $arr['price'] = $sku->price;
             $arr['stock'] = $sku->quantity;
             $arr['outer_id'] = $sku->outer_id;
