@@ -1,25 +1,19 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel star\catalog\models\ItemPropSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app','Item Props');
+$this->title = Yii::t('catalog','Item Props');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-prop-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('app','Create Item Prop'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
+        'export'=>false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -37,15 +31,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'prop_name',
             // 'prop_alias',
             // 'type',
-            // 'is_key_prop',
-            // 'is_sale_prop',
-            // 'is_color_prop',
-            // 'must',
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_key_prop',
+                'vAlign'=>'middle'
+            ],
+            [
+                'class'=>'kartik\grid\BooleanColumn',
+                'attribute'=>'is_sale_prop',
+                'vAlign'=>'middle'
+            ],
             // 'multi',
-            // 'status',
+
             // 'sort_order',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'panel'=>[
+            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> '.Yii::t('catalog','Item Props').'</h3>',
+            'type'=>'success',
+            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i>'.Yii::t('catalog','Create Item Props') , ['create'], ['class' => 'btn btn-success']),
+            'footer'=>false
         ],
     ]); ?>
 
