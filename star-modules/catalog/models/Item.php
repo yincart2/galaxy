@@ -211,22 +211,17 @@ class Item extends \yii\db\ActiveRecord
         }
 
         $suffix = end(explode('.', $image['name']));
-        $shaImage = sha1(file_get_contents($image["tmp_name"]));
-        $md5Image = md5($shaImage);
-        $md5Path = substr($md5Image, 0, 3) . '/' . substr($md5Image, 3, 3);
-        $pic = $md5Path . '/' . $shaImage . '.' . $suffix;
+        $imageName = md5(time().$image['name']).$suffix;
+        $DatePath = date('Y',time()).'/'.date('m',time()).'/'.date('d',time());
+        $pic = $DatePath . '/' . $imageName;
         $path = Yii::getAlias('@image');
 
-        if (!is_dir($path . '/' . $md5Path) && !mkdir($path . '/' . $md5Path, 0777, true) && chmod($path . '/' . $md5Path, 0777)) {
+        if (!is_dir($path . '/' . $DatePath) && !mkdir($path . '/' . $DatePath, 0777, true) && chmod($path . '/' . $DatePath, 0777)) {
             $this->addError('images', Yii::t('catalog', 'Create image dir fail.'));
         }
         if (!move_uploaded_file($image["tmp_name"], $path . '/' . $pic)) {
             $this->addError('images', Yii::t('catalog', 'Remove image fail.'));
         }
-
-        //save thumbnails
-//        Image::thumbnail($path . '/' . $pic,400,400)->save($path . '/' . $md5Path . '/' .'thumb-md-'. $shaImage . '.' . $suffix ,['quality' => 80]);
-//        Image::thumbnail($path . '/' . $pic,100,100)->save($path . '/' . $md5Path . '/' .'thumb-sm-'. $shaImage . '.' . $suffix ,['quality' => 50]);
 
         return ['pic'=>$pic,'title'=>$image['name']];
     }

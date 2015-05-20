@@ -88,6 +88,8 @@ class ItemController extends Controller
                        $model->addError('images',Yii::t('catalog','save images to database fail.'));
                    }
                 }
+            }else{
+                var_dump($model->getErrors());exit;
             }
             if(!$model->hasErrors()){
                 $transaction->commit();
