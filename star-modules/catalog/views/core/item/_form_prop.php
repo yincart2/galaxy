@@ -82,6 +82,6 @@
 
 
     <input type="hidden" id="currentRow" value="0"/>
-    <input type="hidden" id="skus_info" data-id="<?php echo $model->item_id ? $model->item_id : 0; ?>"
+    <input type="hidden" id="skus_info" data-id="<?php echo $model && $model->item_id ? $model->item_id : 0; ?>"
            data-url="<?= \yii\helpers\Url::to(['/catalog/core/item/ajax-skus']); ?>" value=""/>
 </div>
