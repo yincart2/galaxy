@@ -59,7 +59,7 @@ class ItemImgController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if(!$model->delete() || unlink(Yii::getAlias('@image').'/'.$model->pic)){
+        if(!$model->delete()){
             return json_encode(['error',Yii::t('catalog','delete image fail')]);
         }
 
