@@ -16,7 +16,7 @@ use yii\filters\VerbFilter;
 class ItemPropController extends Controller
 {
 
-    public $layout = 'catalog';
+
 
     public function behaviors()
     {

@@ -7,7 +7,6 @@ use yii\web\Controller;
 class DefaultController extends Controller
 {
 
-    public $layout = 'catalog';
 
     public function actionIndex()
     {

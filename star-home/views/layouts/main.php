@@ -59,12 +59,36 @@ AppAsset::register($this);
             NavBar::end();
         ?>
 
-        <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+        <div class="container" style="width: 100%">
+            <div class="col-sm-12">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <div class="row">
+                    <div class="col-md-2 col-sm-4">
+                        <?php
+                        use kartik\sidenav\SideNav;
+                        use yii\helpers\Url;
+
+                        $type = 'http';
+                        $heading = Yii::t('catalog','Catalog');
+                        $item = 'home';
+
+                        echo SideNav::widget([
+                            'type' => $type,
+                            'encodeLabels' => false,
+                            'heading' => $heading,
+                            'items' => [
+                                ['label' => Yii::t('catalog','Item List'), 'icon' => 'tags', 'url' => Url::to(['/catalog/core/item/index', $type]), 'active' => ($item == 'items')],
+                            ],
+                        ]);
+                        ?>
+                    </div>
+                    <div class="col-md-10 col-sm-8">
+                        <?php echo $content ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -22,7 +22,7 @@ use yii\helpers\Json;
 class ItemController extends Controller
 {
 
-    public $layout = 'catalog';
+
 
     public function behaviors()
     {
