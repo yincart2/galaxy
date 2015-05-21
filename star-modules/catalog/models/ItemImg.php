@@ -60,11 +60,8 @@ class ItemImg extends \yii\db\ActiveRecord
         return $this->hasOne(Item::className(), ['item_id' => 'item_id']);
     }
 
-    public function beforeDelete(){
-        if (parent::beforeDelete()) {
-            if(unlink(Yii::getAlias('@image').'/'.$this->pic))
-                return true;
-        }
-        return false;
+    public function afterDelete(){
+        unlink(Yii::getAlias('@image').'/'.$this->pic);
+        parent::afterDelete();
     }
 }
