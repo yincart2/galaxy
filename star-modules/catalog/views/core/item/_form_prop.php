@@ -98,7 +98,7 @@
     }
     ?>
     <hr id="output" />
-    <div id="sku_error" class="alert alert-info">您需要选择所有的销售属性，才能组合成完整的规格信息。</div>
+    <div id="sku_error" class="alert alert-info"><?= Yii::t('catalog','All of the props must be chosen')?></div>
     <div class="control-group">
         <div class="sku-map">
             <table id="sku" class="table table-bordered">
@@ -106,10 +106,10 @@
                 <tr>
                     <?php echo $thead; ?>
 <!--                    <th>标签</th>-->
-                    <th>价格</th>
-                    <th>数量</th>
-                    <th>商家编码</th>
-                    <th>操作</th>
+                    <th><?= Yii::t('catalog','price')?></th>
+                    <th><?= Yii::t('catalog','stock')?></th>
+                    <th><?= Yii::t('catalog','EAN')?></th>
+<!--                    <th>操作</th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -123,11 +123,3 @@
 <input type="hidden" id="skus_info" data-id="<?php echo $model && $model->item_id ? $model->item_id : 0; ?>"
        data-url="<?= \yii\helpers\Url::to(['/catalog/core/item/ajax-skus']); ?>" value=""/>
 
-<div id="hint-contentbox" style="display: none">
-    <div class="batch-body">
-    </div>
-    <div class="batch-foot">
-        <a class="btn btn-success" id="btnPopSub" href="javascript:void(0)">确定</a>
-        <a class="btn btn-info cancel" id="btnPopCancel" href="javascript:void(0)">取消</a>
-    </div>
-</div>

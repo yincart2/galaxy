@@ -245,13 +245,13 @@ class Item extends \yii\db\ActiveRecord
                 $skuModel->outer_id = $sku['outer_id'];
                 if (isset($sku['sku_id']) && $sku['sku_id']) {
                     $skuModel->sku_id = $sku['sku_id'];
-                    if(!$skuModel->update()) {
-                        Yii::$app->session->setFlash('sku-error',Yii::t('catalog','Every sku must has a value !'));
+                    if($skuModel->update()===false) {
+                        Yii::$app->session->setFlash('sku-error',Yii::t('catalog','Every sku must have a value !'));
                         $this->addError('props', Yii::t('catalog', null));
                     }
                 } else {
                     if(!$skuModel->save()){
-                        Yii::$app->session->setFlash('sku-error',Yii::t('catalog','Every sku must has a value !'));
+                        Yii::$app->session->setFlash('sku-error',Yii::t('catalog','Every sku must have a value !'));
                         $this->addError('props', Yii::t('catalog', null));
                     }
                 }

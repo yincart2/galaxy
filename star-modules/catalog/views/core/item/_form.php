@@ -77,6 +77,7 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
         }
 
         $fields[] = $form->field($model, 'images[]')->widget(FileInput::classname(), [
+            'language' => 'zh',
             'options' => [ 'accept' => 'image/*', 'multiple'=>true],
             'pluginOptions' => [
                 'initialPreview'=>$initialPreview,
