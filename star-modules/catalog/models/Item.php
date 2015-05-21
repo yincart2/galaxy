@@ -273,4 +273,15 @@ class Item extends \yii\db\ActiveRecord
             Sku::deleteAll(['item_id' => $item_id]);
         }
     }
+
+    public function beforeDelete(){
+        if (parent::beforeDelete()) {
+            //delete images and sku
+            ItemImg::deleteAll(['item_id'=>$this->item_id]);
+            Sku::deleteAll(['item_id'=>$this->item_id]);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
