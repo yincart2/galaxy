@@ -34,7 +34,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 //            'outer_id',
             'title',
-            'stock',
+            [
+                'attribute'=>'stock',
+                'value'=>function ($model) {
+                        $skus = $model->skus;
+                        $a = 0;
+                        foreach($skus as $sku){
+                            $a += $sku->quantity;
+                        }
+                        return $a;
+                    },
+            ],
             // 'min_number',
             // 'price',
             // 'currency',
