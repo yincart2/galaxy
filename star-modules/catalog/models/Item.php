@@ -273,16 +273,8 @@ class Item extends \yii\db\ActiveRecord
     public function beforeDelete(){
         if (parent::beforeDelete()) {
             //delete images and sku
-            $images = $this->itemImgs;
-            foreach($images as $img){
-                if(!$img->delete())
-                    return false;
-            }
-            $skus = $this->skus;
-            foreach($skus as $sku){
-                if(!$sku->delete())
-                    return false;
-            }
+            ItemImg::deleteAll(['item_id'=>$this->item_id]);
+            Sku::deleteAll(['item_id'=>$this->item_id]);
             return true;
         } else {
             return false;
