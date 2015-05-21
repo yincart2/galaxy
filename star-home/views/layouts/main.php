@@ -42,6 +42,9 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
             } else {
                 $menuItems[] = ['label' => 'User', 'url' => ['/user/admin/index']];
+                $menuItems[] = [
+                    'label' => 'Catalog', 'url' => ['/catalog/core/default/index'],
+                ];
                 $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
