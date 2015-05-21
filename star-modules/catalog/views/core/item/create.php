@@ -13,6 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="item-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <?php if(Yii::$app->session->getFlash('sku-error')) {?>
+        <div class="alert alert-danger"><?= Yii::$app->session->getFlash('sku-error')?></div>
+    <?php } ?>
 
     <?= $this->render('_form', [
         'model' => $model,

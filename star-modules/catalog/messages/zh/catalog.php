@@ -50,5 +50,7 @@ return [
     'Catalog' => '商品管理',
     'Item List' => '商品列表',
     'Create Item'=>'创建商品',
-    'Update Item: '=>'更新商品： '
+    'Update Item: '=>'更新商品： ',
+    'Please select Skus!'=>'您需要选择所有的销售属性，才能组合成完整的规格信息!',
+    'Every sku must has a value !'=>'销售属性都必须有值!',
 ];

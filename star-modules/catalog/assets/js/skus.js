@@ -263,22 +263,22 @@ function renderTable() {
     //    $(".alert").remove();  //会注销掉所有的错误提示
 
 
-    //if((nameArr.length < window.chbGroupCount)&&flag){
-    //    //显示提示信息
-    //    $("#sku_error").show();
-    //    flag = 0;
-    //}
-    //if((nameArr.length == window.chbGroupCount) && !flag){
-    //    $("#sku_error").hide();
-    //    flag = 1;
-    //}
+    if((nameArr.length < window.chbGroupCount)&&flag){
+        //显示提示信息
+        $("#sku_error").show();
+        flag = 0;
+    }
+    if((nameArr.length == window.chbGroupCount) && !flag){
+        $("#sku_error").hide();
+        flag = 1;
+    }
     if (nameArr.length == 0) {
         //显示提示信息
         $("#sku_error").show();
     }
-    if (nameArr.length != 0) {
-        $("#sku_error").hide();
-    }
+    //if (nameArr.length != 0) {
+    //    $("#sku_error").hide();
+    //}
 }
 
 $(document).ready(function () {

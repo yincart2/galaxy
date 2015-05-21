@@ -78,10 +78,14 @@ class ItemController extends Controller
             /** @var  $model  \star\catalog\models\Item  */
             $model = $itemData[0];
             $skus = $itemData[1];
-
+            if(!$skus) {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
             if($model->save()){
 
-                $model->saveSkus($model->item_id,$skus);
+                $model->saveSkus($model->item_id, $skus);
 
                 $imagesArray = $model->getUploadImages();
                 foreach($imagesArray as $num=> $image){
@@ -101,7 +105,7 @@ class ItemController extends Controller
 
             if(!$model->hasErrors()){
                 $transaction->commit();
-                return $this->redirect(['view', 'id' => $model->item_id]);
+                return $this->redirect('index');
             }
             $transaction->rollBack();
         }
@@ -126,11 +130,22 @@ class ItemController extends Controller
             $itemData = $this->handlePostData($model);
             /** @var  $model  \star\catalog\models\Item  */
             $model = $itemData[0];
-            $model->save();
             $skus = $itemData[1];
-            $model->saveSkus($model->item_id,$skus);
-
-            return $this->redirect(['view', 'id' => $model->item_id]);
+            if(!$skus) {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+            if($model->save()) {
+                $model->saveSkus($model->item_id, $skus);
+                if($model->hasErrors()) {
+                    return $this->render('update', [
+                        'model' => $model,
+                    ]);
+                } else {
+                    return $this->redirect('index');
+                }
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -250,6 +265,9 @@ class ItemController extends Controller
             }
 //            $item->skus = $skus;
             $item->stock = $stock;
+        } else {
+            $skus = array();
+            Yii::$app->session->setFlash('sku-error',Yii::t('catalog','Please select Skus!'));
         }
         return array($item,$skus);
     }

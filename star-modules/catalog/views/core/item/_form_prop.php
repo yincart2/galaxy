@@ -2,7 +2,9 @@
     <?php
     use yii\helpers\Html;
 
-    $itemPropValues = json_decode($model->props, true);
+    if($model && $model->props) {
+        $itemPropValues = json_decode($model->props, true);
+    }
     if (!isset($itemProps)) {
         $itemProps = \star\catalog\models\ItemProp::findAll(['category_id' => $tree_id]);
     }
