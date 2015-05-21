@@ -56,6 +56,6 @@ return [
     'All of the props must be chosen' => '您需要选择所有的销售属性，才能组合成完整的规格信息。',
     'price' => '价格',
     'stock' => '库存数量',
-
+    'Image(If update,Please upload first)'=>'图片（若更新,请先上传图片）'
 
 ];

@@ -76,7 +76,7 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
             ];
         }
 
-        $fields[] = $form->field($model, 'images[]')->widget(FileInput::classname(), [
+        $fields[] = $form->field($model, 'images[]')->label(Yii::t('catalog','Image(If update,Please upload first)'))->widget(FileInput::classname(), [
             'language' => 'zh',
             'options' => [ 'accept' => 'image/*', 'multiple'=>true],
             'pluginOptions' => [
