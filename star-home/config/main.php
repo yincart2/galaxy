@@ -44,6 +44,17 @@ return [
                     'sourceLanguage' => 'en',
                 ],
             ],
+        ],
+        'view'=>[
+            'theme'=>[
+                'pathMap'=>[
+                    '@app/views'=>'@theme/star/home/views',
+                    '@app/blog/views/home'=>'@theme/star/home/views/blog',
+                    '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
+                    '@app/modules/member/views'=>'@theme/star/home/views/member',
+                ],
+                'baseUrl'=>'@theme/star/home'
+            ]
         ]
     ],
 //    'as access' => [
