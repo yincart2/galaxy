@@ -284,4 +284,26 @@ class Item extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+    public static function getItemsByCategory($name)
+    {
+        $treeNodes = Tree::getTreesByName($name);
+        //category has children
+        if($treeNodes) {
+            $categories = '(';
+            foreach ($treeNodes as $key => $treeNode) {
+                $categories = $categories . $key . ',';
+            }
+            $categories = substr($categories, 0, strlen($categories) - 1) . ')';
+            $items = static::find()->where('category_id in ' . $categories)->all();
+        } else {
+            $tree_id = Tree::findOne(['name' => $name])->id;
+            $items = static::findAll(['category_id' => $tree_id]);
+        }
+        if($items) {
+            return $items;
+        } else {
+            return false;
+        }
+    }
 }

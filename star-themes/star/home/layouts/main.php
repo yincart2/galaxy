@@ -65,7 +65,7 @@ AppAsset::register($this);
     <div class="clearfix row">
         <div class="col-lg-6 col-md-6 col-sm-4 t_xs_align_c">
             <a href="index.html" class="logo m_xs_bottom_15 d_xs_inline_b">
-                <img src="images/logo.png" alt="">
+                <img src="<?= $link?>/images/logo.png" alt="">
             </a>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 t_align_r t_xs_align_c">
@@ -79,13 +79,13 @@ AppAsset::register($this);
                 </li>
                 <!--language settings-->
                 <li class="m_left_5 relative container3d">
-                    <a role="button" href="#" class="button_type_2 color_dark d_block bg_light_color_1 r_corners tr_delay_hover box_s_none" id="lang_button"><img class="d_inline_middle m_right_10 m_mxs_right_0" src="images/flag_en.jpg" alt=""><span class="d_mxs_none">English</span></a>
+                    <a role="button" href="#" class="button_type_2 color_dark d_block bg_light_color_1 r_corners tr_delay_hover box_s_none" id="lang_button"><img class="d_inline_middle m_right_10 m_mxs_right_0" src="<?= $link?>/images/flag_en.jpg" alt=""><span class="d_mxs_none">English</span></a>
                     <ul class="dropdown_list top_arrow color_light">
-                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_en.jpg" alt="">English</a></li>
-                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_fr.jpg" alt="">French</a></li>
-                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_g.jpg" alt="">German</a></li>
-                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_i.jpg" alt="">Italian</a></li>
-                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_s.jpg" alt="">Spanish</a></li>
+                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="<?= $link?>/images/flag_en.jpg" alt="">English</a></li>
+                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="<?= $link?>/images/flag_fr.jpg" alt="">French</a></li>
+                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="<?= $link?>/images/flag_g.jpg" alt="">German</a></li>
+                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="<?= $link?>/images/flag_i.jpg" alt="">Italian</a></li>
+                        <li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="<?= $link?>/images/flag_s.jpg" alt="">Spanish</a></li>
                     </ul>
                 </li>
                 <!--currency settings-->
@@ -112,7 +112,7 @@ AppAsset::register($this);
                             <li>
                                 <div class="clearfix">
                                     <!--product image-->
-                                    <img class="f_left m_right_10" src="images/shopping_c_img_1.jpg" alt="">
+                                    <img class="f_left m_right_10" src="<?= $link?>/images/shopping_c_img_1.jpg" alt="">
                                     <!--product description-->
                                     <div class="f_left product_description">
                                         <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
@@ -130,7 +130,7 @@ AppAsset::register($this);
                             <li>
                                 <div class="clearfix">
                                     <!--product image-->
-                                    <img class="f_left m_right_10" src="images/shopping_c_img_2.jpg" alt="">
+                                    <img class="f_left m_right_10" src="<?= $link?>/images/shopping_c_img_2.jpg" alt="">
                                     <!--product description-->
                                     <div class="f_left product_description">
                                         <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
@@ -148,7 +148,7 @@ AppAsset::register($this);
                             <li>
                                 <div class="clearfix">
                                     <!--product image-->
-                                    <img class="f_left m_right_10" src="images/shopping_c_img_3.jpg" alt="">
+                                    <img class="f_left m_right_10" src="<?= $link?>/images/shopping_c_img_3.jpg" alt="">
                                     <!--product description-->
                                     <div class="f_left product_description">
                                         <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
@@ -251,7 +251,7 @@ AppAsset::register($this);
                                 <li><a class="color_dark tr_delay_hover" href="#">Tunics</a></li>
                             </ul>
                         </div>
-                        <img src="images/woman_image_1.jpg" class="d_sm_none f_right m_bottom_10" alt="">
+                        <img src="<?= $link?>/images/woman_image_1.jpg" class="d_sm_none f_right m_bottom_10" alt="">
                     </div>
                 </li>
                 <li class="relative f_xs_none m_xs_bottom_5"><a href="#" class="tr_delay_hover color_light tt_uppercase"><b>Portfolio</b></a>
@@ -440,11 +440,11 @@ AppAsset::register($this);
         <div class="container clearfix t_mxs_align_c">
             <p class="f_left f_mxs_none m_mxs_bottom_10">&copy; 2014 <span class="color_light">Flatastic</span>. All Rights Reserved.</p>
             <ul class="f_right horizontal_list clearfix f_mxs_none d_mxs_inline_b">
-                <li><img src="images/payment_img_1.png" alt=""></li>
-                <li class="m_left_5"><img src="images/payment_img_2.png" alt=""></li>
-                <li class="m_left_5"><img src="images/payment_img_3.png" alt=""></li>
-                <li class="m_left_5"><img src="images/payment_img_4.png" alt=""></li>
-                <li class="m_left_5"><img src="images/payment_img_5.png" alt=""></li>
+                <li><img src="<?= $link?>/images/payment_img_1.png" alt=""></li>
+                <li class="m_left_5"><img src="<?= $link?>/images/payment_img_2.png" alt=""></li>
+                <li class="m_left_5"><img src="<?= $link?>/images/payment_img_3.png" alt=""></li>
+                <li class="m_left_5"><img src="<?= $link?>/images/payment_img_4.png" alt=""></li>
+                <li class="m_left_5"><img src="<?= $link?>/images/payment_img_5.png" alt=""></li>
             </ul>
         </div>
     </div>
@@ -457,7 +457,7 @@ AppAsset::register($this);
         <button class="sw_button t_align_c facebook"><i class="fa fa-facebook"></i></button>
         <div class="sw_content">
             <h3 class="color_dark m_bottom_20">Join Us on Facebook</h3>
-            <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fenvato&amp;width=235&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=438889712801266" style="border:none; overflow:hidden; width:235px; height:258px;"></iframe>
+<!--            <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fenvato&amp;width=235&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=438889712801266" style="border:none; overflow:hidden; width:235px; height:258px;"></iframe>-->
         </div>
     </li>
     <!--twitter feed-->
@@ -560,8 +560,8 @@ AppAsset::register($this);
                 <!--left popup column-->
                 <div class="f_left half_column">
                     <div class="relative d_inline_b m_bottom_10 qv_preview">
-                        <span class="hot_stripe"><img src="images/sale_product.png" alt=""></span>
-                        <img src="images/quick_view_img_1.jpg" class="tr_all_hover" alt="">
+                        <span class="hot_stripe"><img src="<?= $link?>/images/sale_product.png" alt=""></span>
+                        <img src="<?= $link?>/images/quick_view_img_1.jpg" class="tr_all_hover" alt="">
                     </div>
                     <!--carousel-->
                     <div class="relative qv_carousel_wrap m_bottom_20">
@@ -569,12 +569,12 @@ AppAsset::register($this);
                             <i class="fa fa-angle-left "></i>
                         </button>
                         <ul class="qv_carousel d_inline_middle">
-                            <li data-src="images/quick_view_img_1.jpg"><img src="images/quick_view_img_4.jpg" alt=""></li>
-                            <li data-src="images/quick_view_img_2.jpg"><img src="images/quick_view_img_5.jpg" alt=""></li>
-                            <li data-src="images/quick_view_img_3.jpg"><img src="images/quick_view_img_6.jpg" alt=""></li>
-                            <li data-src="images/quick_view_img_1.jpg"><img src="images/quick_view_img_4.jpg" alt=""></li>
-                            <li data-src="images/quick_view_img_2.jpg"><img src="images/quick_view_img_5.jpg" alt=""></li>
-                            <li data-src="images/quick_view_img_3.jpg"><img src="images/quick_view_img_6.jpg" alt=""></li>
+                            <li data-src="<?= $link?>/images/quick_view_img_1.jpg"><img src="<?= $link?>/images/quick_view_img_4.jpg" alt=""></li>
+                            <li data-src="<?= $link?>/images/quick_view_img_2.jpg"><img src="<?= $link?>/images/quick_view_img_5.jpg" alt=""></li>
+                            <li data-src="<?= $link?>/images/quick_view_img_3.jpg"><img src="<?= $link?>/images/quick_view_img_6.jpg" alt=""></li>
+                            <li data-src="<?= $link?>/images/quick_view_img_1.jpg"><img src="<?= $link?>/images/quick_view_img_4.jpg" alt=""></li>
+                            <li data-src="<?= $link?>/images/quick_view_img_2.jpg"><img src="<?= $link?>/images/quick_view_img_5.jpg" alt=""></li>
+                            <li data-src="<?= $link?>/images/quick_view_img_3.jpg"><img src="<?= $link?>/images/quick_view_img_6.jpg" alt=""></li>
                         </ul>
                         <button class="button_type_11 t_align_c f_size_ex_large bg_cs_hover r_corners d_inline_middle bg_tr tr_all_hover qv_btn_next">
                             <i class="fa fa-angle-right "></i>

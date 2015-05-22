@@ -1,5 +1,5 @@
 <?php
-list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
+$link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
 ?>
 <!--breadcrumbs-->
 <section class="breadcrumbs">
@@ -7,7 +7,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         <ul class="horizontal_list clearfix bc_list f_size_medium">
             <li class="m_right_10 current"><a href="#" class="default_t_color">Home<i
                         class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
-            <li><a href="#" class="default_t_color">Women</a></li>
+            <li><a href="#" class="default_t_color">item-list</a></li>
         </ul>
     </div>
 </section>
@@ -22,7 +22,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
 <div class="clearfix m_bottom_40">
     <div
         class="photoframe f_left shadow wrapper m_right_30 m_sm_bottom_5 m_sm_right_20 m_xs_bottom_15 f_xs_none d_xs_inline_b">
-        <img class="tr_all_long_hover" src="images/category_img_7.jpg" alt="">
+        <img class="tr_all_long_hover" src="<?= $link?>/images/category_img_7.jpg" alt="">
     </div>
     <p class="m_bottom_10">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et
         urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem ipsum dolor sit amet, consecvtetuer
@@ -38,7 +38,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="images/category_img_2.jpg" alt="">
+												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_2.jpg" alt="">
 											</span>
                 Dresses
             </a>
@@ -46,7 +46,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="images/category_img_3.jpg" alt="">
+												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_3.jpg" alt="">
 											</span>
                 Tops
             </a>
@@ -54,7 +54,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="images/category_img_4.jpg" alt="">
+												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_4.jpg" alt="">
 											</span>
                 Skirts
             </a>
@@ -62,7 +62,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="images/category_img_5.jpg" alt="">
+												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_5.jpg" alt="">
 											</span>
                 Pants
             </a>
@@ -70,7 +70,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="images/category_img_6.jpg" alt="">
+												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_6.jpg" alt="">
 											</span>
                 Shorts
             </a>
@@ -163,8 +163,8 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         <!--product preview-->
         <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
             <!--hot product-->
-            <span class="hot_stripe"><img src="images/hot_product.png" alt=""></span>
-            <img src="images/product_img_1.jpg" class="tr_all_hover" alt="">
+            <span class="hot_stripe"><img src="<?= $link?>/images/hot_product.png" alt=""></span>
+            <img src="<?= $link?>/images/product_img_1.jpg" class="tr_all_hover" alt="">
             <span role="button" data-popup="#quick_view_product"
                   class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
         </a>
@@ -228,7 +228,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
     <figure class="r_corners photoframe tr_all_hover type_2 shadow relative clearfix">
         <!--product preview-->
         <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_sm_right_20 m_xs_right_25">
-            <img src="images/product_img_2.jpg" class="tr_all_hover" alt="">
+            <img src="<?= $link?>/images/product_img_2.jpg" class="tr_all_hover" alt="">
             <span role="button" data-popup="#quick_view_product"
                   class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
         </a>
@@ -289,7 +289,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
     <figure class="r_corners type_2 photoframe tr_all_hover shadow relative clearfix">
         <!--product preview-->
         <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
-            <img src="images/product_img_3.jpg" class="tr_all_hover" alt="">
+            <img src="<?= $link?>/images/product_img_3.jpg" class="tr_all_hover" alt="">
             <span role="button" data-popup="#quick_view_product"
                   class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
         </a>
@@ -354,8 +354,8 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         <!--product preview-->
         <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
             <!--hot product-->
-            <span class="hot_stripe"><img src="images/hot_product.png" alt=""></span>
-            <img src="images/product_img_5.jpg" class="tr_all_hover" alt="">
+            <span class="hot_stripe"><img src="<?= $link?>/images/hot_product.png" alt=""></span>
+            <img src="<?= $link?>/images/product_img_5.jpg" class="tr_all_hover" alt="">
             <span role="button" data-popup="#quick_view_product"
                   class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
         </a>
@@ -420,8 +420,8 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         <!--product preview-->
         <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
             <!--hot product-->
-            <span class="hot_stripe"><img src="images/hot_product.png" alt=""></span>
-            <img src="images/product_img_8.jpg" class="tr_all_hover" alt="">
+            <span class="hot_stripe"><img src="<?= $link?>/images/hot_product.png" alt=""></span>
+            <img src="<?= $link?>/images/product_img_8.jpg" class="tr_all_hover" alt="">
             <span role="button" data-popup="#quick_view_product"
                   class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
         </a>
@@ -685,7 +685,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
 </figure>
 <!--banner-->
 <a href="#" class="d_block r_corners m_bottom_30">
-    <img src="images/banner_img_6.jpg" alt="">
+    <img src="<?= $link?>/images/banner_img_6.jpg" alt="">
 </a>
 <!--Bestsellers-->
 <figure class="widget shadow r_corners wrapper m_bottom_30">
@@ -694,7 +694,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
     </figcaption>
     <div class="widget_content">
         <div class="clearfix m_bottom_15">
-            <img src="images/bestsellers_img_1.jpg" alt=""
+            <img src="<?= $link?>/images/bestsellers_img_1.jpg" alt=""
                  class="f_left m_right_15 m_sm_bottom_10 f_sm_none f_xs_left m_xs_bottom_0">
             <a href="#" class="color_dark d_block bt_link">Ut tellus dolor dapibus</a>
             <!--rating-->
@@ -724,7 +724,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         </div>
         <hr class="m_bottom_15">
         <div class="clearfix m_bottom_15">
-            <img src="images/bestsellers_img_2.jpg" alt=""
+            <img src="<?= $link?>/images/bestsellers_img_2.jpg" alt=""
                  class="f_left m_right_15 m_sm_bottom_10 f_sm_none f_xs_left m_xs_bottom_0">
             <a href="#" class="color_dark d_block bt_link">Elementum vel</a>
             <!--rating-->
@@ -754,7 +754,7 @@ list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
         </div>
         <hr class="m_bottom_15">
         <div class="clearfix m_bottom_5">
-            <img src="images/bestsellers_img_3.jpg" alt=""
+            <img src="<?= $link?>/images/bestsellers_img_3.jpg" alt=""
                  class="f_left m_right_15 m_sm_bottom_10 f_sm_none f_xs_left m_xs_bottom_0">
             <a href="#" class="color_dark d_block bt_link">Crsus eleifend elit</a>
             <!--rating-->

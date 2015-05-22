@@ -24,6 +24,9 @@ class ItemController extends Controller
     }
 
     public function actionList(){
-        return $this->render('list');
+        $items = Item::getItemsByCategory('商品分类');
+        return $this->render('list',[
+            'items' => $items
+        ]);
     }
 }
