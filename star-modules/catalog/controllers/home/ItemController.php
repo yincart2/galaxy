@@ -2,6 +2,7 @@
 
 namespace star\catalog\controllers\home;
 
+use star\catalog\models\Item;
 use yii\web\Controller;
 
 class ItemController extends Controller
@@ -12,8 +13,14 @@ class ItemController extends Controller
         return $this->render('index');
     }
 
-    public function actionView(){
-        return $this->render('view');
+    public function actionView($id){
+        /** @var  $itemModel  \star\catalog\models\Item*/
+        $itemModel = Item::find()->where(['item_id'=>$id])->one();
+        return $this->render('view', [
+            'itemModel' => $itemModel,
+            'itemImgs' => $itemModel->itemImgs,
+            'skus' => $itemModel->skus,
+        ]);
     }
 
     public function actionList(){
