@@ -15,4 +15,8 @@ class ItemController extends Controller
     public function actionView(){
         return $this->render('view');
     }
+
+    public function actionList(){
+        return $this->render('list');
+    }
 }
