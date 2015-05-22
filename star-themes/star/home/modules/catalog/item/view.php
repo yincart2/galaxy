@@ -49,8 +49,9 @@ $this->registerCssFile($link . '/css/sku.css');
             <ul class="qv_carousel_single d_inline_middle">
                 <?php
                 foreach($itemImages as $itemImage){ ?>
-                    <a href="#" data-image="<?= Yii::$app->params['imageDomain'].'/'.$itemImage->pic?>" data-zoom-image="images/preview_zoom_1.jpg"><img src="<?= Yii::$app->params['imageDomain'].'/'.$itemImage->pic?>" alt=""></a>
-                <?
+                    <a href="#" data-image="<?= Yii::$app->params['imageDomain'].'/'.$itemImage->pic?>" data-zoom-image="images/preview_zoom_1.jpg">
+                        <img src="<?= Yii::$app->params['imageDomain'].'/'.$itemImage->pic?>" alt=""></a>
+                <?php
                 }
                 ?>
             </ul>

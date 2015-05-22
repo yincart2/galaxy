@@ -14,18 +14,6 @@ use yii\filters\VerbFilter;
  */
 class ItemImgController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['delete'],
-                ],
-            ],
-        ];
-    }
-
 
     /**
      * Creates a new ItemImg model.
