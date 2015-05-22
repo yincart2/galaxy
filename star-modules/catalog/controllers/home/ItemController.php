@@ -18,7 +18,7 @@ class ItemController extends Controller
         $itemModel = Item::find()->where(['item_id'=>$id])->one();
         return $this->render('view', [
             'itemModel' => $itemModel,
-            'itemImages' => $itemModel->itemImgs,
+            'itemImages' => $itemModel->itemImgs ? $itemModel->itemImgs:[],
             'skuModels' => $itemModel->skus,
         ]);
     }
