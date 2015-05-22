@@ -49,7 +49,8 @@ return [
             'theme'=>[
                 'pathMap'=>[
                     '@app/views'=>'@theme/star/home/views',
-                    '@app/blog/views/home'=>'@theme/star/home/views/blog',
+                    '@star/blog/views/home'=>'@theme/star/home/views/blog',
+                    '@star/catalog/views/home'=>'@theme/star/home/views/catalog',
                     '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
                     '@app/modules/member/views'=>'@theme/star/home/views/member',
                 ],
