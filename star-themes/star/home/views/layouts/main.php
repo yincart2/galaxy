@@ -324,6 +324,7 @@ AppAsset::register($this);
     </div>
 </section>
 </header>
+<?= $content?>
 <footer id="footer">
     <div class="footer_top_part">
         <div class="container">
