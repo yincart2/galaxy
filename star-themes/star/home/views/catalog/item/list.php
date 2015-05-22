@@ -1,3 +1,6 @@
+<?php
+list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/web');
+?>
 <!--breadcrumbs-->
 <section class="breadcrumbs">
     <div class="container">
