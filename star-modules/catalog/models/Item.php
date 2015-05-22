@@ -215,7 +215,7 @@ class Item extends \yii\db\ActiveRecord
         }
 
         $suffix = end(explode('.', $image['name']));
-        $imageName = md5(time().$image['name']).$suffix;
+        $imageName = md5(time().$image['name']).'.'.$suffix;
         $DatePath = date('Y',time()).'/'.date('m',time()).'/'.date('d',time());
         $pic = $DatePath . '/' . $imageName;
         $path = Yii::getAlias('@image');
