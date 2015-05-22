@@ -32,8 +32,8 @@
         "pheme/yii2-settings": "*",
         "omnilight/yii2-shopping-cart": "*",
         "c006/yii2-migration-utility": "dev-master",
-        "starark/star-matter": "*",
-        "yiisoft/yii2-imagine": " *"
+        "yiisoft/yii2-imagine": " *",
+        "himiklab/yii2-easy-thumbnail-image-helper": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
@@ -49,10 +49,7 @@
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
         }
-    },
+    }
 
-    "repositories": [
-        {"type": "composer", "url": "http://pkg.phpcomposer.com/repo/packagist/"},
-        {"packagist": false}
-    ]
+
 }
