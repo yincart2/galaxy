@@ -1,4 +1,8 @@
 <?php
+use common\models\Tree;
+use yii\widgets\LinkPager;
+use yii\helpers\Url;
+
 $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
 ?>
 <!--breadcrumbs-->
@@ -22,7 +26,7 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
 <div class="clearfix m_bottom_40">
     <div
         class="photoframe f_left shadow wrapper m_right_30 m_sm_bottom_5 m_sm_right_20 m_xs_bottom_15 f_xs_none d_xs_inline_b">
-        <img class="tr_all_long_hover" src="<?= $link?>/images/category_img_7.jpg" alt="">
+        <img class="tr_all_long_hover" src="<?= $link ?>/images/category_img_7.jpg" alt="">
     </div>
     <p class="m_bottom_10">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et
         urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem ipsum dolor sit amet, consecvtetuer
@@ -38,7 +42,8 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_2.jpg" alt="">
+												<img class="tr_all_long_hover"
+                                                     src="<?= $link ?>/images/category_img_2.jpg" alt="">
 											</span>
                 Dresses
             </a>
@@ -46,7 +51,8 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_3.jpg" alt="">
+												<img class="tr_all_long_hover"
+                                                     src="<?= $link ?>/images/category_img_3.jpg" alt="">
 											</span>
                 Tops
             </a>
@@ -54,7 +60,8 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_4.jpg" alt="">
+												<img class="tr_all_long_hover"
+                                                     src="<?= $link ?>/images/category_img_4.jpg" alt="">
 											</span>
                 Skirts
             </a>
@@ -62,7 +69,8 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_5.jpg" alt="">
+												<img class="tr_all_long_hover"
+                                                     src="<?= $link ?>/images/category_img_5.jpg" alt="">
 											</span>
                 Pants
             </a>
@@ -70,7 +78,8 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         <li class="m_right_15 f_mxs_none w_mxs_auto d_mxs_inline_b m_mxs_bottom_20">
             <a href="#" class="d_block photoframe tr_all_hover shadow color_dark r_corners">
 											<span class="d_block wrapper">
-												<img class="tr_all_long_hover" src="<?= $link?>/images/category_img_6.jpg" alt="">
+												<img class="tr_all_long_hover"
+                                                     src="<?= $link ?>/images/category_img_6.jpg" alt="">
 											</span>
                 Shorts
             </a>
@@ -158,13 +167,17 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
 <!--products list type-->
 <section class="products_container list_type clearfix m_bottom_5 m_left_0 m_right_0">
 <!--product item-->
+<?php
+/** @var \star\catalog\models\Item $item */
+foreach($items as $item) {
+?>
 <div class="product_item full_width list_type hit m_left_0 m_right_0">
     <figure class="r_corners photoframe tr_all_hover type_2 shadow relative clearfix">
         <!--product preview-->
-        <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
+        <a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
             <!--hot product-->
-            <span class="hot_stripe"><img src="<?= $link?>/images/hot_product.png" alt=""></span>
-            <img src="<?= $link?>/images/product_img_1.jpg" class="tr_all_hover" alt="">
+            <span class="hot_stripe"><img src="<?= $link ?>/images/hot_product.png" alt=""></span>
+            <img src="<?= $link ?>/images/product_img_1.jpg" class="tr_all_hover" alt="">
             <span role="button" data-popup="#quick_view_product"
                   class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
         </a>
@@ -172,7 +185,7 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         <figcaption>
             <div class="clearfix">
                 <div class="f_left p_list_description f_sm_none w_sm_full m_xs_bottom_10">
-                    <h4 class="fw_medium"><a href="#" class="color_dark">Eget elementum vel</a></h4>
+                    <h4 class="fw_medium"><a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" class="color_dark"><?= $item->title ?></a></h4>
 
                     <div class="m_bottom_10">
                         <!--rating-->
@@ -201,12 +214,10 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
                         <a href="#" class="d_inline_middle default_t_color f_size_medium m_left_10">1 Review(s) </a>
                     </div>
                     <hr class="m_bottom_10">
-                    <p class="d_sm_none d_xs_block">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.
-                        Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem
-                        ipsum dolor sit amet, consecvtetuer adipiscing elit.</p>
+                    <div class="d_sm_none d_xs_block" style="height: 166px;overflow: hidden"><?= $item->desc ?></div>
                 </div>
                 <div class="f_right f_sm_none t_align_r t_sm_align_l">
-                    <p class="scheme_color f_size_large m_bottom_15"><span class="fw_medium">$102.00</span></p>
+                    <p class="scheme_color f_size_large m_bottom_15"><span class="fw_medium"><?= $item->price ?></span></p>
                     <button
                         class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15 m_sm_bottom_0 d_sm_inline_middle">
                         Add to Cart
@@ -223,263 +234,7 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         </figcaption>
     </figure>
 </div>
-<!--product item-->
-<div class="product_item full_width list_type hit m_left_0 m_right_0">
-    <figure class="r_corners photoframe tr_all_hover type_2 shadow relative clearfix">
-        <!--product preview-->
-        <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_sm_right_20 m_xs_right_25">
-            <img src="<?= $link?>/images/product_img_2.jpg" class="tr_all_hover" alt="">
-            <span role="button" data-popup="#quick_view_product"
-                  class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
-        </a>
-        <!--description and price of product-->
-        <figcaption>
-            <div class="clearfix">
-                <div class="f_left p_list_description f_sm_none w_sm_full m_xs_bottom_10">
-                    <h4 class="fw_medium"><a href="#" class="color_dark">Ut tellus dolor dapibus</a></h4>
-
-                    <div class="m_bottom_10">
-                        <!--rating-->
-                        <ul class="horizontal_list d_inline_middle clearfix rating_list type_2 tr_all_hover">
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                        </ul>
-                        <a href="#" class="d_inline_middle default_t_color f_size_medium m_left_10">0 Review(s) </a>
-                    </div>
-                    <hr class="m_bottom_10">
-                    <p class="d_sm_none d_xs_block">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.
-                        Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem
-                        ipsum dolor sit amet, consecvtetuer adipiscing elit. </p>
-                </div>
-                <div class="f_right t_align_r f_sm_none t_sm_align_l">
-                    <p class="scheme_color f_size_large m_bottom_15"><span class="fw_medium">$57.00</span></p>
-                    <button class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15">
-                        Add to Cart
-                    </button>
-                    <br>
-                    <ul>
-                        <li class="m_bottom_5"><a href="#" class="color_dark">Add to Wishlist</a></li>
-                        <li class="m_bottom_5"><a href="#" class="color_dark">Add to Compare</a></li>
-                    </ul>
-                </div>
-            </div>
-        </figcaption>
-    </figure>
-</div>
-<!--product item-->
-<div class="product_item full_width list_type hit m_left_0 m_right_0">
-    <figure class="r_corners type_2 photoframe tr_all_hover shadow relative clearfix">
-        <!--product preview-->
-        <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
-            <img src="<?= $link?>/images/product_img_3.jpg" class="tr_all_hover" alt="">
-            <span role="button" data-popup="#quick_view_product"
-                  class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
-        </a>
-        <!--description and price of product-->
-        <figcaption>
-            <div class="clearfix">
-                <div class="f_left p_list_description w_sm_full f_sm_none m_xs_bottom_10">
-                    <h4 class="fw_medium"><a href="#" class="color_dark">Aenean auctor wisi et urna</a></h4>
-
-                    <div class="m_bottom_10">
-                        <!--rating-->
-                        <ul class="horizontal_list d_inline_middle clearfix rating_list type_2 tr_all_hover">
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                        </ul>
-                        <a href="#" class="d_inline_middle default_t_color f_size_medium m_left_10">1 Review(s) </a>
-                    </div>
-                    <hr class="m_bottom_10">
-                    <p class="d_sm_none d_xs_block">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.
-                        Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem
-                        ipsum dolor sit amet, consecvtetuer adipiscing elit. </p>
-                </div>
-                <div class="f_right t_align_r f_sm_none t_sm_align_l">
-                    <p class="scheme_color f_size_large m_bottom_15"><span class="fw_medium">$99.00</span></p>
-                    <button
-                        class="button_type_4 bg_scheme_color d_sm_inline_middle m_sm_bottom_0 r_corners tr_all_hover color_light mw_0 m_bottom_15">
-                        Add to Cart
-                    </button>
-                    <br class="d_sm_none">
-                    <button
-                        class="button_type_4 bg_light_color_2 d_sm_inline_middle f_sm_none tr_all_hover f_right r_corners color_dark mw_0 m_left_5 p_hr_0">
-                        <i class="fa fa-files-o"></i></button>
-                    <button
-                        class="button_type_4 bg_light_color_2 d_sm_inline_middle f_sm_none m_sm_left_5 tr_all_hover f_right r_corners color_dark mw_0 p_hr_0">
-                        <i class="fa fa-heart-o"></i></button>
-                </div>
-            </div>
-        </figcaption>
-    </figure>
-</div>
-<!--product item-->
-<div class="product_item full_width list_type hit m_left_0 m_right_0">
-    <figure class="r_corners photoframe tr_all_hover type_2 shadow relative clearfix">
-        <!--product preview-->
-        <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
-            <!--hot product-->
-            <span class="hot_stripe"><img src="<?= $link?>/images/hot_product.png" alt=""></span>
-            <img src="<?= $link?>/images/product_img_5.jpg" class="tr_all_hover" alt="">
-            <span role="button" data-popup="#quick_view_product"
-                  class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
-        </a>
-        <!--description and price of product-->
-        <figcaption>
-            <div class="clearfix">
-                <div class="f_left p_list_description w_sm_full f_sm_none m_xs_bottom_10">
-                    <h4 class="fw_medium"><a href="#" class="color_dark">Eget elementum vel</a></h4>
-
-                    <div class="m_bottom_10">
-                        <!--rating-->
-                        <ul class="horizontal_list d_inline_middle clearfix rating_list type_2 tr_all_hover">
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                        </ul>
-                        <a href="#" class="d_inline_middle default_t_color f_size_medium m_left_10">1 Review(s) </a>
-                    </div>
-                    <hr class="m_bottom_10">
-                    <p class="d_sm_none d_xs_block">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.
-                        Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem
-                        ipsum dolor sit amet, consecvtetuer adipiscing elit. </p>
-                </div>
-                <div class="f_right t_align_r t_sm_align_l f_sm_none">
-                    <p class="scheme_color f_size_large m_bottom_15"><span class="fw_medium">$102.00</span></p>
-                    <button
-                        class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15 d_sm_inline_middle m_sm_bottom_0">
-                        Add to Cart
-                    </button>
-                    <br class="d_sm_none">
-                    <button
-                        class="button_type_4 bg_light_color_2 d_sm_inline_middle f_sm_none tr_all_hover f_right r_corners color_dark mw_0 m_left_5 p_hr_0">
-                        <i class="fa fa-files-o"></i></button>
-                    <button
-                        class="button_type_4 bg_light_color_2 d_sm_inline_middle f_sm_none m_sm_left_5 tr_all_hover f_right r_corners color_dark mw_0 p_hr_0">
-                        <i class="fa fa-heart-o"></i></button>
-                </div>
-            </div>
-        </figcaption>
-    </figure>
-</div>
-<!--product item-->
-<div class="product_item full_width list_type hit m_left_0 m_right_0">
-    <figure class="r_corners photoframe tr_all_hover type_2 shadow relative clearfix">
-        <!--product preview-->
-        <a href="#" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
-            <!--hot product-->
-            <span class="hot_stripe"><img src="<?= $link?>/images/hot_product.png" alt=""></span>
-            <img src="<?= $link?>/images/product_img_8.jpg" class="tr_all_hover" alt="">
-            <span role="button" data-popup="#quick_view_product"
-                  class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
-        </a>
-        <!--description and price of product-->
-        <figcaption>
-            <div class="clearfix">
-                <div class="f_left p_list_description w_sm_full f_sm_none m_xs_bottom_10">
-                    <h4 class="fw_medium"><a href="#" class="color_dark">Ut tellus dolor dapibus</a></h4>
-
-                    <div class="m_bottom_10">
-                        <!--rating-->
-                        <ul class="horizontal_list d_inline_middle clearfix rating_list type_2 tr_all_hover">
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                        </ul>
-                        <a href="#" class="d_inline_middle default_t_color f_size_medium m_left_10">1 Review(s) </a>
-                    </div>
-                    <hr class="m_bottom_10">
-                    <p class="d_sm_none d_xs_block">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.
-                        Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem
-                        ipsum dolor sit amet, consecvtetuer adipiscing elit. </p>
-                </div>
-                <div class="f_right t_align_r f_sm_none t_sm_align_l">
-                    <p class="scheme_color f_size_large m_bottom_15"><span class="fw_medium">$57.00</span></p>
-                    <button
-                        class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15 m_sm_bottom_0 d_sm_inline_middle">
-                        Add to Cart
-                    </button>
-                    <br class="d_sm_none">
-                    <button
-                        class="button_type_4 bg_light_color_2 f_sm_none d_sm_inline_middle tr_all_hover f_right r_corners color_dark mw_0 m_left_5 p_hr_0">
-                        <i class="fa fa-files-o"></i></button>
-                    <button
-                        class="button_type_4 bg_light_color_2 f_sm_none d_sm_inline_middle m_left_5 tr_all_hover f_right r_corners color_dark mw_0 p_hr_0">
-                        <i class="fa fa-heart-o"></i></button>
-                </div>
-            </div>
-        </figcaption>
-    </figure>
-</div>
+<?php } ?>
 </section>
 <hr class="m_bottom_10 divider_type_3">
 <div class="row clearfix m_bottom_15 m_xs_bottom_30">
@@ -501,17 +256,17 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
     </div>
     <div class="col-lg-5 col-md-5 col-sm-4 t_align_r t_xs_align_l">
         <!--pagination-->
-        <a role="button" href="#"
-           class="button_type_10 color_dark d_inline_middle bg_cs_hover bg_light_color_1 t_align_c tr_delay_hover r_corners box_s_none"><i
-                class="fa fa-angle-left"></i></a>
-        <ul class="horizontal_list clearfix d_inline_middle f_size_medium m_left_10">
-            <li class="m_right_10"><a class="color_dark" href="#">1</a></li>
-            <li class="m_right_10"><a class="scheme_color" href="#">2</a></li>
-            <li class="m_right_10"><a class="color_dark" href="#">3</a></li>
-        </ul>
-        <a role="button" href="#"
-           class="button_type_10 color_dark d_inline_middle bg_cs_hover bg_light_color_1 t_align_c tr_delay_hover r_corners box_s_none"><i
-                class="fa fa-angle-right"></i></a>
+        <?= LinkPager::widget([
+            'pagination' => $pages,
+            'prevPageLabel' => '<i class="fa fa-angle-left"></i>',
+            'nextPageLabel' => '<i class="fa fa-angle-right"></i>',
+            'options' => [
+                'class' => 'horizontal_list clearfix d_inline_middle f_size_medium m_left_10'
+            ],
+            'linkOptions' => [
+                'class' => 'm_right_10 m_left_10'
+            ]
+        ]); ?>
     </div>
 </div>
 </section>
@@ -615,62 +370,51 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
     <div class="widget_content">
         <!--Categories list-->
         <ul class="categories_list">
-            <li class="active">
-                <a href="#" class="f_size_large scheme_color d_block relative">
-                    <b>Women</b>
-                    <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
-                </a>
-                <!--second level-->
-                <ul>
-                    <li class="active">
-                        <a href="#" class="d_block f_size_large color_dark relative">
-                            Dresses<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
-                        </a>
-                        <!--third level-->
-                        <ul>
-                            <li><a href="#" class="color_dark d_block">Evening Dresses</a></li>
-                            <li><a href="#" class="color_dark d_block">Casual Dresses</a></li>
-                            <li><a href="#" class="color_dark d_block">Party Dresses</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="d_block f_size_large color_dark relative">
-                            Accessories<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="d_block f_size_large color_dark relative">
-                            Tops<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#" class="f_size_large color_dark d_block relative">
-                    <b>Men</b>
-                    <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
-                </a>
-                <!--second level-->
-                <ul class="d_none">
-                    <li>
-                        <a href="#" class="d_block f_size_large color_dark relative">
-                            Shorts<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
-                        </a>
-                        <!--third level-->
+            <?php
+            $tree = Tree::find()->where(['name' => '商品分类'])->one();
+            $childrenTags = $tree->children('1')->all();
+            foreach ($childrenTags as $childrenTag) {
+                $secondChildren = $childrenTag->children('1')->all();
+                ?>
+                <li>
+                    <a href="#" class="f_size_large color_dark d_block relative">
+                        <b><?= $childrenTag->name ?></b>
+                        <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
+                    </a>
+                    <?php
+                    if ($secondChildren) {
+                        ?>
                         <ul class="d_none">
-                            <li><a href="#" class="color_dark d_block">Evening</a></li>
-                            <li><a href="#" class="color_dark d_block">Casual</a></li>
-                            <li><a href="#" class="color_dark d_block">Party</a></li>
+                            <?php
+                            foreach ($secondChildren as $secondChild) {
+                                $thirdChildren = $secondChild->children('1')->all();
+                                ?>
+                                <li>
+                                    <a href="#" class=" d_block f_size_large color_dark relative">
+                                        <b><?= $secondChild->name ?></b>
+                                        <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
+                                    </a>
+                                    <?php
+                                    if ($thirdChildren) {
+                                        ?>
+                                        <ul class="d_none">
+                                            <?php
+                                            foreach ($thirdChildren as $thirdChild) {
+                                                ?>
+                                                <li><a href="#" class="color_dark d_block"><?= $thirdChild->name ?></a>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    <?php } ?>
+                                </li>
+                            <?php } ?>
                         </ul>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#" class="f_size_large color_dark d_block relative">
-                    <b>Kids</b>
-                    <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
-                </a>
-            </li>
+                    <?php
+                    }?>
+                </li>
+            <?php
+            }
+            ?>
         </ul>
     </div>
 </figure>
@@ -683,10 +427,6 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         You have no product to compare.
     </div>
 </figure>
-<!--banner-->
-<a href="#" class="d_block r_corners m_bottom_30">
-    <img src="<?= $link?>/images/banner_img_6.jpg" alt="">
-</a>
 <!--Bestsellers-->
 <figure class="widget shadow r_corners wrapper m_bottom_30">
     <figcaption>
@@ -694,7 +434,7 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
     </figcaption>
     <div class="widget_content">
         <div class="clearfix m_bottom_15">
-            <img src="<?= $link?>/images/bestsellers_img_1.jpg" alt=""
+            <img src="<?= $link ?>/images/bestsellers_img_1.jpg" alt=""
                  class="f_left m_right_15 m_sm_bottom_10 f_sm_none f_xs_left m_xs_bottom_0">
             <a href="#" class="color_dark d_block bt_link">Ut tellus dolor dapibus</a>
             <!--rating-->
@@ -724,7 +464,7 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         </div>
         <hr class="m_bottom_15">
         <div class="clearfix m_bottom_15">
-            <img src="<?= $link?>/images/bestsellers_img_2.jpg" alt=""
+            <img src="<?= $link ?>/images/bestsellers_img_2.jpg" alt=""
                  class="f_left m_right_15 m_sm_bottom_10 f_sm_none f_xs_left m_xs_bottom_0">
             <a href="#" class="color_dark d_block bt_link">Elementum vel</a>
             <!--rating-->
@@ -754,7 +494,7 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         </div>
         <hr class="m_bottom_15">
         <div class="clearfix m_bottom_5">
-            <img src="<?= $link?>/images/bestsellers_img_3.jpg" alt=""
+            <img src="<?= $link ?>/images/bestsellers_img_3.jpg" alt=""
                  class="f_left m_right_15 m_sm_bottom_10 f_sm_none f_xs_left m_xs_bottom_0">
             <a href="#" class="color_dark d_block bt_link">Crsus eleifend elit</a>
             <!--rating-->

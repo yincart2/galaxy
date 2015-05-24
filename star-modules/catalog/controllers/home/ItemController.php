@@ -4,6 +4,7 @@ namespace star\catalog\controllers\home;
 
 use star\catalog\models\Item;
 use yii\web\Controller;
+use yii\data\Pagination;
 
 class ItemController extends Controller
 {
@@ -25,8 +26,13 @@ class ItemController extends Controller
 
     public function actionList(){
         $items = Item::getItemsByCategory('商品分类');
-        return $this->render('list',[
-            'items' => $items
-        ]);
+        $pages = new Pagination(['totalCount' =>$items->count(), 'pageSize' => '1']);
+        $items = $items->offset($pages->offset)->limit($pages->limit)->all();
+        if($items) {
+            return $this->render('list', [
+                'items' => $items,
+                'pages' => $pages
+            ]);
+        }
     }
 }

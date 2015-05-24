@@ -295,15 +295,11 @@ class Item extends \yii\db\ActiveRecord
                 $categories = $categories . $key . ',';
             }
             $categories = substr($categories, 0, strlen($categories) - 1) . ')';
-            $items = static::find()->where('category_id in ' . $categories)->all();
+            $items = static::find()->where('category_id in ' . $categories);
         } else {
             $tree_id = Tree::findOne(['name' => $name])->id;
-            $items = static::findAll(['category_id' => $tree_id]);
+            $items = static::find()->where(['category_id' => $tree_id]);
         }
-        if($items) {
-            return $items;
-        } else {
-            return false;
-        }
+        return $items;
     }
 }
