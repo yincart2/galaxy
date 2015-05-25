@@ -33,6 +33,9 @@ return [
         'catalog' => [
             'class' => 'star\catalog\Module',
         ],
+        'member' => [
+            'class' =>'home\modules\member\Module',
+        ]
     ],
     'components' => [
         'user' => [

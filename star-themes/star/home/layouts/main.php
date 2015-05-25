@@ -1,10 +1,10 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use yii\widgets\ActiveForm;
 use home\assets\AppAsset;
 use home\widgets\Alert;
+use dektrium\user\models\LoginForm;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -44,19 +44,28 @@ AppAsset::register($this);
     <div class="container">
         <div class="row clearfix">
             <div class="col-lg-4 col-md-4 col-sm-5 t_xs_align_c">
-                <p class="f_size_small">Welcome visitor can you	<a href="#" data-popup="#login_popup">Log In</a> or <a href="#">Create an Account</a> </p>
+                <?php
+                if (Yii::$app->user->isGuest) {
+              ?>
+                <p class="f_size_small">Welcome visitor can you	<a href="#" data-popup="#login_popup">Log In</a> or <a href="<?=Url::to(['/user/registration/register'])?>">Create an Account</a> </p>
+                <?php } ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
                 <p class="f_size_small">Call us toll free: <b class="color_dark">(123) 456-7890</b></p>
             </div>
             <nav class="col-lg-4 col-md-4 col-sm-5 t_align_r t_xs_align_c">
+                <?php
+                if (!Yii::$app->user->isGuest) {
+                ?>
                 <ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
                     <li><a href="#" class="default_t_color">My Account</a></li>
                     <li><a href="#" class="default_t_color">Orders List</a></li>
                     <li><a href="#" class="default_t_color">Wishlist</a></li>
                     <li><a href="#" class="default_t_color">Checkout</a></li>
+                    <li><a href="<?= Url::to(['/user/security/logout'])?>" class="default_t_color" data-method ='post'>Logout</a></li>
                 </ul>
             </nav>
+            <?php } ?>
         </div>
     </div>
 </section>
@@ -523,31 +532,38 @@ AppAsset::register($this);
     <section class="popup r_corners shadow">
         <button class="bg_tr color_dark tr_all_hover text_cs_hover close f_size_large"><i class="fa fa-times"></i></button>
         <h3 class="m_bottom_20 color_dark">Log In</h3>
-        <form>
-            <ul>
-                <li class="m_bottom_15">
-                    <label for="username" class="m_bottom_5 d_inline_b">Username</label><br>
-                    <input type="text" name="" id="username" class="r_corners full_width">
-                </li>
-                <li class="m_bottom_25">
-                    <label for="password" class="m_bottom_5 d_inline_b">Password</label><br>
-                    <input type="password" name="" id="password" class="r_corners full_width">
-                </li>
-                <li class="m_bottom_15">
-                    <input type="checkbox" class="d_none" id="checkbox_10"><label for="checkbox_10">Remember me</label>
-                </li>
-                <li class="clearfix m_bottom_30">
-                    <button class="button_type_4 tr_all_hover r_corners f_left bg_scheme_color color_light f_mxs_none m_mxs_bottom_15">Log In</button>
-                    <div class="f_right f_size_medium f_mxs_none">
-                        <a href="#" class="color_dark">Forgot your password?</a><br>
-                        <a href="#" class="color_dark">Forgot your username?</a>
-                    </div>
-                </li>
-            </ul>
-        </form>
+        <?php $form = ActiveForm::begin([
+            'id'                     => 'login-form',
+            'enableAjaxValidation'   => true,
+            'enableClientValidation' => false,
+            'validateOnBlur'         => false,
+            'validateOnType'         => false,
+            'validateOnChange'       => false,
+            'action'=> Url::to(['/user/security/login']),
+        ]) ;
+        /** @var dektrium\user\models\LoginForm $model */
+        $model = \Yii::createObject(LoginForm::className());;
+
+        ?>
+        <ul>
+            <li class="m_bottom_15">
+        <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'r_corners full_width', 'tabindex' => '1']])->textInput()->label('Username',['class' => 'm_bottom_5 d_inline_b']) ?>
+            </li><li class="m_bottom_25">
+        <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'r_corners full_width', 'tabindex' => '2']])->passwordInput()->label(Yii::t('user', 'Password') . ($module->enablePasswordRecovery ? ' (' . Html::a(Yii::t('user', 'Forgot password?'), ['/user/recovery/request'], ['tabindex' => '5']) . ')' : '')) ?>
+            </li> <li class="m_bottom_15">
+        <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '4','class' => 'd_none']) ?>
+            </li><li class="clearfix m_bottom_30">
+        <?= Html::submitButton(Yii::t('user', 'Sign in'), ['class' => 'button_type_4 tr_all_hover r_corners f_left bg_scheme_color color_light f_mxs_none m_mxs_bottom_15']) ?>
+                <div class="f_right f_size_medium f_mxs_none">
+                    <a href="<?=Url::to(['/user/security/login'])?>" class="color_dark">Forgot your password?</a>
+                </div>
+            </li>
+        </ul>
+        <?php ActiveForm::end(); ?>
+
         <footer class="bg_light_color_1 t_mxs_align_c">
             <h3 class="color_dark d_inline_middle d_mxs_block m_mxs_bottom_15">New Customer?</h3>
-            <a href="#" role="button" class="tr_all_hover r_corners button_type_4 bg_dark_color bg_cs_hover color_light d_inline_middle m_mxs_left_0">Create an Account</a>
+            <a href="<?=Url::to(['/user/registration/register'])?>" role="button" class="tr_all_hover r_corners button_type_4 bg_dark_color bg_cs_hover color_light d_inline_middle m_mxs_left_0">Create an Account</a>
         </footer>
     </section>
 </div>
