@@ -1,6 +1,10 @@
 <?php
+/**
+ * if this view can't show , you should install imagick for php,The EasyThumbnailImage depend on it
+ */
 use himiklab\thumbnail\EasyThumbnailImage;
 use common\models\Tree;
+
 
 /** @var  $itemModel  \star\catalog\models\Item*/
 
@@ -30,14 +34,14 @@ $this->registerCssFile($link . '/css/sku.css');
     <div class="photoframe type_2 shadow r_corners f_left f_sm_none d_xs_inline_b product_single_preview relative m_right_30 m_bottom_5 m_sm_bottom_20 m_xs_right_0 w_mxs_full">
         <span class="hot_stripe"><img src="images/sale_product.png" alt=""></span>
         <div class="relative d_inline_b m_bottom_10 qv_preview d_xs_block">
-<!--            --><?//= EasyThumbnailImage::thumbnailImg(
-//                '@image/'.$itemImages[0]->pic,
-//                430,
-//                430,
-//                EasyThumbnailImage::THUMBNAIL_OUTBOUND,
-//                ['alt' => $itemImages[0]->title ,'id'=>"zoom_image" ,"data-zoom-image"=>Yii::$app->params['imageDomain'].'/'.$itemImages[0]->pic, "class"=>"tr_all_hover"]
-//            )?>
-            <a href="images/preview_zoom_1.jpg" class="d_block button_type_5 r_corners tr_all_hover box_s_none color_light p_hr_0">
+            <?= EasyThumbnailImage::thumbnailImg(
+                '@image/'.$itemImages[0]->pic,
+                430,
+                430,
+                EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+                ['alt' => $itemImages[0]->title ,'id'=>"zoom_image" ,"data-zoom-image"=>Yii::getAlias( '@image').'/'.$itemImages[0]->pic, "class"=>"tr_all_hover"]
+            )?>
+            <a href="<?=Yii::$app->params['imageDomain'].'/'.$itemImages[0]->pic?>" class="d_block button_type_5 r_corners tr_all_hover box_s_none color_light p_hr_0">
                 <i class="fa fa-expand"></i>
             </a>
         </div>
@@ -50,7 +54,13 @@ $this->registerCssFile($link . '/css/sku.css');
                 <?php
                 foreach($itemImages as $itemImage){ ?>
                     <a href="#" data-image="<?= Yii::$app->params['imageDomain'].'/'.$itemImage->pic?>" data-zoom-image="images/preview_zoom_1.jpg">
-                        <img src="<?= Yii::$app->params['imageDomain'].'/'.$itemImage->pic?>" alt=""></a>
+                        <?= EasyThumbnailImage::thumbnailImg(
+                            '@image/'.$itemImage->pic,
+                            110,
+                            110,
+                            EasyThumbnailImage::THUMBNAIL_OUTBOUND
+                        )?>
+                       </a>
                 <?php
                 }
                 ?>
