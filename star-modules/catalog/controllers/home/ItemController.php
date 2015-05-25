@@ -5,6 +5,7 @@ namespace star\catalog\controllers\home;
 use star\catalog\models\Item;
 use yii\web\Controller;
 use yii\data\Pagination;
+use yii\web\HttpException;
 
 class ItemController extends Controller
 {
@@ -17,11 +18,16 @@ class ItemController extends Controller
     public function actionView($id){
         /** @var  $itemModel  \star\catalog\models\Item*/
         $itemModel = Item::find()->where(['item_id'=>$id])->one();
-        return $this->render('view', [
-            'itemModel' => $itemModel,
-            'itemImages' => $itemModel->itemImgs ? $itemModel->itemImgs:[],
-            'skuModels' => $itemModel->skus,
-        ]);
+        if($itemModel){
+            return $this->render('view', [
+                'itemModel' => $itemModel,
+                'itemImages' => $itemModel->itemImgs ,
+                'skuModels' => $itemModel->skus,
+            ]);
+        }
+        else{
+            throw new HttpException(404, \Yii::t('catalog','The requested Item could not be found.'));
+        }
     }
 
     public function actionList(){

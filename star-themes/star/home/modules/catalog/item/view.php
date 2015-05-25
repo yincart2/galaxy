@@ -8,7 +8,7 @@ use common\models\Tree;
 
 /** @var  $itemModel  \star\catalog\models\Item*/
 
-$link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/web');
+$link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
 
 $this->registerJsFile($link . '/js/fsku.js',['depends' => [\yii\web\JqueryAsset::className()]] );
 $this->registerCssFile($link . '/css/sku.css');
@@ -34,14 +34,15 @@ $this->registerCssFile($link . '/css/sku.css');
     <div class="photoframe type_2 shadow r_corners f_left f_sm_none d_xs_inline_b product_single_preview relative m_right_30 m_bottom_5 m_sm_bottom_20 m_xs_right_0 w_mxs_full">
         <span class="hot_stripe"><img src="images/sale_product.png" alt=""></span>
         <div class="relative d_inline_b m_bottom_10 qv_preview d_xs_block">
+            <?php $mainImage= $itemImages[0]?$itemImages[0]->pic:'';  ?>
             <?= EasyThumbnailImage::thumbnailImg(
-                '@image/'.$itemImages[0]->pic,
+                '@image/'.$mainImage,
                 430,
                 430,
                 EasyThumbnailImage::THUMBNAIL_OUTBOUND,
-                ['alt' => $itemImages[0]->title ,'id'=>"zoom_image" ,"data-zoom-image"=>Yii::getAlias( '@image').'/'.$itemImages[0]->pic, "class"=>"tr_all_hover"]
+                ['alt' => $itemImages[0]->title ,'id'=>"zoom_image" ,"data-zoom-image"=>Yii::$app->params['imageDomain'].'/'.$mainImage, "class"=>"tr_all_hover"]
             )?>
-            <a href="<?=Yii::$app->params['imageDomain'].'/'.$itemImages[0]->pic?>" class="d_block button_type_5 r_corners tr_all_hover box_s_none color_light p_hr_0">
+            <a href="<?=Yii::$app->params['imageDomain'].'/'.$mainImage?>" class="d_block button_type_5 r_corners tr_all_hover box_s_none color_light p_hr_0">
                 <i class="fa fa-expand"></i>
             </a>
         </div>
