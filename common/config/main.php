@@ -4,18 +4,6 @@ return [
     'language' => 'zh-CN',
     'sourceLanguage' => 'en-US',
     'modules' => [
-        'user' => [
-            'class' => 'dektrium\user\Module',
-            'admins' => ['admin'],
-            'mailer' => [
-                'sender'                => 'test@yincart.com', // or ['no-reply@myhost.com' => 'Sender name']
-                'welcomeSubject'        => 'Welcome subject',
-                'confirmationSubject'   => 'Confirmation subject',
-                'reconfirmationSubject' => 'Email change subject',
-                'recoverySubject'       => 'Recovery subject',
-            ],
-            'enableConfirmation' => false
-        ],
         'blog' => [
             'class' => 'common\modules\blog\Module',
         ],
@@ -32,10 +20,6 @@ return [
         ]
     ],
     'components' => [
-        'user' => [
-            'identityClass' => 'dektrium\user\models\User',
-            'enableAutoLogin' => true,
-        ],
         'i18n' => [
             'translations' => [
                 '*' => [

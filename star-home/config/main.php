@@ -12,6 +12,21 @@ return [
     'controllerNamespace' => 'home\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'admins' => ['admin'],
+            'mailer' => [
+                'sender'                => 'test@yincart.com', // or ['no-reply@myhost.com' => 'Sender name']
+                'welcomeSubject'        => 'Welcome subject',
+                'confirmationSubject'   => 'Confirmation subject',
+                'reconfirmationSubject' => 'Email change subject',
+                'recoverySubject'       => 'Recovery subject',
+            ],
+            'enableConfirmation' => false
+        ],
+        'rbac' => [
+            'class' => 'dektrium\rbac\Module',
+        ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ],

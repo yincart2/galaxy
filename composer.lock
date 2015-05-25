@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f533b9f3443bf8ad3f5eaf4954ca7464",
+    "hash": "248b145643ff6e231f643914764eac8c",
     "packages": [
         {
             "name": "2amigos/yii2-file-upload-widget",
@@ -588,6 +588,55 @@
                 "yii2"
             ],
             "time": "2015-01-27 10:53:51"
+        },
+        {
+            "name": "dektrium/yii2-rbac",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dektrium/yii2-rbac.git",
+                "reference": "b00d739a876c2a90f18367ecfd4788543a5d8682"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dektrium/yii2-rbac/zipball/b00d739a876c2a90f18367ecfd4788543a5d8682",
+                "reference": "b00d739a876c2a90f18367ecfd4788543a5d8682",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "dektrium\\rbac\\Bootstrap"
+            },
+            "autoload": {
+                "psr-4": {
+                    "dektrium\\rbac\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Erofeev",
+                    "email": "dmeroff@gmail.com",
+                    "homepage": "http://dmeroff.ru"
+                }
+            ],
+            "description": "RBAC manager for Yii2",
+            "keywords": [
+                "dektrium",
+                "rbac gui",
+                "rbac management",
+                "rbac module",
+                "yii rbac",
+                "yii2",
+                "yii2-rbac"
+            ],
+            "time": "2015-05-24 15:38:03"
         },
         {
             "name": "dektrium/yii2-user",
@@ -3159,7 +3208,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "c006/yii2-migration-utility": 20
+        "c006/yii2-migration-utility": 20,
+        "dektrium/yii2-rbac": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
