@@ -58,7 +58,7 @@ AppAsset::register($this);
                 if (!Yii::$app->user->isGuest) {
                 ?>
                 <ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
-                    <li><a href="#" class="default_t_color">My Account</a></li>
+                    <li><a href="<?= Url::to(['/member'])?>" class="default_t_color">My Account</a></li>
                     <li><a href="#" class="default_t_color">Orders List</a></li>
                     <li><a href="#" class="default_t_color">Wishlist</a></li>
                     <li><a href="#" class="default_t_color">Checkout</a></li>
