@@ -5,6 +5,7 @@ use home\assets\AppAsset;
 use home\widgets\Alert;
 use dektrium\user\models\LoginForm;
 use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -333,6 +334,15 @@ AppAsset::register($this);
     </div>
 </section>
 </header>
+<?=
+Breadcrumbs::widget([
+    'homeLink' => [
+        'label' => Yii::t('app', 'Home'),
+        'url' => Yii::$app->homeUrl,
+    ],
+    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+   ]);
+?>
 <?= $content?>;
 <footer id="footer">
     <div class="footer_top_part">
@@ -549,7 +559,7 @@ AppAsset::register($this);
             <li class="m_bottom_15">
         <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'r_corners full_width', 'tabindex' => '1']])->textInput()->label('Username',['class' => 'm_bottom_5 d_inline_b']) ?>
             </li><li class="m_bottom_25">
-        <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'r_corners full_width', 'tabindex' => '2']])->passwordInput()->label(Yii::t('user', 'Password') . ($module->enablePasswordRecovery ? ' (' . Html::a(Yii::t('user', 'Forgot password?'), ['/user/recovery/request'], ['tabindex' => '5']) . ')' : '')) ?>
+        <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'r_corners full_width', 'tabindex' => '2']])->passwordInput()->label(Yii::t('user', 'Password') ) ?>
             </li> <li class="m_bottom_15">
         <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '4','class' => 'd_none']) ?>
             </li><li class="clearfix m_bottom_30">

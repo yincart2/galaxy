@@ -70,7 +70,7 @@ return [
                     '@star/blog/views/home'=>'@theme/star/home/views/blog',
                     '@star/catalog/views/home'=>'@theme/star/home/modules/catalog',
                     '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
-                    '@app/modules/member/views'=>'@theme/star/home/views/member',
+                    '@app/modules/member/views'=>'@theme/star/home/modules/member',
                 ],
                 'baseUrl'=>'@theme/star/home'
             ]

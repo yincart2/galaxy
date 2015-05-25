@@ -20,6 +20,6 @@ class DefaultController extends Controller
 
     public function actionWishList()
     {
-
+        var_dump('WishList');
     }
 }
