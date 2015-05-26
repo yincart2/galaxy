@@ -15,7 +15,8 @@ class DefaultController extends Controller
 
     public function actionCompare()
     {
-
+        $this->layout= '/main';
+        return $this->render('compare');
     }
 
     public function actionWishList()
