@@ -18,7 +18,7 @@ class DefaultController extends Controller
 
     }
 
-    public function actionWishList()
+    public function actionAddWishList()
     {
         var_dump('WishList');
     }
