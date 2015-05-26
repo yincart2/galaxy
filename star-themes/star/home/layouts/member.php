@@ -7,7 +7,6 @@ use yii\helpers\Url;
 
 $this->beginContent('@theme/star/home/layouts/main.php');
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('member','Member Center'), 'url' => ['index']];
 ?>
     <!--content-->
     <div class="page_content_offset">
