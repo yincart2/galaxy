@@ -1,0 +1,38 @@
+<?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $searchModel radar\models\RadarProductSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Radar Products';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="radar-product-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p>
+        <?= Html::a('Create Radar Product', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'title',
+            'detail:ntext',
+            'create_time:datetime',
+            'update_time:datetime',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+
+</div>

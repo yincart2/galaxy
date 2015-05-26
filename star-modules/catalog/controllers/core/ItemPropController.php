@@ -6,28 +6,27 @@ use star\catalog\models\PropValue;
 use Yii;
 use star\catalog\models\ItemProp;
 use star\catalog\models\ItemPropSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * ItemPropController implements the CRUD actions for ItemProp model.
  */
-class ItemPropController extends Controller
+class ItemPropController extends DefaultController
 {
 
 
 
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**

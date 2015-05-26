@@ -35,12 +35,18 @@ return [
         ],
         'member' => [
             'class' =>'home\modules\member\Module',
-        ]
+        ],
+        'core' => [
+            'class' =>'home\modules\core\Module',
+        ],
     ],
     'components' => [
         'user' => [
             'identityClass' => 'dektrium\user\models\User',
             'enableAutoLogin' => true,
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

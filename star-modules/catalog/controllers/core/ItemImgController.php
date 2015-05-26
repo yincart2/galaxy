@@ -5,14 +5,13 @@ namespace star\catalog\controllers\core;
 use star\catalog\models\Item;
 use Yii;
 use star\catalog\models\ItemImg;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * ItemController implements the CRUD actions for ItemImg model.
  */
-class ItemImgController extends Controller
+class ItemImgController extends DefaultController
 {
 
     /**

@@ -10,7 +10,6 @@ use Yii;
 use star\catalog\models\Item;
 use star\catalog\models\ItemSearch;
 use yii\helpers\ArrayHelper;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -19,21 +18,21 @@ use yii\helpers\Json;
 /**
  * ItemController implements the CRUD actions for Item model.
  */
-class ItemController extends Controller
+class ItemController extends DefaultController
 {
 
 
 
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**

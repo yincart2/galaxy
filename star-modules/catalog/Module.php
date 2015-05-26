@@ -2,6 +2,9 @@
 
 namespace star\catalog;
 
+use Yii;
+use yii\web\ForbiddenHttpException;
+
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'star\catalog\controllers';
@@ -9,7 +12,6 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-
         // custom initialization code goes here
     }
 }
