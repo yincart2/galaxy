@@ -4,17 +4,12 @@ use yii\widgets\LinkPager;
 use yii\helpers\Url;
 
 $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
+
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('catalog','Item List'),
+    'template' => '<li><span>{link}</span></li>',
+];
 ?>
-<!--breadcrumbs-->
-<section class="breadcrumbs">
-    <div class="container">
-        <ul class="horizontal_list clearfix bc_list f_size_medium">
-            <li class="m_right_10 current"><a href="#" class="default_t_color">Home<i
-                        class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
-            <li><a href="#" class="default_t_color">item-list</a></li>
-        </ul>
-    </div>
-</section>
 <!--content-->
 <div class="page_content_offset">
 <div class="container">

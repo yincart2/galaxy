@@ -12,18 +12,12 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
 
 $this->registerJsFile($link . '/js/fsku.js',['depends' => [\yii\web\JqueryAsset::className()]] );
 $this->registerCssFile($link . '/css/sku.css');
-?>
 
-<!--breadcrumbs-->
-<section class="breadcrumbs">
-    <div class="container">
-        <ul class="horizontal_list clearfix bc_list f_size_medium">
-            <li class="m_right_10 current"><a href="#" class="default_t_color">Home<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
-            <li class="m_right_10"><a href="#" class="default_t_color">Women</a><i class="fa fa-angle-right d_inline_middle m_left_10"></i></li>
-            <li><a href="#" class="default_t_color">Eget elementum vel</a></li>
-        </ul>
-    </div>
-</section>
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('catalog','Item View'),
+    'template' => '<li><span>{link}</span></li>',
+];
+?>
 <!--content-->
 <div class="page_content_offset">
 <div class="container">
