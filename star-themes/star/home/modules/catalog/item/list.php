@@ -218,10 +218,20 @@ foreach($items as $item) {
                         Add to Cart
                     </button>
                     <br class="d_sm_none">
-                    <a href="<?= Url::to(['/member/default/add-wishList'])?>"><button
+                    <a href="<?= Url::to([
+                        '/member/wishlist/add-wishlist',
+                        'id' => $item->item_id,
+                        'category_id' => $item->category_id,
+                        'type' => 2
+                    ])?>"><button
                         class="button_type_4 bg_light_color_2 tr_all_hover f_right r_corners color_dark mw_0 m_left_5 p_hr_0 d_sm_inline_middle f_sm_none">
                         <i class="fa fa-files-o"></i></button></a>
-                    <a><button
+                    <a href="<?= Url::to([
+                        '/member/wishlist/add-wishlist',
+                        'id' => $item->item_id,
+                        'category_id' => $item->category_id,
+                        'type' => 1
+                    ])?>"><button
                         class="button_type_4 bg_light_color_2 tr_all_hover f_right m_sm_left_5 r_corners color_dark mw_0 p_hr_0 d_sm_inline_middle f_sm_none">
                         <i class="fa fa-heart-o"></i></button></a>
                 </div>
