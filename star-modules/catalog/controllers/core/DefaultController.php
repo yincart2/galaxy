@@ -23,7 +23,7 @@ class DefaultController extends Controller
         ];
     }
 
-    public $layout = 'catalog';
+    public $layout = '/core-catalog';
 
     public function actionIndex()
     {

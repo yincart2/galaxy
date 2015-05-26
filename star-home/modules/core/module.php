@@ -12,9 +12,6 @@ class module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        if(!(Yii::$app->user->can('Merchant')||Yii::$app->user->can('administrator'))){
-            throw new ForbiddenHttpException(\Yii::t('yii', 'You are not allowed to perform this action.'));
-        }
         // custom initialization code goes here
     }
 }

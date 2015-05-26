@@ -10,7 +10,8 @@ return [
     'id' => 'star-home',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'home\controllers',
-    'layout'=>'/main',
+    'defaultRoute' => 'core',
+    'layout'=>'/core',
     'bootstrap' => ['log'],
     'modules' => [
         'user' => [
@@ -27,8 +28,8 @@ return [
         'catalog' => [
             'class' => 'star\catalog\Module',
         ],
-        'member' => [
-            'class' =>'home\modules\member\Module',
+        'core' => [
+            'class' =>'home\modules\core\Module',
         ],
     ],
     'components' => [
@@ -39,17 +40,17 @@ return [
             'identityClass' => 'dektrium\user\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => [
-                'name' => '_frontendUser', // unique for frontend
+                'name' => '_backendUser', // unique for backend
             ]
         ],
         'session' => [
-            'name' => 'PHPFRONTSESSID',
+            'name' => 'PHPBACKSESSID',
             'savePath' => sys_get_temp_dir(),
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '[RANDOM KEY HERE]',
-            'csrfParam' => '_frontendCSRF',
+            'cookieValidationKey' => '[DIFFERENT UNIQUE KEY]',
+            'csrfParam' => '_backendCSRF',
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
