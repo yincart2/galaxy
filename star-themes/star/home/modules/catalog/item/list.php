@@ -5,6 +5,7 @@ use yii\helpers\Url;
 
 $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
 $this->registerJsFile($link . '/js/wishlist.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile($link . '/js/compare.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('catalog','Item List'),
@@ -220,7 +221,7 @@ foreach($items as $item) {
                     </button>
                     <br class="d_sm_none">
                     <button
-                        class="wishlist button_type_4 bg_light_color_2 tr_all_hover f_right r_corners color_dark mw_0 m_left_5 p_hr_0 d_sm_inline_middle f_sm_none"
+                        class="compare  button_type_4 bg_light_color_2 tr_all_hover f_right r_corners color_dark mw_0 m_left_5 p_hr_0 d_sm_inline_middle f_sm_none"
                         data-url="<?= Url::to(['/member/wishlist/add-wishlist'])?>"
                         data-csrf="<?= Yii::$app->request->csrfToken?>"
                         data-item_id="<?= $item->item_id?>"
@@ -555,4 +556,10 @@ foreach($items as $item) {
 </aside>
 </div>
 </div>
+</div>
+<div class="hidden">
+<form id="compare_form" method="post" action="<?= Url::to(['/member/compare/index'])?>" >
+
+<input type="text" name="_frontendCSRF" value="<?= Yii::$app->request->csrfToken?>">
+</form>
 </div>
