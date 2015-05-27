@@ -17,7 +17,7 @@ class WishlistController extends Controller
         if($item_id && $user_id) {
             $wishlist = new Wishlist();
             if(Wishlist::findOne(['item_id' => $item_id, 'user_id' => $user_id])) {
-                return json_encode('You have already add the item to favorite list!');
+                return json_encode('You have already add the item to wishlist!');
             } else {
                 $result = json_encode('Success');
             }
@@ -35,12 +35,28 @@ class WishlistController extends Controller
         $user_id = Yii::$app->user->id;
         if($user_id) {
             $items= Item::find()->innerJoin('wishlist','item.item_id = wishlist.item_id',['wishlist.user_id' => $user_id]);
-            $pages = new Pagination(['totalCount' =>$items->count(), 'pageSize' => '1']);
+            $pages = new Pagination(['totalCount' =>$items->count(), 'pageSize' => '3']);
             $items = $items->offset($pages->offset)->limit($pages->limit)->all();
-            return $this->render('favorite',[
+            return $this->render('index',[
                 'items' => $items,
                 'pages' => $pages
             ]);
+        } else {
+            return $this->redirect(['/site/login']);
+        }
+    }
+
+    public function actionDeleteWishlist()
+    {
+        $user_id = Yii::$app->user->id;
+        $item_id = Yii::$app->request->get('item_id');
+        if($user_id) {
+            /** @var \home\modules\member\models\Wishlist $wishlist */
+            $wishlist = Wishlist::findOne(['item_id' => $item_id, 'user_id' => $user_id]);
+            if($wishlist) {
+                $wishlist->delete();
+                return $this->redirect(['get-wishlist']);
+            }
         }
     }
 }

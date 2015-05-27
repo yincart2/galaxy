@@ -59,7 +59,7 @@ AppAsset::register($this);
             <nav class="col-lg-4 col-md-4 col-sm-5 t_align_r t_xs_align_c">
                 <?php
                 if (!Yii::$app->user->isGuest) {
-                $countFavorite = count(Wishlist::findAll(['user_id' => Yii::$app->user->id]));
+                $countWishlist = count(Wishlist::findAll(['user_id' => Yii::$app->user->id]));
                 ?>
                 <ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
                     <li><a href="<?= Url::to(['/member']) ?>" class="default_t_color">My Account</a></li>
@@ -88,7 +88,7 @@ AppAsset::register($this);
                 <li>
                     <a role="button" href="<?= Url::to(['/member/wishlist/get-wishlist'])?>"
                        class="button_type_1 color_dark d_block bg_light_color_1 r_corners tr_delay_hover box_s_none"><i
-                            class="fa fa-heart-o f_size_ex_large"></i><span class="count-favorite count circle t_align_c"><?= Yii::$app->user->isGuest ? 0 : $countFavorite ?></span></a>
+                            class="fa fa-heart-o f_size_ex_large"></i><span class="count-wishlist count circle t_align_c"><?= Yii::$app->user->isGuest ? 0 : $countWishlist ?></span></a>
                 </li>
                 <li class="m_left_5">
                     <a role="button"

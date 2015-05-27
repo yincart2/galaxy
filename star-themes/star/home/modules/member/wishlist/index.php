@@ -7,34 +7,18 @@ $this->params['breadcrumbs'][] = [
     'url' => ['/member/default/index'],
 ];
 $this->params['breadcrumbs'][] = [
-    'label' => Yii::t('member','Favorite List'),
+    'label' => Yii::t('member','Wishlist'),
     'template' => '<li><span>{link}</span></li>',
 ];
 $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
-
+$this->registerJsFile($link . '/js/wishlist.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <h2 class="tt_uppercase color_dark m_bottom_20">My Wishlist</h2>
-<div class="row clearfix m_bottom_15">
-    <div class="col-lg-7 col-md-7 col-sm-7 f_sx_none m_xs_bottom_10">
-        <p class="d_inline_middle f_size_medium">Results 1 - 5 of 45</p>
-    </div>
-    <div class="col-lg-5 col-md-5 col-sm-5 f_sx_none t_xs_align_l t_align_r">
-        <!--pagination-->
-        <a role="button" href="#"
-           class="f_size_large button_type_10 color_dark d_inline_middle bg_cs_hover bg_light_color_1 t_align_c tr_delay_hover r_corners box_s_none"><i
-                class="fa fa-angle-left"></i></a>
-        <ul class="horizontal_list clearfix d_inline_middle f_size_medium m_left_10">
-            <li class="m_right_10"><a class="color_dark" href="#">1</a></li>
-            <li class="m_right_10"><a class="scheme_color" href="#">2</a></li>
-            <li class="m_right_10"><a class="color_dark" href="#">3</a></li>
-        </ul>
-        <a role="button" href="#"
-           class="f_size_large button_type_10 color_dark d_inline_middle bg_cs_hover bg_light_color_1 t_align_c tr_delay_hover r_corners box_s_none"><i
-                class="fa fa-angle-right"></i></a>
-    </div>
-</div>
-<hr class="m_bottom_30 divider_type_3">
+
 <!--wishlist table-->
+<?php
+if($items) {
+?>
 <table class="table_type_1 responsive_table full_width t_align_l r_corners wraper shadow bg_light_color_1 m_bottom_30">
     <thead>
     <tr class="f_size_large">
@@ -77,7 +61,7 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
                 Cart
             </button>
             <br>
-            <a href="<?= Url::to(['/member/wishlist/delete-wishlist'])?>" class="color_dark"><i class="fa fa-times m_right_5"></i> Remove</a>
+            <a href="#" data-url="<?= Url::to(['/member/wishlist/delete-wishlist','item_id' => $item->item_id])?>" class="delete_wishlist color_dark"><i class="fa fa-times m_right_5"></i> Remove</a>
         </td>
     </tr>
     <?php } ?>
@@ -103,3 +87,8 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
         ]); ?>
     </div>
 </div>
+<?php } else { ?>
+<div class="alert_box r_corners info m_bottom_10">
+    <i class="fa fa-info-circle"></i><p>No data in your wishlist!</p>
+</div>
+<?php } ?>
