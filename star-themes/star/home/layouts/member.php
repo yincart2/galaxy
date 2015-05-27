@@ -27,12 +27,7 @@ $this->beginContent('@theme/star/home/layouts/main.php');
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Url::to(['/member/wishlist/get-wishlist','type' => 2])?>" class="f_size_large color_dark d_block">
-                                        <b><?= Yii::t('member','My Compare')?></b>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?= Url::to(['/member/wishlist/get-wishlist','type' => 1])?>" class="f_size_large color_dark d_block">
+                                    <a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="f_size_large color_dark d_block">
                                         <b><?= Yii::t('member','My WishList')?></b>
                                     </a>
                                 </li>

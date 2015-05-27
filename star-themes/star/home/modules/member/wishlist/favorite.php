@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = [
     'template' => '<li><span>{link}</span></li>',
 ];
 $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
-$items = \star\catalog\models\Item::find()->all();
+
 ?>
 <h2 class="tt_uppercase color_dark m_bottom_20">My Wishlist</h2>
 <div class="row clearfix m_bottom_15">
