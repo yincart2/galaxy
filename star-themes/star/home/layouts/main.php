@@ -59,13 +59,12 @@ AppAsset::register($this);
             <nav class="col-lg-4 col-md-4 col-sm-5 t_align_r t_xs_align_c">
                 <?php
                 if (!Yii::$app->user->isGuest) {
-                $countFavorite = count(Wishlist::findAll(['user_id' => Yii::$app->user->id,'type' => 1]));
-                $countCompare = count(Wishlist::findAll(['user_id' => Yii::$app->user->id,'type' => 2]));
+                $countFavorite = count(Wishlist::findAll(['user_id' => Yii::$app->user->id]));
                 ?>
                 <ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
                     <li><a href="<?= Url::to(['/member']) ?>" class="default_t_color">My Account</a></li>
                     <li><a href="#" class="default_t_color">Orders List</a></li>
-                    <li><a href="<?= Url::to(['/member/wishlist/get-wishlist','type' => 1])?>" class="default_t_color">Wishlist</a></li>
+                    <li><a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="default_t_color">Wishlist</a></li>
                     <li><a href="#" class="default_t_color">Checkout</a></li>
                     <li><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>Logout</a>
                     </li>
@@ -87,9 +86,9 @@ AppAsset::register($this);
             <ul class="d_inline_b horizontal_list clearfix t_align_l site_settings">
                 <!--like-->
                 <li>
-                    <a role="button" href="<?= Url::to(['/member/wishlist/get-wishlist','type' => 1])?>"
+                    <a role="button" href="<?= Url::to(['/member/wishlist/get-wishlist'])?>"
                        class="button_type_1 color_dark d_block bg_light_color_1 r_corners tr_delay_hover box_s_none"><i
-                            class="fa fa-heart-o f_size_ex_large"></i><span class="count-favorite count circle t_align_c"><?= $countFavorite ?></span></a>
+                            class="fa fa-heart-o f_size_ex_large"></i><span class="count-favorite count circle t_align_c"><?= Yii::$app->user->isGuest ? 0 : $countFavorite ?></span></a>
                 </li>
                 <li class="m_left_5">
                     <a role="button"

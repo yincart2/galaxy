@@ -231,9 +231,7 @@ foreach($items as $key=>$item) {
                         class="wishlist button_type_4 bg_light_color_2 tr_all_hover f_right m_sm_left_5 r_corners color_dark mw_0 p_hr_0 d_sm_inline_middle f_sm_none"
                         data-url="<?= Url::to(['/member/wishlist/add-wishlist'])?>"
                         data-csrf="<?= Yii::$app->request->csrfToken?>"
-                        data-item_id="<?= $item->item_id?>"
-                        data-category_id="<?= $item->category_id?>"
-                        data-type="1">
+                        data-item_id="<?= $item->item_id?>">
                         <i class="fa fa-heart-o"></i></button>
                 </div>
             </div>
