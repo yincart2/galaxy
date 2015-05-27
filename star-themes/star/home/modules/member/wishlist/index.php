@@ -1,6 +1,7 @@
 <?php
 use yii\widgets\LinkPager;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('member','Member Center'),
@@ -61,7 +62,13 @@ if($items) {
                 Cart
             </button>
             <br>
-            <a href="#" data-url="<?= Url::to(['/member/wishlist/delete-wishlist','item_id' => $item->item_id])?>" class="delete_wishlist color_dark"><i class="fa fa-times m_right_5"></i> Remove</a>
+            <?= Html::a('<i class="fa fa-times m_right_5"></i> Remove', ['delete-wishlist', 'item_id' => $item->item_id], [
+                'class' => 'color_dark',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ]) ?>
         </td>
     </tr>
     <?php } ?>
