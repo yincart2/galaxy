@@ -1,4 +1,13 @@
-<div class="container">
+<?php
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('member','Member Center'),
+    'url' => ['/member/default/index'],
+];
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('member','Compare List'),
+    'template' => '<li><span>{link}</span></li>',
+];
+?>
 <h2 class="tt_uppercase color_dark m_bottom_30">Compare Products</h2>
 <!--compare products table-->
 <table class="table_type_2 responsive_table type_2 full_width r_corners wraper shadow t_align_l m_bottom_30">
@@ -239,6 +248,3 @@
     </td>
 </tr>
 </table>
-<hr class="m_bottom_15 divider_type_3">
-<a href="index.html" role="button" class="d_inline_b bg_light_color_2 color_dark tr_all_hover button_type_4 r_corners"><i class="fa fa-reply m_left_5 m_right_10 f_size_large"></i>Back to: Shop home</a>
-</div>
