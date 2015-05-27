@@ -166,7 +166,7 @@ $this->params['breadcrumbs'][] = [
 <!--product item-->
 <?php
 /** @var \star\catalog\models\Item $item */
-foreach($items as $item) {
+foreach($items as $key=>$item) {
 ?>
 <div class="product_item full_width list_type hit m_left_0 m_right_0">
     <figure class="r_corners photoframe tr_all_hover type_2 shadow relative clearfix">
@@ -221,7 +221,11 @@ foreach($items as $item) {
                     </button>
                     <br class="d_sm_none">
                     <button
-                        class="compare  button_type_4 bg_light_color_2 tr_all_hover f_right r_corners color_dark mw_0 m_left_5 p_hr_0 d_sm_inline_middle f_sm_none">
+                        class="compare  button_type_4 bg_light_color_2 tr_all_hover f_right r_corners color_dark mw_0 m_left_5 p_hr_0 d_sm_inline_middle f_sm_none"
+                        data-compare_id="<?= $key?>"
+                        data-item_id="<?= $item->item_id?>"
+                        data-category_id="<?= $item->category_id?>"
+                        data-selected= 0>
                         <i class="fa fa-files-o"></i></button>
                     <button
                         class="wishlist button_type_4 bg_light_color_2 tr_all_hover f_right m_sm_left_5 r_corners color_dark mw_0 p_hr_0 d_sm_inline_middle f_sm_none"
