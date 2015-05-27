@@ -32,7 +32,7 @@ class ItemController extends Controller
 
     public function actionList(){
         $items = Item::getItemsByCategory('商品分类');
-        $pages = new Pagination(['totalCount' =>$items->count(), 'pageSize' => '1']);
+        $pages = new Pagination(['totalCount' =>$items->count(), 'pageSize' => '3']);
         $items = $items->offset($pages->offset)->limit($pages->limit)->all();
         if($items) {
             return $this->render('list', [
