@@ -92,9 +92,9 @@ AppAsset::register($this);
                             class="fa fa-heart-o f_size_ex_large"></i><span class="count-favorite count circle t_align_c"><?= $countFavorite ?></span></a>
                 </li>
                 <li class="m_left_5">
-                    <a role="button" href="<?= Url::to(['/member/wishlist/get-wishlist','type' => 2])?>"
+                    <a role="button"
                        class="button_type_1 color_dark d_block bg_light_color_1 r_corners tr_delay_hover box_s_none"><i
-                            class="fa fa-files-o f_size_ex_large"></i><span class="count-compare count circle t_align_c"><?= $countCompare ?></span></a>
+                            class="fa fa-files-o f_size_ex_large"></i><span class="count-compare count circle t_align_c" id="countCompare">0</span></a>
                 </li>
                 <!--language settings-->
                 <li class="m_left_5 relative container3d">
