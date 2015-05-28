@@ -54,7 +54,7 @@ AppAsset::register($this);
                 <?php } ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
-                <p class="f_size_small">Call us toll free: <b class="color_dark">(123) 456-7890</b></p>
+                <p class="f_size_small">Call us toll free: <b class="color_dark">(0547) 800-820-8820</b></p>
             </div>
             <nav class="col-lg-4 col-md-4 col-sm-5 t_align_r t_xs_align_c">
                 <?php

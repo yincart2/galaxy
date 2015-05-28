@@ -1,8 +1,10 @@
 <?php
 
 namespace home\modules\member\controllers;
+use core\models\User;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use Yii;
 
 class DefaultController extends Controller
 {
@@ -24,7 +26,12 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        if(!Yii::$app->user->isGuest) {
+            $user = User::findOne(['id' => Yii::$app->user->id]);
+            return $this->render('index', [
+                'user' => $user
+            ]);
+        }
     }
 
 }
