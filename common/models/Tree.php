@@ -21,14 +21,18 @@ class Tree extends TreeModel
     {
         /** @var \common\models\Tree|\creocoder\nestedsets\NestedSetsBehavior $root */
         $root = static::find()->where(['name' => $name])->one();
-        $categories = $root->children()->indexBy('id')->all();
-        return array_map(function($cate) use ($root) {
-            $prefix = '';
-            $cate->level -= $root->level;
-            while(--$cate->level) {
-                $prefix .= '|----';
-            }
-            return $prefix . $cate->name;
-        }, $categories);
+        if ($root) {
+            $categories = $root->children()->indexBy('id')->all();
+            return array_map(function ($cate) use ($root) {
+                $prefix = '';
+                $cate->level -= $root->level;
+                while (--$cate->level) {
+                    $prefix .= '|----';
+                }
+                return $prefix . $cate->name;
+            }, $categories);
+        } else {
+            return false;
+        }
     }
 }

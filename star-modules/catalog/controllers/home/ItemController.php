@@ -6,6 +6,7 @@ use star\catalog\models\Item;
 use yii\web\Controller;
 use yii\data\Pagination;
 use yii\web\HttpException;
+use Yii;
 
 class ItemController extends Controller
 {
@@ -31,14 +32,22 @@ class ItemController extends Controller
     }
 
     public function actionList(){
-        $items = Item::getItemsByCategory('商品分类');
-        $pages = new Pagination(['totalCount' =>$items->count(), 'pageSize' => '3']);
-        $items = $items->offset($pages->offset)->limit($pages->limit)->all();
+        $catalog = Yii::$app->request->get('catalog');
+        $items = Item::getItemsByCategory($catalog);
         if($items) {
-            return $this->render('list', [
-                'items' => $items,
-                'pages' => $pages
-            ]);
+            $pages = new Pagination(['totalCount' => $items->count(), 'pageSize' => '3']);
+            $items = $items->offset($pages->offset)->limit($pages->limit)->all();
+            if ($items) {
+                return $this->render('list', [
+                    'items' => $items,
+                    'pages' => $pages
+                ]);
+            }
+        } else {
+            return $this->render('//site/error', [
+                'name' => 'catalog',
+                'message' => 'Catalog does not exist'
+                ]);
         }
     }
 }
