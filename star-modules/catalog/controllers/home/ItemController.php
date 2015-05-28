@@ -2,6 +2,7 @@
 
 namespace star\catalog\controllers\home;
 
+use common\models\Tree;
 use star\catalog\models\Item;
 use yii\web\Controller;
 use yii\data\Pagination;
@@ -34,20 +35,22 @@ class ItemController extends Controller
     public function actionList(){
         $catalog = Yii::$app->request->get('catalog');
         $items = Item::getItemsByCategory($catalog);
-        if($items) {
+        $categories = Tree::getCategoriesById($catalog);
+        if($items && $categories) {
             $pages = new Pagination(['totalCount' => $items->count(), 'pageSize' => '3']);
             $items = $items->offset($pages->offset)->limit($pages->limit)->all();
             if ($items) {
                 return $this->render('list', [
+                    'currentCategory' => Tree::findOne(['id' => $catalog]),
+                    'categories' => $categories,
                     'items' => $items,
                     'pages' => $pages
                 ]);
             }
-        } else {
-            return $this->render('//site/error', [
-                'name' => 'catalog',
-                'message' => 'Catalog does not exist'
-                ]);
         }
+        return $this->render('//site/error', [
+            'name' => 'catalog',
+            'message' => 'Catalog does not exist'
+            ]);
     }
 }

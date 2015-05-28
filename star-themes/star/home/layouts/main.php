@@ -373,7 +373,7 @@ AppAsset::register($this);
                     </div>
                 </li>
                 <li class="relative f_xs_none m_xs_bottom_5">
-                    <a href="<?= Url::to(['/catalog/home/item/list','catalog' => '商品分类'])?>" class="tr_delay_hover color_light tt_uppercase"><b>Item List</b></a>
+                    <a href="<?= Url::to(['/catalog/home/item/list','catalog' => 39])?>" class="tr_delay_hover color_light tt_uppercase"><b>Item List</b></a>
                 </li>
                 <li class="relative f_xs_none m_xs_bottom_5"><a href="contact.html"
                                                                 class="tr_delay_hover color_light tt_uppercase"><b>Contact</b></a>

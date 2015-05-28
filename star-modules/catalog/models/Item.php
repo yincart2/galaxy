@@ -285,9 +285,9 @@ class Item extends \yii\db\ActiveRecord
         }
     }
 
-    public static function getItemsByCategory($name)
+    public static function getItemsByCategory($id)
     {
-        $treeNodes = Tree::getTreesByName($name);
+        $treeNodes = Tree::getTreesById($id);
         //category has children
         if($treeNodes) {
             $categories = '(';
@@ -297,7 +297,7 @@ class Item extends \yii\db\ActiveRecord
             $categories = substr($categories, 0, strlen($categories) - 1) . ')';
             $items = static::find()->where('category_id in ' . $categories);
         } else {
-            $tree = Tree::findOne(['name' => $name]);
+            $tree = Tree::findOne(['id' => $id]);
             if($tree) {
                 $items = static::find()->where(['category_id' => $tree->id]);
             } else {
