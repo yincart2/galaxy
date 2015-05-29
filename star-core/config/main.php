@@ -30,6 +30,14 @@ return [
             ],
             'mainLayout' => '@core/views/layouts/main.php',
         ],
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'admins' => ['admin'],
+            'enableRegistration' => false,
+        ],
+        'rbac' => [
+            'class' => 'dektrium\rbac\Module',
+        ],
         'station' => [
             'class' => 'core\modules\station\Module',
         ],
@@ -65,6 +73,14 @@ return [
                     'sourceLanguage' => 'en',
                 ],
             ],
+        ],
+        'view'=>[
+            'theme'=>[
+                'pathMap'=>[
+                    '@core/views'=>'@theme/star/home/',
+                ],
+                'baseUrl'=>'@theme/star/home'
+            ]
         ]
     ],
 //    'as access' => [

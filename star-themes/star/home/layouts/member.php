@@ -23,7 +23,7 @@ $this->beginContent('@theme/star/home/layouts/main.php');
                             <ul class="categories_list">
                                 <li class="active">
                                     <a href="<?= Url::to(['/member/default/index'])?>" class="f_size_large color_dark d_block">
-                                        <b><?= Yii::t('member','Person Information')?></b>
+                                        <b><?= Yii::t('member','Member Information')?></b>
                                     </a>
                                 </li>
                                 <li>

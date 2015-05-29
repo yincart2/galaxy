@@ -54,7 +54,7 @@ AppAsset::register($this);
                 <?php } ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
-                <p class="f_size_small">Call us toll free: <b class="color_dark">(123) 456-7890</b></p>
+                <p class="f_size_small">Call us toll free: <b class="color_dark">(0547) 800-820-8820</b></p>
             </div>
             <nav class="col-lg-4 col-md-4 col-sm-5 t_align_r t_xs_align_c">
                 <?php
@@ -372,15 +372,8 @@ AppAsset::register($this);
                         </ul>
                     </div>
                 </li>
-                <li class="relative f_xs_none m_xs_bottom_5"><a href="features_shortcodes.html"
-                                                                class="tr_delay_hover color_light tt_uppercase"><b>Features</b></a>
-                    <!--sub menu-->
-                    <div class="sub_menu_wrap top_arrow d_xs_none type_2 tr_all_hover clearfix r_corners">
-                        <ul class="sub_menu">
-                            <li><a class="color_dark tr_delay_hover" href="features_shortcodes.html">Shortcodes</a></li>
-                            <li><a class="color_dark tr_delay_hover" href="features_typography.html">Typography</a></li>
-                        </ul>
-                    </div>
+                <li class="relative f_xs_none m_xs_bottom_5">
+                    <a href="<?= Url::to(['/catalog/home/item/list','catalog' => 39])?>" class="tr_delay_hover color_light tt_uppercase"><b>Item List</b></a>
                 </li>
                 <li class="relative f_xs_none m_xs_bottom_5"><a href="contact.html"
                                                                 class="tr_delay_hover color_light tt_uppercase"><b>Contact</b></a>

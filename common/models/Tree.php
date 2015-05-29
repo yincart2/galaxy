@@ -21,14 +21,48 @@ class Tree extends TreeModel
     {
         /** @var \common\models\Tree|\creocoder\nestedsets\NestedSetsBehavior $root */
         $root = static::find()->where(['name' => $name])->one();
-        $categories = $root->children()->indexBy('id')->all();
-        return array_map(function($cate) use ($root) {
-            $prefix = '';
-            $cate->level -= $root->level;
-            while(--$cate->level) {
-                $prefix .= '|----';
+        if ($root) {
+            $categories = $root->children()->indexBy('id')->all();
+            return array_map(function ($cate) use ($root) {
+                $prefix = '';
+                $cate->level -= $root->level;
+                while (--$cate->level) {
+                    $prefix .= '|----';
+                }
+                return $prefix . $cate->name;
+            }, $categories);
+        } else {
+            return false;
+        }
+    }
+
+    public static function getTreesById($id)
+    {
+        /** @var \common\models\Tree|\creocoder\nestedsets\NestedSetsBehavior $root */
+        $root = static::find()->where(['id' => $id])->one();
+        if ($root) {
+            $categories = Tree::find()->where('lft >= '.$root->lft.' and rgt <= '.$root->rgt.' and root = '.$root->root.' order by id desc')->indexBy('id')->all();
+            return array_map(function ($cate) use ($root) {
+                return $cate->name;
+            }, $categories);
+        } else {
+            return false;
+        }
+    }
+
+    public static function getCategoriesById($id)
+    {
+        /** @var \common\models\Tree|\creocoder\nestedsets\NestedSetsBehavior $root */
+        $root = static::find()->where(['id' => $id])->one();
+        if ($root) {
+            $categories = $root->children(1)->indexBy('id')->all();
+            if($categories) {
+                return $categories;
+            } else {
+                return array($root);
             }
-            return $prefix . $cate->name;
-        }, $categories);
+        } else {
+            return false;
+        }
     }
 }

@@ -41,8 +41,8 @@ if($items) {
         <td data-title="Product Image"><img src="<?= $link?>/images/quick_view_img_10.jpg" alt=""></td>
         <!--product name and category-->
         <td data-title="Product Name">
-            <a href="#" class="fw_medium d_inline_b f_size_ex_large color_dark m_bottom_5"><?= $item->title ?></a><br>
-            <a href="#" class="default_t_color"><?= $item->category->name?></a>
+            <a href="<?= Url::to(['/catalog/home/item/view','id' => $item->item_id])?>" class="fw_medium d_inline_b f_size_ex_large color_dark m_bottom_5"><?= $item->title ?></a><br>
+            <a href="<?= Url::to(['/catalog/home/item/list','catalog' => $item->category->id])?>" class="default_t_color"><?= $item->category->name?></a>
         </td>
         <!--product price-->
         <td data-title="Price">

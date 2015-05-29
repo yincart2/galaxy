@@ -2,10 +2,12 @@
 
 namespace star\catalog\controllers\home;
 
+use common\models\Tree;
 use star\catalog\models\Item;
 use yii\web\Controller;
 use yii\data\Pagination;
 use yii\web\HttpException;
+use Yii;
 
 class ItemController extends Controller
 {
@@ -31,14 +33,24 @@ class ItemController extends Controller
     }
 
     public function actionList(){
-        $items = Item::getItemsByCategory('商品分类');
-        $pages = new Pagination(['totalCount' =>$items->count(), 'pageSize' => '3']);
-        $items = $items->offset($pages->offset)->limit($pages->limit)->all();
-        if($items) {
-            return $this->render('list', [
-                'items' => $items,
-                'pages' => $pages
-            ]);
+        $catalog = Yii::$app->request->get('catalog');
+        $items = Item::getItemsByCategory($catalog);
+        $categories = Tree::getCategoriesById($catalog);
+        if($items && $categories) {
+            $pages = new Pagination(['totalCount' => $items->count(), 'pageSize' => '3']);
+            $items = $items->offset($pages->offset)->limit($pages->limit)->all();
+            if ($items) {
+                return $this->render('list', [
+                    'currentCategory' => Tree::findOne(['id' => $catalog]),
+                    'categories' => $categories,
+                    'items' => $items,
+                    'pages' => $pages
+                ]);
+            }
         }
+        return $this->render('//site/error', [
+            'name' => 'catalog',
+            'message' => 'Catalog does not exist'
+            ]);
     }
 }
