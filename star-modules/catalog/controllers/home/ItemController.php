@@ -37,7 +37,7 @@ class ItemController extends Controller
         $items = Item::getItemsByCategory($catalog);
         $categories = Tree::getCategoriesById($catalog);
         if($items && $categories) {
-            $pages = new Pagination(['totalCount' => $items->count(), 'pageSize' => '1']);
+            $pages = new Pagination(['totalCount' => $items->count(), 'pageSize' => '3']);
             $items = $items->offset($pages->offset)->limit($pages->limit)->all();
             if ($items) {
                 return $this->render('list', [

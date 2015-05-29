@@ -38,6 +38,7 @@ return [
     'components' => [
         'urlManager'=>[
             'showScriptName' => true,
+            'enablePrettyUrl' => false,
         ],
         'user' => [
             'identityClass' => 'dektrium\user\models\User',

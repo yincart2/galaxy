@@ -32,7 +32,7 @@ return [
     ],
     'components' => [
         'urlManager'=>[
-            'showScriptName' => true,
+            'showScriptName' => false,
         ],
         'user' => [
             'identityClass' => 'dektrium\user\models\User',
