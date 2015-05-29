@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = [
     <div class="photoframe type_2 shadow r_corners f_left f_sm_none d_xs_inline_b product_single_preview relative m_right_30 m_bottom_5 m_sm_bottom_20 m_xs_right_0 w_mxs_full">
         <span class="hot_stripe"><img src="images/sale_product.png" alt=""></span>
         <div class="relative d_inline_b m_bottom_10 qv_preview d_xs_block">
-            <?php $mainImage= $itemImages[0]?$itemImages[0]->pic:'';  ?>
+            <?php $mainImage= isset($itemImages[0])?$itemImages[0]->pic:'';  ?>
             <?= EasyThumbnailImage::thumbnailImg(
                 '@image/'.$mainImage,
                 430,
