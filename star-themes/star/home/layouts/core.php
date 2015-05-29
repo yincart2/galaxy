@@ -46,6 +46,7 @@ AppAsset::register($this);
                     'label' => 'Catalog', 'url' => ['/catalog/core/default/index'],
                 ];
                 $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
+                $menuItems[] = ['label' => 'Auth', 'url' => ['/auth/auth/create']];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/user/security/logout'],

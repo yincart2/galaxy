@@ -5,7 +5,7 @@ namespace home\modules\core;
 use Yii;
 use yii\web\ForbiddenHttpException;
 
-class module extends \yii\base\Module
+class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'home\modules\core\controllers';
 
