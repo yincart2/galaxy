@@ -31,6 +31,9 @@ return [
         'core' => [
             'class' =>'home\modules\core\Module',
         ],
+        'auth' => [
+            'class'=>'star\auth\Module',
+        ]
     ],
     'components' => [
         'urlManager'=>[
