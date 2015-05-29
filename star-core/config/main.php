@@ -10,7 +10,7 @@ return [
     'id' => 'core',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'core\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','star\auth\bootstrap\Bootstrap'],
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
@@ -77,7 +77,7 @@ return [
         'view'=>[
             'theme'=>[
                 'pathMap'=>[
-                    '@core/views'=>'@theme/star/home/',
+                    '@core/views'=>'@theme/star/core/',
                 ],
                 'baseUrl'=>'@theme/star/home'
             ]

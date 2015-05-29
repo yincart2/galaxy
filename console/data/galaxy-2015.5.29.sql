@@ -616,6 +616,20 @@ INSERT INTO `language` VALUES ('3', 'de', 'German');
 INSERT INTO `language` VALUES ('4', 'ru', 'Russian');
 INSERT INTO `language` VALUES ('5', 'it', 'Italian');
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `wishlist`
+--
+
+CREATE TABLE IF NOT EXISTS `wishlist` (
+  `wishlist_id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) DEFAULT NULL,
+  `item_id` int(10) DEFAULT NULL,
+  `desc` text,
+  `created_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`wishlist_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- 限制导出的表

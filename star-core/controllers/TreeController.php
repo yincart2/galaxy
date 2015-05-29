@@ -8,11 +8,26 @@
 
 namespace core\controllers;
 
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use common\models\Tree;
 
 class TreeController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['Administrator'],
+                    ],
+                ],
+            ],
+            ];
+    }
     public function actions() {
         return [
             'nodeChildren' => [
