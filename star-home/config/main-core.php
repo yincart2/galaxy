@@ -16,7 +16,7 @@ return [
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
-            'admins' => ['Administrator'],
+            'admins' => ['admin'],
             'enableRegistration' => false,
         ],
         'rbac' => [

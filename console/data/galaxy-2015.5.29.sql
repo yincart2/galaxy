@@ -131,15 +131,11 @@ INSERT INTO `auth_item_child` VALUES ('Merchant', 'star\\catalog\\controllers\\c
 INSERT INTO `auth_item_child` VALUES ('Administrator', 'star\\catalog\\controllers\\core\\ItemImgController_Index');
 INSERT INTO `auth_item_child` VALUES ('Merchant', 'star\\catalog\\controllers\\core\\ItemImgController_Index');
 INSERT INTO `auth_item_child` VALUES ('Administrator', 'star\\catalog\\controllers\\core\\ItemPropController_Create');
-INSERT INTO `auth_item_child` VALUES ('Merchant', 'star\\catalog\\controllers\\core\\ItemPropController_Create');
 INSERT INTO `auth_item_child` VALUES ('Administrator', 'star\\catalog\\controllers\\core\\ItemPropController_Delete');
-INSERT INTO `auth_item_child` VALUES ('Merchant', 'star\\catalog\\controllers\\core\\ItemPropController_Delete');
 INSERT INTO `auth_item_child` VALUES ('Administrator', 'star\\catalog\\controllers\\core\\ItemPropController_Index');
-INSERT INTO `auth_item_child` VALUES ('Merchant', 'star\\catalog\\controllers\\core\\ItemPropController_Index');
 INSERT INTO `auth_item_child` VALUES ('Administrator', 'star\\catalog\\controllers\\core\\ItemPropController_Update');
-INSERT INTO `auth_item_child` VALUES ('Merchant', 'star\\catalog\\controllers\\core\\ItemPropController_Update');
 INSERT INTO `auth_item_child` VALUES ('Administrator', 'star\\catalog\\controllers\\core\\ItemPropController_View');
-INSERT INTO `auth_item_child` VALUES ('Merchant', 'star\\catalog\\controllers\\core\\ItemPropController_View');
+
 
 
 
