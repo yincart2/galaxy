@@ -12,7 +12,7 @@ use dektrium\user\models\User;
 use yii\base\Event;
 use yii\rbac\DbManager;
 
-class RegisterEvent
+class UserEvent
 {
 
     /**
@@ -35,10 +35,17 @@ class RegisterEvent
         });
     }
 
-    public static  function backendRegister()
+    /**
+     * when user login in backend , it should be 'Administrator' or ,'Merchant'
+     */
+    public static  function beforeLogin()
     {
-        Event::on(User::className(), User::USER_REGISTER_DONE, function() {
-
+        Event::on(\yii\web\User::className(), \yii\web\User::EVENT_BEFORE_LOGIN, function($event) {
+            $user = $event->identity;
+            $auth = new DbManager();
+            $auth->init();
+            $role = $auth->getRolesByUser($user->id);
+            $event->isValid = in_array($role->name,['Administrator','Merchant']);
         });
     }
 } 

@@ -12,7 +12,7 @@ return [
     'controllerNamespace' => 'home\controllers',
     'defaultRoute' => 'core',
     'layout'=>'/core',
-    'bootstrap' => ['log','star\auth\bootstrap\Bootstrap'],
+    'bootstrap' => ['log',[ 'home\models\UserEvent', 'beforeLogin'],'star\auth\bootstrap\Bootstrap'],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
