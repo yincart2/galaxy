@@ -45,12 +45,15 @@ class AssignModel extends Model{
         $permissionArray = [];
         foreach($permissions as $permission=>$v){
             $tmp = explode('_',$permission);
-            $permissionArray[$tmp[0]][] = isset($tmp[1])? $tmp[1]: $tmp[0];
+            $permissionArray[$tmp[0]][isset($tmp[1])? $tmp[1]: $tmp[0]] = isset($tmp[1])? $tmp[1]: $tmp[0];
         }
         $this->_permissions = $permissionArray;
         return $permissionArray;
     }
 
+    /**
+     * assign permissions to roles
+     */
     public function save(){
         $permissions = $this->permissions;
         $auth = new DbManager();
@@ -58,7 +61,7 @@ class AssignModel extends Model{
         $role = $auth->getRole($this->role_name);
         $auth->removeChildren($role);
        foreach($this->_permissions as $key=>$value){
-           if(is_array($permissions[$key])){
+           if(isset($permissions[$key]) && is_array($permissions[$key]) ){
                foreach($permissions[$key] as $v){
                    if($key == $value[$v]){
                        $auth->addChild($role,$auth->getPermission($key));
@@ -66,19 +69,23 @@ class AssignModel extends Model{
                        $auth->addChild($role,$auth->getPermission($key.'_'.$value[$v]));
                    }
                }
-           }else{
-               if(is_numeric($permissions[$key])){
-                   $auth->addChild($role,$auth->getPermission($key.'_'.$value));
-               }
            }
        }
     }
 
+    /**
+     * load permissions for selected
+     * @return array
+     */
     public function loadPermissions(){
         $auth = new DbManager();
         $auth->init();
         $children = $auth->getChildren($this->role_name);
         $dbPermissions = $this->serializePermissions($children);
-//        var_dump($dbPermissions) ;exit;
+        $selectedValue = [];
+        foreach($dbPermissions as $key=>$value){
+            $selectedValue[$key]=array_keys($value);
+        }
+        return $selectedValue;
     }
 }

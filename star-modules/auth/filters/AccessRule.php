@@ -8,6 +8,7 @@
 namespace star\auth\filters;
 
 use yii\base\Controller;
+use yii\helpers\StringHelper;
 
 class AccessRule extends \yii\filters\AccessRule{
     public $params = [];
@@ -29,31 +30,23 @@ class AccessRule extends \yii\filters\AccessRule{
      */
     public function matchActionAccess($action, $user, $request)
     {
-        if ($user->getIsGuest()) {
-            return false;
-        }
-
         if ($this->isAdmin()) {
             return true;
         }
 
         if ($action->controller instanceof Controller) {
-            $key =  $action->controller->uniqueId . '_' . $action->id;
-            return $user->can($key, $this->params);
+            $key = get_class($action->controller) . '_' . $action->id;
+            if(\Yii::$app->authManager->getPermission($key)){
+                return $user->can($key, $this->params);
+            }else{
+                return true;
+            }
         }
-//        else {
-//            $key = $action->getUniqueId();
-//            $key = explode('/', $key);
-//            array_shift($key);
-//            $key = implode('_', $key);
-//        }
-//        $formatKey = lcfirst(implode('', array_map(function($k) { return ucfirst($k); }, explode('-', $key))));
-
     }
 
     public function isAdmin()
     {
-        $roles = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
-        return isset($roles['__admin__']);
+        return (\Yii::$app->user->id==1);
     }
+
 } 

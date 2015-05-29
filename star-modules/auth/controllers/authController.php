@@ -14,6 +14,7 @@ use dektrium\rbac\models\Search;
 
 class AuthController  extends Controller{
 
+    public $layout = '/core-auth';
      public function actionCreate(){
          $role = new RoleModel();
          if ($role->load(\Yii::$app->request->post()) ){
@@ -33,14 +34,14 @@ class AuthController  extends Controller{
         $permissions = $assignModel->getPermissions();
         if ($assignModel->load(\Yii::$app->request->post()) ){
             $assignModel->save();
-        }else{
-            $assignModel->loadPermissions();
         }
+        $selected = $assignModel->loadPermissions();
 
 
         return $this->render('assign',[
             'permissions' => $permissions,
-            'assignModel' => $assignModel
+            'assignModel' => $assignModel,
+            'selected' => $selected,
         ]);
     }
 

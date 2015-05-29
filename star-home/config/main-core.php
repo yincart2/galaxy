@@ -12,11 +12,11 @@ return [
     'controllerNamespace' => 'home\controllers',
     'defaultRoute' => 'core',
     'layout'=>'/core',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','star\auth\bootstrap\Bootstrap'],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
-            'admins' => ['admin'],
+            'admins' => ['Administrator'],
             'enableRegistration' => false,
         ],
         'rbac' => [

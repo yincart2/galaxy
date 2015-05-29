@@ -71,16 +71,20 @@ class RoleModel extends Model{
         $auth = new DbManager();
         $auth->init();
         $actions = $this->getActions();
-        foreach($actions as $action){
-            if(!$auth->getPermission($this->controllerClass.'_'.$action)){
-                $permission = $auth->createPermission($this->controllerClass.'_'.$action);
-                if(!$auth->add($permission)){
-                    echo $action.' add failed';
+        if(strpos($this->controllerClass,'\\')===false){
+            \Yii::$app->session->addFlash('error',\Yii::t('auth','wrong data '));
+        }else{
+            foreach($actions as $action){
+                if(!$auth->getPermission($this->controllerClass.'_'.$action)){
+                    $permission = $auth->createPermission($this->controllerClass.'_'.$action);
+                    if(!$auth->add($permission)){
+                        \Yii::$app->session->addFlash('error',\Yii::t('auth', $action.' action add failed'));
+                    }else{
+                        \Yii::$app->session->addFlash('success',\Yii::t('auth', 'add '. $action.' action success!'));  ;
+                    }
                 }else{
-                    echo 'add'. $action.' success!';
+                    \Yii::$app->session->addFlash('error',\Yii::t('auth', $action.' action has already exist'));
                 }
-            }else{
-                echo $action.' has already exist';
             }
         }
     }

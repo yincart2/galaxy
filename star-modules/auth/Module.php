@@ -7,7 +7,7 @@ use Yii;
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'star\auth\controllers';
-
+    public $defaultRoute = 'auth/create';
     public function init()
     {
         parent::init();

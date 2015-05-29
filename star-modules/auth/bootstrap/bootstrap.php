@@ -16,7 +16,6 @@ class Bootstrap implements BootstrapInterface
     public function bootstrap($app){
         $accessControl = [
             'class' => AccessControl::className(),
-            'except' => ['catalog/home/item/list', 'site/login', 'site/error', 'site/index','site/register'],
             'rules' => [
                 // deny all POST requests
                 [

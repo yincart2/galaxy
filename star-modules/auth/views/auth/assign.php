@@ -1,15 +1,19 @@
 <?php
 use yii\widgets\ActiveForm;
 
+$this->title = Yii::t('auth', 'Assign Permissions');
+$this->params['breadcrumbs'][] = $this->title;
 
 $form = ActiveForm::begin([
     'method' => 'post',
 ]);
-echo $assignModel->role_name;
+
+echo '<h3>'.$assignModel->role_name.'</h3>';
+
 foreach($permissions as $key=>$permission){
-    echo \yii\helpers\Html::label($key);
-    echo \yii\helpers\Html::checkboxList('AssignModel[permissions]['.$key.']',NULL,$permission);
-//    echo $form->field($assignModel, 'permissions['.$key.']')->checkboxList($permission)->label($key);
+    echo '<div class="form-group"><label class="control-label">' .$key . '</label>' ;
+    echo \yii\helpers\Html::checkboxList('AssignModel[permissions]['.$key.']',$selected[$key],$permission,['class' => 'inline checkbox']);
+
 }
 
 ?>
