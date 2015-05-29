@@ -86,53 +86,9 @@ $this->params['breadcrumbs'][] = [
             </select>
         </div>
     </div>
-    <div class="col-lg-5 col-md-4 col-sm-12 t_align_r t_sm_align_l">
-        <!--grid view or list view-->
-        <p class="d_inline_middle f_size_medium m_right_5">View as:</p>
-
-        <div class="clearfix d_inline_middle">
-            <button
-                class="button_type_7 bg_light_color_1 color_dark tr_delay_hover r_corners mw_0 box_s_none bg_cs_hover f_left">
-                <i class="fa fa-th m_left_0 m_right_0"></i></button>
-            <button
-                class="button_type_7 bg_scheme_color color_light tr_delay_hover r_corners mw_0 box_s_none bg_cs_hover f_left m_left_5">
-                <i class="fa fa-th-list m_left_0 m_right_0"></i></button>
-        </div>
-    </div>
 </div>
 <hr class="m_bottom_10 divider_type_3">
-<div class="row clearfix m_bottom_15">
-    <div class="col-lg-7 col-md-7 col-sm-8 col-xs-12 m_xs_bottom_10">
-        <p class="d_inline_middle f_size_medium d_xs_block m_xs_bottom_5">Results 1 - 5 of 45</p>
 
-        <p class="d_inline_middle f_size_medium m_left_20 m_xs_left_0">Show:</p>
-        <!--show items per page select-->
-        <div class="custom_select f_size_medium relative d_inline_middle m_left_5">
-            <div class="select_title r_corners relative color_dark">9</div>
-            <ul class="select_list d_none"></ul>
-            <select name="show">
-                <option value="Manufacture 1">6</option>
-                <option value="Manufacture 2">3</option>
-                <option value="Manufacture 3">1</option>
-            </select>
-        </div>
-        <p class="d_inline_middle f_size_medium m_left_5">items per page</p>
-    </div>
-    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12 t_align_r t_xs_align_l">
-        <!--pagination-->
-        <a role="button" href="#"
-           class="button_type_10 color_dark d_inline_middle bg_cs_hover bg_light_color_1 t_align_c tr_delay_hover r_corners box_s_none"><i
-                class="fa fa-angle-left"></i></a>
-        <ul class="horizontal_list clearfix d_inline_middle f_size_medium m_left_10">
-            <li class="m_right_10"><a class="color_dark" href="#">1</a></li>
-            <li class="m_right_10"><a class="scheme_color" href="#">2</a></li>
-            <li class="m_right_10"><a class="color_dark" href="#">3</a></li>
-        </ul>
-        <a role="button" href="#"
-           class="button_type_10 color_dark d_inline_middle bg_cs_hover bg_light_color_1 t_align_c tr_delay_hover r_corners box_s_none"><i
-                class="fa fa-angle-right"></i></a>
-    </div>
-</div>
 <!--products list type-->
 <section class="products_container list_type clearfix m_bottom_5 m_left_0 m_right_0">
 <!--product item-->
@@ -220,15 +176,14 @@ foreach($items as $key=>$item) {
         <!--pagination-->
         <?= LinkPager::widget([
             'pagination' => $pages,
-            'prevPageLabel' => '<i class="fa fa-angle-left"></i>',
-            'nextPageLabel' => '<i class="fa fa-angle-right"></i>',
-            'options' => [
-                'class' => 'horizontal_list clearfix d_inline_middle f_size_medium m_left_10'
-            ],
-            'activePageCssClass' => 'color_dark',
-            'linkOptions' => [
-                'class' => 'm_right_10 m_left_10'
-            ]
+//            'prevPageLabel' => '<i class="fa fa-angle-left"></i>',
+//            'nextPageLabel' => '<i class="fa fa-angle-right"></i>',
+//            'options' => [
+//                'class' => 'horizontal_list clearfix d_inline_middle f_size_medium m_left_10'
+//            ],
+//            'linkOptions' => [
+//                'class' => 'm_right_10 m_left_10'
+//            ]
         ]); ?>
     </div>
 </div>
@@ -340,7 +295,7 @@ foreach($items as $key=>$item) {
                 $secondChildren = $childrenTag->children('1')->all();
                 ?>
                 <li>
-                    <a href="#" class="f_size_large color_dark d_block relative">
+                    <a href="<?= Url::to(['/catalog/home/item/list','catalog' => $childrenTag->id])?>" class="f_size_large color_dark d_block relative">
                         <b><?= $childrenTag->name ?></b>
                         <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
                     </a>
@@ -353,7 +308,7 @@ foreach($items as $key=>$item) {
                                 $thirdChildren = $secondChild->children('1')->all();
                                 ?>
                                 <li>
-                                    <a href="#" class=" d_block f_size_large color_dark relative">
+                                    <a href="<?= Url::to(['/catalog/home/item/list','catalog' => $secondChild->id])?>" class=" d_block f_size_large color_dark relative">
                                         <b><?= $secondChild->name ?></b>
                                         <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
                                     </a>
@@ -364,7 +319,7 @@ foreach($items as $key=>$item) {
                                             <?php
                                             foreach ($thirdChildren as $thirdChild) {
                                                 ?>
-                                                <li><a href="#" class="color_dark d_block"><?= $thirdChild->name ?></a>
+                                                <li><a href="<?= Url::to(['/catalog/home/item/list','catalog' => $thirdChild->id])?>" class="color_dark d_block"><?= $thirdChild->name ?></a>
                                                 </li>
                                             <?php } ?>
                                         </ul>

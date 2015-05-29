@@ -42,7 +42,7 @@ class WishlistController extends Controller
                 'pages' => $pages
             ]);
         } else {
-            return $this->redirect(['/site/login']);
+            return $this->redirect(['/user/login']);
         }
     }
 
