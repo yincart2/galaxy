@@ -8,7 +8,7 @@ $this->registerJsFile($link . '/js/wishlist.js', ['depends' => [\yii\web\JqueryA
 $this->registerJsFile($link . '/js/compare.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 $this->params['breadcrumbs'][] = [
-    'label' => Yii::t('catalog','Item List'),
+    'label' => $currentCategory->name,
     'template' => '<li><span>{link}</span></li>',
 ];
 ?>
