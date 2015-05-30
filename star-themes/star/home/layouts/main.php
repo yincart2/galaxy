@@ -49,7 +49,7 @@ AppAsset::register($this);
                 <?php
                 if (Yii::$app->user->isGuest) {
                     ?>
-                    <p class="f_size_small">Welcome visitor can you <a href="#" data-popup="#login_popup">Log In</a> or
+                    <p class="f_size_small">Welcome visitor can you <a href="<?= Url::to(['/user/login'])?>">Log In</a> or
                         <a href="<?= Url::to(['/user/registration/register']) ?>">Create an Account</a></p>
                 <?php } ?>
             </div>

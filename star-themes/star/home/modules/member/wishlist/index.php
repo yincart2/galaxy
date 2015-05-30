@@ -52,7 +52,7 @@ if($items) {
         <td data-title="Quantity">
             <div class="clearfix quantity r_corners d_inline_middle f_size_medium color_dark">
                 <button class="bg_tr d_block f_left" data-direction="down">-</button>
-                <input type="text" name="" readonly value="<?= $item->stock ?>" class="f_left">
+                <input type="text" name="" readonly value="1" class="f_left">
                 <button class="bg_tr d_block f_left" data-direction="up">+</button>
             </div>
         </td>
@@ -77,20 +77,19 @@ if($items) {
 <hr class="m_bottom_10 divider_type_3">
 <div class="row clearfix m_bottom_40">
     <div class="col-lg-7 col-md-7 col-sm-7 f_sx_none m_xs_bottom_10">
-        <p class="d_inline_middle f_size_medium">Results 1 - 5 of 45</p>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 t_align_r f_sx_none t_xs_align_l">
         <!--pagination-->
         <?= LinkPager::widget([
             'pagination' => $pages,
-            'prevPageLabel' => '<i class="fa fa-angle-left"></i>',
-            'nextPageLabel' => '<i class="fa fa-angle-right"></i>',
-            'options' => [
-                'class' => 'horizontal_list clearfix d_inline_middle f_size_medium m_left_10'
-            ],
-            'linkOptions' => [
-                'class' => 'm_right_10 m_left_10'
-            ]
+//            'prevPageLabel' => '<i class="fa fa-angle-left"></i>',
+//            'nextPageLabel' => '<i class="fa fa-angle-right"></i>',
+//            'options' => [
+//                'class' => 'horizontal_list clearfix d_inline_middle f_size_medium m_left_10'
+//            ],
+//            'linkOptions' => [
+//                'class' => 'm_right_10 m_left_10'
+//            ]
         ]); ?>
     </div>
 </div>

@@ -104,7 +104,7 @@ class ItemController extends DefaultController
 
             if(!$model->hasErrors()){
                 $transaction->commit();
-                return $this->redirect('index');
+                return $this->redirect(['index']);
             }
             $transaction->rollBack();
         }
@@ -142,7 +142,7 @@ class ItemController extends DefaultController
                         'model' => $model,
                     ]);
                 } else {
-                    return $this->redirect('index');
+                    return $this->redirect(['index']);
                 }
             }
         } else {
