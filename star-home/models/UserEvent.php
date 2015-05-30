@@ -45,7 +45,7 @@ class UserEvent
             $auth = new DbManager();
             $auth->init();
             $role = $auth->getRolesByUser($user->id);
-            $event->isValid = in_array($role->name,['Administrator','Merchant']);
+            $event->isValid = in_array(current($role)->name,['Administrator','Merchant']);
         });
     }
 } 
