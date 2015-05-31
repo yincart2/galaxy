@@ -3,8 +3,8 @@
 namespace star\blog\controllers\core;
 
 use Yii;
-use common\modules\blog\models\Post;
-use common\modules\blog\models\PostSearch;
+use star\blog\models\Post;
+use star\blog\models\PostSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

@@ -235,7 +235,7 @@ class ItemController extends DefaultController
                 }
             }
         }
-        return $this->redirect(['index']);
+        return $this->redirect(['index','ItemSearch' => Yii::$app->request->post('ItemSearch')]);
     }
 
     /**

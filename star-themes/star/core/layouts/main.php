@@ -51,6 +51,9 @@ AppAsset::register($this);
         $menuItems[] = [
             'label' => 'Station', 'url' => ['/station/default/index'],
         ];
+        $menuItems[] = [
+            'label' => 'Blog', 'url' => ['/blog/core/post'],
+        ];
         $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
         $menuItems[] = ['label' => 'Auth', 'url' => ['/auth/auth/create']];
         $menuItems[] = [
