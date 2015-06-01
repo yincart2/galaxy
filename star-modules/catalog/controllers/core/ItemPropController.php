@@ -67,7 +67,7 @@ class ItemPropController extends DefaultController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->savePropValue($model->prop_id);
-            return $this->redirect(['view', 'id' => $model->prop_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -87,7 +87,7 @@ class ItemPropController extends DefaultController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->savePropValue($model->prop_id);
-            return $this->redirect(['view', 'id' => $model->prop_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

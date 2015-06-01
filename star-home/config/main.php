@@ -29,6 +29,9 @@ return [
         'member' => [
             'class' =>'home\modules\member\Module',
         ],
+        'blog' => [
+            'class' => 'star\blog\Module',
+        ],
     ],
     'components' => [
         'urlManager'=>[

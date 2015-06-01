@@ -5,7 +5,7 @@ namespace star\blog\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\modules\blog\models\Post;
+use star\blog\models\Post;
 
 /**
  * PostSearch represents the model behind the search form about `common\modules\blog\models\Post`.

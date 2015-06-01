@@ -14,19 +14,23 @@ class WishlistController extends Controller
     {
         $user_id = Yii::$app->user->id;
         $item_id = Yii::$app->request->post('item_id');
-        if($item_id && $user_id) {
-            $wishlist = new Wishlist();
-            if(Wishlist::findOne(['item_id' => $item_id, 'user_id' => $user_id])) {
-                return json_encode('You have already add the item to wishlist!');
-            } else {
-                $result = json_encode('Success');
+        if($user_id) {
+            if ($item_id) {
+                $wishlist = new Wishlist();
+                if (Wishlist::findOne(['item_id' => $item_id, 'user_id' => $user_id])) {
+                    return json_encode('You have already add the item to wishlist !');
+                } else {
+                    $result = json_encode('Success');
+                }
+                $wishlist->user_id = $user_id;
+                $wishlist->item_id = $item_id;
+                $wishlist->created_at = time();
+                if ($wishlist->save()) {
+                    return $result;
+                }
             }
-            $wishlist->user_id = $user_id;
-            $wishlist->item_id = $item_id;
-            $wishlist->created_at = time();
-            if($wishlist->save()) {
-                return $result;
-            }
+        } else {
+            return json_encode('Please login first !');
         }
     }
 

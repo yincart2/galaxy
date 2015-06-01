@@ -47,6 +47,9 @@ return [
         'catalog' => [
             'class' => 'star\catalog\Module',
         ],
+        'blog' => [
+            'class' => 'star\blog\Module',
+        ],
     ],
     'components' => [
         'user' => [

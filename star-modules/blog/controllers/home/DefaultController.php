@@ -6,7 +6,7 @@ use common\models\Tree;
 use yii\web\Controller;
 use yii\widgets\ListView;
 use yii\data\ActiveDataProvider;
-use common\modules\blog\models\Post;
+use star\blog\models\Post;
 
 class DefaultController extends Controller
 {

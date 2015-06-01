@@ -49,7 +49,7 @@ AppAsset::register($this);
                 <?php
                 if (Yii::$app->user->isGuest) {
                     ?>
-                    <p class="f_size_small">Welcome visitor can you <a href="#" data-popup="#login_popup">Log In</a> or
+                    <p class="f_size_small">Welcome visitor can you <a href="<?= Url::to(['/user/login'])?>">Log In</a> or
                         <a href="<?= Url::to(['/user/registration/register']) ?>">Create an Account</a></p>
                 <?php } ?>
             </div>
@@ -247,13 +247,13 @@ AppAsset::register($this);
         <!--main menu-->
         <nav role="navigation" class="f_left f_xs_none d_xs_none">
             <ul class="horizontal_list main_menu clearfix">
-                <li class="<?= Yii::$app->request->get('catalog') ? '' : 'current'?> relative f_xs_none m_xs_bottom_5">
+                <li class="<?= Yii::$app->request->get('catalog') || Yii::$app->request->get('tab') ? '' : 'current'?> relative f_xs_none m_xs_bottom_5">
                     <a href="<?= Url::to(['/'])?>" class="tr_delay_hover color_light tt_uppercase"><b>Home</b></a>
                 </li>
                 <?php
                 $root = \common\models\Tree::find()->where(['name' => '商品分类'])->one();
                 if ($root) {
-                    $categories = $root->children(1)->indexBy('id')->all();
+                    $categories = $root->children(1)->indexBy('id')->limit(5)->all();
                     if($categories) {
                         foreach($categories as $category) {
                 ?>
@@ -261,8 +261,8 @@ AppAsset::register($this);
                     <a href="<?= Url::to(['/catalog/home/item/list','catalog' => $category->id])?>" class="tr_delay_hover color_light tt_uppercase"><b><?= $category->name?></b></a>
                 </li>
                 <?php } } } ?>
-                <li class="relative f_xs_none m_xs_bottom_5">
-                    <a href="<?= Url::to(['/catalog/home/item/list','catalog' => \common\models\Tree::findOne(['name' => '商品分类'])->id])?>" class="tr_delay_hover color_light tt_uppercase"><b>Item List</b></a>
+                <li class="<?= Yii::$app->request->get('tab') ? 'current' : ''?> relative f_xs_none m_xs_bottom_5">
+                    <a href="<?= Url::to(['/blog/home/default','tab' =>'blog'])?>" class="tr_delay_hover color_light tt_uppercase"><b>Blog</b></a>
                 </li>
             </ul>
         </nav>
