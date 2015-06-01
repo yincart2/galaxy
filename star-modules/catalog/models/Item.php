@@ -217,8 +217,8 @@ class Item extends \yii\db\ActiveRecord
             $this->addError('images', Yii::t('catalog', $image['type'] . 'Type is wrong'));
             return [];
         }
-
-        $suffix = end(explode('.', $image['name']));
+        $tmp = explode('.', $image['name']);
+        $suffix = end($tmp);
         $imageName = md5(time().$image['name']).'.'.$suffix;
         $DatePath = date('Y',time()).'/'.date('m',time()).'/'.date('d',time());
         $pic = $DatePath . '/' . $imageName;
