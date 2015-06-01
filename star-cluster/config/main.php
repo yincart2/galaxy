@@ -35,7 +35,10 @@ return [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-        ]
+        ],
+        'catalog' => [
+            'class' => 'star\catalog\Module',
+        ],
     ],
     'components' => [
         'user' => [

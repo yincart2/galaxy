@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use home\assets\AppAsset;
 use home\widgets\Alert;
-
+use yii\helpers\Url;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -717,12 +717,16 @@ AppAsset::register($this);
 
         <ul>
 
-            <li class="current"><a href="index.html">Home</a></li>
-            <li><a href="shop_my_account.html">My Account</a></li>
-            <li><a href="shop_shopping_cart.html">Shopping Cart</a></li>
-            <li><a href="shop_checkout.html">Checkout</a></li>
-            <li><a href="blog_v1.html">Blog</a></li>
-            <li><a href="additional_page_contact.html">Contact Us</a></li>
+            <li class="current"><a href="<?= Url::to(['/'])?>">Home</a></li>
+            <?php
+            $root = \common\models\Tree::find()->where(['name' => '商品分类'])->one();
+            if ($root) {
+            $categories = $root->children(1)->indexBy('id')->limit(5)->all();
+            if($categories) {
+            foreach($categories as $category) {
+            ?>
+            <li><a href="<?= Url::to(['/catalog/home/item/list','catalog' => $category->id])?>"><?= $category->name?></a></li>
+            <?php } } } ?>
 
             <li class="has_submenu">
 
