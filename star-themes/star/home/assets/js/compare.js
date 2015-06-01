@@ -20,7 +20,7 @@ $(function(){
 
     });
 
-    $('#countCompare').click(function(){
+    $('#compare').click(function(){
         form.submit();
     })
 });
