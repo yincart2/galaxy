@@ -34,7 +34,10 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
     $fieldGroups[] = ['label' => Yii::t('catalog','Base Info'), 'content' => implode('', $fields)];
 
     $fields = [];
-    $fields[] = $form->field($model, 'desc')->widget(CKEditor::className(), ['editorOptions' => ['filebrowserBrowseUrl' => Url::to(['elfinder/manager'])]]);
+    $fields[] = $form->field($model, 'desc')->widget(CKEditor::className(), [
+        'editorOptions' => [
+            'filebrowserBrowseUrl' => Url::to(['/elfinder/manager','filter' => 'image']),
+        ]]);
     $fieldGroups[] = ['label' => Yii::t('catalog','Detailed Info'), 'content' => implode('', $fields)];
 
     $fields = [];
