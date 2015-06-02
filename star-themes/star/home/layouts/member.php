@@ -31,6 +31,11 @@ $this->beginContent('@theme/star/home/layouts/main.php');
                                         <b><?= Yii::t('member','My WishList')?></b>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="<?= Url::to(['/member/address/delivery-address'])?>" class="f_size_large color_dark d_block">
+                                        <b><?= Yii::t('member','Delivery Address')?></b>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </figure>
