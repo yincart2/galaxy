@@ -132,12 +132,12 @@ $(function () {
             $('.deal_size').removeClass('prop-div-select');
             $.post($(this).data('url'), $('#deal').serialize(), function(response) {
                 if(response.status=='success'){
-                    var num=$('.shopping_car').children().text();
+                    var num=$('#shopping_car').text();
                     num=parseInt(num)+1;
-                    $('.shopping_car').children().text(num);
-                    showPopup(response.status);
+                    $('#shopping_car').text(num);
+                    alert(response.message);
                 }else
-                    showPopup(response.status);
+                    alert(response.message);
             },'json');
         }
     });

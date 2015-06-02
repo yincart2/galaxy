@@ -33,7 +33,7 @@ $form = \yii\widgets\ActiveForm::begin();
             /**@var star\catalog\models\Item $item * */
             $sku = $cartItem->sku;
             $item = $sku->item;
-
+            $itemImages = $item->itemImgs;
 
             ?>
             <tr>
