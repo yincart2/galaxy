@@ -4,7 +4,7 @@
  */
 use himiklab\thumbnail\EasyThumbnailImage;
 use common\models\Tree;
-
+use yii\helpers\Url;
 
 /** @var  $itemModel  \star\catalog\models\Item*/
 
@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = [
             </tr>
             <tr>
                 <td>Availability:</td>
-                <td><span class="color_green">in stock</span> <?= $itemModel->stock?> item(s)</td>
+                <td ><span class="color_green">in stock</span> <span id="stock"><?= $itemModel->stock?></span> item(s)</td>
             </tr>
             <tr>
                 <td>Product Code:</td>
@@ -113,40 +113,33 @@ $this->params['breadcrumbs'][] = [
         <hr class="divider_type_3 m_bottom_10">
         <p class="m_bottom_10">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem ipsum dolor sit amet, consecvtetuer adipiscing. </p>
         <hr class="divider_type_3 m_bottom_15">
-        <div class="m_bottom_15">
-            <s class="v_align_b f_size_ex_large">$152.00</s><span class="v_align_b f_size_big m_left_5 scheme_color fw_medium"><?= $itemModel->price ?></span>
+        <div class="m_bottom_15 deal_price">
+            <s class="v_align_b f_size_ex_large">$152.00</s><span class="v_align_b f_size_big m_left_5 scheme_color fw_medium"><strong><?= $itemModel->price ?></strong></span>
         </div>
+
+        <?php
+        $skus = array();
+        foreach ($skuModels as $sku) {
+
+            $skuId[]=$sku->sku_id;
+            $key = implode(';', json_decode($sku->props, true));
+            $skus[$key] = json_encode(array('price' => $sku->price, 'stock' => $sku->quantity));
+        }
+        ?>
+        <form  method="post" id="deal">
+            <input type="hidden" id="item_id" name="item_id" value="<?= $itemModel->item_id; ?>"/>
+            <input type="hidden" name="_frontendCSRF" value="<?= Yii::$app->request->csrfToken ?>"/>
+            <input type="hidden" id="props" name="props" value="" />
+
+        <div class="deal_size" data-sku-key='<?php echo json_encode(array_keys($skus)); ?>'
+             data-sku-value='<?php echo json_encode($skus); ?>' data-sku-id="<?php if(isset($skuId))echo implode(',',$skuId);else echo $itemModel->item_id; ?>">
         <table class="description_table type_2 m_bottom_15">
-<!--            <tr>-->
-<!--                <td class="v_align_m">Size:</td>-->
-<!--                <td class="v_align_m">-->
-<!--                    <div class="custom_select f_size_medium relative d_inline_middle">-->
-<!--                        <div class="select_title r_corners relative color_dark">s</div>-->
-<!--                        <ul class="select_list d_none"></ul>-->
-<!--                        <select name="product_name">-->
-<!--                            <option value="s">s</option>-->
-<!--                            <option value="m">m</option>-->
-<!--                            <option value="l">l</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </td>-->
-<!--            </tr>-->
 
             <!-- Price Starts -->
 <!--            <div class="deal_price">-->
 <!--                <span class="cor_gray">市场价：<strong>--><?php //echo  $itemModel->price ?><!--</strong>元</span>-->
 <!--            </div>-->
-            <?php
-            $skus = array();
-            foreach ($skuModels as $sku) {
 
-                $skuId[]=$sku->sku_id;
-                $key = implode(';', json_decode($sku->props, true));
-                $skus[$key] = json_encode(array('price' => $sku->price, 'stock' => $sku->quantity));
-            }
-            ?>
-            <div class="deal_size" data-sku-key='<?php echo json_encode(array_keys($skus)); ?>'
-                 data-sku-value='<?php echo json_encode($skus); ?>' data-sku-id="<?php if(isset($skuId))echo implode(',',$skuId);else echo $item->item_id; ?>">
                 <?php
                 $itemProps = $propValues = array();
                 $itemPropModels = \star\catalog\models\ItemProp::find()->where(['category_id'=>$itemModel->category_id])->all();
@@ -194,30 +187,30 @@ $this->params['breadcrumbs'][] = [
                                 <?php
                                 }
                             } ?>
-                                    </div>
                             </td>
                         </tr>
                     <?php
                     }
                 } ?>
-            </div>
+
             <!-- Price Ends -->
             <tr>
                 <td class="v_align_m">Quantity:</td>
                 <td class="v_align_m">
                     <div class="clearfix quantity r_corners d_inline_middle f_size_medium color_dark">
-                        <button class="bg_tr d_block f_left" data-direction="down">-</button>
-                        <input type="text" name="" readonly value="1" class="f_left">
-                        <button class="bg_tr d_block f_left" data-direction="up">+</button>
+                        <button type="button" class="bg_tr d_block f_left" data-direction="down">-</button>
+                        <input type="text"   value="1" class="f_left" name="qty" id="qty" data-stock="<?= $itemModel->stock?>">
+                        <button type="button" class="bg_tr d_block f_left" data-direction="up">+</button>
                     </div>
                 </td>
             </tr>
         </table>
+        </div>
         <div class="d_ib_offset_0 m_bottom_20">
-            <button class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large">Add to Cart</button>
-            <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Wishlist</span><i class="fa fa-heart-o f_size_big"></i></button>
-            <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Compare</span><i class="fa fa-files-o f_size_big"></i></button>
-            <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0 relative"><i class="fa fa-question-circle f_size_big"></i><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Ask a Question</span></button>
+            <button type="button" class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large deal_add_car" data-url="<?= Url::to(['/cart/cart/add']); ?>">Add to Cart</button>
+            <button type="button" class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Wishlist</span><i class="fa fa-heart-o f_size_big"></i></button>
+            <button type="button" class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Compare</span><i class="fa fa-files-o f_size_big"></i></button>
+            <button type="button" class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0 relative"><i class="fa fa-question-circle f_size_big"></i><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Ask a Question</span></button>
         </div>
         <p class="d_inline_middle">Share this:</p>
         <div class="d_inline_middle m_left_5 addthis_widget_container">
@@ -232,6 +225,8 @@ $this->params['breadcrumbs'][] = [
             </div>
             <!-- AddThis Button END -->
         </div>
+
+        </form>
     </div>
 </div>
 <!--tabs-->

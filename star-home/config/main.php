@@ -32,6 +32,9 @@ return [
         'blog' => [
             'class' => 'star\blog\Module',
         ],
+        'cart' => [
+            'class' =>'home\modules\cart\Module',
+        ],
     ],
     'components' => [
         'urlManager'=>[
@@ -85,6 +88,7 @@ return [
                     '@star/catalog/views/home'=>'@theme/star/home/modules/catalog',
                     '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
                     '@app/modules/member/views'=>'@theme/star/home/modules/member',
+                    '@app/modules/cart/views'=>'@theme/star/home/modules/cart',
                 ],
                 'baseUrl'=>'@theme/star/home'
             ]
