@@ -6,7 +6,7 @@
  * Time: 11:26 AM
  */
 
-namespace core\controllers;
+namespace cluster\controllers;
 
 use yii\web\Controller;
 use common\models\Tree;

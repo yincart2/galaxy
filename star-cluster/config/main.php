@@ -7,9 +7,9 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'core',
+    'id' => 'cluster',
     'basePath' => dirname(__DIR__),
-    'controllerNamespace' => 'core\controllers',
+    'controllerNamespace' => 'cluster\controllers',
     'bootstrap' => ['log'],
     'modules' => [
         'admin' => [
@@ -35,7 +35,10 @@ return [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-        ]
+        ],
+        'catalog' => [
+            'class' => 'star\catalog\Module',
+        ],
     ],
     'components' => [
         'user' => [
@@ -62,6 +65,16 @@ return [
                     'sourceLanguage' => 'en',
                 ],
             ],
+        ],
+        'view'=>[
+            'theme'=>[
+                'pathMap'=>[
+                    '@app/views'=>'@theme/star/cluster/',
+                    '@star/catalog/views/home'=>'@theme/star/cluster/modules/catalog',
+                    '@app/modules/member/views'=>'@theme/star/cluster/modules/member',
+                ],
+                'baseUrl'=>'@theme/star/cluster'
+            ]
         ]
     ],
 //    'as access' => [

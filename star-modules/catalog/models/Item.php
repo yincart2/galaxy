@@ -159,9 +159,11 @@ class Item extends \yii\db\ActiveRecord
     public function getUploadImages(){
         $images = $this->loadUploadImages('Item');
         $imagesArray = [];
-        foreach($images['images'] as $image){
-            if($image['size']){
-                $imagesArray[] = $this ->saveImage($image);
+        if(isset($images['images'])){
+            foreach($images['images'] as $image){
+                if($image['size']){
+                    $imagesArray[] = $this ->saveImage($image);
+                }
             }
         }
         return $imagesArray;
@@ -190,10 +192,12 @@ class Item extends \yii\db\ActiveRecord
      */
     public function loadUploadImages($file){
         $images = [];
-        foreach ($_FILES[$file] as $key => $info) {
-            foreach($info as $attributes => $v){
-                foreach($v as $num=>$value){
-                    $images[$attributes][$num][$key] = $value;
+        if(isset($_FILES[$file])){
+            foreach ($_FILES[$file] as $key => $info) {
+                foreach($info as $attributes => $v){
+                    foreach($v as $num=>$value){
+                        $images[$attributes][$num][$key] = $value;
+                    }
                 }
             }
         }
@@ -213,8 +217,8 @@ class Item extends \yii\db\ActiveRecord
             $this->addError('images', Yii::t('catalog', $image['type'] . 'Type is wrong'));
             return [];
         }
-
-        $suffix = end(explode('.', $image['name']));
+        $tmp = explode('.', $image['name']);
+        $suffix = end($tmp);
         $imageName = md5(time().$image['name']).'.'.$suffix;
         $DatePath = date('Y',time()).'/'.date('m',time()).'/'.date('d',time());
         $pic = $DatePath . '/' . $imageName;
