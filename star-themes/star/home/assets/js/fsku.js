@@ -126,18 +126,18 @@ $(function () {
 
     $('.deal_add_car').click(function() {
         var selectProps = $('.prop-select,.img-prop-select');
-        if (selectProps.length < $('.deal_size p').length) {
+        if (selectProps.length < $('.deal_size tr').length-1) {
             $('.deal_size').addClass('prop-div-select');
         } else {
             $('.deal_size').removeClass('prop-div-select');
             $.post($(this).data('url'), $('#deal').serialize(), function(response) {
                 if(response.status=='success'){
-                    var num=$('.shopping_car').children().text();
+                    var num=$('#shopping_car').text();
                     num=parseInt(num)+1;
-                    $('.shopping_car').children().text(num);
-                    showPopup(response.status);
+                    $('#shopping_car').text(num);
+                    alert(response.message);
                 }else
-                    showPopup(response.status);
+                    alert(response.message);
             },'json');
         }
     });
@@ -151,7 +151,7 @@ $(function () {
     });
     $('.deal_add').click(function() {
         var selectProps = $('.prop-select,.img-prop-select');
-        if (selectProps.length < $('.deal_size p').length) {
+        if (selectProps.length < $('.deal_size tr').length) {
             $('.deal_size').addClass('prop-div-select');
         } else {
             $('.deal_size').removeClass('prop-div-select');
