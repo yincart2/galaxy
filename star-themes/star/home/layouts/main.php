@@ -136,7 +136,7 @@ AppAsset::register($this);
                 </li>
                 <!--shopping cart-->
                 <li class="m_left_5 relative container3d" id="shopping_button">
-                    <a role="button" href="#"
+                    <a role="button" href="<?= Url::to(['/cart/cart/index'])?>"
                        class="button_type_3 color_light bg_scheme_color d_block r_corners tr_delay_hover box_s_none">
 										<span class="d_inline_middle shop_icon m_mxs_right_0">
 											<i class="fa fa-shopping-cart"></i>

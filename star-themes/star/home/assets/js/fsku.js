@@ -126,7 +126,7 @@ $(function () {
 
     $('.deal_add_car').click(function() {
         var selectProps = $('.prop-select,.img-prop-select');
-        if (selectProps.length < $('.deal_size p').length) {
+        if (selectProps.length < $('.deal_size tr').length-1) {
             $('.deal_size').addClass('prop-div-select');
         } else {
             $('.deal_size').removeClass('prop-div-select');
@@ -151,7 +151,7 @@ $(function () {
     });
     $('.deal_add').click(function() {
         var selectProps = $('.prop-select,.img-prop-select');
-        if (selectProps.length < $('.deal_size p').length) {
+        if (selectProps.length < $('.deal_size tr').length) {
             $('.deal_size').addClass('prop-div-select');
         } else {
             $('.deal_size').removeClass('prop-div-select');
