@@ -751,7 +751,7 @@ $tmpJs = ["js/jquery-2.1.0.min.js", "js/jquery-migrate-1.2.1.min.js", "js/retina
     "js/waypoints.min.js", "js/jquery.isotope.min.js", "js/owl.carousel.min.js", "js/jquery.tweet.min.js", "js/jquery.custom-scrollbar.js", "js/scripts.js",
 ];
 foreach ($tmpJs as $v) {
-    $this->registerJsFile($link . '/' . $v, ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerJsFile($link . '/' . $v);
 }
 ?>
 <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5306f8f674bfda4c"></script>
