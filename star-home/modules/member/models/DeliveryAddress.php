@@ -6,9 +6,9 @@ use common\models\Area;
 use Yii;
 
 /**
- * This is the model class for table "member_address".
+ * This is the model class for table "delivery_address".
  *
- * @property integer $member_address_id
+ * @property integer $delivery_address_id
  * @property integer $user_id
  * @property string $province
  * @property string $city
@@ -19,14 +19,14 @@ use Yii;
  * @property string $name
  * @property integer $is_default
  */
-class MemberAddress extends \yii\db\ActiveRecord
+class DeliveryAddress extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'member_address';
+        return 'delivery_address';
     }
 
     /**
@@ -46,7 +46,7 @@ class MemberAddress extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'member_address_id' => Yii::t('app', 'Member Address ID'),
+            'delivery_address_id' => Yii::t('app', 'Delivery Address ID'),
             'user_id' => Yii::t('app', 'User ID'),
             'province' => Yii::t('app', 'Province'),
             'city' => Yii::t('app', 'City'),

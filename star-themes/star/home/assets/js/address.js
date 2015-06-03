@@ -1,30 +1,30 @@
 $(function() {
 
-    $("#memberaddress-zip_code").keyup(function() {
-        $("#memberaddress-zip_code").val($('#memberaddress-zip_code').val().replace(/\D/g,''));
+    $("#deliveryaddress-zip_code").keyup(function() {
+        $("#deliveryaddress-zip_code").val($('#deliveryaddress-zip_code').val().replace(/\D/g,''));
     });
 
-    $("#memberaddress-phone").keyup(function() {
-        $("#memberaddress-phone").val($('#memberaddress-phone').val().replace(/\D/g,''));
+    $("#deliveryaddress-phone").keyup(function() {
+        $("#deliveryaddress-phone").val($('#deliveryaddress-phone').val().replace(/\D/g,''));
     });
 
     $("#cat-id").change(function() {
         if($(this).children("option:selected").val() != '') {
-            $(".field-memberaddress-province").removeClass("has-error");
-            $(".field-memberaddress-province").addClass("has-success");
+            $(".field-deliveryaddress-province").removeClass("has-error");
+            $(".field-deliveryaddress-province").addClass("has-success");
         } else {
-            $(".field-memberaddress-province").removeClass("has-success");
-            $(".field-memberaddress-province").addClass("has-error");
+            $(".field-deliveryaddress-province").removeClass("has-success");
+            $(".field-deliveryaddress-province").addClass("has-error");
         }
     });
 
     $("#subcat-id").change(function() {
         if($(this).children("option:selected").val() != '') {
-            $(".field-memberaddress-city").removeClass("has-error");
-            $(".field-memberaddress-city").addClass("has-success");
+            $(".field-deliveryaddress-city").removeClass("has-error");
+            $(".field-deliveryaddress-city").addClass("has-success");
         } else {
-            $(".field-memberaddress-city").removeClass("has-success");
-            $(".field-memberaddress-city").addClass("has-error");
+            $(".field-deliveryaddress-city").removeClass("has-success");
+            $(".field-deliveryaddress-city").addClass("has-error");
         }
     });
 });
