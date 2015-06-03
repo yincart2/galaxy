@@ -18,6 +18,10 @@ use Yii;
  * @property string $phone
  * @property string $name
  * @property integer $is_default
+ *
+ * @property \common\models\Area $provinceArea
+ * @property \common\models\Area $cityArea
+ * @property \common\models\Area $districtArea
  */
 class DeliveryAddress extends \yii\db\ActiveRecord
 {
@@ -62,10 +66,37 @@ class DeliveryAddress extends \yii\db\ActiveRecord
     public function getProvinceArea(){
         return $this->hasOne(Area::className(),['area_id'=>'province']);
     }
+
     public function getCityArea(){
         return $this->hasOne(Area::className(),['area_id'=>'city']);
     }
+
     public function getDistrictArea(){
         return $this->hasOne(Area::className(),['area_id'=>'district']);
+    }
+
+    public static function getAddressList()
+    {
+        /** @var \yii\web\user $customer */
+        $customer = Yii::$app->user->identity;
+        $deliveryAddresses = DeliveryAddress::find()->where(['user_id' => $customer->id])->all();
+        $addressList = array_map(function($address) {
+            /** @var \home\modules\member\models\DeliveryAddress $address */
+            $addressInfo = [$address->provinceArea->name . $address->cityArea->name . $address->districtArea->name . $address->address,
+                $address->zip_code, $address->name, $address->phone];
+            $addressInfo = implode(' ', $addressInfo);
+            return $addressInfo;
+        }, $deliveryAddresses);
+        $defaultAddress = array_filter($deliveryAddresses, function($address) {
+            /** @var \home\modules\member\models\DeliveryAddress $address */
+            return $address->is_default;
+        });
+        if(!empty($defaultAddress)){
+            $defaultKey = array_keys($defaultAddress)[0];
+            $defaultAddress = $addressList[$defaultKey];
+        }
+
+
+        return [array_combine($addressList, $addressList), $defaultAddress];
     }
 }
