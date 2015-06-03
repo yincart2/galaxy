@@ -9,16 +9,12 @@ use home\modules\cart\models\ShoppingCart;
 
 list($path, $link) = $this->getAssetManager()->publish('@home/modules/order/web/js');
 $this->registerJsFile($link . '/order.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-?>
 
-<!-- Main Container Starts -->
-<div id="main-container" class="container">
-    <!-- Breadcrumb Starts -->
-    <ol class="breadcrumb">
-        <li><a href="<?= Url::to(['/']) ?>">首页</a></li>
-        <li class="active">结算</li>
-    </ol>
-    <!-- Breadcrumb Ends -->
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('order','Check Out'),
+    'template' => '<li><span>{link}</span></li>',
+];
+?>
     <!-- Main Heading Starts -->
     <h2 class="main-heading text-center">
         结算
@@ -28,7 +24,7 @@ $this->registerJsFile($link . '/order.js', ['depends' => [\yii\web\JqueryAsset::
     <form>
         <div class="breadcrumb address-panel">
             <div class="box-title container_24"><span
-                    style="float:right"><?php echo Html::a('管理收货地址', array('/customer/delivery-address'), array('target' => '_blank')) ?></span>收货地址
+                    style="float:right"><?php echo Html::a('管理收货地址', array('/member/address/delivery-address'), array('target' => '_blank')) ?></span>收货地址
             </div>
             <div class="box-content">
                 <?php list($addressList, $defaultAddress) = \home\modules\member\models\DeliveryAddress::getAddressList(); ?>
@@ -70,24 +66,24 @@ $this->registerJsFile($link . '/order.js', ['depends' => [\yii\web\JqueryAsset::
 
                         $key = $cartItem->data['key'];
 
-                        $item = $cartItem->item;
+                        $item = $cartItem->sku->item;
 //                        if($customer_sale){
 //                            $price_true = $customer_sale->sale_price;
 //                        }else{
                             $price_true = $item->price;
 //                        }
                         if (isset($item)) {
-                            $pictures = explode(',',$item->pictures);
                             ?>
                             <tr><?php
-                                if ($item->pictures){
-                                $picUrl = is_array($pictures)?$pictures[0]:$pictures;
-                                ?>
-                                <td><?php echo Html::img($picUrl,['style' => "width : 80px; height:80px"]);
-                                    } else {
-                                        echo Yii::t('leather', '该商品没有上传图片');
-                                    } ?></td>
-                                <td><?php echo $item->name; ?></td>
+//                                if ($item->itemImgs){
+//                                $pictures = $item->itemImgs;
+//                                $picUrl = is_array($pictures)?$pictures[0]:$pictures;
+//                                ?>
+<!--                                <td>--><?php //echo Html::img($picUrl,['style' => "width : 80px; height:80px"]);
+//                                    } else {
+//                                        echo Yii::t('leather', '该商品没有上传图片');
+//                                    } ?><!--</td>-->
+                                <td><?php echo $item->title; ?></td>
                                 <td><?php echo $price_true; ?></td>
                                 <td><?php echo $cartItem->qty; ?></td>
                                 <td><?php echo $price_true * $cartItem->qty; ?></td>
@@ -131,5 +127,3 @@ $this->registerJsFile($link . '/order.js', ['depends' => [\yii\web\JqueryAsset::
             </div>
         </div>
     </form>
-</div>
-<!-- Main Container Ends -->

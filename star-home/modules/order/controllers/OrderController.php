@@ -25,7 +25,6 @@ class OrderController extends Controller
         $shoppingCart = new ShoppingCart();
         $cartItems = $shoppingCart->cartItems;
 
-
         return $this->render('index', [
             'cartItems' => $cartItems,
         ]);
