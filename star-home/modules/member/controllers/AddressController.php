@@ -4,7 +4,7 @@ namespace home\modules\member\controllers;
 
 use common\models\Area;
 use yii\helpers\Json;
-use home\modules\member\models\MemberAddress;
+use home\modules\member\models\DeliveryAddress;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use yii;
@@ -17,7 +17,7 @@ class AddressController extends Controller
      * @return string
      */
     public function actionDeliveryAddress(){
-        $model = new MemberAddress();
+        $model = new DeliveryAddress();
 
         $dataProvider = new ActiveDataProvider([
             'query' =>  $model::find()->where(['user_id'=>Yii::$app->user->id]),
@@ -30,18 +30,18 @@ class AddressController extends Controller
 
         //create and update
         if ($model->load(Yii::$app->request->post()) ) {
-            $memberAddress = Yii::$app->request->post('MemberAddress');
-            $memberAddress['user_id'] = Yii::$app->user->id;
+            $deliveryAddress = Yii::$app->request->post('DeliveryAddress');
+            $deliveryAddress['user_id'] = Yii::$app->user->id;
 
             $model->user_id = Yii::$app->user->id;
 
             //prevent causing multiple submissions when F5 to refresh the page
-            if(!MemberAddress::find()->where($memberAddress)->all()) {
+            if(!DeliveryAddress::find()->where($deliveryAddress)->all()) {
                 /**
                  * ensure only one default deliveryAddress
                  */
                 if ($model->is_default == 1) {
-                    $deliveryAddress = MemberAddress::find()->where(['is_default' => 1, 'user_id' => Yii::$app->user->id])->all();
+                    $deliveryAddress = DeliveryAddress::find()->where(['is_default' => 1, 'user_id' => Yii::$app->user->id])->all();
                     foreach ($deliveryAddress as $address) {
                         $address->is_default = 0;
                         $address->save();
@@ -139,7 +139,7 @@ class AddressController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findMemberAddressModel($id)->delete();
+        $this->findDeliveryAddressModel($id)->delete();
 
         return $this->redirect(['delivery-address']);
     }
@@ -151,9 +151,9 @@ class AddressController extends Controller
      * @return customerAddress the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findMemberAddressModel($id)
+    protected function findDeliveryAddressModel($id)
     {
-        $model = new MemberAddress();
+        $model = new DeliveryAddress();
         if (($model = $model::findOne($id)) !== null) {
             return $model;
         } else {

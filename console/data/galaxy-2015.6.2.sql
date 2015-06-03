@@ -4125,11 +4125,11 @@ CREATE TABLE IF NOT EXISTS `lookup` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `member_address`
+-- 表的结构 `delivery_address`
 --
 
-CREATE TABLE IF NOT EXISTS `member_address` (
-  `member_address_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `delivery_address` (
+  `delivery_address_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `province` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -4139,8 +4139,8 @@ CREATE TABLE IF NOT EXISTS `member_address` (
   `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `is_default` int(11) DEFAULT NULL,
-  PRIMARY KEY (`member_address_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
+  PRIMARY KEY (`delivery_address_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

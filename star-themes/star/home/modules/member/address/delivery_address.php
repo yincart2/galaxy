@@ -3,14 +3,14 @@ use kartik\widgets\DepDrop;
 use \yii\helpers\Url;
 use \yii\helpers\Html;
 use yii\grid\GridView;
-use home\modules\member\models\MemberAddress;
+use home\modules\member\models\DeliveryAddress;
 
 $dataList = ['1'=>'是','0'=>'否'];
 $this->params['breadcrumbs'][] = '收货地址';
 $link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
 $this->registerJsFile($link . '/js/address.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
-<?php $count = MemberAddress::find()->where(['user_id' => Yii::$app->user->id])->count();
+<?php $count = DeliveryAddress::find()->where(['user_id' => Yii::$app->user->id])->count();
 if($count == 0) {
     echo '您还没有创建收货地址! 请填写以下信息并保存：<br /><br />';
 } else {
@@ -44,7 +44,7 @@ if($count == 0) {
                             return ;
                         },
                         'update' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['address/delivery-address', 'view_id' => $model->member_address_id]);
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['address/delivery-address', 'view_id' => $model->delivery_address_id]);
                         }
                     ]
             ],
@@ -63,13 +63,13 @@ if(!isset($viewId) && $count != 0){
 <div id="address"  style="display: <?=  (isset($viewId) || $count == 0) ? 'block': 'none';  ?>">
     <?php
     if(!isset($viewId)) {
-        $model = new MemberAddress();
+        $model = new DeliveryAddress();
     }
     $form = \yii\widgets\ActiveForm::begin();
     $select = ['' => '请选择...'];
     $catList = $select+$catList;
 
-    /* @var \home\modules\member\models\MemberAddress $model */
+    /* @var \home\modules\member\models\DeliveryAddress $model */
     echo $form->field($model, 'province')->dropDownList($catList, ['id'=>'cat-id']);
 
     // Child # 1
