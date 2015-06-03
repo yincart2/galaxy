@@ -39,11 +39,19 @@ return [
         'catalog' => [
             'class' => 'star\catalog\Module',
         ],
+        'cart' => [
+            'class' =>'cluster\modules\cart\Module',
+        ],
     ],
     'components' => [
         'user' => [
             'identityClass' => 'dektrium\user\models\User',
             'enableAutoLogin' => true,
+        ],
+        'request' => [
+            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'cookieValidationKey' => '[RANDOM KEY HERE]',
+            'csrfParam' => '_frontendCSRF',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -72,6 +80,7 @@ return [
                     '@app/views'=>'@theme/star/cluster/',
                     '@star/catalog/views/home'=>'@theme/star/cluster/modules/catalog',
                     '@app/modules/member/views'=>'@theme/star/cluster/modules/member',
+                    '@app/modules/cart/views'=>'@theme/star/cluster/modules/cart',
                 ],
                 'baseUrl'=>'@theme/star/cluster'
             ]

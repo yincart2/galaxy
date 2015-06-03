@@ -1005,7 +1005,7 @@ AppAsset::register($this);
 
         <div class="animated_item">
 
-            <a href="#" class="button_grey">View Cart</a>
+            <a href="<?= Url::to(['/cart/cart/index'])?>" class="button_grey">View Cart</a>
 
             <a href="#" class="button_blue">Checkout</a>
 
@@ -1632,7 +1632,9 @@ AppAsset::register($this);
 <!-- Include Libs & Plugins
 		============================================ -->
 <?php
-$tmpJs = ["js/jquery-2.1.0.min.js", "js/queryloader2.min.js", "js/rs-plugin/js/jquery.themepunch.tools.min.js", "js/rs-plugin/js/jquery.themepunch.revolution.min.js", "js/jquery.appear.js", "js/owlcarousel/owl.carousel.min.js",
+$tmpJs = ["js/jquery-2.1.1.min.js", "js/queryloader2.min.js","js/jquery.elevateZoom-3.0.8.min.js", "js/fancybox/source/jquery.fancybox.pack.js","js/fancybox/source/helpers/jquery.fancybox-media.js",
+    "js/fancybox/source/helpers/jquery.fancybox-thumbs.js","js/rs-plugin/js/jquery.themepunch.tools.min.js", "js/rs-plugin/js/jquery.themepunch.revolution.min.js", "js/jquery.appear.js",
+    "js/owlcarousel/owl.carousel.min.js",
     "js/jquery.countdown.plugin.min.js", "js/jquery.countdown.min.js",
     "js/arcticmodal/jquery.arcticmodal.js", "twitter/jquery.tweet.min.js", "js/colorpicker/colorpicker.js", "js/retina.min.js", "js/theme.plugins.js", "js/theme.core.js",
 ];
