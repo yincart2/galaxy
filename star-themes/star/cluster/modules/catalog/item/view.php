@@ -2,13 +2,13 @@
 /**
  * if this view can't show , you should install imagick for php,The EasyThumbnailImage depend on it
  */
+use yii\helpers\Url;
 use himiklab\thumbnail\EasyThumbnailImage;
-use common\models\Tree;
 
 
 /** @var  $itemModel  \star\catalog\models\Item*/
 
-$link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
+$link = $this->getAssetManager()->getPublishedUrl('@theme/star/cluster/assets');
 
 $this->registerJsFile($link . '/js/fsku.js',['depends' => [\yii\web\JqueryAsset::className()]] );
 $this->registerCssFile($link . '/css/sku.css');
@@ -211,23 +211,78 @@ $this->params['breadcrumbs'][] = [
     </div>
     <!-- - - - - - - - - - - - - - Product size - - - - - - - - - - - - - - - - -->
 
-    <div class="description_section_2 v_centered">
+    <?php
+    $skus = array();
+    foreach ($skuModels as $sku) {
 
-        <span class="title">Size:</span>
+        $skuId[]=$sku->sku_id;
+        $key = implode(';', json_decode($sku->props, true));
+        $skus[$key] = json_encode(array('price' => $sku->price, 'stock' => $sku->quantity));
+    }
+    ?>
+    <form  method="post" id="deal">
+        <input type="hidden" id="item_id" name="item_id" value="<?= $itemModel->item_id; ?>"/>
+        <input type="hidden" name="_frontendCSRF" value="<?= Yii::$app->request->csrfToken ?>"/>
+        <input type="hidden" id="props" name="props" value="" />
 
-        <div class="custom_select min">
+        <div class="deal_size" data-sku-key='<?php echo json_encode(array_keys($skus)); ?>'
+             data-sku-value='<?php echo json_encode($skus); ?>' data-sku-id="<?php if(isset($skuId))echo implode(',',$skuId);else echo $itemModel->item_id; ?>">
 
-            <select>
 
-                <option value="Small">Small</option>
-                <option value="Middle">Middle</option>
-                <option value="Big">Big</option>
-
-            </select>
-
+            <?php
+            $itemProps = $propValues = array();
+            $itemPropModels = \star\catalog\models\ItemProp::find()->where(['category_id'=>$itemModel->category_id])->all();
+            foreach ($itemPropModels as $itemProp) {
+                $itemProps[$itemProp->prop_id] = $itemProp;
+                foreach ($itemProp->propValues as $propValue) {
+                    $propValues[$propValue->value_id] = $propValue;
+                }
+            }
+            $pvids = json_decode($itemModel->props);
+            foreach ($pvids as $pid => $pvid) {
+                if (isset($itemProps[$pid]) && $itemProps[$pid]->is_sale_prop) {
+                    $itemProp = $itemProps[$pid];
+                    ?>
+                    <div class="description_section_2 v_centered">
+                    <p> <span class="title"><?php echo $itemProp->prop_name ?>：</span>
+                                <?php if (is_array($pvid)) {
+                                    foreach ($pvid as $v) {
+                                        $ids = explode(':', $v);
+                                        $propValue = $propValues[$ids[1]];
+                                        if ($itemProp->is_color_prop && false) {
+                                            ?>
+                                            <a href="javascript:void(0)" data-value="<?php echo $v; ?>" id="prop<?php echo str_replace(':','-',$v); ?>">
+                                                <img alt="<?php echo $propValue->prop_name; ?>"
+                                                     src="<?php echo isset($propImgs[$v]) ? $propImgs[$v] : ''; ?>"
+                                                     width="41" height="41"></a>
+                                        <?php } else { ?>
+                                            <a href="javascript:void(0)"
+                                               data-value="<?php echo $v; ?>" id="prop<?php echo str_replace(':','-',$v); ?>"><?php echo $propValue->value_name; ?></a>
+                                        <?php
+                                        }
+                                    }
+                                } else {
+                                    $ids = explode(':', $pvid);
+                                    $propValue = $propValues[$ids[1]];
+                                    if ($itemProp->is_color_prop && false) {
+                                        ?>
+                                        <a href="javascript:void(0)" data-value="<?php echo $pvid; ?>" id="prop<?php echo str_replace(':','-',$v); ?>">
+                                            <img alt="<?php echo $propValue->prop_name; ?>"
+                                                 src="<?php echo isset($propImgs[$pvid]) ? $propImgs[$pvid] : ''; ?>"
+                                                 width="41" height="41"></a>
+                                    <?php } else { ?>
+                                        <a href="javascript:void(0)"
+                                           data-value="<?php echo $pvid; ?>" id="prop<?php echo str_replace(':','-',$v); ?>"><?php echo $propValue->prop_name; ?></a>
+                                    <?php
+                                    }
+                                } ?>
+                    </p>
+                    </div>
+                <?php
+                }
+            } ?>
         </div>
 
-    </div>
 
     <!-- - - - - - - - - - - - - - End of product size - - - - - - - - - - - - - - - - -->
 
@@ -239,9 +294,9 @@ $this->params['breadcrumbs'][] = [
 
         <div class="qty min clearfix">
 
-            <button class="theme_button" data-direction="minus">&#45;</button>
-            <input type="text" name="" value="1">
-            <button class="theme_button" data-direction="plus">&#43;</button>
+            <button  type="button" class="theme_button" data-direction="minus">&#45;</button>
+            <input type="text" value="1" name="qty" id="qty" data-stock="<?= $itemModel->stock?>">
+            <button type="button" class="theme_button" data-direction="plus">&#43;</button>
 
         </div>
 
@@ -253,18 +308,18 @@ $this->params['breadcrumbs'][] = [
 
     <div class="buttons_row">
 
-        <button class="button_blue middle_btn">Add to Cart</button>
+        <button type="button" class="button_blue middle_btn deal_add_car" data-url="<?= Url::to(['/cart/cart/add']); ?>">Add to Cart</button>
 
-        <button class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container"><span class="tooltip top">Add to Wishlist</span></button>
+        <button type="button" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container"><span class="tooltip top">Add to Wishlist</span></button>
 
-        <button class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container"><span class="tooltip top">Add to Compare</span></button>
+        <button type="button" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container"><span class="tooltip top">Add to Compare</span></button>
 
     </div>
 
     <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
 
 </div>
-
+    </form>
 <!-- - - - - - - - - - - - - - End of product description column - - - - - - - - - - - - - - - - -->
 
 </div>
