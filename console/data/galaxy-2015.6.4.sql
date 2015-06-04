@@ -3907,6 +3907,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `cart_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `sku_id` int(10) unsigned NOT NULL COMMENT 'SKU Id',
+  `star_id` int(10) unsigned NULL COMMENT 'Store Id',
   `qty` int(10) unsigned NOT NULL COMMENT '库存',
   `data` varchar(255) DEFAULT NULL COMMENT 'json格式存取，额外的字段',
   `create_time` int(10) unsigned NOT NULL COMMENT '创建时间',

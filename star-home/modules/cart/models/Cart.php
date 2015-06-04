@@ -12,6 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $cart_id
  * @property string $user_id
  * @property string $sku_id
+ * @property string $star_id
  * @property string $qty
  * @property string $data
  * @property string $create_time
@@ -33,7 +34,7 @@ class Cart extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'sku_id', 'qty' ], 'required'],
-            [['user_id', 'sku_id', 'qty', 'create_time'], 'integer'],
+            [['user_id', 'sku_id', 'qty', 'create_time','star_id'], 'integer'],
             [['data'], 'string', 'max' => 255]
         ];
     }
