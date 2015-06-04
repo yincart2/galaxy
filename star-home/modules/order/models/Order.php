@@ -28,6 +28,8 @@ use yii\db\Exception;
  */
 class Order extends \yii\db\ActiveRecord
 {
+    public $orderItems;
+
     const STATUS_WAIT_PAYMENT = 1;
 
     const STATUS_WAIT_SHIPMENT = 2;
@@ -117,86 +119,81 @@ class Order extends \yii\db\ActiveRecord
     {
         $orderItems = [];
         $item_id = Yii::$app->request->post('item_id');
-        if(isset($item_id)) {
-            $qty = Yii::$app->request->post('qty');
-            $data = Yii::$app->request->post('data');
-            $sku = Sku::find()->where(['sku_id'=>$item_id])->one();
-            $item = $sku->item;
-            $this->user_id = Yii::$app->user->id;
-            $this->shipping_fee = $item->shipping_fee;
-            $this->payment_fee = 0;
-            $this->status = 1;
+        try {
+            if (isset($item_id)) {
+                $qty = Yii::$app->request->post('qty');
+                $data = Yii::$app->request->post('data');
+                $sku = Sku::find()->where(['sku_id' => $item_id])->one();
+                $item = $sku->item;
+                $this->user_id = Yii::$app->user->id;
+                $this->shipping_fee = $item->shipping_fee;
+                $this->payment_fee = 0;
+                $this->status = 1;
 
-            $orderItem = new OrderItem();
-            $orderItem->item_id = $item_id;
-            //todo groupon
+                $orderItem = new OrderItem();
+                $orderItem->item_id = $item_id;
+                //todo groupon
 //            if(Yii::$app->session->get('groupon')&& $groupon = Groupon::find()->where(['item_id'=> $orderItem->item_id])->andWhere('begin_time < '.time().' and end_time > '.time())->one()){
 //                $orderItem->price =$groupon->price;
 //
 //            }else{
                 $orderItem->price = $sku->price;
 //            }
-            $this->total_price =  $orderItem->price * $qty + $item->shipping_fee;
-            $orderItem->qty = $qty;
-            $orderItem->name = $item->name;
-            if(isset($data)) {
-                $orderItem->data = $data;
-            }
-            $pictures = explode(',',$item->pictures);
-            $picUrl = is_array($pictures)?$pictures[0]:$pictures;
-            $orderItem->picture = is_null($picUrl) ? 'default' :$picUrl ;
-            $orderItems[] = $orderItem;
-        } else {
-            $ShoppingCart = new ShoppingCart();
-            $this->user_id = Yii::$app->user->id;
-            $this->total_price = $ShoppingCart->getTotal();
-            /**@TODO attributes  * */
-            $this->shipping_fee = $ShoppingCart->getShippingFee();
-            $this->payment_fee = 0;
-            $this->status = 1;
-            $cartItems = $ShoppingCart->cartItems;
-            foreach ($cartItems as $cartItem) {
-
-                $key = $cartItem->data['key'];
-                $price_true = $cartItem->sku->price;
-                $orderItem = new OrderItem();
-                $orderItem->item_id = $cartItem->sku->sku_id;
-                $orderItem->price = $price_true;
-                $orderItem->qty = $cartItem->qty;
-                $orderItem->name = $cartItem->sku->item->name;
-                $orderItem->data = $cartItem->data;
-                $pictures = explode(',',$cartItem->sku->item->pictures);
-                $picUrl = is_array($pictures)?$pictures[0]:$pictures;
-                $orderItem->picture = is_null($picUrl) ? 'default' :$picUrl ;
-                $orderItems[] = $orderItem;
-            }
-        }
-
-        $this->orderItems = $orderItems;
-        $transaction=\Yii::$app->db->beginTransaction();
-        try {
-            if ($this->save()) {
-                if (!isset($item_id)) {
-                    $ShoppingCart->clearAll();
+                $this->total_price = $orderItem->price * $qty + $item->shipping_fee;
+                $orderItem->qty = $qty;
+                $orderItem->name = $item->title;
+                if (isset($data)) {
+                    $orderItem->data = $data;
                 }
-
-                //todo shipment
-//                $shipment = new Shipment();
-//                $shipment->order_id = $this->order_id;
-//                $shipment->shipment_method = '待填';
-//                $shipment->trace_no = '待填';
-//                $shipment->status = 0;
-//                if ($shipment->save()) {
-//                    $transaction->commit();
-//                    return true;
-//                } else {
-//                    throw new Exception('Unable to save shipment record.');
-//                }
+//            $pictures = explode(',',$item->pictures);
+//            $picUrl = is_array($pictures)?$pictures[0]:$pictures;
+//            $orderItem->picture = is_null($picUrl) ? 'default' :$picUrl ;
+                $orderItem->picture = 'default';
+                if ($this->save()) {
+                    $orderItem->order_id = $this->order_id;
+                    $orderItem->save();
+                } else {
+                    throw new Exception('Unable to save order record.');
+                }
+                $orderItems[] = $orderItem;
             } else {
-                throw new Exception('Unable to save order record.');
+                $ShoppingCart = new ShoppingCart();
+                $this->user_id = Yii::$app->user->id;
+                $this->total_price = $ShoppingCart->getTotal();
+                /**@TODO attributes  * */
+                $this->shipping_fee = $ShoppingCart->getShippingFee();
+                $this->payment_fee = 0;
+                $this->status = 1;
+                if ($this->save()) {
+                    $cartItems = $ShoppingCart->cartItems;
+                    foreach ($cartItems as $cartItem) {
+                        $key = $cartItem->data['key'];
+                        $price_true = $cartItem->sku->price;
+                        $orderItem = new OrderItem();
+                        $orderItem->order_id = $this->order_id;
+                        $orderItem->item_id = $cartItem->sku->sku_id;
+                        $orderItem->price = $price_true;
+                        $orderItem->qty = $cartItem->qty;
+                        $orderItem->name = $cartItem->sku->item->title;
+                        $orderItem->data = $cartItem->data;
+//                $pictures = explode(',',$cartItem->sku->item->pictures);
+//                $picUrl = is_array($pictures)?$pictures[0]:$pictures;
+//                $orderItem->picture = is_null($picUrl) ? 'default' :$picUrl ;
+                        $orderItem->picture = 'default';
+                        $orderItems[] = $orderItem;
+                        if(!$orderItem->save()) {
+                            throw new Exception('Unable to save order item record.');
+                        }
+                    }
+                    $ShoppingCart->clearAll();
+                } else {
+                    throw new Exception('Unable to save order record.');
+                }
             }
+            $this->orderItems = $orderItems;
+            $this->updateItemStock();
+            return true;
         } catch (\yii\base\Exception $e) {
-            $transaction->rollback();
             return false;
         }
     }
@@ -215,7 +212,7 @@ class Order extends \yii\db\ActiveRecord
     public function attachEvents()
     {
         $this->on(static::EVENT_BEFORE_INSERT, [$this, 'generateOrderNo']);
-        $this->on(static::EVENT_AFTER_INSERT, [$this, 'updateItemStock']);
+//        $this->on(static::EVENT_AFTER_INSERT, [$this, 'updateItemStock']);
     }
 
     public function generateOrderNo()

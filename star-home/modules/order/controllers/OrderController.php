@@ -122,9 +122,9 @@ class OrderController extends Controller
                 }
             }
 //            return $this->redirect(['alipay/index', 'id' => $orderModel->order_id]);
-//            return Json::encode(['message' => \Yii::t('app', 'create order success'), 'redirect' => 'success']);
+            return Json::encode(['message' => \Yii::t('app', 'create order success'), 'redirect' => 'success']);
         } else {
-         return Json::encode(['message' =>'下单失败', 'redirect' => Url::to(['site/index'])]);
+            return Json::encode(['message' =>'下单失败', 'redirect' => Url::to(['/order/order/index'])]);
         }
     }
 

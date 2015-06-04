@@ -35,7 +35,7 @@ class OrderItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'item_id', 'price', 'qty', 'name', 'picture'], 'required'],
+//            [['order_id', 'item_id', 'price', 'qty', 'name', 'picture'], 'required'],
             [['order_id', 'item_id', 'qty'], 'integer'],
             [['price'], 'number'],
             [['name', 'picture'], 'string', 'max' => 255]
