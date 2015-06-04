@@ -35,6 +35,9 @@ return [
         'cart' => [
             'class' =>'home\modules\cart\Module',
         ],
+        'order' => [
+            'class' =>'home\modules\order\Module',
+        ],
     ],
     'components' => [
         'urlManager'=>[

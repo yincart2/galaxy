@@ -65,7 +65,7 @@ AppAsset::register($this);
                     <li><a href="<?= Url::to(['/member']) ?>" class="default_t_color">My Account</a></li>
                     <li><a href="#" class="default_t_color">Orders List</a></li>
                     <li><a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="default_t_color">Wishlist</a></li>
-                    <li><a href="#" class="default_t_color">Checkout</a></li>
+                    <li><a href="<?= Url::to(['/order/order/index']) ?>" class="default_t_color">Checkout</a></li>
                     <li><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>Logout</a>
                     </li>
                 </ul>
