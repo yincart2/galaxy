@@ -51,6 +51,9 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * update cart
+     */
     public function actionUpdate()
     {
         $shoppingCartModel = new ShoppingCart();
@@ -66,6 +69,9 @@ class CartController extends Controller
         return Json::encode(['message' => $message,'redirect' =>'index']);
     }
 
+    /**
+     * remove item from cart
+     */
     public function actionRemove()
     {
         $shoppingCartModel = new ShoppingCart();
@@ -77,6 +83,9 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * remove all items
+     */
     public function actionClearAll(){
         $shoppingCartModel = new ShoppingCart();
         if ($shoppingCartModel->clearAll()) {

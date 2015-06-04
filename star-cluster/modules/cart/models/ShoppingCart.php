@@ -27,6 +27,9 @@ class ShoppingCart extends Component
     /** @var Cart[] */
     public $cartItems = [];
 
+    /**
+     * save cart into cookies and database
+     */
     public function init()
     {
         $cookies = Yii::$app->request->cookies;
@@ -177,6 +180,13 @@ class ShoppingCart extends Component
         return false;
     }
 
+    /**
+     * update cart
+     * @param $sku_id
+     * @param $qty
+     * @param $data
+     * @return bool
+     */
     public function update($sku_id, $qty,$data)
     {
         if ($this->beforeUpdate($sku_id, $qty,$data)) {

@@ -45,7 +45,7 @@ foreach ($cartItems as $key=>$carts) {
     $sku = $cartItem->sku;
     $item = $sku->item;
     $itemImages = $item->itemImgs;
-
+    if($sku && $item){
     ?>
     <tr>
 
@@ -148,6 +148,7 @@ foreach ($cartItems as $key=>$carts) {
         <!-- - - - - - - - - - - - - - End of action - - - - - - - - - - - - - - - - -->
 
     </tr>
+        <?php } ?>
     <?php } ?>
 <?php } ?>
 
