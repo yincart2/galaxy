@@ -222,6 +222,7 @@ $this->params['breadcrumbs'][] = [
     ?>
     <form  method="post" id="deal">
         <input type="hidden" id="item_id" name="item_id" value="<?= $itemModel->item_id; ?>"/>
+        <input type="hidden" id="star_id" name="star_id" value="<?= $itemModel->star_id; ?>"/>
         <input type="hidden" name="_frontendCSRF" value="<?= Yii::$app->request->csrfToken ?>"/>
         <input type="hidden" id="props" name="props" value="" />
 

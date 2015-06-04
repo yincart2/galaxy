@@ -12,6 +12,7 @@ use star\catalog\models\Sku;
 use Yii;
 use yii\base\Component;
 use yii\base\ModelEvent;
+use yii\web\Cookie;
 
 class ShoppingCart extends Component
 {
@@ -21,31 +22,37 @@ class ShoppingCart extends Component
     const EVENT_AFTER_REMOVE = 'afterRemove';
     const EVENT_BEFORE_UPDATE = 'beforeUpdate';
     const EVENT_AFTER_UPDATE = 'afterUpdate';
-    const SESSION_KEY = 'cart';
+    const COOKIE_KEY = 'cart';
 
     /** @var Cart[] */
     public $cartItems = [];
 
     public function init()
     {
-        $this->cartItems = Yii::$app->getSession()->has(self::SESSION_KEY) ? Yii::$app->getSession()->get(self::SESSION_KEY) : [];
+        $cookies = Yii::$app->request->cookies;
+        $this->cartItems = $cookies->getValue(self::COOKIE_KEY,[]);
         //@TODO need to take a event to login;
         if (!Yii::$app->getUser()->getIsGuest()) {
             $cartItems = Cart::find()->where(['user_id' => Yii::$app->user->id])->indexBy('sku_id')->all();
-
-            $this->cartItems = $cartItems + $this->cartItems;
-            Yii::$app->getSession()->set(self::SESSION_KEY, $this->cartItems);
-            foreach ($this->cartItems as $cart) {
-                $cart->save();
+            if($cartItems){
+                $this->cartItems = $cartItems+ $this->cartItems;
+                Yii::$app->response->cookies->add(new Cookie([
+                    'name' => self::COOKIE_KEY,
+                    'value' => $this->cartItems,
+                ]));
+                foreach ($this->cartItems as $cart) {
+                    $cart->save();
+                }
             }
         }
         $this->attachEvent();
     }
 
-    public function beforeAdd($item_id, $qty,$data)
+    public function beforeAdd($item_id,$star_id, $qty,$data)
     {
         $event = new CartEvent;
         $event->item_id = $item_id;
+        $event->star_id = $star_id;
         $event->qty =$qty;
         $event->content = $data;
         $this->trigger(self::EVENT_BEFORE_ADD, $event);
@@ -128,9 +135,15 @@ class ShoppingCart extends Component
      */
     public function save($event)
     {
-        $cartItems = Yii::$app->getSession()->has(self::SESSION_KEY) ? Yii::$app->getSession()->get(self::SESSION_KEY) : [];
+        $requestCookies = Yii::$app->request->cookies;
+        $cartItems = $requestCookies->getValue(self::COOKIE_KEY,[]);
+
         $toDelCartItems = array_diff_key($cartItems, $this->cartItems);
-        Yii::$app->getSession()->set(self::SESSION_KEY, $this->cartItems);
+
+        Yii::$app->response->cookies->add(new Cookie([
+            'name' => self::COOKIE_KEY,
+            'value' => $this->cartItems,
+        ]));
         if (!Yii::$app->user->isGuest) {
             foreach ($this->cartItems as $cart) {
                 $cart->user_id = Yii::$app->user->id;
@@ -142,19 +155,20 @@ class ShoppingCart extends Component
     }
 
     /**
-     * add item to cart
+     *  add item to cart
      * @param $sku_id
+     * @param $star_id
      * @param $qty
      * @param $data
      * @return bool
      */
-    public function add($sku_id, $qty,$data)
+    public function add($sku_id,$star_id, $qty,$data)
     {
-        if ($this->beforeAdd($sku_id, $qty,$data)) {
+        if ($this->beforeAdd($sku_id,$star_id, $qty,$data)) {
             if (isset($this->cartItems[$sku_id])) {
                 $this->cartItems[$sku_id]->qty += $qty;
             } else {
-                $this->cartItems[$sku_id] = new Cart(['sku_id' => $sku_id, 'qty' => $qty]);
+                $this->cartItems[$sku_id] = new Cart(['sku_id' => $sku_id, 'qty' => $qty,'star_id'=>$star_id]);
             }
             $this->cartItems[$sku_id]->data = $data;
             $this->afterAdd();
@@ -245,11 +259,26 @@ class ShoppingCart extends Component
         //@TODO need to add event
         return $this->getSubTotal() + $this->getShippingFee();
     }
+
+    /**
+     * serial cart
+     * return array like cart['star_id']['sku_id'] = cartModel
+     * @return array
+     */
+    public function serialCartItems(){
+        $carItems = [];
+        foreach($this->cartItems as $sku_id=>$carItem){
+            $carItems[$carItem->star_id][$sku_id] = $carItem;
+        }
+        return $carItems;
+    }
 }
 
 class CartEvent extends ModelEvent
 {
     public $item_id;
+
+    public $star_id;
 
     public $qty;
 

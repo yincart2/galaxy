@@ -39,7 +39,8 @@ $form = \yii\widgets\ActiveForm::begin();
 
     <tbody>
 <?php
-foreach ($cartItems as $cartItem) {
+foreach ($cartItems as $key=>$carts) {
+    foreach($carts as $cartItem){
     /**@var star\catalog\models\Item $item * */
     $sku = $cartItem->sku;
     $item = $sku->item;
@@ -147,6 +148,7 @@ foreach ($cartItems as $cartItem) {
         <!-- - - - - - - - - - - - - - End of action - - - - - - - - - - - - - - - - -->
 
     </tr>
+    <?php } ?>
 <?php } ?>
 
 

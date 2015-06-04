@@ -13,7 +13,7 @@ class CartController extends Controller
     public function actionIndex()
     {
         $shoppingCartModel = new ShoppingCart();
-        $cartItems = $shoppingCartModel->cartItems;
+        $cartItems = $shoppingCartModel->serialCartItems();
 
         return $this->render('index', [
             'cartItems' => $cartItems,
@@ -21,9 +21,14 @@ class CartController extends Controller
         ]);
     }
 
+    /**
+     * add item to cart, it should have ['item_id','star_id','qty','props']
+     * @return string
+     */
     public function actionAdd()
     {
         $item_id = (int)Yii::$app->request->post('item_id');
+        $star_id = (int)Yii::$app->request->post('star_id');
         $qty = (int)Yii::$app->request->post('qty');
         $data = Yii::$app->request->post('data');
         $props = Yii::$app->request->post('props');
@@ -39,7 +44,7 @@ class CartController extends Controller
         }
 
         $shoppingCartModel = new ShoppingCart();
-        if($shoppingCartModel->add($sku_id, $qty,$data)) {
+        if($shoppingCartModel->add($sku_id,$star_id, $qty,$data)) {
             return Json::encode(['message' => \Yii::t('app', 'add to cart success')]);
         } else {
             return Json::encode(['message' => \Yii::t('app', 'add to cart fail')]);
