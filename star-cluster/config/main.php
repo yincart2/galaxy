@@ -10,26 +10,36 @@ return [
     'id' => 'cluster',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'cluster\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log',[ 'home\models\UserEvent', 'frontendRegister'],'star\auth\bootstrap\Bootstrap'],
     'modules' => [
-        'admin' => [
-            'class' => 'mdm\admin\Module',
-            'layout' => 'left-menu', // default to null. other avaliable value 'right-menu' and 'top-menu'
-            'controllerMap' => [
-                'assignment' => [
-                    'class' => 'mdm\admin\controllers\AssignmentController',
-                    'userClassName' => 'dektrium\user\models\User',
-                    'idField' => 'id'
-                ]
-            ],
-            'menus' => [
-                'assignment' => [
-                    'label' => 'Grand Access' // change label
-                ],
-                'route' => null, // disable menu
-            ],
-            'mainLayout' => '@core/views/layouts/main.php',
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'enableConfirmation' => false
         ],
+        'rbac' => [
+            'class' => 'dektrium\rbac\Module',
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
+        ],
+//        'admin' => [
+//            'class' => 'mdm\admin\Module',
+//            'layout' => 'left-menu', // default to null. other avaliable value 'right-menu' and 'top-menu'
+//            'controllerMap' => [
+//                'assignment' => [
+//                    'class' => 'mdm\admin\controllers\AssignmentController',
+//                    'userClassName' => 'dektrium\user\models\User',
+//                    'idField' => 'id'
+//                ]
+//            ],
+//            'menus' => [
+//                'assignment' => [
+//                    'label' => 'Grand Access' // change label
+//                ],
+//                'route' => null, // disable menu
+//            ],
+//            'mainLayout' => '@core/views/layouts/main.php',
+//        ],
         'station' => [
             'class' => 'core\modules\station\Module',
         ],

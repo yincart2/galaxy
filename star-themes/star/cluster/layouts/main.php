@@ -37,31 +37,31 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <!-- - - - - - - - - - - - - - Cookie Message - - - - - - - - - - - - - - - - -->
 
-<div class="cookie_message">
-
-    <div class="container">
-
-        <div class="on_the_sides">
-
-            <div class="left_side">Please note this website requires cookies in order to function correctly, they do not store any specific information about your personally.</div>
-
-            <div class="right_side">
-
-                <div class="buttons_row">
-
-                    <a href="#" class="button_blue accept_cookie">Accept Cookies</a>
-
-                    <a href="#" class="button_dark_grey">Read More</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
+<!--<div class="cookie_message">-->
+<!---->
+<!--    <div class="container">-->
+<!---->
+<!--        <div class="on_the_sides">-->
+<!---->
+<!--            <div class="left_side">Please note this website requires cookies in order to function correctly, they do not store any specific information about your personally.</div>-->
+<!---->
+<!--            <div class="right_side">-->
+<!---->
+<!--                <div class="buttons_row">-->
+<!---->
+<!--                    <a href="#" class="button_blue accept_cookie">Accept Cookies</a>-->
+<!---->
+<!--                    <a href="#" class="button_dark_grey">Read More</a>-->
+<!---->
+<!--                </div>-->
+<!---->
+<!--            </div>-->
+<!---->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
+<!---->
+<!--</div>-->
 
 <!-- - - - - - - - - - - - - - End of Cookie Message - - - - - - - - - - - - - - - - -->
 
@@ -114,13 +114,17 @@ AppAsset::register($this);
         <div class="row">
 
             <div class="col-lg-6 col-md-7 col-sm-8">
-
+                <?php
+                if (Yii::$app->user->isGuest) {
+                ?>
                 <!-- - - - - - - - - - - - - - Login - - - - - - - - - - - - - - - - -->
 
-                <p>Welcom visitor <a href="#" data-modal-url="modals/login.html">Login</a> or <a href="#">Register</a></p>
+                <p>Welcom visitor <a href="<?= Url::to(['/user/login'])?>" >Login</a> or <a href="<?= Url::to(['/user/registration/register']) ?>">Register</a></p>
 
                 <!-- - - - - - - - - - - - - - End login - - - - - - - - - - - - - - - - -->
-
+                <?php }else{ ?>
+                <p><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>Logout</a></p>
+                <?php } ?>
             </div> <!--/ [col]-->
 
             <div class="col-lg-6 col-md-5 col-sm-4">
@@ -131,13 +135,13 @@ AppAsset::register($this);
 
                     <div class="alignright site_settings">
 
-                        <span class="current open_"><img src="images/flag_en.jpg" alt="">English</span>
+                        <span class="current open_"><img src="<?= $link ?>/images/flag_en.jpg" alt="">English</span>
 
                         <ul class="dropdown site_setting_list language">
 
-                            <li class="animated_item"><a href="#"><img src="images/flag_en.jpg" alt=""> English</a></li>
-                            <li class="animated_item"><a href="#"><img src="images/flag_g.jpg" alt=""> German</a></li>
-                            <li class="animated_item"><a href="#"><img src="images/flag_s.jpg" alt=""> Spanish</a></li>
+                            <li class="animated_item"><a href="#"><img src="<?= $link ?>/images/flag_en.jpg" alt=""> English</a></li>
+                            <li class="animated_item"><a href="#"><img src="<?= $link ?>/images/flag_g.jpg" alt=""> German</a></li>
+                            <li class="animated_item"><a href="#"><img src="<?= $link ?>/images/flag_s.jpg" alt=""> Spanish</a></li>
 
                         </ul>
 
@@ -193,7 +197,7 @@ AppAsset::register($this);
 
                     <a href="index.html" class="logo">
 
-                        <img src="images/logo.png" alt="">
+                        <img src="<?= $link ?>/images/logo.png" alt="">
 
                     </a>
 
@@ -403,7 +407,7 @@ AppAsset::register($this);
         <div class="mega_menu_item">
 
             <a href="#">
-                <img src="images/mega_menu_img_1.jpg" alt="">
+                <img src="<?= $link ?>/images/mega_menu_img_1.jpg" alt="">
             </a>
 
         </div><!--/ .mega_menu_item-->
@@ -465,7 +469,7 @@ AppAsset::register($this);
 
                         <div class="image_wrap">
 
-                            <img src="images/product_img_11.jpg" alt="">
+                            <img src="<?= $link ?>/images/product_img_11.jpg" alt="">
 
                         </div><!--/. image_wrap-->
 
@@ -513,7 +517,7 @@ AppAsset::register($this);
 
                         <div class="image_wrap">
 
-                            <img src="images/product_img_12.jpg" alt="">
+                            <img src="<?= $link ?>/images/product_img_12.jpg" alt="">
 
                         </div><!--/. image_wrap-->
 
@@ -561,7 +565,7 @@ AppAsset::register($this);
 
                         <div class="image_wrap">
 
-                            <img src="images/product_img_13.jpg" alt="">
+                            <img src="<?= $link ?>/images/product_img_13.jpg" alt="">
 
                         </div><!--/. image_wrap-->
 
@@ -684,7 +688,7 @@ AppAsset::register($this);
         <div class="mega_menu_banner">
 
             <a href="#">
-                <img src="images/mega_menu_img_2.jpg" alt="">
+                <img src="<?= $link ?>/images/mega_menu_img_2.jpg" alt="">
             </a>
 
         </div><!--/ .mega_menu_banner-->
@@ -931,7 +935,7 @@ AppAsset::register($this);
 
             <div class="clearfix sc_product">
 
-                <a href="#" class="product_thumb"><img src="images/sc_img_1.jpg" alt=""></a>
+                <a href="#" class="product_thumb"><img src="<?= $link ?>/images/sc_img_1.jpg" alt=""></a>
 
                 <a href="#" class="product_name">Natural Factors PGX Daily Ultra Matrix...</a>
 
@@ -951,7 +955,7 @@ AppAsset::register($this);
 
             <div class="clearfix sc_product">
 
-                <a href="#" class="product_thumb"><img src="images/sc_img_2.jpg" alt=""></a>
+                <a href="#" class="product_thumb"><img src="<?= $link ?>/images/sc_img_2.jpg" alt=""></a>
 
                 <a href="#" class="product_name">Oral-B Glide Pro-Health Floss...</a>
 
@@ -971,7 +975,7 @@ AppAsset::register($this);
 
             <div class="clearfix sc_product">
 
-                <a href="#" class="product_thumb"><img src="images/sc_img_3.jpg" alt=""></a>
+                <a href="#" class="product_thumb"><img src="<?= $link ?>/images/sc_img_3.jpg" alt=""></a>
 
                 <a href="#" class="product_name">Culturelle Kids! Probi-<br>otic Packets 30 ea</a>
 
@@ -1259,7 +1263,7 @@ AppAsset::register($this);
 
                     <a href="#" class="entry_thumb">
 
-                        <img src="images/latest_news_thumb_1.jpg" alt="">
+                        <img src="<?= $link ?>/images/latest_news_thumb_1.jpg" alt="">
 
                     </a>
 
@@ -1297,7 +1301,7 @@ AppAsset::register($this);
 
                     <a href="#" class="entry_thumb">
 
-                        <img src="images/latest_news_thumb_2.jpg" alt="">
+                        <img src="<?= $link ?>/images/latest_news_thumb_2.jpg" alt="">
 
                     </a>
 
@@ -1335,7 +1339,7 @@ AppAsset::register($this);
 
                     <a href="#" class="entry_thumb">
 
-                        <img src="images/latest_news_thumb_3.jpg" alt="">
+                        <img src="<?= $link ?>/images/latest_news_thumb_3.jpg" alt="">
 
                     </a>
 
@@ -1391,14 +1395,14 @@ AppAsset::register($this);
 
         <ul class="payments">
 
-            <li><img src="images/payment_1.png" alt=""></li>
-            <li><img src="images/payment_2.png" alt=""></li>
-            <li><img src="images/payment_3.png" alt=""></li>
-            <li><img src="images/payment_4.png" alt=""></li>
-            <li><img src="images/payment_5.png" alt=""></li>
-            <li><img src="images/payment_6.png" alt=""></li>
-            <li><img src="images/payment_7.png" alt=""></li>
-            <li><img src="images/payment_8.png" alt=""></li>
+            <li><img src="<?= $link ?>/images/payment_1.png" alt=""></li>
+            <li><img src="<?= $link ?>/images/payment_2.png" alt=""></li>
+            <li><img src="<?= $link ?>/images/payment_3.png" alt=""></li>
+            <li><img src="<?= $link ?>/images/payment_4.png" alt=""></li>
+            <li><img src="<?= $link ?>/images/payment_5.png" alt=""></li>
+            <li><img src="<?= $link ?>/images/payment_6.png" alt=""></li>
+            <li><img src="<?= $link ?>/images/payment_7.png" alt=""></li>
+            <li><img src="<?= $link ?>/images/payment_8.png" alt=""></li>
 
         </ul>
 
@@ -1444,60 +1448,7 @@ AppAsset::register($this);
 
 <ul class="social_feeds">
 
-    <!-- - - - - - - - - - - - - - Facebook - - - - - - - - - - - - - - - - -->
 
-    <li>
-
-        <button class="icon_btn middle_btn social_facebook open_"><i class="icon-facebook-1"></i></button>
-
-
-        <section class="dropdown">
-
-            <div class="animated_item">
-
-                <h3 class="title">Join Us on Facebook</h3>
-
-            </div><!--/ .animated_item-->
-
-            <div class="animated_item">
-
-                <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fthemeforest&amp;width=235&amp;height=345&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=438889712801266" style="border:none; overflow:hidden; width:235px; height:345px;"></iframe>
-
-            </div><!--/ .animated_item-->
-
-        </section><!--/ .dropdown-->
-
-    </li>
-
-    <!-- - - - - - - - - - - - - - End of Facebook - - - - - - - - - - - - - - - - -->
-
-    <!-- - - - - - - - - - - - - - Twitter - - - - - - - - - - - - - - - - -->
-
-    <li>
-
-        <button class="icon_btn middle_btn social_twitter open_"><i class="icon-twitter"></i></button>
-
-        <section class="dropdown">
-
-            <div class="animated_item">
-
-                <h3 class="title">Latest Tweets</h3>
-
-            </div><!--/ .animated_item-->
-
-            <div class="tweet_list_wrap"></div>
-
-            <footer class="animated_item bottom_box">
-
-                <a href="#" class="button_grey middle_btn twitter_follow">Follow Us</a>
-
-            </footer><!--/ .animated_item-->
-
-        </section><!--/ .dropdown-->
-
-    </li>
-
-    <!-- - - - - - - - - - - - - - End of Twitter - - - - - - - - - - - - - - - - -->
 
     <!-- - - - - - - - - - - - - - Contact us - - - - - - - - - - - - - - - - -->
 
@@ -1573,57 +1524,6 @@ AppAsset::register($this);
 
     <!-- - - - - - - - - - - - - - End contact us - - - - - - - - - - - - - - - - -->
 
-    <!-- - - - - - - - - - - - - - Google map - - - - - - - - - - - - - - - - -->
-
-    <li>
-
-        <button class="icon_btn middle_btn social_gmap open_"><i class="icon-location-4"></i></button>
-
-        <!--Location-->
-
-        <section class="dropdown">
-
-            <div class="animated_item">
-
-                <h3 class="title">Store Location</h3>
-
-            </div><!--/ .animated_item-->
-
-            <div class="animated_item">
-
-                <p class="c_info_location">8901 Marmora Road,<br>Glasgow, D04 89GR.</p>
-
-                <div class="proportional_frame">
-
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3024.238131852431!2d-74.006059!3d40.712773999999996!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258fda88cefb3%3A0x7f1e88758d210007!2z0J3RjNGOLdC50L7RgNC60YHQutC40Lkg0KHQuNGC0Lgt0YXQvtC70Ls!5e0!3m2!1sru!2sua!4v1415946524959" style="border:0"></iframe>
-
-                </div>
-
-                <ul class="c_info_list">
-
-                    <li class="c_info_phone">800-599-65-80</li>
-                    <li class="c_info_mail"><a href="mailto:#">info@companyname.com</a></li>
-                    <li class="c_info_schedule">
-
-                        <ul>
-
-                            <li>Monday-Friday: 8.00-20.00</li>
-                            <li>Saturday: 9.00-15.00</li>
-                            <li>Sunday: closed</li>
-
-                        </ul>
-
-                    </li>
-
-                </ul>
-
-            </div><!--/ .animated_item-->
-
-        </section><!--/ .dropdown-->
-
-    </li>
-
-    <!-- - - - - - - - - - - - - - End google map - - - - - - - - - - - - - - - - -->
 
 </ul>
 
@@ -1632,7 +1532,7 @@ AppAsset::register($this);
 <!-- Include Libs & Plugins
 		============================================ -->
 <?php
-$tmpJs = ["js/jquery-2.1.1.min.js", "js/queryloader2.min.js","js/jquery.elevateZoom-3.0.8.min.js", "js/fancybox/source/jquery.fancybox.pack.js","js/fancybox/source/helpers/jquery.fancybox-media.js",
+$tmpJs = [ "js/queryloader2.min.js","js/jquery.elevateZoom-3.0.8.min.js", "js/fancybox/source/jquery.fancybox.pack.js","js/fancybox/source/helpers/jquery.fancybox-media.js",
     "js/fancybox/source/helpers/jquery.fancybox-thumbs.js","js/rs-plugin/js/jquery.themepunch.tools.min.js", "js/rs-plugin/js/jquery.themepunch.revolution.min.js", "js/jquery.appear.js",
     "js/owlcarousel/owl.carousel.min.js",
     "js/jquery.countdown.plugin.min.js", "js/jquery.countdown.min.js",

@@ -39,7 +39,11 @@ $form = \yii\widgets\ActiveForm::begin();
 
     <tbody>
 <?php
-foreach ($cartItems as $key=>$carts) {
+foreach ($cartItems as $star_id=>$carts) {
+    if($star_id != 0){
+        //get store name by star_id
+        echo 'Store Name';
+    }
     foreach($carts as $cartItem){
     /**@var star\catalog\models\Item $item * */
     $sku = $cartItem->sku;
