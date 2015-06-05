@@ -1,6 +1,6 @@
 <?php
 
-namespace home\modules\member;
+namespace star\member;
 
 use Yii;
 use yii\web\ForbiddenHttpException;

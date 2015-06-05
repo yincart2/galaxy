@@ -1,6 +1,6 @@
 <?php
 
-namespace home\modules\member\models;
+namespace star\modules\member\models;
 
 use common\models\Area;
 use Yii;
