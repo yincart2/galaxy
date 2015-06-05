@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = [
                     style="float:right"><?php echo Html::a('管理收货地址', array('/member/address/delivery-address'), array('target' => '_blank')) ?></span>收货地址
             </div>
             <div class="box-content">
-                <?php list($addressList, $defaultAddress) = \home\modules\member\models\DeliveryAddress::getAddressList(); ?>
+                <?php list($addressList, $defaultAddress) = \star\member\models\DeliveryAddress::getAddressList(); ?>
                 <?= Html::radioList('address', $defaultAddress, $addressList, ['separator' => '<br />']); ?>
             </div>
         </div>

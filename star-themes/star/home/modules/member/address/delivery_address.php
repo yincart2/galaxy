@@ -3,7 +3,7 @@ use kartik\widgets\DepDrop;
 use \yii\helpers\Url;
 use \yii\helpers\Html;
 use yii\grid\GridView;
-use home\modules\member\models\DeliveryAddress;
+use star\member\models\DeliveryAddress;
 
 $dataList = ['1'=>'是','0'=>'否'];
 $this->params['breadcrumbs'][] = '收货地址';
