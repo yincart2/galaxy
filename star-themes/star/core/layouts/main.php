@@ -54,6 +54,9 @@ AppAsset::register($this);
         $menuItems[] = [
             'label' => 'Blog', 'url' => ['/blog/core/post'],
         ];
+        $menuItems[] = [
+            'label' => 'Order', 'url' => ['/order/core/order/index'],
+        ];
         $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
         $menuItems[] = ['label' => 'Auth', 'url' => ['/auth/auth/create']];
         $menuItems[] = [

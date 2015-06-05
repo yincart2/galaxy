@@ -10,7 +10,7 @@ return [
     'id' => 'core',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'core\controllers',
-    'bootstrap' => ['log','star\auth\bootstrap\Bootstrap'],
+    'bootstrap' => ['log','star\auth\bootstrap\Bootstrap',[ 'home\models\UserEvent', 'beforeLogin']],
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
@@ -50,6 +50,9 @@ return [
         'blog' => [
             'class' => 'star\blog\Module',
         ],
+        'order' => [
+            'class' =>'star\order\Module',
+        ]
     ],
     'components' => [
         'user' => [

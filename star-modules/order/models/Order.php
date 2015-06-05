@@ -31,11 +31,24 @@ class Order extends \yii\db\ActiveRecord
     public $orderItems;
 
     const STATUS_WAIT_PAYMENT = 1;
-
     const STATUS_WAIT_SHIPMENT = 2;
+    const STATUS_WAIT_CONFIRM  = 3;
+    const STATUS_COMPLETE  = 4;
+    const STATUS_WAIT_REFUSED  = 5;
+    const STATUS_REFUSED_FAILED  = 6;
+    const STATUS_REFUSED_PASS  = 7;
 
-    const STATUS_COMPLETE = 3;
-
+    public function getStatusArray(){
+        return [
+            self::STATUS_WAIT_PAYMENT => '待支付',
+            self::STATUS_WAIT_SHIPMENT => '待发货',
+            self::STATUS_WAIT_CONFIRM => '待收货',
+            self::STATUS_COMPLETE => '订单完成',
+            self::STATUS_WAIT_REFUSED => '退货中',
+            self::STATUS_REFUSED_FAILED => '退货未通过',
+            self::STATUS_REFUSED_PASS => '退货通过',
+        ];
+    }
     /**
      * @inheritdoc
      */
