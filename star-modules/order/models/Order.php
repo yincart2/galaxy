@@ -34,9 +34,9 @@ class Order extends \yii\db\ActiveRecord
     const STATUS_WAIT_SHIPMENT = 2;
     const STATUS_WAIT_CONFIRM  = 3;
     const STATUS_COMPLETE  = 4;
-    const STATUS_WAIT_REFUSED  = 5;
-    const STATUS_REFUSED_FAILED  = 6;
-    const STATUS_REFUSED_PASS  = 7;
+    const STATUS_WAIT_REFUND  = 5;
+    const STATUS_REFUND_FAILED  = 6;
+    const STATUS_REFUND_PASS  = 7;
 
     public function getStatusArray(){
         return [
@@ -44,9 +44,9 @@ class Order extends \yii\db\ActiveRecord
             self::STATUS_WAIT_SHIPMENT => '待发货',
             self::STATUS_WAIT_CONFIRM => '待收货',
             self::STATUS_COMPLETE => '订单完成',
-            self::STATUS_WAIT_REFUSED => '退货中',
-            self::STATUS_REFUSED_FAILED => '退货未通过',
-            self::STATUS_REFUSED_PASS => '退货通过',
+            self::STATUS_WAIT_REFUND => '退货中',
+            self::STATUS_REFUND_FAILED => '退货未通过',
+            self::STATUS_REFUND_PASS => '退货通过',
         ];
     }
     /**
@@ -75,16 +75,16 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'order_id' => Yii::t('app', 'Order ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'total_price' => Yii::t('app', 'Total Price'),
-            'shipping_fee' => Yii::t('app', 'Shipping Fee'),
-            'payment_fee' => Yii::t('app', 'Payment Fee'),
-            'address' => Yii::t('app', 'Address'),
-            'memo' => Yii::t('app', 'Memo'),
-            'create_at' => Yii::t('app', 'Create At'),
-            'update_at' => Yii::t('app', 'Update At'),
-            'status' => Yii::t('app', 'Status'),
+            'order_id' => Yii::t('order', 'Order ID'),
+            'user_id' => Yii::t('order', 'User ID'),
+            'total_price' => Yii::t('order', 'Total Price'),
+            'shipping_fee' => Yii::t('order', 'Shipping Fee'),
+            'payment_fee' => Yii::t('order', 'Payment Fee'),
+            'address' => Yii::t('order', 'Address'),
+            'memo' => Yii::t('order', 'Memo'),
+            'create_at' => Yii::t('order', 'Create At'),
+            'update_at' => Yii::t('order', 'Update At'),
+            'status' => Yii::t('order', 'Status'),
         ];
     }
 
