@@ -1,6 +1,6 @@
 <?php
 
-namespace star\modules\member\models;
+namespace star\member\models;
 
 use Yii;
 

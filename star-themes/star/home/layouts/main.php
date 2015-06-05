@@ -6,7 +6,7 @@ use home\widgets\Alert;
 use dektrium\user\models\LoginForm;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-use home\modules\member\models\Wishlist;
+use star\member\models\Wishlist;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
