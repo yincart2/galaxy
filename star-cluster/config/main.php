@@ -42,6 +42,9 @@ return [
         'cart' => [
             'class' =>'cluster\modules\cart\Module',
         ],
+        'order' => [
+            'class' =>'star\order\Module',
+        ],
     ],
     'components' => [
         'user' => [

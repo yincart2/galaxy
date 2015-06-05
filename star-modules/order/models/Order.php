@@ -1,9 +1,9 @@
 <?php
 
-namespace home\modules\order\models;
+namespace star\order\models;
 
 use dektrium\user\models\User;
-use home\modules\cart\models\ShoppingCart;
+use cluster\modules\cart\models\ShoppingCart;
 use star\catalog\models\Sku;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -119,6 +119,7 @@ class Order extends \yii\db\ActiveRecord
     {
         $orderItems = [];
         $item_id = Yii::$app->request->post('item_id');
+        $transaction=\Yii::$app->db->beginTransaction();
         try {
             if (isset($item_id)) {
                 $qty = Yii::$app->request->post('qty');
@@ -192,8 +193,10 @@ class Order extends \yii\db\ActiveRecord
             }
             $this->orderItems = $orderItems;
             $this->updateItemStock();
+            $transaction->commit();
             return true;
         } catch (\yii\base\Exception $e) {
+            $transaction->rollback();
             return false;
         }
     }

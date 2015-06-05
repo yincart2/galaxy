@@ -1,6 +1,6 @@
 <?php
 
-namespace home\modules\order;
+namespace star\order;
 
 
 class Module extends \yii\base\Module

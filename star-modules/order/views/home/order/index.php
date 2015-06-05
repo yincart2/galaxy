@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use home\modules\cart\models\ShoppingCart;
+use cluster\modules\cart\models\ShoppingCart;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-list($path, $link) = $this->getAssetManager()->publish('@home/modules/order/web/js');
+list($path, $link) = $this->getAssetManager()->publish('@star/order/web/js');
 $this->registerJsFile($link . '/order.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 $this->params['breadcrumbs'][] = [

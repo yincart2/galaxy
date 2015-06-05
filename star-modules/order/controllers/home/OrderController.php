@@ -1,9 +1,9 @@
 <?php
 
-namespace home\modules\order\controllers;
+namespace star\order\controllers\home;
 
-use home\modules\cart\models\ShoppingCart;
-use home\modules\order\models\Order;
+use cluster\modules\cart\models\ShoppingCart;
+use star\order\models\Order;
 use star\catalog\models\Sku;
 use Yii;
 use yii\helpers\Url;

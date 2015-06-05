@@ -3988,7 +3988,7 @@ CREATE TABLE IF NOT EXISTS `friend_link` (
 CREATE TABLE IF NOT EXISTS `item` (
   `item_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Item ID',
   `category_id` int(10) unsigned NOT NULL COMMENT 'Category ID',
-  `star_id` varchar(45) DEFAULT NULL,
+  `star_id` int(10) DEFAULT 0,
   `title` varchar(255) NOT NULL COMMENT '名称',
   `stock` int(10) unsigned NOT NULL COMMENT '库存',
   `min_number` int(10) unsigned NOT NULL DEFAULT '1' COMMENT '最少订货量',

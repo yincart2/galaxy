@@ -1,6 +1,6 @@
 <?php
 
-namespace home\modules\order\models;
+namespace star\order\models;
 
 use common\models\Tree;
 use Yii;
