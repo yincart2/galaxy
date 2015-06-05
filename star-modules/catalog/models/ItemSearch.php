@@ -19,7 +19,7 @@ class ItemSearch extends Item
     {
         return [
             [['item_id', 'category_id', 'stock', 'min_number', 'is_show', 'is_promote', 'is_new', 'is_hot', 'is_best', 'click_count', 'wish_count', 'review_count', 'deal_count', 'create_time', 'update_time', 'country', 'state', 'city'], 'integer'],
-            [['outer_id', 'title', 'currency', 'props', 'props_name', 'desc', 'language'], 'safe'],
+            [['star_id', 'title', 'currency', 'props', 'props_name', 'desc', 'language'], 'safe'],
             [['price', 'shipping_fee'], 'number'],
         ];
     }
@@ -79,7 +79,7 @@ class ItemSearch extends Item
             'city' => $this->city,
         ]);
 
-        $query->andFilterWhere(['like', 'outer_id', $this->outer_id])
+        $query->andFilterWhere(['like', 'star_id', $this->star_id])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'currency', $this->currency])
             ->andFilterWhere(['like', 'props', $this->props])
