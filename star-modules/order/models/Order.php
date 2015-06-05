@@ -40,13 +40,13 @@ class Order extends \yii\db\ActiveRecord
 
     public function getStatusArray(){
         return [
-            self::STATUS_WAIT_PAYMENT => '待支付',
-            self::STATUS_WAIT_SHIPMENT => '待发货',
-            self::STATUS_WAIT_CONFIRM => '待收货',
-            self::STATUS_COMPLETE => '订单完成',
-            self::STATUS_WAIT_REFUND => '退货中',
-            self::STATUS_REFUND_FAILED => '退货未通过',
-            self::STATUS_REFUND_PASS => '退货通过',
+            self::STATUS_WAIT_PAYMENT => Yii::t('order','Wait Payment'),
+            self::STATUS_WAIT_SHIPMENT => Yii::t('order','Wait Shipment'),
+            self::STATUS_WAIT_CONFIRM => Yii::t('order','Wait Confirm'),
+            self::STATUS_COMPLETE => Yii::t('order','Complete'),
+            self::STATUS_WAIT_REFUND =>  Yii::t('order','Wait Refund'),
+            self::STATUS_REFUND_FAILED =>  Yii::t('order','Refund Failed'),
+            self::STATUS_REFUND_PASS => Yii::t('order','Refund Pass'),
         ];
     }
     /**
@@ -76,6 +76,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'order_id' => Yii::t('order', 'Order ID'),
+            'order_no' => Yii::t('order', 'Order No'),
             'user_id' => Yii::t('order', 'User ID'),
             'total_price' => Yii::t('order', 'Total Price'),
             'shipping_fee' => Yii::t('order', 'Shipping Fee'),
@@ -88,7 +89,7 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getOrderItems()
+    public function getOrderItem()
     {
         return $this->hasMany(OrderItem::className(), ['order_id' => 'order_id']);
     }
