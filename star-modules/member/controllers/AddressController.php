@@ -1,10 +1,10 @@
 <?php
 
-namespace home\modules\member\controllers;
+namespace star\modules\member\controllers;
 
 use common\models\Area;
 use yii\helpers\Json;
-use home\modules\member\models\DeliveryAddress;
+use star\modules\member\models\DeliveryAddress;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use yii;

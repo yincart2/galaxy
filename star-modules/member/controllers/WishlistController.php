@@ -1,8 +1,8 @@
 <?php
 
-namespace home\modules\member\controllers;
+namespace star\modules\member\controllers;
 
-use home\modules\member\models\Wishlist;
+use star\modules\member\models\Wishlist;
 use star\catalog\models\Item;
 use yii\web\Controller;
 use yii\data\Pagination;

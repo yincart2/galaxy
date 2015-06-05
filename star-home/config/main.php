@@ -27,7 +27,7 @@ return [
             'class' => 'star\catalog\Module',
         ],
         'member' => [
-            'class' =>'home\modules\member\Module',
+            'class' =>'star\member\Module',
         ],
         'blog' => [
             'class' => 'star\blog\Module',
@@ -90,7 +90,7 @@ return [
                     '@star/blog/views/home'=>'@theme/star/home/views/blog',
                     '@star/catalog/views/home'=>'@theme/star/home/modules/catalog',
                     '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
-                    '@app/modules/member/views'=>'@theme/star/home/modules/member',
+                    '@star/member/views'=>'@theme/star/home/modules/member',
                     '@app/modules/cart/views'=>'@theme/star/home/modules/cart',
                 ],
                 'baseUrl'=>'@theme/star/home'
