@@ -8,43 +8,49 @@ use yii\helpers\Url;
 $this->beginContent('@theme/star/cluster/layouts/main.php');
 
 ?>
-    <!--content-->
-    <div class="page_content_offset">
-        <div class="container">
-            <div class="row clearfix">
-                <aside class="col-lg-3 col-md-3 col-sm-3">
-                    <!--widgets-->
-                    <figure class="widget shadow r_corners wrapper m_bottom_30">
-                        <figcaption>
-                            <h3 class="color_light"><?= Yii::t('member','Member Center')?></h3>
-                        </figcaption>
-                        <div class="widget_content">
-                            <!--Categories list-->
-                            <ul class="categories_list">
-                                <li class="active">
-                                    <a href="<?= Url::to(['/member/default/index'])?>" class="f_size_large color_dark d_block">
-                                        <b><?= Yii::t('member','Member Information')?></b>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="f_size_large color_dark d_block">
-                                        <b><?= Yii::t('member','My WishList')?></b>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?= Url::to(['/member/address/delivery-address'])?>" class="f_size_large color_dark d_block">
-                                        <b><?= Yii::t('member','Delivery Address')?></b>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </figure>
-                </aside>
-                <aside class="col-lg-9 col-md-9 col-sm-9">
-                    <?= $content ?>
-                </aside>
-            </div>
-        </div>
-    </div>
+    <div class="row">
+
+        <aside class="col-md-3 col-sm-4">
+
+            <!-- - - - - - - - - - - - - - Information - - - - - - - - - - - - - - - - -->
+
+            <section class="section_offset">
+
+                <h3><?= Yii::t('member', 'Member Center') ?></h3>
+
+                <ul class="theme_menu">
+
+                    <li class="active">
+                        <a href="<?= Url::to(['/member/default/index']) ?>">
+                            <b><?= Yii::t('member', 'Member Information') ?></b>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['/member/wishlist/get-wishlist']) ?>">
+                            <b><?= Yii::t('member', 'My WishList') ?></b>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['/member/address/delivery-address']) ?>">
+                            <b><?= Yii::t('member', 'Delivery Address') ?></b>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </section>
+            <!--/ .section_offset -->
+
+            <!-- - - - - - - - - - - - - - End of information - - - - - - - - - - - - - - - - -->
+
+        </aside>
+        <!--/ [col]-->
+
+        <main class="col-md-9 col-sm-8">
+            <?= $content ?>
+        </main>
+        <!--/ [col]-->
+
+    </div><!--/ .row-->
 
 <?php $this->endContent(); ?>

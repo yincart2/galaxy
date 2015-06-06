@@ -272,7 +272,9 @@ foreach($items as $key=>$item) {
 
                 </div><!--/ .centered_buttons -->
 
-                <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container"><span class="tooltip right">Add to Wishlist</span></a>
+                <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                    <span class="tooltip right">Add to Wishlist</span>
+                </a>
 
                 <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container"><span class="tooltip left">Add to Compare</span></a>
 
@@ -351,7 +353,7 @@ foreach($items as $key=>$item) {
 
             </div>
 
-            <p><?= $item->desc ?></p>
+            <div style="height: 166px;overflow: hidden"><?= $item->desc ?></div>
 
             <a href="#" class="learn_more">Learn More</a>
 
@@ -411,9 +413,22 @@ foreach($items as $key=>$item) {
 
                 <li><a href="#" class="button_blue middle_btn add_to_cart">Add to Cart</a></li>
 
-                <li><a href="#" class="icon_link"><i class="icon-heart-5"></i>Add to Wishlist</a></li>
+                <li><a href="javascript:void(0);" class="wishlist icon_link"
+                       data-url="<?= Url::to(['/member/wishlist/add-wishlist'])?>"
+                       data-csrf="<?= Yii::$app->request->csrfToken?>"
+                       data-item_id="<?= $item->item_id?>">
+                        <i class="icon-heart-5"></i>Add to Wishlist
+                    </a>
+                </li>
 
-                <li><a href="#" class="icon_link"><i class="icon-resize-small"></i>Add to Compare</a></li>
+                <li><a href="javascript:void(0);" class="compare icon_link"
+                       data-compare_id="<?= $key?>"
+                       data-item_id="<?= $item->item_id?>"
+                       data-category_id="<?= $item->category_id?>"
+                       data-selected= 0>
+                        <i class="icon-resize-small"></i>Add to Compare
+                    </a>
+                </li>
 
             </ul>
 
@@ -1351,30 +1366,6 @@ foreach($items as $key=>$item) {
 </section>
 
 <!-- - - - - - - - - - - - - - End of Bestseller Products - - - - - - - - - - - - - - - - -->
-
-<!-- - - - - - - - - - - - - - Sign Up to Our Newsletter - - - - - - - - - - - - - - - - -->
-
-<section class="section_offset">
-
-    <h3>Sign Up to Our Newsletter</h3>
-
-    <div class="theme_box">
-
-        <p class="form_caption">Sing up to our newsletter and get exclusive deals you wont find any- where else straight to your inbox!</p>
-
-        <form class="newsletter subscribe clearfix" novalidate>
-
-            <input type="email" name="sc_email" placeholder="Enter your email address">
-
-            <button class="button_blue def_icon_btn"></button>
-
-        </form>
-
-    </div><!--/ .theme_box-->
-
-</section>
-
-<!-- - - - - - - - - - - - - - End of Sign Up to Our Newsletter - - - - - - - - - - - - - - - - -->
 
 <!-- - - - - - - - - - - - - - Testimonials - - - - - - - - - - - - - - - - -->
 

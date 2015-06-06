@@ -4,6 +4,7 @@ use home\assets\AppAsset;
 use home\widgets\Alert;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
+use star\member\models\Wishlist;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -20,7 +21,7 @@ AppAsset::register($this);
 
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<!--    <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>-->
     <?php
     $this->head();
     list($path, $link) = $this->getAssetManager()->publish('@theme/star/cluster/assets');
@@ -92,7 +93,9 @@ AppAsset::register($this);
                 <p>Welcom visitor <a href="<?= Url::to(['/user/login'])?>" >Login</a> or <a href="<?= Url::to(['/user/registration/register']) ?>">Register</a></p>
 
                 <!-- - - - - - - - - - - - - - End login - - - - - - - - - - - - - - - - -->
-                <?php }else{ ?>
+                <?php }else{
+                    $countWishlist = count(Wishlist::findAll(['user_id' => Yii::$app->user->id]));
+                    ?>
                 <div class="col-sm-2"><a href="<?= Url::to(['/member']) ?>" class="default_t_color">My Account</a></div>
                 <div class="col-sm-2"><a href="#" class="default_t_color">Orders List</a></div>
                 <div class="col-sm-2"><a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="default_t_color">Wishlist</a></div>
@@ -695,7 +698,7 @@ AppAsset::register($this);
 
         <ul>
 
-            <li class="current"><a href="<?= Url::to(['/'])?>">Home</a></li>
+            <li class="<?= Yii::$app->request->get('catalog') || Yii::$app->request->get('tab') ? '' : 'current'?>"><a href="<?= Url::to(['/'])?>">Home</a></li>
             <?php
             $root = \common\models\Tree::find()->where(['name' => '商品分类'])->one();
             if ($root) {
@@ -703,161 +706,10 @@ AppAsset::register($this);
             if($categories) {
             foreach($categories as $category) {
             ?>
-            <li><a href="<?= Url::to(['/catalog/home/item/list','catalog' => $category->id])?>"><?= $category->name?></a></li>
+            <li class="<?= Yii::$app->request->get('catalog') == $category->id ? 'current' : ''?>"><a href="<?= Url::to(['/catalog/home/item/list','catalog' => $category->id])?>"><?= $category->name?></a></li>
             <?php } } } ?>
-
-            <li class="has_submenu">
-
-                <a href="index.html">Pages</a>
-
-                <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
-                <ul class="theme_menu submenu">
-
-                    <li class="has_submenu current">
-
-                        <a href="index.html">Homepage Layouts</a>
-
-                        <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                        <ul class="theme_menu submenu">
-
-                            <li class="current"><a href="index.html">Home 1</a></li>
-                            <li><a href="home_v2.html">Home 2</a></li>
-                            <li><a href="home_v3.html">Home 3</a></li>
-                            <li><a href="home_v4.html">Home 4</a></li>
-                            <li><a href="home_v5.html">Home 5</a></li>
-                            <li><a href="home_v6.html">Home 6</a></li>
-
-                        </ul>
-
-                        <!-- - - - - - - - - - - - - - End submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                    </li>
-
-                    <li class="has_submenu">
-
-                        <a href="category_page_v1.html">Category Page Layouts</a>
-
-                        <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                        <ul class="theme_menu submenu">
-
-                            <li><a href="category_page_v1.html">Category page 1</a></li>
-                            <li><a href="category_page_v2.html">Category page 2</a></li>
-                            <li><a href="category_page_v3.html">Category page 3</a></li>
-                            <li><a href="category_page_v4.html">Category page 4</a></li>
-
-                        </ul>
-
-                        <!-- - - - - - - - - - - - - - End submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                    </li>
-
-                    <li class="has_submenu">
-
-                        <a href="product_page_v1.html">Product Page Layouts</a>
-
-                        <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                        <ul class="theme_menu submenu">
-
-                            <li><a href="product_page_v1.html">Product page 1</a></li>
-                            <li><a href="product_page_v2.html">Product page 2</a></li>
-                            <li><a href="product_page_v3.html">Product page 3</a></li>
-
-                        </ul>
-
-                        <!-- - - - - - - - - - - - - - End submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                    </li>
-
-                    <li class="has_submenu">
-
-                        <a href="shop_shopping_cart.html">Other Shop Pages</a>
-
-                        <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                        <ul class="theme_menu submenu">
-
-                            <li><a href="shop_shopping_cart.html">Shopping cart</a></li>
-                            <li><a href="shop_checkout.html">Checkout</a></li>
-                            <li><a href="shop_wishlist.html">Wishlist</a></li>
-                            <li><a href="shop_product_comparison.html">Product Comparison</a></li>
-                            <li><a href="shop_my_account.html">My Account</a></li>
-                            <li><a href="shop_manufacturers.html">Manufacturers</a></li>
-                            <li><a href="shop_manufacturer_page.html">Manufacturer Page</a></li>
-                            <li><a href="shop_orders_list.html">Order List</a></li>
-                            <li><a href="shop_order_page.html">Order Page</a></li>
-
-                        </ul>
-
-                        <!-- - - - - - - - - - - - - - End submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                    </li>
-
-                    <li class="has_submenu">
-
-                        <a href="additional_page_about.html">Additional Pages</a>
-
-                        <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                        <ul class="theme_menu submenu">
-
-                            <li><a href="additional_page_about.html">About Us</a></li>
-                            <li><a href="additional_page_contact.html">Contact Us</a></li>
-                            <li><a href="additional_page_faq.html">FAQ</a></li>
-                            <li><a href="additional_page_404.html">404 Page</a></li>
-                            <li><a href="additional_page_sitemap.html">Sitemap</a></li>
-
-                        </ul>
-
-                        <!-- - - - - - - - - - - - - - End submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                    </li>
-
-                    <li class="has_submenu">
-
-                        <a href="extra_stuff_elements.html">Extra Stuff</a>
-
-                        <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                        <ul class="theme_menu submenu">
-
-                            <li><a href="extra_stuff_elements.html">Elements</a></li>
-                            <li><a href="extra_stuff_typography.html">Typography</a></li>
-                            <li><a href="extra_stuff_columns.html">Columns</a></li>
-
-                        </ul>
-
-                        <!-- - - - - - - - - - - - - - End submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                    </li>
-
-                    <li class="has_submenu">
-
-                        <a href="blog_v1.html">Blog Pages</a>
-
-                        <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                        <ul class="theme_menu submenu">
-
-                            <li><a href="blog_v1.html">Blog v1</a></li>
-                            <li><a href="blog_v2.html">Blog v2</a></li>
-                            <li><a href="blog_v3.html">Blog v3</a></li>
-                            <li><a href="blog_post_v1.html">Blog Post v1</a></li>
-                            <li><a href="blog_post_v2.html">Blog Post v2</a></li>
-
-                        </ul>
-
-                        <!-- - - - - - - - - - - - - - End submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                    </li>
-
-                </ul>
-
-                <!-- - - - - - - - - - - - - - End submenu (level 2) - - - - - - - - - - - - - - - - -->
-
+            <li class="<?= Yii::$app->request->get('tab') ? 'current' : ''?>">
+                <a href="<?= Url::to(['/blog/home/default','tab' =>'blog'])?>">Blog</a>
             </li>
 
         </ul>
@@ -872,7 +724,7 @@ AppAsset::register($this);
 
 <div class="nav_item size_4">
 
-    <a href="#" class="wishlist_button" data-amount="7"></a>
+    <a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="wishlist_button count-wishlist" data-amount="<?= Yii::$app->user->isGuest ? 0 : $countWishlist ?>"></a>
 
 </div><!--/ .nav_item-->
 
@@ -880,9 +732,9 @@ AppAsset::register($this);
 
 <!-- - - - - - - - - - - - - - Navigation item - - - - - - - - - - - - - - - - -->
 
-<div class="nav_item size_4">
+<div class="nav_item size_4" id="compare">
 
-    <a href="#" class="compare_button" data-amount="3"></a>
+    <a href="#" class="compare_button count-compare" id="countCompare" data-amount="3"></a>
 
 </div><!--/ .nav_item-->
 

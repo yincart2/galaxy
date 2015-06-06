@@ -5,7 +5,7 @@ return [
     'sourceLanguage' => 'en-US',
     'modules' => [
         'blog' => [
-            'class' => 'common\modules\blog\Module',
+            'class' => 'star\blog\Module',
         ],
         'utility' => [
             'class' => 'c006\utility\migration\Module',

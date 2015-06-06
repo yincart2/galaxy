@@ -2,7 +2,6 @@
 
 namespace star\blog\models;
 
-use common\modules\blog\Module;
 use matter\behaviors\ArrayToStringBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;

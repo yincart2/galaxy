@@ -8,7 +8,8 @@ $(".wishlist").on("click", function() {
     };
     $.post(url,data,function(response) {
         if(response == "Success") {
-            $(".count-wishlist").html(parseInt($(".count-wishlist").html()) + 1);
+            var count = parseInt($(".count-wishlist").data("amount")) + 1;
+            $(".count-wishlist").attr("data-amount",count);
             alert("Add the item to wishlist success!");
         } else {
             alert(response);
