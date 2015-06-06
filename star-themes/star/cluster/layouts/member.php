@@ -22,17 +22,17 @@ $this->beginContent('@theme/star/cluster/layouts/main.php');
 
                     <li class="active">
                         <a href="<?= Url::to(['/member/default/index']) ?>">
-                            <b><?= Yii::t('member', 'Member Information') ?></b>
+                            <?= Yii::t('member', 'Member Information') ?>
                         </a>
                     </li>
                     <li>
                         <a href="<?= Url::to(['/member/wishlist/get-wishlist']) ?>">
-                            <b><?= Yii::t('member', 'My WishList') ?></b>
+                            <?= Yii::t('member', 'My WishList') ?>
                         </a>
                     </li>
                     <li>
                         <a href="<?= Url::to(['/member/address/delivery-address']) ?>">
-                            <b><?= Yii::t('member', 'Delivery Address') ?></b>
+                            <?= Yii::t('member', 'Delivery Address') ?>
                         </a>
                     </li>
 

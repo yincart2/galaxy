@@ -320,9 +320,11 @@ foreach($items as $key=>$item) {
 
         <div class="full_description">
 
-            <a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" class="product_title"><?= $item->title ?></a>
+            <div style="overflow:hidden;text-overflow:ellipsis;white-space: nowrap;width:363px;" class="product_title">
+                <a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" title="<?= $item->title ?>"><?= $item->title ?></a>
+            </div>
 
-            <a href="#" class="product_category">Beauty Clearance</a>
+            <a href="<?= Url::to(['/catalog/home/item/list','catalog' => $item->category->id])?>" class="product_category"><?= $currentCategory->name ?></a>
 
             <div class="v_centered product_reviews">
 
@@ -353,7 +355,7 @@ foreach($items as $key=>$item) {
 
             </div>
 
-            <div style="height: 166px;overflow: hidden"><?= $item->desc ?></div>
+            <div style="height: 166px;overflow: hidden;"><?= $item->desc ?></div>
 
             <a href="#" class="learn_more">Learn More</a>
 
@@ -449,8 +451,6 @@ foreach($items as $key=>$item) {
 <footer class="bottom_box on_the_sides">
 
     <div class="left_side">
-
-        <p>Showing 1 to 3 of 45 (15 Pages)</p>
 
     </div>
 

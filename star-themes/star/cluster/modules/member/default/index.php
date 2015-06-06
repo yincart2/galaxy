@@ -8,23 +8,29 @@ $this->params['breadcrumbs'][] = [
     'template' => '<li><span>{link}</span></li>',
 ];
 ?>
-<h2 class="tt_uppercase color_dark m_bottom_25"><?= Yii::t('member','Member Information')?></h2>
+<h1 class="tt_uppercase color_dark m_bottom_25"><?= Yii::t('member','Member Information')?></h1>
 <!--order info tables-->
-<table class="table_type_6 responsive_table full_width r_corners shadow m_bottom_45 t_align_l">
+<table>
     <tr>
-        <td class="f_size_large d_xs_none"><?= Yii::t('member','Username')?></td>
-        <td data-title="Order Number"><?= $user->username ?></td>
+        <td><?= Yii::t('member','Username')?></td>
+        <td><?= $user->username ?></td>
     </tr>
     <tr>
-        <td class="f_size_large d_xs_none"><?= Yii::t('member','Email')?></td>
-        <td data-title="Order Date"><?= $user->email ?></td>
+        <td><?= Yii::t('member','Email')?></td>
+        <td><?= $user->email ?></td>
     </tr>
     <tr>
-        <td class="f_size_large d_xs_none"><?= Yii::t('member','Phone')?></td>
-        <td data-title="Order Status">(0547) 800-820-8820</td>
+        <td><?= Yii::t('member','Phone')?></td>
+        <td>(0547) 800-820-8820</td>
     </tr>
     <tr>
-        <td class="f_size_large d_xs_none"><?= Yii::t('member','Registered At')?></td>
-        <td data-title="Last Update"><?= date('Y-m-d', $user->created_at) ?></td>
+        <td><?= Yii::t('member','Registered At')?></td>
+        <td><?= date('Y-m-d', $user->created_at) ?></td>
     </tr>
 </table>
+<!--<section class="theme_box">-->
+<!--    <div class="buttons_row">-->
+<!--        <a href="#" class="button_grey middle_btn">Edit Account Information</a>-->
+<!--        <a href="#" class="button_grey middle_btn">Change Password</a>-->
+<!--    </div>-->
+<!--</section>-->

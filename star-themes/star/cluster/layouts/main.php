@@ -5,6 +5,7 @@ use home\widgets\Alert;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use star\member\models\Wishlist;
+
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -21,7 +22,7 @@ AppAsset::register($this);
 
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-<!--    <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>-->
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <?php
     $this->head();
     list($path, $link) = $this->getAssetManager()->publish('@theme/star/cluster/assets');
@@ -35,7 +36,7 @@ AppAsset::register($this);
     $this->registerJsFile($link . '/js/modernizr.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
     ?>
 </head>
-<body class="front_page promo_popup">
+<body>
 <?php $this->beginBody() ?>
 
 <!--[if lt IE 9]>
@@ -48,13 +49,17 @@ AppAsset::register($this);
 
             <div class="left_side">
 
-                <i class="icon-attention-5"></i> <span class="bold">Attention!</span> This page may not display correctly. You are using an outdated version of Internet Explorer. For a faster, safer browsing experience.</span>
+                <i class="icon-attention-5"></i> <span class="bold">Attention!</span> This page may not display
+                correctly. You are using an outdated version of Internet Explorer. For a faster, safer browsing
+                experience.</span>
 
             </div>
 
             <div class="right_side">
 
-                <a target="_blank" href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode" class="button_black">Update Now!</a>
+                <a target="_blank"
+                   href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"
+                   class="button_black">Update Now!</a>
 
             </div>
 
@@ -84,27 +89,34 @@ AppAsset::register($this);
 
         <div class="row">
 
-            <div class="col-lg-7 col-md-7 col-sm-8">
+            <div class="col-lg-8 col-md-7 col-sm-8">
                 <?php
                 if (Yii::$app->user->isGuest) {
-                ?>
-                <!-- - - - - - - - - - - - - - Login - - - - - - - - - - - - - - - - -->
+                    ?>
+                    <!-- - - - - - - - - - - - - - Login - - - - - - - - - - - - - - - - -->
 
-                <p>Welcom visitor <a href="<?= Url::to(['/user/login'])?>" >Login</a> or <a href="<?= Url::to(['/user/registration/register']) ?>">Register</a></p>
+                    <p>Welcom visitor <a href="<?= Url::to(['/user/login']) ?>">Login</a> or <a
+                            href="<?= Url::to(['/user/registration/register']) ?>">Register</a></p>
 
-                <!-- - - - - - - - - - - - - - End login - - - - - - - - - - - - - - - - -->
-                <?php }else{
+                    <!-- - - - - - - - - - - - - - End login - - - - - - - - - - - - - - - - -->
+                <?php
+                } else {
                     $countWishlist = count(Wishlist::findAll(['user_id' => Yii::$app->user->id]));
                     ?>
-                <div class="col-sm-2"><a href="<?= Url::to(['/member']) ?>" class="default_t_color">My Account</a></div>
-                <div class="col-sm-2"><a href="#" class="default_t_color">Orders List</a></div>
-                <div class="col-sm-2"><a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="default_t_color">Wishlist</a></div>
-                <div class="col-sm-2"><a href="<?= Url::to(['/order/order/index']) ?>" class="default_t_color">Checkout</a></div>
-                <div class="col-sm-2"><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>Logout</a></div>
+                    <div class="col-sm-2"><a href="<?= Url::to(['/member']) ?>" class="default_t_color">My Account</a>
+                    </div>
+                    <div class="col-sm-2"><a href="#" class="default_t_color">Orders List</a></div>
+                    <div class="col-sm-2"><a href="<?= Url::to(['/member/wishlist/get-wishlist']) ?>"
+                                             class="default_t_color">Wishlist</a></div>
+                    <div class="col-sm-2"><a href="<?= Url::to(['/order/order/index']) ?>" class="default_t_color">Checkout</a>
+                    </div>
+                    <div class="col-sm-2"><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color"
+                                             data-method='post'>Logout</a></div>
                 <?php } ?>
-            </div> <!--/ [col]-->
+            </div>
+            <!--/ [col]-->
 
-            <div class="col-lg-5 col-md-5 col-sm-4">
+            <div class="col-lg-4 col-md-5 col-sm-4">
 
                 <div class="clearfix">
 
@@ -116,13 +128,17 @@ AppAsset::register($this);
 
                         <ul class="dropdown site_setting_list language">
 
-                            <li class="animated_item"><a href="#"><img src="<?= $link ?>/images/flag_en.jpg" alt=""> English</a></li>
-                            <li class="animated_item"><a href="#"><img src="<?= $link ?>/images/flag_g.jpg" alt=""> German</a></li>
-                            <li class="animated_item"><a href="#"><img src="<?= $link ?>/images/flag_s.jpg" alt=""> Spanish</a></li>
+                            <li class="animated_item"><a href="#"><img src="<?= $link ?>/images/flag_en.jpg" alt="">
+                                    English</a></li>
+                            <li class="animated_item"><a href="#"><img src="<?= $link ?>/images/flag_g.jpg" alt="">
+                                    German</a></li>
+                            <li class="animated_item"><a href="#"><img src="<?= $link ?>/images/flag_s.jpg" alt="">
+                                    Spanish</a></li>
 
                         </ul>
 
-                    </div><!--/ .alignright.site_settings-->
+                    </div>
+                    <!--/ .alignright.site_settings-->
 
                     <!-- - - - - - - - - - - - - - End of language change - - - - - - - - - - - - - - - - -->
 
@@ -140,19 +156,25 @@ AppAsset::register($this);
 
                         </ul>
 
-                    </div><!--/ .alignright.site_settings.currency-->
+                    </div>
+                    <!--/ .alignright.site_settings.currency-->
 
                     <!-- - - - - - - - - - - - - - End of currency change - - - - - - - - - - - - - - - - -->
 
-                </div><!--/ .clearfix-->
+                </div>
+                <!--/ .clearfix-->
 
-            </div><!--/ [col]-->
+            </div>
+            <!--/ [col]-->
 
-        </div><!--/ .row-->
+        </div>
+        <!--/ .row-->
 
-    </div><!--/ .container -->
+    </div>
+    <!--/ .container -->
 
-</div><!--/ .top_part -->
+</div>
+<!--/ .top_part -->
 
 <!-- - - - - - - - - - - - - - End of top part - - - - - - - - - - - - - - - - -->
 
@@ -180,7 +202,8 @@ AppAsset::register($this);
 
                     <!-- - - - - - - - - - - - - - End of logo - - - - - - - - - - - - - - - - -->
 
-                </div><!--/ [col]-->
+                </div>
+                <!--/ [col]-->
 
                 <div class="col-sm-3">
 
@@ -190,11 +213,13 @@ AppAsset::register($this);
 
                         <span>Call us toll free:</span> <b>+1888 234 5678</b>
 
-                    </div><!--/ .call_us-->
+                    </div>
+                    <!--/ .call_us-->
 
                     <!-- - - - - - - - - - - - - - End call to action - - - - - - - - - - - - - - - - -->
 
-                </div><!--/ [col]-->
+                </div>
+                <!--/ [col]-->
 
                 <div class="col-sm-6">
 
@@ -222,25 +247,32 @@ AppAsset::register($this);
 
                             </ul>
 
-                        </div><!--/ .search_category.alignleft-->
+                        </div>
+                        <!--/ .search_category.alignleft-->
 
                         <!-- - - - - - - - - - - - - - End of categories - - - - - - - - - - - - - - - - -->
 
                         <button class="button_blue def_icon_btn alignleft"></button>
 
-                    </form><!--/ #search-->
+                    </form>
+                    <!--/ #search-->
 
                     <!-- - - - - - - - - - - - - - End search form - - - - - - - - - - - - - - - - -->
 
-                </div><!--/ [col]-->
+                </div>
+                <!--/ [col]-->
 
-            </div><!--/ .main_header_row-->
+            </div>
+            <!--/ .main_header_row-->
 
-        </div><!--/ .row-->
+        </div>
+        <!--/ .row-->
 
-    </div><!--/ .container-->
+    </div>
+    <!--/ .container-->
 
-</div><!--/ .bottom_part -->
+</div>
+<!--/ .bottom_part -->
 
 <!-- - - - - - - - - - - - - - End of bottom part - - - - - - - - - - - - - - - - -->
 
@@ -294,7 +326,8 @@ AppAsset::register($this);
 
             </ul>
 
-        </div><!--/ .mega_menu_item-->
+        </div>
+        <!--/ .mega_menu_item-->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
@@ -316,11 +349,13 @@ AppAsset::register($this);
 
             </ul>
 
-        </div><!--/ .mega_menu_item-->
+        </div>
+        <!--/ .mega_menu_item-->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
-    </div><!--/ .mega_menu-->
+    </div>
+    <!--/ .mega_menu-->
 
     <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
 
@@ -352,7 +387,8 @@ AppAsset::register($this);
 
             </ul>
 
-        </div><!--/ .mega_menu_item-->
+        </div>
+        <!--/ .mega_menu_item-->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
@@ -375,7 +411,8 @@ AppAsset::register($this);
 
             </ul>
 
-        </div><!--/ .mega_menu_item-->
+        </div>
+        <!--/ .mega_menu_item-->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
@@ -387,11 +424,13 @@ AppAsset::register($this);
                 <img src="<?= $link ?>/images/mega_menu_img_1.jpg" alt="">
             </a>
 
-        </div><!--/ .mega_menu_item-->
+        </div>
+        <!--/ .mega_menu_item-->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
-    </div><!--/ .mega_menu-->
+    </div>
+    <!--/ .mega_menu-->
 
     <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
 
@@ -424,7 +463,8 @@ AppAsset::register($this);
 
             </ul>
 
-        </div><!--/ .mega_menu_item -->
+        </div>
+        <!--/ .mega_menu_item -->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
@@ -448,7 +488,8 @@ AppAsset::register($this);
 
                             <img src="<?= $link ?>/images/product_img_11.jpg" alt="">
 
-                        </div><!--/. image_wrap-->
+                        </div>
+                        <!--/. image_wrap-->
 
                         <!-- - - - - - - - - - - - - - End thumbnail - - - - - - - - - - - - - - - - -->
 
@@ -456,7 +497,8 @@ AppAsset::register($this);
 
                         <div class="label_offer percentage">
 
-                            <div>30%</div>OFF
+                            <div>30%</div>
+                            OFF
 
                         </div>
 
@@ -472,17 +514,20 @@ AppAsset::register($this);
 
                                 <p class="product_price alignleft"><s>$9.99</s> <b>$5.99</b></p>
 
-                            </div><!--/ .clearfix.product_info-->
+                            </div>
+                            <!--/ .clearfix.product_info-->
 
                         </div>
 
                         <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
 
-                    </div><!--/ .product_item-->
+                    </div>
+                    <!--/ .product_item-->
 
                     <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
-                </div><!--/ [col]-->
+                </div>
+                <!--/ [col]-->
 
                 <div class="col-sm-4">
 
@@ -496,7 +541,8 @@ AppAsset::register($this);
 
                             <img src="<?= $link ?>/images/product_img_12.jpg" alt="">
 
-                        </div><!--/. image_wrap-->
+                        </div>
+                        <!--/. image_wrap-->
 
                         <!-- - - - - - - - - - - - - - End thumbnail - - - - - - - - - - - - - - - - -->
 
@@ -504,7 +550,8 @@ AppAsset::register($this);
 
                         <div class="label_offer percentage">
 
-                            <div>25%</div>OFF
+                            <div>25%</div>
+                            OFF
 
                         </div>
 
@@ -520,17 +567,20 @@ AppAsset::register($this);
 
                                 <p class="product_price alignleft"><s>$16.99</s> <b>$14.99</b></p>
 
-                            </div><!--/ .clearfix.product_info-->
+                            </div>
+                            <!--/ .clearfix.product_info-->
 
                         </div>
 
                         <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
 
-                    </div><!--/ .product_item-->
+                    </div>
+                    <!--/ .product_item-->
 
                     <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
-                </div><!--/ [col]-->
+                </div>
+                <!--/ [col]-->
 
                 <div class="col-sm-4">
 
@@ -544,7 +594,8 @@ AppAsset::register($this);
 
                             <img src="<?= $link ?>/images/product_img_13.jpg" alt="">
 
-                        </div><!--/. image_wrap-->
+                        </div>
+                        <!--/. image_wrap-->
 
                         <!-- - - - - - - - - - - - - - End thumbnail - - - - - - - - - - - - - - - - -->
 
@@ -552,7 +603,8 @@ AppAsset::register($this);
 
                         <div class="label_offer percentage">
 
-                            <div>40%</div>OFF
+                            <div>40%</div>
+                            OFF
 
                         </div>
 
@@ -568,29 +620,35 @@ AppAsset::register($this);
 
                                 <p class="product_price alignleft"><s>$103.99</s> <b>$73.99</b></p>
 
-                            </div><!--/ .clearfix.product_info-->
+                            </div>
+                            <!--/ .clearfix.product_info-->
 
                         </div>
 
                         <!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
 
-                    </div><!--/ .product_item-->
+                    </div>
+                    <!--/ .product_item-->
 
                     <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
-                </div><!--/ [col]-->
+                </div>
+                <!--/ [col]-->
 
-            </div><!--/ .row-->
+            </div>
+            <!--/ .row-->
 
             <hr>
 
             <a href="#" class="button_grey">View All Deals</a>
 
-        </div><!--/ .mega_menu_item-->
+        </div>
+        <!--/ .mega_menu_item-->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
-    </div><!--/ .mega_menu-->
+    </div>
+    <!--/ .mega_menu-->
 
     <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
 
@@ -618,7 +676,8 @@ AppAsset::register($this);
 
             </ul>
 
-        </div><!--/ .mega_menu_item-->
+        </div>
+        <!--/ .mega_menu_item-->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
@@ -637,7 +696,8 @@ AppAsset::register($this);
 
             </ul>
 
-        </div><!--/ .mega_menu_item-->
+        </div>
+        <!--/ .mega_menu_item-->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
@@ -656,7 +716,8 @@ AppAsset::register($this);
 
             </ul>
 
-        </div><!--/ .mega_menu_item-->
+        </div>
+        <!--/ .mega_menu_item-->
 
         <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
@@ -668,11 +729,13 @@ AppAsset::register($this);
                 <img src="<?= $link ?>/images/mega_menu_img_2.jpg" alt="">
             </a>
 
-        </div><!--/ .mega_menu_banner-->
+        </div>
+        <!--/ .mega_menu_banner-->
 
         <!-- - - - - - - - - - - - - - End of banner - - - - - - - - - - - - - - - - -->
 
-    </div><!--/ .mega_menu-->
+    </div>
+    <!--/ .mega_menu-->
 
     <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
 
@@ -686,7 +749,8 @@ AppAsset::register($this);
 
 <!-- - - - - - - - - - - - - - End of main navigation - - - - - - - - - - - - - - - - -->
 
-</div><!--/ .nav_item-->
+</div>
+<!--/ .nav_item-->
 
 <!-- - - - - - - - - - - - - - End of navigation item - - - - - - - - - - - - - - - - -->
 
@@ -698,23 +762,29 @@ AppAsset::register($this);
 
         <ul>
 
-            <li class="<?= Yii::$app->request->get('catalog') || Yii::$app->request->get('tab') ? '' : 'current'?>"><a href="<?= Url::to(['/'])?>">Home</a></li>
+            <li class="<?= Yii::$app->request->get('catalog') || Yii::$app->request->get('tab') ? '' : 'current' ?>"><a
+                    href="<?= Url::to(['/']) ?>">Home</a></li>
             <?php
             $root = \common\models\Tree::find()->where(['name' => '商品分类'])->one();
             if ($root) {
-            $categories = $root->children(1)->indexBy('id')->limit(5)->all();
-            if($categories) {
-            foreach($categories as $category) {
-            ?>
-            <li class="<?= Yii::$app->request->get('catalog') == $category->id ? 'current' : ''?>"><a href="<?= Url::to(['/catalog/home/item/list','catalog' => $category->id])?>"><?= $category->name?></a></li>
-            <?php } } } ?>
-            <li class="<?= Yii::$app->request->get('tab') ? 'current' : ''?>">
-                <a href="<?= Url::to(['/blog/home/default','tab' =>'blog'])?>">Blog</a>
+                $categories = $root->children(1)->indexBy('id')->limit(5)->all();
+                if ($categories) {
+                    foreach ($categories as $category) {
+                        ?>
+                        <li class="<?= Yii::$app->request->get('catalog') == $category->id ? 'current' : '' ?>"><a
+                                href="<?= Url::to(['/catalog/home/item/list', 'catalog' => $category->id]) ?>"><?= $category->name ?></a>
+                        </li>
+                    <?php }
+                }
+            } ?>
+            <li class="<?= Yii::$app->request->get('tab') ? 'current' : '' ?>">
+                <a href="<?= Url::to(['/blog/home/default', 'tab' => 'blog']) ?>">Blog</a>
             </li>
 
         </ul>
 
-    </nav><!--/ .main_navigation-->
+    </nav>
+    <!--/ .main_navigation-->
 
 </div>
 
@@ -724,9 +794,11 @@ AppAsset::register($this);
 
 <div class="nav_item size_4">
 
-    <a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="wishlist_button count-wishlist" data-amount="<?= Yii::$app->user->isGuest ? 0 : $countWishlist ?>"></a>
+    <a href="<?= Url::to(['/member/wishlist/get-wishlist']) ?>" class="wishlist_button count-wishlist"
+       data-amount="<?= Yii::$app->user->isGuest ? 0 : $countWishlist ?>"></a>
 
-</div><!--/ .nav_item-->
+</div>
+<!--/ .nav_item-->
 
 <!-- - - - - - - - - - - - - - End of main navigation - - - - - - - - - - - - - - - - -->
 
@@ -736,7 +808,8 @@ AppAsset::register($this);
 
     <a href="#" class="compare_button count-compare" id="countCompare" data-amount="3"></a>
 
-</div><!--/ .nav_item-->
+</div>
+<!--/ .nav_item-->
 
 <!-- - - - - - - - - - - - - - End of main navigation - - - - - - - - - - - - - - - - -->
 
@@ -769,11 +842,13 @@ AppAsset::register($this);
 
                 <button class="close"></button>
 
-            </div><!--/ .clearfix.sc_product-->
+            </div>
+            <!--/ .clearfix.sc_product-->
 
             <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
-        </div><!--/ .animated_item-->
+        </div>
+        <!--/ .animated_item-->
 
         <div class="animated_item">
 
@@ -789,11 +864,13 @@ AppAsset::register($this);
 
                 <button class="close"></button>
 
-            </div><!--/ .clearfix.sc_product-->
+            </div>
+            <!--/ .clearfix.sc_product-->
 
             <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
-        </div><!--/ .animated_item-->
+        </div>
+        <!--/ .animated_item-->
 
         <div class="animated_item">
 
@@ -809,11 +886,13 @@ AppAsset::register($this);
 
                 <button class="close"></button>
 
-            </div><!--/ .clearfix.sc_product-->
+            </div>
+            <!--/ .clearfix.sc_product-->
 
             <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
-        </div><!--/ .animated_item-->
+        </div>
+        <!--/ .animated_item-->
 
         <div class="animated_item">
 
@@ -831,35 +910,44 @@ AppAsset::register($this);
 
             <!-- - - - - - - - - - - - - - End of total info - - - - - - - - - - - - - - - - -->
 
-        </div><!--/ .animated_item-->
+        </div>
+        <!--/ .animated_item-->
 
         <div class="animated_item">
 
-            <a href="<?= Url::to(['/cart/cart/index'])?>" class="button_grey">View Cart</a>
+            <a href="<?= Url::to(['/cart/cart/index']) ?>" class="button_grey">View Cart</a>
 
             <a href="#" class="button_blue">Checkout</a>
 
-        </div><!--/ .animated_item-->
+        </div>
+        <!--/ .animated_item-->
 
-    </div><!--/ .shopping_cart.dropdown-->
+    </div>
+    <!--/ .shopping_cart.dropdown-->
 
     <!-- - - - - - - - - - - - - - End of products list - - - - - - - - - - - - - - - - -->
 
-</div><!--/ .nav_item-->
+</div>
+<!--/ .nav_item-->
 
 <!-- - - - - - - - - - - - - - End of navigation item - - - - - - - - - - - - - - - - -->
 
-</div><!--/ .sticky_inner -->
+</div>
+<!--/ .sticky_inner -->
 
 <!-- - - - - - - - - - - - - - End of sticky container - - - - - - - - - - - - - - - - -->
 
-</div><!--/ [col]-->
+</div>
+<!--/ [col]-->
 
-</div><!--/ .row-->
+</div>
+<!--/ .row-->
 
-</div><!--/ .container-->
+</div>
+<!--/ .container-->
 
-</div><!--/ .main_navigation_wrap-->
+</div>
+<!--/ .main_navigation_wrap-->
 
 <!-- - - - - - - - - - - - - - End of main navigation wrapper - - - - - - - - - - - - - - - - -->
 
@@ -869,24 +957,26 @@ AppAsset::register($this);
 
 <!-- - - - - - - - - - - - - - Page Wrapper - - - - - - - - - - - - - - - - -->
 
-<div class="page_wrapper">
+<div class="secondary_page_wrapper">
 
-<div class="container">
-    <?=
-    Breadcrumbs::widget([
-        'options' => ['class' => 'breadcrumbs'],
-        'homeLink' => [
-            'label' => Yii::t('app', 'Home'),
-            'url' => Yii::$app->homeUrl,
-        ],
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]);
-    ?>
-    <?= $content ?>
+    <div class="container">
+        <?=
+        Breadcrumbs::widget([
+            'options' => ['class' => 'breadcrumbs'],
+            'homeLink' => [
+                'label' => Yii::t('app', 'Home'),
+                'url' => Yii::$app->homeUrl,
+            ],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]);
+        ?>
+        <?= $content ?>
 
-</div><!--/ .container-->
+    </div>
+    <!--/ .container-->
 
-</div><!--/ .page_wrapper-->
+</div>
+<!--/ .page_wrapper-->
 
 <!-- - - - - - - - - - - - - - End Page Wrapper - - - - - - - - - - - - - - - - -->
 
@@ -929,13 +1019,16 @@ AppAsset::register($this);
                 </a><!--/ .infoblock-->
             </li>
 
-        </ul><!--/ .infoblocks_wrap.section_offset.clearfix-->
+        </ul>
+        <!--/ .infoblocks_wrap.section_offset.clearfix-->
 
-    </div><!--/ .infoblocks_container -->
+    </div>
+    <!--/ .infoblocks_container -->
 
     <!-- - - - - - - - - - - - - - End of infoblocks - - - - - - - - - - - - - - - - -->
 
-</div><!--/ .container -->
+</div>
+<!--/ .container -->
 
 <!-- - - - - - - - - - - - - - Footer section- - - - - - - - - - - - - - - - -->
 
@@ -953,46 +1046,56 @@ AppAsset::register($this);
 
         <h4>About Us</h4>
 
-        <p class="about_us">Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In pede mi, aliquet sit amet, euis- mod in auctor ut, ligula. Aliquam dapibus tincidunt metus.</p>
+        <p class="about_us">Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In
+            pede mi, aliquet sit amet, euis- mod in auctor ut, ligula. Aliquam dapibus tincidunt metus.</p>
 
         <!-- - - - - - - - - - - - - - Social icon's list - - - - - - - - - - - - - - - - -->
 
         <ul class="social_btns">
 
             <li>
-                <a href="#" class="icon_btn middle_btn social_facebook tooltip_container"><i class="icon-facebook-1"></i><span class="tooltip top">Facebook</span></a>
+                <a href="#" class="icon_btn middle_btn social_facebook tooltip_container"><i
+                        class="icon-facebook-1"></i><span class="tooltip top">Facebook</span></a>
             </li>
 
             <li>
-                <a href="#" class="icon_btn middle_btn  social_twitter tooltip_container"><i class="icon-twitter"></i><span class="tooltip top">Twitter</span></a>
+                <a href="#" class="icon_btn middle_btn  social_twitter tooltip_container"><i
+                        class="icon-twitter"></i><span class="tooltip top">Twitter</span></a>
             </li>
 
             <li>
-                <a href="#" class="icon_btn middle_btn social_googleplus tooltip_container"><i class="icon-gplus-2"></i><span class="tooltip top">GooglePlus</span></a>
+                <a href="#" class="icon_btn middle_btn social_googleplus tooltip_container"><i class="icon-gplus-2"></i><span
+                        class="tooltip top">GooglePlus</span></a>
             </li>
 
             <li>
-                <a href="#" class="icon_btn middle_btn social_pinterest tooltip_container"><i class="icon-pinterest-3"></i><span class="tooltip top">Pinterest</span></a>
+                <a href="#" class="icon_btn middle_btn social_pinterest tooltip_container"><i
+                        class="icon-pinterest-3"></i><span class="tooltip top">Pinterest</span></a>
             </li>
 
             <li>
-                <a href="#" class="icon_btn middle_btn social_flickr tooltip_container"><i class="icon-flickr-1"></i><span class="tooltip top">Flickr</span></a>
+                <a href="#" class="icon_btn middle_btn social_flickr tooltip_container"><i
+                        class="icon-flickr-1"></i><span class="tooltip top">Flickr</span></a>
             </li>
 
             <li>
-                <a href="#" class="icon_btn middle_btn social_youtube tooltip_container"><i class="icon-youtube"></i><span class="tooltip top">Youtube</span></a>
+                <a href="#" class="icon_btn middle_btn social_youtube tooltip_container"><i
+                        class="icon-youtube"></i><span class="tooltip top">Youtube</span></a>
             </li>
 
             <li>
-                <a href="#" class="icon_btn middle_btn social_vimeo tooltip_container"><i class="icon-vimeo-2"></i><span class="tooltip top">Vimeo</span></a>
+                <a href="#" class="icon_btn middle_btn social_vimeo tooltip_container"><i class="icon-vimeo-2"></i><span
+                        class="tooltip top">Vimeo</span></a>
             </li>
 
             <li>
-                <a href="#" class="icon_btn middle_btn social_instagram tooltip_container"><i class="icon-instagram-4"></i><span class="tooltip top">Instagram</span></a>
+                <a href="#" class="icon_btn middle_btn social_instagram tooltip_container"><i
+                        class="icon-instagram-4"></i><span class="tooltip top">Instagram</span></a>
             </li>
 
             <li>
-                <a href="#" class="icon_btn middle_btn social_linkedin tooltip_container"><i class="icon-linkedin-5"></i><span class="tooltip top">LinkedIn</span></a>
+                <a href="#" class="icon_btn middle_btn social_linkedin tooltip_container"><i
+                        class="icon-linkedin-5"></i><span class="tooltip top">LinkedIn</span></a>
             </li>
 
         </ul>
@@ -1003,7 +1106,8 @@ AppAsset::register($this);
 
     <!-- - - - - - - - - - - - - - End of about us widget - - - - - - - - - - - - - - - - -->
 
-</div><!--/ [col]-->
+</div>
+<!--/ [col]-->
 
 <div class="col-md-2 col-sm-6">
 
@@ -1024,11 +1128,13 @@ AppAsset::register($this);
 
         </ul>
 
-    </section><!--/ .widget-->
+    </section>
+    <!--/ .widget-->
 
     <!-- - - - - - - - - - - - - - End of information widget - - - - - - - - - - - - - - - - -->
 
-</div><!--/ [col]-->
+</div>
+<!--/ [col]-->
 
 <div class="col-md-2 col-sm-6">
 
@@ -1048,11 +1154,13 @@ AppAsset::register($this);
 
         </ul>
 
-    </section><!--/ .widget-->
+    </section>
+    <!--/ .widget-->
 
     <!-- - - - - - - - - - - - - - End of extras widget - - - - - - - - - - - - - - - - -->
 
-</div><!--/ [col]-->
+</div>
+<!--/ [col]-->
 
 <div class="col-md-2 col-sm-6">
 
@@ -1072,7 +1180,8 @@ AppAsset::register($this);
 
         </ul>
 
-    </section><!--/ .widget-->
+    </section>
+    <!--/ .widget-->
 
     <!-- - - - - - - - - - - - - - End my account widget - - - - - - - - - - - - - - - - -->
 
@@ -1114,13 +1223,16 @@ AppAsset::register($this);
 
                             <span><i class="icon-calendar"></i> 2014-08-05 07:01:49</span>
 
-                        </div><!--/ .entry_meta-->
+                        </div>
+                        <!--/ .entry_meta-->
 
                         <!-- - - - - - - - - - - - - - End of byline - - - - - - - - - - - - - - - - -->
 
-                    </div><!--/ .wrapper-->
+                    </div>
+                    <!--/ .wrapper-->
 
-                </article><!--/ .clearfix-->
+                </article>
+                <!--/ .clearfix-->
 
             </li>
 
@@ -1152,13 +1264,16 @@ AppAsset::register($this);
 
                             <span><i class="icon-calendar"></i> 2014-08-05 07:01:49</span>
 
-                        </div><!--/ .entry_meta-->
+                        </div>
+                        <!--/ .entry_meta-->
 
                         <!-- - - - - - - - - - - - - - End of byline - - - - - - - - - - - - - - - - -->
 
-                    </div><!--/ .wrapper-->
+                    </div>
+                    <!--/ .wrapper-->
 
-                </article><!--/ .clearfix-->
+                </article>
+                <!--/ .clearfix-->
 
             </li>
 
@@ -1190,13 +1305,16 @@ AppAsset::register($this);
 
                             <span><i class="icon-calendar"></i> 2014-08-05 07:01:49</span>
 
-                        </div><!--/ .entry_meta-->
+                        </div>
+                        <!--/ .entry_meta-->
 
                         <!-- - - - - - - - - - - - - - End of byline - - - - - - - - - - - - - - - - -->
 
-                    </div><!--/ .wrapper-->
+                    </div>
+                    <!--/ .wrapper-->
 
-                </article><!--/ .clearfix-->
+                </article>
+                <!--/ .clearfix-->
 
             </li>
 
@@ -1204,17 +1322,22 @@ AppAsset::register($this);
 
         </ul>
 
-    </section><!--/ .widget-->
+    </section>
+    <!--/ .widget-->
 
     <!-- - - - - - - - - - - - - - End of blog widget - - - - - - - - - - - - - - - - -->
 
-</div><!--/ [col]-->
+</div>
+<!--/ [col]-->
 
-</div><!--/ .row-->
+</div>
+<!--/ .row-->
 
-</div><!--/ .container -->
+</div>
+<!--/ .container -->
 
-</div><!--/ .footer_section_2-->
+</div>
+<!--/ .footer_section_2-->
 
 <!-- - - - - - - - - - - - - - End footer section- - - - - - - - - - - - - - - - -->
 
@@ -1265,9 +1388,11 @@ AppAsset::register($this);
 
         <p class="copyright">&copy; 2015 <a href="index.html">Shopme</a>. All Rights Reserved.</p>
 
-    </div><!--/ .container -->
+    </div>
+    <!--/ .container -->
 
-</div><!--/ .footer_section-->
+</div>
+<!--/ .footer_section-->
 
 <!-- - - - - - - - - - - - - - End footer section - - - - - - - - - - - - - - - - -->
 
@@ -1275,14 +1400,14 @@ AppAsset::register($this);
 
 <!-- - - - - - - - - - - - - - End Footer - - - - - - - - - - - - - - - - -->
 
-</div><!--/ [layout]-->
+</div>
+<!--/ [layout]-->
 
 <!-- - - - - - - - - - - - - - End Main Wrapper - - - - - - - - - - - - - - - - -->
 
 <!-- - - - - - - - - - - - - - Social feeds - - - - - - - - - - - - - - - - -->
 
 <ul class="social_feeds">
-
 
 
     <!-- - - - - - - - - - - - - - Contact us - - - - - - - - - - - - - - - - -->
@@ -1297,7 +1422,8 @@ AppAsset::register($this);
 
                 <h3 class="title">Contact Us</h3>
 
-            </div><!--/ .animated_item-->
+            </div>
+            <!--/ .animated_item-->
 
             <div class="animated_item">
 
@@ -1331,7 +1457,8 @@ AppAsset::register($this);
 
                             <div class="col-xs-12">
 
-                                <textarea placeholder="Message" required title="Message" name="cf_message" rows="6"></textarea>
+                                <textarea placeholder="Message" required title="Message" name="cf_message"
+                                          rows="6"></textarea>
 
                             </div>
 
@@ -1351,9 +1478,11 @@ AppAsset::register($this);
 
                 </form>
 
-            </div><!--/ .animated_item-->
+            </div>
+            <!--/ .animated_item-->
 
-        </section><!--/ .dropdown-->
+        </section>
+        <!--/ .dropdown-->
 
     </li>
 
@@ -1367,8 +1496,8 @@ AppAsset::register($this);
 <!-- Include Libs & Plugins
 		============================================ -->
 <?php
-$tmpJs = [ "js/queryloader2.min.js","js/jquery.elevateZoom-3.0.8.min.js", "js/fancybox/source/jquery.fancybox.pack.js","js/fancybox/source/helpers/jquery.fancybox-media.js",
-    "js/fancybox/source/helpers/jquery.fancybox-thumbs.js","js/rs-plugin/js/jquery.themepunch.tools.min.js", "js/rs-plugin/js/jquery.themepunch.revolution.min.js", "js/jquery.appear.js",
+$tmpJs = ["js/queryloader2.min.js", "js/jquery.elevateZoom-3.0.8.min.js", "js/fancybox/source/jquery.fancybox.pack.js", "js/fancybox/source/helpers/jquery.fancybox-media.js",
+    "js/fancybox/source/helpers/jquery.fancybox-thumbs.js", "js/rs-plugin/js/jquery.themepunch.tools.min.js", "js/rs-plugin/js/jquery.themepunch.revolution.min.js", "js/jquery.appear.js",
     "js/owlcarousel/owl.carousel.min.js",
     "js/jquery.countdown.plugin.min.js", "js/jquery.countdown.min.js",
     "js/arcticmodal/jquery.arcticmodal.js", "twitter/jquery.tweet.min.js", "js/colorpicker/colorpicker.js", "js/retina.min.js", "js/theme.plugins.js", "js/theme.core.js",
