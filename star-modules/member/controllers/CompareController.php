@@ -1,6 +1,6 @@
 <?php
 
-namespace star\modules\member\controllers;
+namespace star\member\controllers;
 
 use star\catalog\models\Item;
 use yii\web\Controller;

@@ -18,20 +18,6 @@ $this->params['breadcrumbs'][] = [
     'template' => '<li><span>{link}</span></li>',
 ];
 ?>
-<!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
-
-<ul class="breadcrumbs">
-
-    <li><a href="index.html">Home</a></li>
-    <li><a href="#">Beauty</a></li>
-    <li><a href="#">Skin Care</a></li>
-    <li><a href="#">Cleansers</a></li>
-    <li><a href="#">Liquid</a></li>
-    <li>Metus nulla facilisi, Original 24 fl oz (709 ml)</li>
-
-</ul>
-
-<!-- - - - - - - - - - - - - - End of breadcrumbs - - - - - - - - - - - - - - - - -->
 
 <div class="row">
 
@@ -72,7 +58,7 @@ $this->params['breadcrumbs'][] = [
         <div class="owl_carousel" id="thumbnails">
             <?php
             foreach($itemImages as $itemImage){ ?>
-                <a href="#" data-image="<?= Yii::$app->params['imageDomain'].'/'.$itemImage->pic?>" data-zoom-image="images/preview_zoom_1.jpg">
+                <a href="#" data-image="<?= Yii::$app->params['imageDomain'].'/'.$itemImage->pic?>" data-zoom-image="<?= $link ?>/images/preview_zoom_1.jpg">
                     <?= EasyThumbnailImage::thumbnailImg(
                         '@image/'.$itemImage->pic,
                         80,
@@ -974,7 +960,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_30.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_30.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1034,7 +1020,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_31.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_31.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1088,7 +1074,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_32.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_32.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1162,7 +1148,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_33.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_33.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1216,7 +1202,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_30.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_30.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1276,7 +1262,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_31.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_31.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1330,7 +1316,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_32.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_32.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1404,7 +1390,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_33.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_33.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1470,7 +1456,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_6.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_6.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1524,7 +1510,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_14.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_14.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1592,7 +1578,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/product_img_15.jpg" alt="">
+        <img src="<?= $link ?>/images/product_img_15.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1652,7 +1638,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/tabs_img_1.jpg" alt="">
+        <img src="<?= $link ?>/images/tabs_img_1.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1712,7 +1698,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/tabs_img_2.jpg" alt="">
+        <img src="<?= $link ?>/images/tabs_img_2.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1780,7 +1766,7 @@ $this->params['breadcrumbs'][] = [
 
     <div class="image_wrap">
 
-        <img src="images/tabs_img_3.jpg" alt="">
+        <img src="<?= $link ?>/images/tabs_img_3.jpg" alt="">
 
         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -1852,7 +1838,7 @@ $this->params['breadcrumbs'][] = [
 
             <a href="#" class="alignleft photo">
 
-                <img src="images/seller_photo_1.jpg" alt="">
+                <img src="<?= $link ?>/images/seller_photo_1.jpg" alt="">
 
             </a>
 
@@ -1942,7 +1928,7 @@ $this->params['breadcrumbs'][] = [
 
         <a href="#" class="product_thumb">
 
-            <img src="images/product_thumb_4.jpg" alt="">
+            <img src="<?= $link ?>/images/product_thumb_4.jpg" alt="">
 
         </a>
 
@@ -1982,7 +1968,7 @@ $this->params['breadcrumbs'][] = [
 
         <a href="#" class="product_thumb">
 
-            <img src="images/product_thumb_5.jpg" alt="">
+            <img src="<?= $link ?>/images/product_thumb_5.jpg" alt="">
 
         </a>
 
@@ -2022,7 +2008,7 @@ $this->params['breadcrumbs'][] = [
 
         <a href="#" class="product_thumb">
 
-            <img src="images/product_thumb_6.jpg" alt="">
+            <img src="<?= $link ?>/images/product_thumb_6.jpg" alt="">
 
         </a>
 
@@ -2066,7 +2052,7 @@ $this->params['breadcrumbs'][] = [
 
         <a href="#" class="product_thumb">
 
-            <img src="images/product_thumb_7.jpg" alt="">
+            <img src="<?= $link ?>/images/product_thumb_7.jpg" alt="">
 
         </a>
 
@@ -2106,7 +2092,7 @@ $this->params['breadcrumbs'][] = [
 
         <a href="#" class="product_thumb">
 
-            <img src="images/product_thumb_8.jpg" alt="">
+            <img src="<?= $link ?>/images/product_thumb_8.jpg" alt="">
 
         </a>
 
@@ -2146,7 +2132,7 @@ $this->params['breadcrumbs'][] = [
 
         <a href="#" class="product_thumb">
 
-            <img src="images/product_thumb_9.jpg" alt="">
+            <img src="<?= $link ?>/images/product_thumb_9.jpg" alt="">
 
         </a>
 
@@ -2222,7 +2208,7 @@ $this->params['breadcrumbs'][] = [
 
             <a href="#" class="product_thumb">
 
-                <img src="images/product_thumb_4.jpg" alt="">
+                <img src="<?= $link ?>/images/product_thumb_4.jpg" alt="">
 
             </a>
 
@@ -2262,7 +2248,7 @@ $this->params['breadcrumbs'][] = [
 
             <a href="#" class="product_thumb">
 
-                <img src="images/product_thumb_11.jpg" alt="">
+                <img src="<?= $link ?>/images/product_thumb_11.jpg" alt="">
 
             </a>
 

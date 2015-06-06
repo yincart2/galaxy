@@ -1,10 +1,10 @@
 <?php
 
-namespace star\modules\member\controllers;
+namespace star\member\controllers;
 
 use common\models\Area;
 use yii\helpers\Json;
-use star\modules\member\models\DeliveryAddress;
+use star\member\models\DeliveryAddress;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use yii;
@@ -25,7 +25,7 @@ class AddressController extends Controller
 
         //view
         if(Yii::$app->request->get('view_id')){
-            $model = $model->find()->where(['member_address_id'=>Yii::$app->request->get('view_id'),'user_id'=>Yii::$app->user->id])->one();
+            $model = $model->find()->where(['delivery_address_id'=>Yii::$app->request->get('view_id'),'user_id'=>Yii::$app->user->id])->one();
         }
 
         //create and update

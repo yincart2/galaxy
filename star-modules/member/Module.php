@@ -6,7 +6,7 @@ use Yii;
 use yii\web\ForbiddenHttpException;
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'home\modules\member\controllers';
+    public $controllerNamespace = 'star\member\controllers';
     public $layout = '/member';
     public function init()
     {

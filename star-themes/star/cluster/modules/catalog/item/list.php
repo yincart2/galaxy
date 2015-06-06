@@ -8,15 +8,13 @@ $link = $this->getAssetManager()->getPublishedUrl('@theme/star/cluster/assets');
 $this->registerJsFile($link . '/js/wishlist.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile($link . '/js/compare.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
+$this->params['breadcrumbs'][] = [
+    'label' => $currentCategory->name,
+    'template' => '<li><span>{link}</span></li>',
+];
+
 ?>
-<!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
 
-<ul class="breadcrumbs">
-
-    <li><a href="index.html">Home</a></li>
-    <li>Beauty</li>
-
-</ul>
 
 <div class="row">
 

@@ -55,6 +55,9 @@ return [
         'order' => [
             'class' =>'star\order\Module',
         ],
+        'member' => [
+            'class' =>'star\member\Module',
+        ],
     ],
     'components' => [
         'user' => [
@@ -92,7 +95,7 @@ return [
                 'pathMap'=>[
                     '@app/views'=>'@theme/star/cluster/',
                     '@star/catalog/views/home'=>'@theme/star/cluster/modules/catalog',
-                    '@app/modules/member/views'=>'@theme/star/cluster/modules/member',
+                    '@star/member/views'=>'@theme/star/cluster/modules/member',
                     '@app/modules/cart/views'=>'@theme/star/cluster/modules/cart',
                 ],
                 'baseUrl'=>'@theme/star/cluster'

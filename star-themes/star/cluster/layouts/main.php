@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use home\assets\AppAsset;
 use home\widgets\Alert;
 use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -35,37 +36,6 @@ AppAsset::register($this);
 </head>
 <body class="front_page promo_popup">
 <?php $this->beginBody() ?>
-<!-- - - - - - - - - - - - - - Cookie Message - - - - - - - - - - - - - - - - -->
-
-<!--<div class="cookie_message">-->
-<!---->
-<!--    <div class="container">-->
-<!---->
-<!--        <div class="on_the_sides">-->
-<!---->
-<!--            <div class="left_side">Please note this website requires cookies in order to function correctly, they do not store any specific information about your personally.</div>-->
-<!---->
-<!--            <div class="right_side">-->
-<!---->
-<!--                <div class="buttons_row">-->
-<!---->
-<!--                    <a href="#" class="button_blue accept_cookie">Accept Cookies</a>-->
-<!---->
-<!--                    <a href="#" class="button_dark_grey">Read More</a>-->
-<!---->
-<!--                </div>-->
-<!---->
-<!--            </div>-->
-<!---->
-<!--        </div>-->
-<!---->
-<!--    </div>-->
-<!---->
-<!--</div>-->
-
-<!-- - - - - - - - - - - - - - End of Cookie Message - - - - - - - - - - - - - - - - -->
-
-<!-- - - - - - - - - - - - - - Old ie alert message - - - - - - - - - - - - - - - - -->
 
 <!--[if lt IE 9]>
 
@@ -113,7 +83,7 @@ AppAsset::register($this);
 
         <div class="row">
 
-            <div class="col-lg-6 col-md-7 col-sm-8">
+            <div class="col-lg-7 col-md-7 col-sm-8">
                 <?php
                 if (Yii::$app->user->isGuest) {
                 ?>
@@ -123,11 +93,15 @@ AppAsset::register($this);
 
                 <!-- - - - - - - - - - - - - - End login - - - - - - - - - - - - - - - - -->
                 <?php }else{ ?>
-                <p><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>Logout</a></p>
+                <div class="col-sm-2"><a href="<?= Url::to(['/member']) ?>" class="default_t_color">My Account</a></div>
+                <div class="col-sm-2"><a href="#" class="default_t_color">Orders List</a></div>
+                <div class="col-sm-2"><a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="default_t_color">Wishlist</a></div>
+                <div class="col-sm-2"><a href="<?= Url::to(['/order/order/index']) ?>" class="default_t_color">Checkout</a></div>
+                <div class="col-sm-2"><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>Logout</a></div>
                 <?php } ?>
             </div> <!--/ [col]-->
 
-            <div class="col-lg-6 col-md-5 col-sm-4">
+            <div class="col-lg-5 col-md-5 col-sm-4">
 
                 <div class="clearfix">
 
@@ -1046,7 +1020,16 @@ AppAsset::register($this);
 <div class="page_wrapper">
 
 <div class="container">
-
+    <?=
+    Breadcrumbs::widget([
+        'options' => ['class' => 'breadcrumbs'],
+        'homeLink' => [
+            'label' => Yii::t('app', 'Home'),
+            'url' => Yii::$app->homeUrl,
+        ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]);
+    ?>
     <?= $content ?>
 
 </div><!--/ .container-->

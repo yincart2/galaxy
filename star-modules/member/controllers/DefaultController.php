@@ -1,6 +1,6 @@
 <?php
 
-namespace star\modules\member\controllers;
+namespace star\member\controllers;
 use core\models\User;
 use yii\web\Controller;
 use yii\filters\AccessControl;
