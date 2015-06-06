@@ -35,6 +35,11 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@star/catalog/messages',
+                ],
+                'order' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/order/messages',
                 ]
             ],
         ],

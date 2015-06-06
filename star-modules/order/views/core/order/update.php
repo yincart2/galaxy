@@ -19,6 +19,20 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
     <h1><?= Html::encode($this->title) ?></h1>
     <?php
     $items = [];
+    $orderItemArray = '';
+    $orderItems = $model->orderItem;
+
+    foreach($orderItems as $orderItem){
+        $orderItemArray .= DetailView::widget([
+            'model' => $orderItem,
+            'attributes' => [
+                'name',
+                'price',
+                'qty',
+                'picture:image',
+            ]
+        ]);
+    }
     $orderInfo =  DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -37,9 +51,9 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
     ]) ;
 
      $items = [
-         ['label' => Yii::t('app', 'Order'), 'content' => $orderInfo.$orderInfo2],
+         ['label' => Yii::t('order', 'Order'), 'content' => $orderItemArray.$orderInfo.$orderInfo2],
 //         ['label' => Yii::t('app', 'Payment'), 'content' => $paymentInfo],
-         ['label' => Yii::t('app', 'Shipment'), 'content' => $shipmentInfo],
+         ['label' => Yii::t('order', 'Shipment'), 'content' => $shipmentInfo],
 //        ['label' => Yii::t('app', 'Refund'), 'content' => ''],
      ];
 

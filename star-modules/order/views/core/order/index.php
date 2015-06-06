@@ -5,7 +5,7 @@ use kartik\grid\GridView;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $searchModel star\catalog\models\ItemSearch */
+/* @var $searchModel star\order\models\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('order', 'Orders');
@@ -15,8 +15,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'export'=>false,
+        'responsive'=>false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
+        'headerRowOptions'=>['class'=>'kartik-sheet-style'],
+        'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -31,7 +35,20 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'memo',
              'create_at:datetime',
              'update_at:datetime',
-             'status',
+            [
+                'attribute'=>'status',
+                'value'=>function ($model) {
+                        $status = $model->getStatusArray();
+                        return $status[$model->status];
+                    },
+                'filterType'=>GridView::FILTER_SELECT2,
+                'filter'=>Yii::createObject(\star\order\models\Order::className())->getStatusArray(),
+                'filterWidgetOptions'=>[
+                    'pluginOptions'=>['allowClear'=>true],
+                ],
+                'filterInputOptions'=>['placeholder'=>'Status'],
+                'format'=>'raw'
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
