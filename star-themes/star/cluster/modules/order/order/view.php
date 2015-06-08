@@ -1,6 +1,21 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model  star\order\models\order */
+
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('member','Member Center'),
+    'url' => ['/member/default/index'],
+];
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('member','Order List'),
+    'url' => ['/order/home/order/list'],
+];
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('member','Order View'),
+    'template' => '<li><span>{link}</span></li>',
+];
+$this->params['order-list'] = true;
+
 ?>
 
 <h1>Order #<?= $model->order_no?> </h1>

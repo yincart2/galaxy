@@ -7,6 +7,7 @@ $this->params['breadcrumbs'][] = [
     'label' => Yii::t('member','Member Information'),
     'template' => '<li><span>{link}</span></li>',
 ];
+$this->params['information'] = true;
 ?>
 <h1 class="tt_uppercase color_dark m_bottom_25"><?= Yii::t('member','Member Information')?></h1>
 <!--order info tables-->

@@ -39,6 +39,7 @@ class DeliveryAddress extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['province', 'city', 'district', 'address', 'zip_code', 'phone', 'name'], 'required'],
             [['user_id', 'is_default'], 'integer'],
             [['province', 'city', 'district', 'address', 'zip_code', 'phone', 'name'], 'string', 'max' => 255]
         ];

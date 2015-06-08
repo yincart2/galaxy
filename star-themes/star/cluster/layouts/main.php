@@ -108,7 +108,7 @@ AppAsset::register($this);
                     <div class="col-sm-2"><a href="#" class="default_t_color">Orders List</a></div>
                     <div class="col-sm-2"><a href="<?= Url::to(['/member/wishlist/get-wishlist']) ?>"
                                              class="default_t_color">Wishlist</a></div>
-                    <div class="col-sm-2"><a href="<?= Url::to(['/order/order/index']) ?>" class="default_t_color">Checkout</a>
+                    <div class="col-sm-2"><a href="<?= Url::to(['/order/home/order/index']) ?>" class="default_t_color">Checkout</a>
                     </div>
                     <div class="col-sm-2"><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color"
                                              data-method='post'>Logout</a></div>

@@ -6,7 +6,12 @@ use yii\grid\GridView;
 use star\member\models\DeliveryAddress;
 
 $dataList = ['1'=>'是','0'=>'否'];
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('member','Member Center'),
+    'url' => ['/member/default/index'],
+];
 $this->params['breadcrumbs'][] = '收货地址';
+$this->params['delivery-address'] = true;
 $link = $this->getAssetManager()->getPublishedUrl('@theme/star/cluster/assets');
 $this->registerJsFile($link . '/js/address.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
@@ -54,10 +59,9 @@ if($count == 0) {
 
 //index view
 $viewId = Yii::$app->request->get('view_id');
-if(!isset($viewId) && $count != 0){
-    ?>
-    <button type="button" class="btn btn-primary btn-lg" onclick="javascript: $('#address').toggle()">新建收货地址</button>
-<?php } ?>
+?>
+    <button type="button" id="new_address" class="button_blue middle_btn" onclick="javascript:void(0);"
+        <?php if(isset($viewId) || $count == 0){echo 'style="display: none"';} ?> >新建收货地址</button>
 
 
 <div id="address"  style="display: <?=  (isset($viewId) || $count == 0) ? 'block': 'none';  ?>">
@@ -65,7 +69,14 @@ if(!isset($viewId) && $count != 0){
     if(!isset($viewId)) {
         $model = new DeliveryAddress();
     }
-    $form = \yii\widgets\ActiveForm::begin();
+    $form = \yii\widgets\ActiveForm::begin([
+        'requiredCssClass' => '',
+        'options' => ['class' => 'type_2'],
+        'fieldConfig' => [
+            'labelOptions' => ['class' => 'required'],
+            'template' => "{label}\n{input}\n<div class=\"col-lg-12\">{error}\n{hint}</div>",
+        ],
+    ]);
     $select = ['' => '请选择...'];
     $catList = $select+$catList;
 
@@ -107,7 +118,8 @@ if(!isset($viewId) && $count != 0){
     <?= $form->field($model, 'is_default')->dropDownList($dataList) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? '保存' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '保存' : '更新', ['class' => 'button_blue small_btn']) ?>
+        <button type="button" id="<?= $model->isNewRecord ? 'cancel' : 'back'?>" class="button_dark_grey small_btn" onclick="javascript:void(0);">取消</button>
     </div>
     <?php $form->end();  ?>
 </div>
