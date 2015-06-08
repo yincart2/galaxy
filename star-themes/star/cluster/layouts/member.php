@@ -35,7 +35,11 @@ $this->beginContent('@theme/star/cluster/layouts/main.php');
                             <?= Yii::t('member', 'Delivery Address') ?>
                         </a>
                     </li>
-
+                    <li>
+                        <a href="<?= Url::to(['/order/home/order/list']) ?>">
+                            <?= Yii::t('member', 'Order') ?>
+                        </a>
+                    </li>
                 </ul>
 
             </section>

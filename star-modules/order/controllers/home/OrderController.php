@@ -6,6 +6,7 @@ use cluster\modules\cart\models\ShoppingCart;
 use star\order\models\Order;
 use star\catalog\models\Sku;
 use Yii;
+use yii\data\Pagination;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Json;
@@ -31,12 +32,13 @@ class OrderController extends Controller
     }
 
     /**
-     * Displays a single Order model.
+     * Displays a single Order model in member center.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
+        $this->layout = '/member';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -131,4 +133,26 @@ class OrderController extends Controller
     public function actionSuccess(){
         return $this->render('success');
     }
+
+    /**
+     * list orders in member center
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @return string
+     */
+    public function actionList(){
+        $this->layout = '/member';
+        $condition = '';
+        $query = Order::find()->where($condition);
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $orderModels = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('list', [
+            'orderModels' => $orderModels,
+            'pages' => $pages,
+        ]);
+    }
+
 }
