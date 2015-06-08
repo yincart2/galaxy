@@ -20,22 +20,22 @@ $this->beginContent('@theme/star/cluster/layouts/main.php');
 
                 <ul class="theme_menu">
 
-                    <li class="active">
+                    <li class="<?= isset($this->params['information']) ? 'current' : ''?>">
                         <a href="<?= Url::to(['/member/default/index']) ?>">
                             <?= Yii::t('member', 'Member Information') ?>
                         </a>
                     </li>
-                    <li>
+                    <li class="<?= isset($this->params['wishlist']) ? 'current' : ''?>">
                         <a href="<?= Url::to(['/member/wishlist/get-wishlist']) ?>">
                             <?= Yii::t('member', 'My WishList') ?>
                         </a>
                     </li>
-                    <li>
+                    <li class="<?= isset($this->params['delivery-address']) ? 'current' : ''?>">
                         <a href="<?= Url::to(['/member/address/delivery-address']) ?>">
                             <?= Yii::t('member', 'Delivery Address') ?>
                         </a>
                     </li>
-                    <li>
+                    <li class="<?= isset($this->params['order-list']) ? 'current' : ''?>">
                         <a href="<?= Url::to(['/order/home/order/list']) ?>">
                             <?= Yii::t('member', 'Order') ?>
                         </a>

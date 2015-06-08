@@ -6,7 +6,12 @@ use yii\grid\GridView;
 use star\member\models\DeliveryAddress;
 
 $dataList = ['1'=>'是','0'=>'否'];
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('member','Member Center'),
+    'url' => ['/member/default/index'],
+];
 $this->params['breadcrumbs'][] = '收货地址';
+$this->params['delivery-address'] = true;
 $link = $this->getAssetManager()->getPublishedUrl('@theme/star/cluster/assets');
 $this->registerJsFile($link . '/js/address.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>

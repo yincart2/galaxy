@@ -3,6 +3,16 @@
 /* @var $orderModel  star\order\models\order */
 
 use yii\helpers\Url;
+
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('member','Member Center'),
+    'url' => ['/member/default/index'],
+];
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('member','Order List'),
+    'template' => '<li><span>{link}</span></li>',
+];
+$this->params['order-list'] = true;
 ?>
 
 <!-- - - - - - - - - - - - - - End of breadcrumbs - - - - - - - - - - - - - - - - -->

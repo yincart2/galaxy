@@ -11,6 +11,7 @@ $this->params['breadcrumbs'][] = [
     'label' => Yii::t('member','Wishlist'),
     'template' => '<li><span>{link}</span></li>',
 ];
+$this->params['wishlist'] = true;
 $link = $this->getAssetManager()->getPublishedUrl('@theme/star/cluster/assets');
 $this->registerJsFile($link . '/js/wishlist.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
