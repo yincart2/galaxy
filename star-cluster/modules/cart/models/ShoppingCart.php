@@ -138,12 +138,12 @@ class ShoppingCart extends Component
      */
     public function save($event)
     {
-        $requestCookies = Yii::$app->request->cookies;
-        $cartItems = $requestCookies->getValue(self::COOKIE_KEY,[]);
+        $cookies = Yii::$app->response->cookies;
+        $cartItems = $cookies->getValue(self::COOKIE_KEY,[]);
 
         $toDelCartItems = array_diff_key($cartItems, $this->cartItems);
 
-        Yii::$app->response->cookies->add(new Cookie([
+        $cookies->add(new Cookie([
             'name' => self::COOKIE_KEY,
             'value' => $this->cartItems,
         ]));
@@ -224,18 +224,22 @@ class ShoppingCart extends Component
     public function clearAll()
     {
         //@TODO need to add event
-        if (Yii::$app->getSession()->remove(self::SESSION_KEY) && Cart::deleteAll(['user_id' => Yii::$app->user->id])) {
-            $this->cartItems = [];
-            return true;
+        Yii::$app->response->cookies->remove(self::COOKIE_KEY);
+        $this->cartItems = [];
+        if (! Cart::deleteAll(['user_id' => Yii::$app->user->id])) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
-     * @param int $sku_id
+     * return subtotal.
+     * @param int $sku_id , if it is exist, it will return the price of this sku .
+     * @param int $star_id, if it is exist, it will return the price of store .
+     * if they were null. it will return the total price of shopping cart.
      * @return number
      */
-    public function getSubTotal($sku_id = 0)
+    public function getSubTotal($sku_id = 0,$star_id=0)
     {
         //@TODO need to add event
         if ($sku_id) {
@@ -243,11 +247,15 @@ class ShoppingCart extends Component
 
             $price_true = $cartItem->sku->price;
             return $price_true * $cartItem->qty;
+        }
 
-//            return $cartItem->item->price * $cartItem->qty;
+        $cartItems = $this->cartItems;
+        if($star_id){
+            $serialCartItems = $this->serialCartItems();
+            $cartItems = $serialCartItems[$star_id];
         }
         $subTotals = [];
-        foreach($this->cartItems as $sku_id => $carItem) {
+        foreach($cartItems as $sku_id => $carItem) {
             $subTotals[$sku_id] = $this->getSubTotal($sku_id);
         }
         return array_sum($subTotals);

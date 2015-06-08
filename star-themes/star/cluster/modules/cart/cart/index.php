@@ -18,7 +18,13 @@ $form = \yii\widgets\ActiveForm::begin();
     <h1>Shopping Cart</h1>
 
     <!-- - - - - - - - - - - - - - Shopping cart table - - - - - - - - - - - - - - - - -->
-
+<?php
+foreach ($cartItems as $star_id=>$carts) {
+if($star_id != 0){
+    //get store name by star_id
+    echo 'Store Name';
+}
+?>
     <div class="table_wrap">
 
     <table class="table_type_1 shopping_cart_table">
@@ -39,11 +45,6 @@ $form = \yii\widgets\ActiveForm::begin();
 
     <tbody>
 <?php
-foreach ($cartItems as $star_id=>$carts) {
-    if($star_id != 0){
-        //get store name by star_id
-        echo 'Store Name';
-    }
     foreach($carts as $cartItem){
     /**@var star\catalog\models\Item $item * */
     $sku = $cartItem->sku;
@@ -154,15 +155,59 @@ foreach ($cartItems as $star_id=>$carts) {
     </tr>
         <?php } ?>
     <?php } ?>
-<?php } ?>
-
 
     </tbody>
 
     </table>
 
     </div><!--/ .table_wrap -->
+    <?php if($star_id != 0){ ?>
+    <div class="row">
 
+        <section class=" col-md-4 col-md-offset-8 ">
+            <div class="table_wrap">
+
+                <table class="zebra">
+
+                    <tfoot>
+
+                    <tr>
+
+                        <td>Shipment Fee:</td>
+                        <td>$<?=  $shoppingCartModel->getShippingFee() ?></td>
+
+                    </tr>
+
+                    <tr class="total">
+
+                        <td>Total</td>
+                        <td>$<?=  $shoppingCartModel->getTotal(0,$star_id) ?></td>
+
+                    </tr>
+
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+            <footer class="bottom_box">
+
+                <a class="button_blue middle_btn" href="#">Proceed to Checkout</a>
+
+                <div class="single_link_wrap">
+
+                    <a href="#">Checkout with Multiple Addresses</a>
+
+                </div>
+
+            </footer>
+
+        </section><!-- / [col] -->
+
+    </div><!--/ .row -->
+<?php }
+} ?>
 
 
     <footer class="bottom_box on_the_sides">
