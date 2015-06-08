@@ -43,9 +43,6 @@ return [
         'station' => [
             'class' => 'core\modules\station\Module',
         ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-        ],
         'catalog' => [
             'class' => 'star\catalog\Module',
         ],
