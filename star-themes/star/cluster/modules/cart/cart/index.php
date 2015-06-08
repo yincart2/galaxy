@@ -193,7 +193,7 @@ if($star_id != 0){
 
             <footer class="bottom_box">
 
-                <a class="button_blue middle_btn" href="#">Proceed to Checkout</a>
+                <a class="button_blue middle_btn" href="<?= Url::to(['/order/home/order/checkout','star_id'=>$star_id])?>" >Proceed to Checkout</a>
 
                 <div class="single_link_wrap">
 
@@ -382,7 +382,7 @@ if($star_id != 0){
 
             <footer class="bottom_box">
 
-                <a class="button_blue middle_btn" href="#">Proceed to Checkout</a>
+                <a class="button_blue middle_btn" href="<?= Url::to(['/order/home/order/checkout'])?>">Proceed to Checkout</a>
 
                 <div class="single_link_wrap">
 

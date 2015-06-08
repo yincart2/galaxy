@@ -18,20 +18,6 @@ use yii\web\Controller;
 class OrderController extends Controller
 {
     /**
-     * Lists all Order models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $shoppingCart = new ShoppingCart();
-        $cartItems = $shoppingCart->cartItems;
-
-        return $this->render('index', [
-            'cartItems' => $cartItems,
-        ]);
-    }
-
-    /**
      * Displays a single Order model in member center.
      * @param integer $id
      * @return mixed
@@ -42,43 +28,6 @@ class OrderController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
-
-    /**
-     * Creates a new Order model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Order();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->order_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing Order model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->order_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
     }
 
     /**
@@ -141,6 +90,7 @@ class OrderController extends Controller
      */
     public function actionList(){
         $this->layout = '/member';
+        //@todo add status
         $condition = '';
         $query = Order::find()->where($condition);
         $countQuery = clone $query;
@@ -155,4 +105,20 @@ class OrderController extends Controller
         ]);
     }
 
+    public function actionCheckout(){
+        $star_id = (int)Yii::$app->request->get('star_id');
+
+        $shoppingCart = new ShoppingCart();
+        $cartItems = $shoppingCart->serialCartItems();
+        if($star_id){
+            if(isset($cartItems[$star_id])){
+                $cartItems = $cartItems[$star_id];
+            }else {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
+        }
+        return $this->render('index', [
+            'cartItems' => $cartItems,
+        ]);
+    }
 }

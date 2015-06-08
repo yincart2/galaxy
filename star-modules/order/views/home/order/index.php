@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = [
                 <?= Html::button('确认订单',
                     [
                         'class' => 'btn btn-danger pull-right create-order',
-                        'data-create' => true, 'data-url' => Url::to(['order/order-save']),
+                        'data-create' => true, 'data-url' => Url::to(['/order/home/order/order-save']),
                         'style' => "line-height:20px;margin-right:150px;margin-bottom:30px;"
                     ]) ?>
             </div>
