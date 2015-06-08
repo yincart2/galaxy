@@ -1,5 +1,19 @@
 $(function() {
 
+    $("#new_address").on("click",function() {
+        $(this).hide();
+        $('#address').show();
+    });
+
+    $("#cancel").on("click",function() {
+        $("#new_address").show();
+        $('#address').hide();
+    });
+
+    $("#back").on("click",function() {
+        history.back();
+    });
+
     $("#deliveryaddress-zip_code").keyup(function() {
         $("#deliveryaddress-zip_code").val($('#deliveryaddress-zip_code').val().replace(/\D/g,''));
     });
