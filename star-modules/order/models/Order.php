@@ -6,6 +6,7 @@ use dektrium\user\models\User;
 use cluster\modules\cart\models\ShoppingCart;
 use star\catalog\models\Sku;
 use Yii;
+use yii\base\ModelEvent;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Exception;
 
@@ -24,11 +25,10 @@ use yii\db\Exception;
  * @property integer $update_at
  * @property integer $status
  *
- * @property OrderItem[] $orderItems
  */
 class Order extends \yii\db\ActiveRecord
 {
-    public $orderItems;
+    public $items = [];
 
     const STATUS_WAIT_PAYMENT = 1;
     const STATUS_WAIT_SHIPMENT = 2;
@@ -37,6 +37,8 @@ class Order extends \yii\db\ActiveRecord
     const STATUS_WAIT_REFUND  = 5;
     const STATUS_REFUND_FAILED  = 6;
     const STATUS_REFUND_PASS  = 7;
+
+    const EVENT_CHANGE_PRICE  = 'changePrice';
 
     public function getStatusArray(){
         return [
@@ -129,83 +131,82 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * save order
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @return bool
+     */
     public function saveOrder()
     {
-        $orderItems = [];
-        $item_id = Yii::$app->request->post('item_id');
+        $ShoppingCart = new ShoppingCart();
+        $cartItems = $ShoppingCart->cartItems;
+        foreach($this->items as $skuId => $v){
+            $this->items[$skuId] = $cartItems[$skuId];
+        }
+
+        $carItems = [];
+        foreach($this->items as $skuId=>$carItem){
+            $starId = $carItem->star_id;
+            $carItems[$carItem->star_id][$skuId] = $carItem;
+        }
+
+        if(count($carItems)>1){
+            return $this->saveSeveralOrders($carItems);
+        }else{
+            return $this->saveSingleOrder($this->items,$starId);
+        }
+    }
+
+    //todo save several orders
+    /**
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @param $carItems, it should be [ 'store_id' => ['sku_id'=> cartModel] ]
+     * @return bool
+     */
+    public function saveSeveralOrders($carItems){ return false;}
+
+    /**
+     * save a order for one store
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @param $carItems , it should be  ['sku_id'=> cartModel]
+     * @param $starId
+     * @return bool
+     */
+    public function saveSingleOrder($carItems,$starId){
+        $ShoppingCart = new ShoppingCart();
         $transaction=\Yii::$app->db->beginTransaction();
         try {
-            if (isset($item_id)) {
-                $qty = Yii::$app->request->post('qty');
-                $data = Yii::$app->request->post('data');
-                $sku = Sku::find()->where(['sku_id' => $item_id])->one();
-                $item = $sku->item;
-                $this->user_id = Yii::$app->user->id;
-                $this->shipping_fee = $item->shipping_fee;
-                $this->payment_fee = 0;
-                $this->status = 1;
+            $this->user_id = Yii::$app->user->id;
+            $this->total_price = $ShoppingCart->getSubTotal(0,$starId);
+            $this->shipping_fee = $ShoppingCart->getShippingFee();
+            $this->payment_fee = 0;
+            $this->status =  self::STATUS_WAIT_PAYMENT;
+            $this->changePrice();
+            if ($this->save()) {
+                foreach ($carItems as $cartItem) {
+                    $sku =  $cartItem->sku;
+                    $item = $sku->item;
+                    $price_true =$sku->price;
 
-                $orderItem = new OrderItem();
-                $orderItem->item_id = $item_id;
-                //todo groupon
-//            if(Yii::$app->session->get('groupon')&& $groupon = Groupon::find()->where(['item_id'=> $orderItem->item_id])->andWhere('begin_time < '.time().' and end_time > '.time())->one()){
-//                $orderItem->price =$groupon->price;
-//
-//            }else{
-                $orderItem->price = $sku->price;
-//            }
-                $this->total_price = $orderItem->price * $qty + $item->shipping_fee;
-                $orderItem->qty = $qty;
-                $orderItem->name = $item->title;
-                if (isset($data)) {
-                    $orderItem->data = $data;
-                }
-//            $pictures = explode(',',$item->pictures);
-//            $picUrl = is_array($pictures)?$pictures[0]:$pictures;
-//            $orderItem->picture = is_null($picUrl) ? 'default' :$picUrl ;
-                $orderItem->picture = 'default';
-                if ($this->save()) {
+                    $orderItem = new OrderItem();
                     $orderItem->order_id = $this->order_id;
-                    $orderItem->save();
-                } else {
-                    throw new Exception('Unable to save order record.');
-                }
-                $orderItems[] = $orderItem;
-            } else {
-                $ShoppingCart = new ShoppingCart();
-                $this->user_id = Yii::$app->user->id;
-                $this->total_price = $ShoppingCart->getTotal();
-                /**@TODO attributes  * */
-                $this->shipping_fee = $ShoppingCart->getShippingFee();
-                $this->payment_fee = 0;
-                $this->status = 1;
-                if ($this->save()) {
-                    $cartItems = $ShoppingCart->cartItems;
-                    foreach ($cartItems as $cartItem) {
-                        $key = $cartItem->data['key'];
-                        $price_true = $cartItem->sku->price;
-                        $orderItem = new OrderItem();
-                        $orderItem->order_id = $this->order_id;
-                        $orderItem->item_id = $cartItem->sku->sku_id;
-                        $orderItem->price = $price_true;
-                        $orderItem->qty = $cartItem->qty;
-                        $orderItem->name = $cartItem->sku->item->title;
-                        $orderItem->data = $cartItem->data;
-//                $pictures = explode(',',$cartItem->sku->item->pictures);
-//                $picUrl = is_array($pictures)?$pictures[0]:$pictures;
-//                $orderItem->picture = is_null($picUrl) ? 'default' :$picUrl ;
-                        $orderItem->picture = 'default';
-                        $orderItems[] = $orderItem;
-                        if(!$orderItem->save()) {
-                            throw new Exception('Unable to save order item record.');
-                        }
+                    $orderItem->item_id = $sku->sku_id;
+                    $orderItem->price = $price_true;
+                    $orderItem->qty = $cartItem->qty;
+                    $orderItem->name = $item->title;
+                    $orderItem->picture =$item->getMainImage();
+                    $orderItems[] = $orderItem;
+                    if(!$orderItem->save()) {
+                        throw new Exception('Unable to save order item record.');
                     }
-                    $ShoppingCart->clearAll();
-                } else {
-                    throw new Exception('Unable to save order record.');
                 }
+                foreach ($carItems as $cartItem) {
+                    $ShoppingCart->remove($cartItem->sku_id);
+                }
+            } else {
+                throw new Exception('Unable to save order record.');
             }
-            $this->orderItems = $orderItems;
+            $this->items = $orderItems;
             $this->updateItemStock();
             $transaction->commit();
             return true;
@@ -213,6 +214,17 @@ class Order extends \yii\db\ActiveRecord
             $transaction->rollback();
             return false;
         }
+    }
+
+    /**
+     * this event is used to change price before save
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @return bool
+     */
+    public function changePrice()
+    {
+       $event = new ModelEvent();
+       $this->trigger( self::EVENT_CHANGE_PRICE , $event);
     }
 
     public function getOrderName()
@@ -240,7 +252,7 @@ class Order extends \yii\db\ActiveRecord
 
     public function updateItemStock()
     {
-        foreach($this->orderItems as $orderItem){
+        foreach($this->items as $orderItem){
             /** @var \star\catalog\models\Sku $item */
             $item = Sku::findOne(['sku_id'=>$orderItem->item_id]);
             $item->quantity = $item->quantity - $orderItem->qty;

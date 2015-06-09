@@ -63,15 +63,9 @@ class OrderController extends Controller
         $orderModel = new Order();
         $orderModel->address = Yii::$app->request->post('address');
         $orderModel->memo = Yii::$app->request->post('memo');
+        $orderModel->items = Yii::$app->request->post('items');
         if ($orderModel->saveOrder()) {
-            $item_id = Yii::$app->request->post('item_id');
-            if(isset($item_id)) {
-                $sku = Sku::find()->where(['sku_id'=>$item_id])->one();
-                $item = $sku->item;
-                if($item->type==$item::TYPE_CREDIT){
-                    return Json::encode([ 'redirect' => Url::to(['customer/order'])]);
-                }
-            }
+
 //            return $this->redirect(['alipay/index', 'id' => $orderModel->order_id]);
             return Json::encode(['message' => \Yii::t('app', 'create order success'), 'redirect' => 'success']);
         } else {
@@ -105,12 +99,20 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * checkout view
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @return string
+     * @throws \yii\web\NotFoundHttpException
+     */
     public function actionCheckout(){
         $star_id = (int)Yii::$app->request->get('star_id');
 
         $shoppingCart = new ShoppingCart();
-        $cartItems = $shoppingCart->serialCartItems();
+        $cartItems = $shoppingCart->cartItems;
+
         if($star_id){
+            $cartItems = $shoppingCart->serialCartItems();
             if(isset($cartItems[$star_id])){
                 $cartItems = $cartItems[$star_id];
             }else {

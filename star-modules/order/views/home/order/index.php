@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = [
                     foreach ($cartItems as $cartItem) {
                         $sku = $cartItem->sku;
                         $item = $sku->item;
-                            $price_true = $sku->price;
+                        $price_true = $sku->price;
                         if (isset($item)) {
                             ?>
                             <tr>
@@ -87,6 +87,7 @@ $this->params['breadcrumbs'][] = [
                                 <td><?php echo $cartItem->qty; ?></td>
                                 <td><?php echo $price_true * $cartItem->qty; ?></td>
                             </tr>
+                            <input type="text" class="hidden" name="items[<?= $cartItem->sku_id?>]" value="<?= $cartItem->sku_id?>">
                         <?php
                         } else {
                             ?>
