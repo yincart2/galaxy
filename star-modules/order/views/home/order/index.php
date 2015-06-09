@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use cluster\modules\cart\models\ShoppingCart;
-
+use himiklab\thumbnail\EasyThumbnailImage;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = [
             </div>
             <div class="box-content">
                 <?php list($addressList, $defaultAddress) = \star\member\models\DeliveryAddress::getAddressList(); ?>
-                <?= Html::radioList('address', $defaultAddress, $addressList, ['separator' => '<br />']); ?>
+                <?= Html::dropDownList('address', $defaultAddress, $addressList); ?>
             </div>
         </div>
         <div class="breadcrumb">
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = [
             </div>
         </div>
 
-        <?php //$imageHelper=new ImageHelper(); ?>
+
         <div class="breadcrumb">
             <div class="box-title container_24">商品列表</div>
             <div class="box-content cart container_24">
@@ -56,34 +56,33 @@ $this->params['breadcrumbs'][] = [
                     <tr style="background:#F3F3F3;">
                         <th class="col-xs-3">图片</th>
                         <th class="col-xs-3">名称</th>
-                        <!--                <th class="col-xs-3">属性</th>-->
+                                        <th class="col-xs-3">属性</th>
                         <th class="col-xs-1">价格</th>
                         <th class="col-xs-1">数量</th>
                         <th class="col-xs-1">小计</th>
                     </tr>
                     <?php
                     foreach ($cartItems as $cartItem) {
-
-                        $key = $cartItem->data['key'];
-
-                        $item = $cartItem->sku->item;
-//                        if($customer_sale){
-//                            $price_true = $customer_sale->sale_price;
-//                        }else{
-                            $price_true = $item->price;
-//                        }
+                        $sku = $cartItem->sku;
+                        $item = $sku->item;
+                            $price_true = $sku->price;
                         if (isset($item)) {
                             ?>
-                            <tr><?php
-//                                if ($item->itemImgs){
-//                                $pictures = $item->itemImgs;
-//                                $picUrl = is_array($pictures)?$pictures[0]:$pictures;
-//                                ?>
-<!--                                <td>--><?php //echo Html::img($picUrl,['style' => "width : 80px; height:80px"]);
-//                                    } else {
-//                                        echo Yii::t('leather', '该商品没有上传图片');
-//                                    } ?><!--</td>-->
+                            <tr>
+                                <td> <?= EasyThumbnailImage::thumbnailImg(
+                                        '@image/'.$item->getMainImage(),
+                                        50,
+                                        50
+                                    )?></td>
                                 <td><?php echo $item->title; ?></td>
+                                <td><ul class="sc_product_info">
+
+                                        <?php
+                                        foreach( \yii\helpers\Json::decode($sku->props_name ) as $v){
+                                            echo '<li>'.$v.'</li>';
+                                        }?>
+
+                                    </ul></td>
                                 <td><?php echo $price_true; ?></td>
                                 <td><?php echo $cartItem->qty; ?></td>
                                 <td><?php echo $price_true * $cartItem->qty; ?></td>

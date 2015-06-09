@@ -310,4 +310,14 @@ class Item extends \yii\db\ActiveRecord
         }
         return $items;
     }
+
+    /**
+     * get main image to show
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @return string
+     */
+    public function getMainImage(){
+        $itemImages = $this->itemImgs;
+        return isset($itemImages[0])?$itemImages[0]->pic:'';
+    }
 }
