@@ -157,8 +157,8 @@ class Order extends \yii\db\ActiveRecord
         }
     }
 
-    //todo save several orders
     /**
+     * todo save several orders
      * @author cangzhou.wu(wucangzhou@gmail.com)
      * @param $carItems, it should be [ 'store_id' => ['sku_id'=> cartModel] ]
      * @return bool
