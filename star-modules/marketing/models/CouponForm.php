@@ -5,7 +5,7 @@
  * Date: 6/10/2015
  * Time: 2:13 PM
  */
-namespace star\marking\models;
+namespace star\marketing\models;
 
 use Yii;
 

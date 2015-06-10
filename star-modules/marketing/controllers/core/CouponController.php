@@ -1,9 +1,9 @@
 <?php
 
-namespace star\marking\controllers\core;
+namespace star\marketing\controllers\core;
 
 use Yii;
-use star\coupon\models\Coupon;
+use star\marketing\models\Coupon;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

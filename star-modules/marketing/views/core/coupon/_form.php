@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model star\coupon\models\Coupon */
+/* @var $model star\marketing\models\Coupon */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

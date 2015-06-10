@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model star\coupon\models\Coupon */
+/* @var $model star\marketing\models\Coupon */
 
 $this->title = Yii::t('coupon', 'Update {modelClass}: ', [
     'modelClass' => 'Coupon',

@@ -1,6 +1,6 @@
 <?php
 
-namespace star\marking\models;
+namespace star\marketing\models;
 
 use Yii;
 
