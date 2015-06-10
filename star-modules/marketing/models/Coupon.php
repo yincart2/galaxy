@@ -3,6 +3,7 @@
 namespace star\marketing\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "coupon".
@@ -35,9 +36,12 @@ class Coupon extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['coupon_id', 'coupon_no', 'rule_id', 'created_at', 'updated_at', 'start_at', 'end_at'], 'required'],
-            [['coupon_id', 'rule_id', 'order_id', 'user_id', 'status', 'created_at', 'updated_at', 'start_at', 'end_at', 'star_id'], 'integer'],
-            [['coupon_no'], 'string', 'max' => 225]
+            [['start_at', 'end_at'], 'required'],
+            [['rule_id', 'order_id', 'user_id', 'status', 'created_at', 'updated_at', 'star_id'], 'integer'],
+            ['start_at', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'start_at', 'on' => ['insert']],
+            ['end_at', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'end_at', 'on' => ['insert']],
+            ['start_at', 'validateStartAt', 'on' => ['insert']],
+            ['end_at', 'validateEndAt', 'on' => ['insert']]
         ];
     }
 
@@ -59,5 +63,30 @@ class Coupon extends \yii\db\ActiveRecord
             'end_at' => Yii::t('coupon', 'End At'),
             'star_id' => Yii::t('coupon', 'Star ID'),
         ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+            ]
+        ];
+    }
+
+    public function validateStartAt()
+    {
+        if($this->start_at < time()) {
+            $this->addError('start_at', '开始时间不能早于当前时间！');
+        }
+    }
+
+    public function validateEndAt()
+    {
+        if($this->start_at > $this->end_at) {
+            $this->addError('end_at', '结束时间不能早于开始时间！');
+        }
     }
 }

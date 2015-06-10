@@ -2,6 +2,7 @@
 
 namespace star\marketing\controllers\core;
 
+use star\marketing\models\CouponForm;
 use Yii;
 use star\marketing\models\Coupon;
 use yii\data\ActiveDataProvider;
@@ -60,7 +61,8 @@ class CouponController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Coupon();
+        $model = new CouponForm();
+        $model->scenario = 'insert';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->coupon_id]);
