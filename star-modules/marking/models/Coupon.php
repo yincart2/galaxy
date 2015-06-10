@@ -1,6 +1,6 @@
 <?php
 
-namespace star\coupon\models;
+namespace star\marking\models;
 
 use Yii;
 

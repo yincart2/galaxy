@@ -1,6 +1,6 @@
 <?php
 
-namespace star\coupon\controllers\core;
+namespace star\marking\controllers\core;
 
 use Yii;
 use star\coupon\models\Coupon;

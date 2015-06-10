@@ -6,7 +6,8 @@
  * Time: 下午3:13
  */
 
-namespace star\coupon\models;
+namespace star\marking\models;
+
 use star\order\models\Order;
 use yii\base\Component;
 

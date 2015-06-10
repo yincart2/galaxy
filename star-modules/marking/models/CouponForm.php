@@ -5,7 +5,7 @@
  * Date: 6/10/2015
  * Time: 2:13 PM
  */
-namespace star\coupon\models;
+namespace star\marking\models;
 
 use Yii;
 

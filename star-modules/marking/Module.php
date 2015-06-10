@@ -1,12 +1,12 @@
 <?php
 
-namespace star\coupon;
+namespace star\marking;
 
 use Yii;
 use yii\web\ForbiddenHttpException;
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'star\coupon\controllers';
+    public $controllerNamespace = 'star\marking\controllers';
 
     public function init()
     {
