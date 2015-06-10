@@ -10,31 +10,23 @@ namespace star\marketing\models;
 
 use star\order\models\Order;
 use yii\base\Component;
+use yii\helpers\Json;
 
 class ShoppingCoupon extends Component{
-    public function init(){
-        $this->attachEvent();
-    }
 
-    public function attachEvent(){
-        $this->on(Order::EVENT_CHANGE_PRICE, [$this, 'validate']);
-    }
-
-    public function validate($event){
-        /** @var \yii\base\ModelEvent $event */
-
-        $orderModel = $event->sender;
-        var_dump($orderModel);exit;
-    }
-
-    public function validateCoupon(Coupon $couponModel){
+    public function validate(Coupon $couponModel){
         if($couponModel->start_at<time() && $couponModel->end_at>time() && $couponModel->status == 1){
-            return true;
+            $this->validateRule($couponModel->couponRule);
         }
         return false;
     }
 
-    public function validateRule(CouponRule $couponRuleModel){
 
+
+    public function validateRule(CouponRule $couponRuleModel){
+        $condition = Json::decode($couponRuleModel->condition);
+        foreach($condition as $key=> $value){
+
+        }
     }
 } 
