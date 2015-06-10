@@ -6,7 +6,7 @@
  * Time: 下午3:13
  */
 
-namespace star\marking\models;
+namespace star\marketing\models;
 
 use star\order\models\Order;
 use yii\base\Component;

@@ -52,6 +52,9 @@ return [
         ],
         'order' => [
             'class' =>'star\order\Module',
+        ],
+        'marketing' => [
+            'class' =>'star\marketing\Module',
         ]
     ],
     'components' => [
