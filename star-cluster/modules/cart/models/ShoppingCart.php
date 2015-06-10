@@ -37,17 +37,17 @@ class ShoppingCart extends Component
         //@TODO need to take a event to login;
         if (!Yii::$app->getUser()->getIsGuest()) {
             $cartItems = Cart::find()->where(['user_id' => Yii::$app->user->id])->indexBy('sku_id')->all();
-            foreach ($this->cartItems as $cart) {
-                $cart->user_id = Yii::$app->user->id;
-                $cart->create_time = time();
-                $cart->save();
-            }
             if($cartItems){
                 $this->cartItems = $cartItems+ $this->cartItems;
                 Yii::$app->response->cookies->add(new Cookie([
                     'name' => self::COOKIE_KEY,
                     'value' => $this->cartItems,
                 ]));
+            }
+            foreach ($this->cartItems as $cart) {
+                $cart->user_id = Yii::$app->user->id;
+                $cart->create_time = time();
+                $cart->save();
             }
         }
         $this->attachEvent();
