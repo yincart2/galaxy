@@ -38,10 +38,6 @@ class Coupon extends \yii\db\ActiveRecord
         return [
             [['start_at', 'end_at'], 'required'],
             [['rule_id', 'order_id', 'user_id', 'status', 'created_at', 'updated_at', 'star_id'], 'integer'],
-            ['start_at', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'start_at', 'on' => ['insert']],
-            ['end_at', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'end_at', 'on' => ['insert']],
-            ['start_at', 'validateStartAt', 'on' => ['insert']],
-            ['end_at', 'validateEndAt', 'on' => ['insert']]
         ];
     }
 
@@ -76,17 +72,4 @@ class Coupon extends \yii\db\ActiveRecord
         ];
     }
 
-    public function validateStartAt()
-    {
-        if($this->start_at < time()) {
-            $this->addError('start_at', '开始时间不能早于当前时间！');
-        }
-    }
-
-    public function validateEndAt()
-    {
-        if($this->start_at > $this->end_at) {
-            $this->addError('end_at', '结束时间不能早于开始时间！');
-        }
-    }
 }
