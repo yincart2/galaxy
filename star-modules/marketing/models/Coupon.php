@@ -61,6 +61,12 @@ class Coupon extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public function getCouponRule()
+    {
+        return $this->hasOne(CouponRule::className(), ['rule_id' => 'rule_id']);
+    }
+
     public function behaviors()
     {
         return [
@@ -71,5 +77,5 @@ class Coupon extends \yii\db\ActiveRecord
             ]
         ];
     }
-
+    
 }

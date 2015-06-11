@@ -68,4 +68,12 @@ class Sku extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Item::className(), ['item_id' => 'item_id']);
     }
+
+    /**
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @return string
+     */
+    public function getPrice(){
+        return $this->price;
+    }
 }

@@ -9,6 +9,9 @@ use himiklab\thumbnail\EasyThumbnailImage;
 list($url,$link) = $this->getAssetManager()->publish('@cluster/modules/cart/web');
 $this->registerJsFile($link . '/js/cart.js',['depends' => [\yii\web\JqueryAsset::className()]] );
 
+$link = $this->getAssetManager()->getPublishedUrl('@theme/star/cluster/assets');
+$this->registerJsFile($link . '/js/coupon.js',['depends' => [\yii\web\JqueryAsset::className()]] );
+
 $form = \yii\widgets\ActiveForm::begin();
 ?>
 
@@ -251,7 +254,7 @@ if($star_id != 0){
 
                             <div class="col-xs-12">
 
-                                <input type="text" name="">
+                                <input type="text" name="couponCode">
 
                             </div>
 
@@ -265,7 +268,7 @@ if($star_id != 0){
 
             <footer class="bottom_box">
 
-                <button type="submit" form="discount_code" class="button_grey middle_btn">Apply Coupon</button>
+                <button type="button" form="discount_code" class="button_grey middle_btn" id="addCoupon" data-url="<?= Url::to(['/marketing/home/coupon/add-coupon'])?>">Apply Coupon</button>
 
             </footer>
 
