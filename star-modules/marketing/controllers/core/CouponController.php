@@ -3,6 +3,7 @@
 namespace star\marketing\controllers\core;
 
 use star\marketing\models\CouponForm;
+use star\marketing\models\CouponRule;
 use Yii;
 use star\marketing\models\Coupon;
 use yii\data\ActiveDataProvider;
@@ -34,7 +35,7 @@ class CouponController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Coupon::find(),
+            'query' => CouponRule::find(),
         ]);
 
         return $this->render('index', [
@@ -49,8 +50,12 @@ class CouponController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+        $dataProvider = new ActiveDataProvider([
+            'query' => Coupon::find()->where(['rule_id' => $id]),
+        ]);
+
+        return $this->render('index_coupon', [
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -113,6 +118,23 @@ class CouponController extends Controller
     protected function findModel($id)
     {
         if (($model = Coupon::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionDeleteRule($id)
+    {
+        $this->findRuleModel($id)->delete();
+        Coupon::deleteAll(['rule_id' => $id]);
+
+        return $this->redirect(['index']);
+    }
+
+    protected function findRuleModel($id)
+    {
+        if (($model = CouponRule::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
