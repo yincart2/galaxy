@@ -60,4 +60,8 @@ class Coupon extends \yii\db\ActiveRecord
             'star_id' => Yii::t('coupon', 'Star ID'),
         ];
     }
+
+    public function getCouponRule(){
+        return $this->hasOne(CouponRule::className(), ['rule_id' => 'rule_id']);
+    }
 }

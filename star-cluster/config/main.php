@@ -55,6 +55,9 @@ return [
         'member' => [
             'class' =>'star\member\Module',
         ],
+        'marketing' => [
+            'class' =>'star\marketing\Module',
+        ],
     ],
     'components' => [
         'user' => [
