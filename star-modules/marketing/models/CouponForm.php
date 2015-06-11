@@ -11,6 +11,8 @@ use Yii;
 
 class CouponForm extends Coupon
 {
+    public $total;
+
     public $total_price;
     public $qty;
     public $category_id;
