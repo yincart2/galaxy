@@ -29,9 +29,11 @@ class ShoppingCoupon extends Component
                 $category_id = isset($condition['category_id']) ? $condition['category_id'] : null;
                 $orderModel = $this->getOrderModel($category_id, $cartItems);
                 foreach ($condition as $key => $value) {
+                    if($key!='category_id'){
                         if (!$orderModel->$key >= $value) {
                             return false;
                         }
+                    }
                 }
                 return true;
             }
@@ -73,9 +75,9 @@ class ShoppingCoupon extends Component
                 $qty += $carItem->qty;
             }
         }
-        $orderModel->total_price = isset($totalPrice) ? : 0;
-        $orderModel->qty = isset($qty) ? : 0;
-        $orderModel->shippingFee = isset($shippingFee) ? : 0;
+        $orderModel->total_price = isset($totalPrice) ?$totalPrice : 0;
+        $orderModel->qty = isset($qty) ? $qty: 0;
+        $orderModel->shippingFee = isset($shippingFee) ? $shippingFee: 0;
         return $orderModel;
     }
 
