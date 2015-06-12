@@ -38,7 +38,7 @@ class Order extends \yii\db\ActiveRecord
     const STATUS_REFUND_FAILED  = 6;
     const STATUS_REFUND_PASS  = 7;
 
-    const EVENT_CHANGE_PRICE  = 'changePrice';
+    const EVENT_CHANGE_PRICE  = 'changeOrderPrice';
 
     public function getStatusArray(){
         return [

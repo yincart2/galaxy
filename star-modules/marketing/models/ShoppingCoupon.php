@@ -9,13 +9,16 @@
 namespace star\marketing\models;
 
 
+use star\order\models\Order;
 use yii\base\Component;
+use yii\base\Event;
 use yii\helpers\Json;
+use Yii;
 
 class ShoppingCoupon extends Component
 {
-
-    public $couponModel;
+    const SESSION_KEY = 'couponId';
+    const SESSION_COUPON_MODEL_KEY = 'couponModel';
 
     public function validate(Coupon $couponModel, $cartItems)
     {
@@ -26,13 +29,10 @@ class ShoppingCoupon extends Component
                 $category_id = isset($condition['category_id']) ? $condition['category_id'] : null;
                 $orderModel = $this->getOrderModel($category_id, $cartItems);
                 foreach ($condition as $key => $value) {
-                    if ($orderModel->hasAttribute($key)) {
                         if (!$orderModel->$key >= $value) {
                             return false;
                         }
-                    }
                 }
-                $this->couponModel = $couponModel;
                 return true;
             }
         }
@@ -91,13 +91,76 @@ class ShoppingCoupon extends Component
         /** @var  $coupon Coupon */
         $coupons = Coupon::find()->where(['user_id' => \Yii::$app->user->id, 'status' => 1])->all();
         $result = ['usable'=>[\Yii::t('coupon','Please Select One')],'useless'=>[]];
+        $couponIdArray = [];
         foreach ($coupons as $coupon) {
             if ($this->validate($coupon, $cartItems)) {
+                $couponIdArray[] = $coupon->coupon_id;
                 $result['usable'][$coupon->coupon_id] = $coupon->coupon_no;
             } else {
                 $result['useless'][$coupon->coupon_id] = $coupon->coupon_no;
             }
         }
+        Yii::$app->getSession()->set(self::SESSION_KEY,$couponIdArray);
         return $result;
+    }
+
+    /**
+     * return couponRule's result to order view
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @param $couponId
+     * @return array
+     */
+    public function getResult($couponId){
+        $couponModel = Coupon::findOne($couponId);
+        $couponRuleModel =  $couponModel->couponRule;
+        if($couponRuleModel){
+            Yii::$app->getSession()->set(self::SESSION_COUPON_MODEL_KEY,$couponId);
+            return $couponRuleModel->result;
+        }
+        return [];
+    }
+
+    /**
+     * use coupon before create order
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @param $event
+     */
+    public function useCoupon($event){
+        /** @var  $order Order */
+        $order = $event->sender;
+        /** @var  $couponModel  Coupon */
+        $couponModel = Coupon::findOne(Yii::$app->getSession()->get(self::SESSION_COUPON_MODEL_KEY));
+        if($couponModel){
+            $couponRuleModel = $couponModel->couponRule;
+            $result = Json::decode($couponRuleModel->result);
+            if($result['type']){
+                $order->total_price = $order->total_price * $result['number'];
+            }else{
+                $order->total_price = $order->total_price - $result['number'];
+            }
+            switch($result['shipping']){
+                case 1:
+                    $order->shipping_fee = $order->shipping_fee - $result['shippingFee'];
+                    break;
+                case 2:
+                    $order->shipping_fee = 0;
+            }
+            Event::on(Order::className(),Order::EVENT_AFTER_INSERT,[ShoppingCoupon::className(),'updateCouponStatus'],['couponModel'=>$couponModel]);
+        }
+    }
+
+    /**
+     * update coupon's status after order is created
+     * @author cangzhou.wu(wucangzhou@gmail.com)
+     * @param $event
+     */
+    public  function updateCouponStatus($event){
+        /** @var  $order Order */
+        $order = $event->sender;
+        $data = $event->data;
+        $couponModel = $data['couponModel'];
+        $couponModel->order_id = $order->order_id;
+        $couponModel->status = $couponModel::STATUS_USED;
+        $couponModel->save();
     }
 } 

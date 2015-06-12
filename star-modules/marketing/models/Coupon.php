@@ -22,6 +22,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Coupon extends \yii\db\ActiveRecord
 {
+    const STATUS_USELESS = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_USED = 2;
+
     /**
      * @inheritdoc
      */
