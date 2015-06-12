@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view', 'id' => $model->rule_id]);
                         },
                         'update' => function ($url, $model) {
-                            return ;
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model->rule_id]);
                         },
                         'delete' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete-rule', 'id' => $model->rule_id]);

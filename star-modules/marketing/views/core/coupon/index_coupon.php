@@ -22,19 +22,38 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'coupon_no',
-            'status',
-            'start_at',
-            'end_at',
+            [
+                'attribute'=>'status',
+                'value'=>function($model) {
+                    $dateList = [0 => '未激活',1 => '已激活',2 => '已使用'];
+                    return $dateList[$model->status];
+                }
+            ],
+            [
+                'attribute'=>'start_at',
+                'value'=>function($model) {
+                    return date('Y-m-d h:i:s', $model->start_at);
+                }
+            ],
+            [
+                'attribute'=>'end_at',
+                'value'=>function($model) {
+                    return date('Y-m-d h:i:s', $model->end_at);
+                }
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
                 "buttons" =>
                     [
                         'view' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view']);
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view', 'id' => $model->coupon_id]);
                         },
                         'update' => function ($url, $model) {
                             return ;
+                        },
+                        'delete' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->coupon_id]);
                         },
                     ]
             ],

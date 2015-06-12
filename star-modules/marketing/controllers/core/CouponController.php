@@ -68,7 +68,7 @@ class CouponController extends Controller
     {
         $model = new CouponForm();
         if ($model->load(Yii::$app->request->post()) && $model->saveCoupon()) {
-//            return $this->redirect(['view', 'id' => $model->coupon_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
