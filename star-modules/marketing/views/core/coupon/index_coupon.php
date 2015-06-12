@@ -52,9 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'update' => function ($url, $model) {
                             return ;
                         },
-                        'delete' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->coupon_id]);
-                        },
                     ]
             ],
         ],

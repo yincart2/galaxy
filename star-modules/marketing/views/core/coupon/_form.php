@@ -61,20 +61,19 @@ if(isset($model->start_at) && isset($model->end_at)) {
     $fields[] = $form->field($model, 'total_price')->textInput(['maxlength' => true]);
     $fields[] = $form->field($model, 'qty')->textInput(['maxlength' => true]);
 
-    //todo categories
-//    $root = \common\models\Tree::find()->where(['name' => '商品分类'])->one();
-//    $categories = $root->children(1)->all();
-//    $categories = ArrayHelper::map($categories, 'id', 'name');
-//    $fields[] = $form->field($model, 'category_id')->widget(Select2::classname(), [
-//        'data' => $categories,
-//        'language' => 'en',
-//        'pluginOptions' => [
-//            'placeholder' => 'Select a state ...',
-//        ],
-//        'options' => [
-//            'multiple' => true,
-//        ],
-//    ]);
+    $root = \common\models\Tree::find()->where(['name' => '商品分类'])->one();
+    $categories = $root->children(1)->all();
+    $categories = ArrayHelper::map($categories, 'id', 'name');
+    $fields[] = $form->field($model, 'category_id')->widget(Select2::classname(), [
+        'data' => $categories,
+        'language' => 'en',
+        'pluginOptions' => [
+            'placeholder' => 'Select a state ...',
+        ],
+        'options' => [
+            'multiple' => true,
+        ],
+    ]);
 
     $fieldGroups[] = ['label' => Yii::t('marketing','Coupon Conditions'), 'content' => implode('', $fields)];
 
@@ -89,7 +88,7 @@ if(isset($model->start_at) && isset($model->end_at)) {
     ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('coupon', 'Create') : Yii::t('coupon', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton( Yii::t('coupon', 'Create'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

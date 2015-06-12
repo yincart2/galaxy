@@ -36,7 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model->rule_id]);
                         },
                         'delete' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete-rule', 'id' => $model->rule_id]);
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete-rule', 'id' => $model->rule_id], [
+                                'data' => [
+                                    'confirm' => Yii::t('coupon', 'Are you sure you want to delete this item?'),
+                                    'method' => 'post',
+                                ],
+                            ]);
                         },
                     ]
             ],
