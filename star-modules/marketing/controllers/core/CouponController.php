@@ -59,6 +59,13 @@ class CouponController extends Controller
         ]);
     }
 
+    public function actionViewDetail($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
     /**
      * Creates a new Coupon model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -68,7 +75,7 @@ class CouponController extends Controller
     {
         $model = new CouponForm();
         if ($model->load(Yii::$app->request->post()) && $model->saveCoupon()) {
-//            return $this->redirect(['view', 'id' => $model->coupon_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,10 +91,10 @@ class CouponController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->coupon_id]);
+        $model = new CouponForm();
+        $model->scenario = 'update';
+        if ($model->load(Yii::$app->request->post()) && $model->updateCoupon($id)) {
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

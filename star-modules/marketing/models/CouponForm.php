@@ -12,8 +12,6 @@ use yii\base\Model;
 
 class CouponForm extends Model
 {
-    public $isNewRecord;
-
     public $star_id;
     public $total;
     public $desc;
@@ -44,12 +42,13 @@ class CouponForm extends Model
     public function rules()
     {
         return [
-            [['star_id', 'total', 'desc', 'status', 'total_price', 'qty', 'type', 'number', 'shipping'], 'required'],
-            [['shippingFee', 'total_price'],'integer'],
-            ['start_at', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'start_at', 'on' => ['insert']],
-            ['end_at', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'end_at', 'on' => ['insert']],
-            ['start_at', 'validateStartAt', 'on' => ['insert']],
-            ['end_at', 'validateEndAt', 'on' => ['insert']]
+            [['category_id', 'total', 'desc', 'status', 'type', 'number', 'shipping'], 'required', 'on' => ['insert']],
+            [['star_id', 'total', 'shippingFee', 'total_price', 'qty'],'integer'],
+            [['total' ,'status'], 'required', 'on' => 'update'],
+            ['start_at', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'start_at', 'on' => ['insert','update']],
+            ['end_at', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'end_at', 'on' => ['insert','update']],
+            ['start_at', 'validateStartAt', 'on' => ['insert','update']],
+            ['end_at', 'validateEndAt', 'on' => ['insert','update']]
         ];
     }
 
@@ -102,6 +101,7 @@ class CouponForm extends Model
                 $condition = [
                     'total_price' => $this->total_price,
                     'qty' => $this->qty,
+                    'category_id' => $this->category_id
                 ];
                 $result = [
                     'type' => $this->type,
@@ -117,6 +117,30 @@ class CouponForm extends Model
                     $coupon = new Coupon();
                     $coupon->coupon_no = uniqid();
                     $coupon->rule_id = $couponRule->rule_id;
+                    $coupon->status = $this->status;
+                    $coupon->start_at = $this->start_at;
+                    $coupon->end_at = $this->end_at;
+                    $coupon->star_id = $this->star_id;
+                    $coupon->save();
+                }
+
+                $transaction->commit();
+                return true;
+            } catch (\yii\base\Exception $e) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+    }
+
+    public function updateCoupon($rule_id) {
+        if($this->validate()) {
+            $transaction = \Yii::$app->db->beginTransaction();
+            try {
+                for ($i = 0; $i < $this->total; $i++) {
+                    $coupon = new Coupon();
+                    $coupon->coupon_no = uniqid();
+                    $coupon->rule_id = $rule_id;
                     $coupon->status = $this->status;
                     $coupon->start_at = $this->start_at;
                     $coupon->end_at = $this->end_at;
