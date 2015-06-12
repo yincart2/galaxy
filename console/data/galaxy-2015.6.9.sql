@@ -4565,7 +4565,7 @@ INSERT INTO `wishlist` (`wishlist_id`, `user_id`, `item_id`, `desc`, `created_at
 -- ----------------------------
 DROP TABLE IF EXISTS `coupon`;
 CREATE TABLE `coupon` (
-  `coupon_id` int(11) NOT NULL,
+  `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
   `coupon_no` varchar(225) NOT NULL,
   `rule_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL DEFAULT '0',
@@ -4588,7 +4588,7 @@ CREATE TABLE `coupon` (
 -- ----------------------------
 DROP TABLE IF EXISTS `coupon_rule`;
 CREATE TABLE `coupon_rule` (
-  `rule_id` int(11) NOT NULL,
+  `rule_id` int(11) NOT NULL AUTO_INCREMENT,
   `desc` varchar(255) DEFAULT NULL,
   `condition` varchar(255) DEFAULT NULL COMMENT '存入json数组，类似[''total_price''=>''200'']或者[''category_id''=>[''200'',''100'']]',
   `result` varchar(255) NOT NULL COMMENT '存入json数组，类似[''total_price'',''+'',''200'']',

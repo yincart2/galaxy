@@ -28,8 +28,7 @@ class CouponRule extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['rule_id', 'result'], 'required'],
-            [['rule_id'], 'integer'],
+            [['result'], 'required'],
             [['desc', 'condition', 'result'], 'string', 'max' => 255]
         ];
     }

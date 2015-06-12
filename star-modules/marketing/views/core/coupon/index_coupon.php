@@ -21,22 +21,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'desc',
-            'condition',
-            'result',
+            'coupon_no',
+            'status',
+            'start_at',
+            'end_at',
 
             [
                 'class' => 'yii\grid\ActionColumn',
                 "buttons" =>
                     [
                         'view' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view', 'id' => $model->rule_id]);
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view']);
                         },
                         'update' => function ($url, $model) {
                             return ;
-                        },
-                        'delete' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete-rule', 'id' => $model->rule_id]);
                         },
                     ]
             ],
@@ -44,11 +42,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel'=>[
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> '.Yii::t('coupon','Coupon').'</h3>',
             'type'=>'success',
-            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i>'.Yii::t('coupon', 'Create Coupon'), ['create'], ['class' => 'btn btn-success']),
             'footer'=>false
         ],
         'toolbar' => [
-
             '{export}',
             '{toggleData}'
         ],
