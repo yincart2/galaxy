@@ -62,6 +62,9 @@ $this->params['breadcrumbs'][] = [
                 <?= Html::dropDownList('coupon', null, $couponArray['usable'], ['id'=>'couponDropDrown','data-url'=>Url::to(['/marketing/home/coupon/validate'])]); ?>
 
             </div>
+            <div id="coupon-result">
+
+            </div>
         </div>
         <div class="breadcrumb">
             <div class="box-title container_24">商品列表</div>
@@ -112,13 +115,13 @@ $this->params['breadcrumbs'][] = [
                         }
                     }?>
                     <tr>
-                        <td colspan="6" style="padding:10px;text-align:right">
-                            运费：<?php $shoppingCart = new ShoppingCart(); echo $shoppingCart->getShippingFee(); ?> 元
+                        <td colspan="6" style="padding:10px;text-align:right" >
+                            运费：<span id="shipping-fee" data-price="<?php $shoppingCart = new ShoppingCart();  echo $shoppingCart->getShippingFee(); ?>"><?php echo $shoppingCart->getShippingFee(); ?></span> 元
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="6" style="padding:10px;text-align:right">
-                            总计：<?php echo $shoppingCart->getTotal(); ?> 元
+                        <td colspan="6" style="padding:10px;text-align:right"  >
+                            总计：<span id="total-price" data-price="<?php echo $shoppingCart->getTotal(); ?>"><?php echo $shoppingCart->getTotal(); ?> </span>元
                         </td>
                     </tr>
                 </table>

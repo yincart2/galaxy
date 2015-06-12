@@ -18,10 +18,12 @@ class CouponController extends Controller
     public function actionValidate(){
         $couponId = Yii::$app->request->post('couponId');
         $shoppingCoupon = new ShoppingCoupon();
-        if(in_array($couponId, Yii::$app->getSession()->get($shoppingCoupon::SESSION_KEY))){
-            return $shoppingCoupon->getResult($couponId);
-        }else{
-            return Json::encode(['status'=>'fail']);
+        if($couponId!=0){
+            if(in_array($couponId, Yii::$app->getSession()->get($shoppingCoupon::SESSION_KEY))){
+                return $shoppingCoupon->getResult($couponId);
+            }else{
+                return Json::encode(['status'=>'fail']);
+            }
         }
     }
 
