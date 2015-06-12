@@ -9,6 +9,8 @@
 namespace home\models;
 
 use dektrium\user\models\User;
+use star\marketing\models\ShoppingCoupon;
+use star\order\models\Order;
 use yii\base\Event;
 use yii\rbac\DbManager;
 
@@ -33,6 +35,7 @@ class UserEvent
 
             $auth->assign($role, $user->id);
         });
+        Event::on(Order::className(),Order::EVENT_CHANGE_PRICE,[ShoppingCoupon::className(),'changeOrder']);
     }
 
     /**

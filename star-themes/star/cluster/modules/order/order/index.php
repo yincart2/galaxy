@@ -4,11 +4,15 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use cluster\modules\cart\models\ShoppingCart;
 use himiklab\thumbnail\EasyThumbnailImage;
+use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 list($path, $link) = $this->getAssetManager()->publish('@star/order/web/js');
 $this->registerJsFile($link . '/order.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+
+$link = $this->getAssetManager()->getPublishedUrl('@theme/star/cluster/assets');
+$this->registerJsFile($link . '/js/coupon.js',['depends' => [\yii\web\JqueryAsset::className()]] );
 
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('order','Check Out'),
@@ -52,10 +56,11 @@ $this->params['breadcrumbs'][] = [
             <div class="box-title container_24">优惠券</div>
             <div class="box-content" style="vertical-align:middle;">
                 <?php
-                $shoppingCouponModel = new \star\marketing\models\ShoppingCoupon();
+                $shoppingCouponModel = new \star\marketing\models\ShoppingCoupon();;
                 $couponArray = $shoppingCouponModel->getCouponList($cartItems);
                 ?>
-                <?= Html::dropDownList('coupon', null, $couponArray['usable']); ?>
+                <?= Html::dropDownList('coupon', null, $couponArray['usable'], ['id'=>'couponDropDrown','data-url'=>Url::to(['/marketing/home/coupon/validate'])]); ?>
+
             </div>
         </div>
         <div class="breadcrumb">

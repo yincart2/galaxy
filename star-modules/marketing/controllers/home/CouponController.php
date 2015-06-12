@@ -8,6 +8,7 @@
 namespace star\marketing\controllers\home;
 
 use star\marketing\models\Coupon;
+use star\marketing\models\ShoppingCoupon;
 use yii\helpers\Json;
 use yii\web\Controller;
 use Yii;
@@ -15,7 +16,13 @@ class CouponController extends Controller
 {
 
     public function actionValidate(){
-
+        $couponId = Yii::$app->request->post('couponId');
+        $shoppingCoupon = new ShoppingCoupon();
+        if(in_array($couponId, Yii::$app->getSession()->get($shoppingCoupon::SESSION_KEY))){
+            return $shoppingCoupon->getResult($couponId);
+        }else{
+            return Json::encode(['status'=>'fail']);
+        }
     }
 
     /**

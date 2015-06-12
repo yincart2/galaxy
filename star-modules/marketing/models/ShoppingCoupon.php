@@ -9,13 +9,20 @@
 namespace star\marketing\models;
 
 
+use star\order\models\Order;
 use yii\base\Component;
 use yii\helpers\Json;
+use Yii;
 
 class ShoppingCoupon extends Component
 {
-
+    const SESSION_KEY = 'couponId';
+    const SESSION_COUPON_MODEL_KEY = 'couponModel';
     public $couponModel;
+
+    public function init(){
+            $this->couponModel = Coupon::findOne(Yii::$app->getSession()->get(self::SESSION_COUPON_MODEL_KEY));
+    }
 
     public function validate(Coupon $couponModel, $cartItems)
     {
@@ -32,7 +39,6 @@ class ShoppingCoupon extends Component
                         }
                     }
                 }
-                $this->couponModel = $couponModel;
                 return true;
             }
         }
@@ -91,13 +97,51 @@ class ShoppingCoupon extends Component
         /** @var  $coupon Coupon */
         $coupons = Coupon::find()->where(['user_id' => \Yii::$app->user->id, 'status' => 1])->all();
         $result = ['usable'=>[\Yii::t('coupon','Please Select One')],'useless'=>[]];
+        $couponIdArray = [];
         foreach ($coupons as $coupon) {
             if ($this->validate($coupon, $cartItems)) {
+                $couponIdArray[] = $coupon->coupon_id;
                 $result['usable'][$coupon->coupon_id] = $coupon->coupon_no;
             } else {
                 $result['useless'][$coupon->coupon_id] = $coupon->coupon_no;
             }
         }
+        Yii::$app->getSession()->set(self::SESSION_KEY,$couponIdArray);
         return $result;
+    }
+
+    public function getResult($couponId){
+        $couponModel = Coupon::findOne($couponId);
+        $couponRuleModel =  $couponModel->couponRule;
+        if($couponRuleModel){
+            Yii::$app->getSession()->set(self::SESSION_COUPON_MODEL_KEY,$couponId);
+            return $couponRuleModel->result;
+        }
+        return [];
+    }
+
+    public function changeOrder($event){
+        /** @var  $order Order */
+        $order = $event->sender;
+        $couponModel = Coupon::findOne(Yii::$app->getSession()->get(self::SESSION_COUPON_MODEL_KEY));
+        if($couponModel){
+            $couponRuleModel = $couponModel->couponRule;
+            $result = Json::decode($couponRuleModel->result);
+            foreach($result as $value){
+                var_dump($result);exit;
+                if($order->hasAttribute($value[0])){
+                    switch($value[1]){
+                       case '-':
+                           var_dump(2);exit;
+                             $order->$value[0] = $order->$value[0] - $value[2];
+                                break;
+                       case '*':
+                           $order->$value[0] = $order->$value[0] * $value[2];
+                            break;
+                    }
+                }
+            }
+        }
+        var_dump($order->total_price);exit;
     }
 } 
