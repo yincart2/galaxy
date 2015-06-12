@@ -59,6 +59,13 @@ class CouponController extends Controller
         ]);
     }
 
+    public function actionViewDetail($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
     /**
      * Creates a new Coupon model.
      * If creation is successful, the browser will be redirected to the 'view' page.

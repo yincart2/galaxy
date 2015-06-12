@@ -9,36 +9,31 @@ use yii\widgets\DetailView;
 $this->title = $model->coupon_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('coupon', 'Coupons'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$dateList = [0 => '未激活',1 => '已激活',2 => '已使用'];
+$model->status = $dateList[$model->status];
+$model->start_at = date('Y-m-d h:i:s', $model->start_at);
+$model->end_at = date('Y-m-d h:i:s', $model->end_at);
 ?>
 <div class="coupon-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('coupon', 'Update'), ['update', 'id' => $model->coupon_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('coupon', 'Delete'), ['delete', 'id' => $model->coupon_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('coupon', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'coupon_id',
+//            'coupon_id',
             'coupon_no',
-            'rule_id',
-            'order_id',
-            'user_id',
+//            'rule_id',
+//            'order_id',
+//            'user_id',
+            'couponRule.desc',
             'status',
-            'created_at',
-            'updated_at',
+//            'created_at',
+//            'updated_at',
             'start_at',
             'end_at',
-            'star_id',
+//            'star_id',
         ],
     ]) ?>
 
