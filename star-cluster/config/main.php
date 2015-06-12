@@ -10,7 +10,7 @@ return [
     'id' => 'cluster',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'cluster\controllers',
-    'bootstrap' => ['log',[ 'home\models\UserEvent', 'frontendRegister'],'star\auth\bootstrap\Bootstrap'],
+    'bootstrap' => ['log',[ 'cluster\models\Events', 'attachEvents'],'star\auth\bootstrap\Bootstrap'],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',

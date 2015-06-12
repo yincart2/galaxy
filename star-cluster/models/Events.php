@@ -6,14 +6,21 @@
  * Time: 下午6:50
  */
 
-namespace home\models;
+namespace cluster\models;
 
 use dektrium\user\models\User;
+use star\marketing\models\ShoppingCoupon;
+use star\order\models\Order;
 use yii\base\Event;
 use yii\rbac\DbManager;
 
-class UserEvent
+class Events
 {
+
+    public static function attachEvents(){
+        self::frontendRegister();
+        Event::on(Order::className(),Order::EVENT_CHANGE_PRICE,[ShoppingCoupon::className(),'useCoupon']);
+    }
 
     /**
      * the register customer will be added  'customer' role

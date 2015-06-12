@@ -182,7 +182,6 @@ class Order extends \yii\db\ActiveRecord
             $this->payment_fee = 0;
             $this->status =  self::STATUS_WAIT_PAYMENT;
             $this->changePrice();
-            var_dump($this);exit;
             if ($this->save()) {
                 foreach ($carItems as $cartItem) {
                     $sku =  $cartItem->sku;
