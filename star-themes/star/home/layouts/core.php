@@ -45,6 +45,9 @@ AppAsset::register($this);
                 $menuItems[] = [
                     'label' => 'Catalog', 'url' => ['/catalog/core/default/index'],
                 ];
+                $menuItems[] = [
+                    'label' => 'Order', 'url' => ['/order/core/order/index'],
+                ];
                 $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
                 $menuItems[] = ['label' => 'Auth', 'url' => ['/auth/auth/create']];
                 $menuItems[] = [

@@ -33,7 +33,10 @@ return [
         ],
         'auth' => [
             'class'=>'star\auth\Module',
-        ]
+        ],
+        'order' => [
+            'class' =>'star\order\Module',
+        ],
     ],
     'components' => [
         'urlManager'=>[

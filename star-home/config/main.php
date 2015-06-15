@@ -92,6 +92,7 @@ return [
                     '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
                     '@star/member/views'=>'@theme/star/home/modules/member',
                     '@app/modules/cart/views'=>'@theme/star/home/modules/cart',
+                    '@star/order/views/home'=>'@theme/star/home/modules/order',
                 ],
                 'baseUrl'=>'@theme/star/home'
             ]

@@ -86,7 +86,7 @@ class OrderController extends Controller
         $this->layout = '/member';
         //@todo add status
         $condition = '';
-        $query = Order::find()->where($condition);
+        $query = Order::find()->where($condition)->addOrderBy('create_at DESC');
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $orderModels = $query->offset($pages->offset)

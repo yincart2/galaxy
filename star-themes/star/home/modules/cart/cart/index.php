@@ -104,6 +104,7 @@ $form = \yii\widgets\ActiveForm::begin();
 
                         <?= Html::button(Yii::t('app', 'Update Cart'), ['class' => 'button_type_4 r_corners bg_light_color_2 m_left_5 mw_0 tr_all_hover color_dark update-cart', 'data-url' => Url::to(['cart/update'])]) ?>
 
+
                     </div>
                     <p class="fw_medium f_size_large t_align_r scheme_color p_xs_hr_0 d_inline_middle half_column d_ib_offset_normal d_xs_block w_xs_full t_xs_align_c">Total:</p>
                 </td>
@@ -111,6 +112,22 @@ $form = \yii\widgets\ActiveForm::begin();
                     <p class="fw_medium f_size_large scheme_color m_xs_bottom_10">$<?=  $shoppingCartModel->getTotal() ?></p>
                 </td>
             </tr>
+            <tr>
+
+                <td colspan="4" class="v_align_m d_ib_offset_large t_xs_align_l">
+                    <!--coupon-->
+                    <form class="d_ib_offset_0 d_inline_middle half_column d_xs_block w_xs_full m_xs_bottom_5"  id="discount_code">
+                        <input placeholder="Enter your coupon code" name="couponCode" class="r_corners f_size_medium" type="text">
+                        <button type="button" class="button_type_4 r_corners bg_light_color_2 m_left_5 mw_0 tr_all_hover color_dark" id="addCoupon" data-url="<?= Url::to(['/marketing/home/coupon/add-coupon'])?>">Apply Coupon</button>
+                    </form>
+                </td>
+                <td colspan="1" class="v_align_m">
+                    <?= Html::a(Yii::t('app', 'Checkout'),Url::to(['/order/home/order/checkout']), ['class' => 'button_type_6 bg_scheme_color f_size_large r_corners tr_all_hover color_light m_bottom_20']) ?>
+
+                </td>
+            </tr>
+
+
             </tbody>
         </table>
     </section>
