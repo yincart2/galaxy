@@ -310,11 +310,11 @@ $this->params['breadcrumbs'][] = [
 <!--    <div class="row clearfix">-->
 <!--        <div class="col-lg-8 col-md-8 col-sm-8">-->
 <!--            <h5 class="fw_medium m_bottom_15">Last Reviews</h5>-->
-<!--            <!--review-->-->
+<!--            <!--review-->
 <!--            <article>-->
 <!--                <div class="clearfix m_bottom_10">-->
 <!--                    <p class="f_size_medium f_left f_mxs_none m_mxs_bottom_5">By John Smith - Thursday, 26 December 2013</p>-->
-<!--                    <!--rating-->-->
+<!--                    <!--rating-->
 <!--                    <ul class="horizontal_list f_right f_mxs_none clearfix rating_list type_2">-->
 <!--                        <li class="active">-->
 <!--                            <i class="fa fa-star-o empty tr_all_hover"></i>-->
@@ -341,11 +341,11 @@ $this->params['breadcrumbs'][] = [
 <!--                <p class="m_bottom_15">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem ipsum dolor sit amet, consecvtetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.</p>-->
 <!--            </article>-->
 <!--            <hr class="m_bottom_15">-->
-<!--            <!--review-->-->
+<!--            <!--review-->
 <!--            <article>-->
 <!--                <div class="clearfix m_bottom_10">-->
 <!--                    <p class="f_size_medium f_left f_mxs_none m_mxs_bottom_5">By Admin - Thursday, 26 December 2013</p>-->
-<!--                    <!--rating-->-->
+<!--                    <!--rating-->
 <!--                    <ul class="horizontal_list f_right f_mxs_none clearfix rating_list type_2">-->
 <!--                        <li class="active">-->
 <!--                            <i class="fa fa-star-o empty tr_all_hover"></i>-->
@@ -372,11 +372,11 @@ $this->params['breadcrumbs'][] = [
 <!--                <p class="m_bottom_15">Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse sollicitudin velit sed leo.</p>-->
 <!--            </article>-->
 <!--            <hr class="m_bottom_15">-->
-<!--            <!--review-->-->
+<!--            <!--review-->
 <!--            <article>-->
 <!--                <div class="clearfix m_bottom_10">-->
 <!--                    <p class="f_size_medium f_left f_mxs_none m_mxs_bottom_5">By Alan Doe - Thursday, 26 December 2013</p>-->
-<!--                    <!--rating-->-->
+<!--                    <!--rating-->
 <!--                    <ul class="horizontal_list f_right f_mxs_none clearfix rating_list type_2">-->
 <!--                        <li class="active">-->
 <!--                            <i class="fa fa-star-o empty tr_all_hover"></i>-->
@@ -412,7 +412,7 @@ $this->params['breadcrumbs'][] = [
 <!--                <div class="d_block full_width m_bottom_10">-->
 <!--                    <div class="d_block m_bottom_5 v_align_m">-->
 <!--                        <p class="f_size_medium d_inline_middle m_right_5">Rating:</p>-->
-<!--                        <!--rating-->-->
+<!--                        <!--rating-->
 <!--                        <ul class="horizontal_list clearfix rating_list type_2 d_inline_middle">-->
 <!--                            <li class="active">-->
 <!--                                <i class="fa fa-star-o empty tr_all_hover"></i>-->
@@ -457,19 +457,19 @@ $this->params['breadcrumbs'][] = [
 <!--</div>-->
 <!--<div class="related_projects m_bottom_15 m_sm_bottom_0 m_xs_bottom_15">-->
 <!--<figure class="r_corners photoframe shadow relative d_xs_inline_b tr_all_hover">-->
-<!--    <!--product preview-->-->
+<!--    <!--product preview-->
 <!--    <a href="#" class="d_block relative pp_wrap">-->
-<!--        <!--hot product-->-->
+<!--        <!--hot product-->
 <!--        <span class="hot_stripe type_2"><img src="images/hot_product_type_2.png" alt=""></span>-->
 <!--        <img src="images/product_img_5.jpg" class="tr_all_hover" alt="">-->
 <!--        <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>-->
 <!--    </a>-->
-<!--    <!--description and price of product-->-->
+<!--    <!--description and price of product-->
 <!--    <figcaption class="t_xs_align_l">-->
 <!--        <h5 class="m_bottom_10"><a href="#" class="color_dark ellipsis">Eget elementum vel</a></h5>-->
 <!--        <div class="clearfix">-->
 <!--            <p class="scheme_color f_left f_size_large m_bottom_15">$102.00</p>-->
-<!--            <!--rating-->-->
+<!--            <!--rating-->
 <!--            <ul class="horizontal_list f_right clearfix rating_list tr_all_hover">-->
 <!--                <li class="active">-->
 <!--                    <i class="fa fa-star-o empty tr_all_hover"></i>-->
@@ -497,17 +497,17 @@ $this->params['breadcrumbs'][] = [
 <!--    </figcaption>-->
 <!--</figure>-->
 <!--<figure class="r_corners photoframe shadow relative d_xs_inline_b tr_all_hover">-->
-<!--    <!--product preview-->-->
+<!--    <!--product preview-->
 <!--    <a href="#" class="d_block relative pp_wrap">-->
 <!--        <img src="images/product_img_7.jpg" class="tr_all_hover" alt="">-->
 <!--        <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>-->
 <!--    </a>-->
-<!--    <!--description and price of product-->-->
+<!--    <!--description and price of product-->
 <!--    <figcaption class="t_xs_align_l">-->
 <!--        <h5 class="m_bottom_10"><a href="#" class="color_dark ellipsis">Cursus eleifend elit aenean elit aenean</a></h5>-->
 <!--        <div class="clearfix">-->
 <!--            <p class="scheme_color f_left f_size_large m_bottom_15">$99.00</p>-->
-<!--            <!--rating-->-->
+<!--            <!--rating-->
 <!--            <ul class="horizontal_list f_right clearfix rating_list tr_all_hover">-->
 <!--                <li class="active">-->
 <!--                    <i class="fa fa-star-o empty tr_all_hover"></i>-->
@@ -535,19 +535,19 @@ $this->params['breadcrumbs'][] = [
 <!--    </figcaption>-->
 <!--</figure>-->
 <!--<figure class="r_corners photoframe shadow relative d_xs_inline_b tr_all_hover">-->
-<!--    <!--product preview-->-->
+<!--    <!--product preview-->
 <!--    <a href="#" class="d_block relative pp_wrap">-->
-<!--        <!--sale product-->-->
+<!--        <!--sale product-->
 <!--        <span class="hot_stripe type_2"><img src="images/sale_product_type_2.png" alt=""></span>-->
 <!--        <img src="images/product_img_8.jpg" class="tr_all_hover" alt="">-->
 <!--        <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>-->
 <!--    </a>-->
-<!--    <!--description and price of product-->-->
+<!--    <!--description and price of product-->
 <!--    <figcaption class="t_xs_align_l">-->
 <!--        <h5 class="m_bottom_10"><a href="#" class="color_dark ellipsis">Aliquam erat volutpat</a></h5>-->
 <!--        <div class="clearfix">-->
 <!--            <p class="scheme_color f_left f_size_large m_bottom_15">$36.00</p>-->
-<!--            <!--rating-->-->
+<!--            <!--rating-->
 <!--            <ul class="horizontal_list f_right clearfix rating_list tr_all_hover">-->
 <!--                <li class="active">-->
 <!--                    <i class="fa fa-star-o empty tr_all_hover"></i>-->
@@ -575,19 +575,19 @@ $this->params['breadcrumbs'][] = [
 <!--    </figcaption>-->
 <!--</figure>-->
 <!--<figure class="r_corners photoframe shadow relative d_xs_inline_b tr_all_hover">-->
-<!--    <!--product preview-->-->
+<!--    <!--product preview-->
 <!--    <a href="#" class="d_block relative pp_wrap">-->
-<!--        <!--hot product-->-->
+<!--        <!--hot product-->
 <!--        <span class="hot_stripe type_2"><img src="images/hot_product_type_2.png" alt=""></span>-->
 <!--        <img src="images/product_img_3.jpg" class="tr_all_hover" alt="">-->
 <!--        <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>-->
 <!--    </a>-->
-<!--    <!--description and price of product-->-->
+<!--    <!--description and price of product-->
 <!--    <figcaption class="t_xs_align_l">-->
 <!--        <h5 class="m_bottom_10"><a href="#" class="color_dark ellipsis">Eget elementum vel</a></h5>-->
 <!--        <div class="clearfix">-->
 <!--            <p class="scheme_color f_left f_size_large m_bottom_15">$102.00</p>-->
-<!--            <!--rating-->-->
+<!--            <!--rating-->
 <!--            <ul class="horizontal_list f_right clearfix rating_list tr_all_hover">-->
 <!--                <li class="active">-->
 <!--                    <i class="fa fa-star-o empty tr_all_hover"></i>-->
@@ -615,17 +615,17 @@ $this->params['breadcrumbs'][] = [
 <!--    </figcaption>-->
 <!--</figure>-->
 <!--<figure class="r_corners photoframe shadow relative d_xs_inline_b tr_all_hover">-->
-<!--    <!--product preview-->-->
+<!--    <!--product preview-->
 <!--    <a href="#" class="d_block relative pp_wrap">-->
 <!--        <img src="images/product_img_1.jpg" class="tr_all_hover" alt="">-->
 <!--        <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>-->
 <!--    </a>-->
-<!--    <!--description and price of product-->-->
+<!--    <!--description and price of product-->
 <!--    <figcaption class="t_xs_align_l">-->
 <!--        <h5 class="m_bottom_10"><a href="#" class="color_dark ellipsis">Cursus eleifend elit aenean...</a></h5>-->
 <!--        <div class="clearfix">-->
 <!--            <p class="scheme_color f_left f_size_large m_bottom_15">$99.00</p>-->
-<!--            <!--rating-->-->
+<!--            <!--rating-->
 <!--            <ul class="horizontal_list f_right clearfix rating_list tr_all_hover">-->
 <!--                <li class="active">-->
 <!--                    <i class="fa fa-star-o empty tr_all_hover"></i>-->
@@ -653,19 +653,19 @@ $this->params['breadcrumbs'][] = [
 <!--    </figcaption>-->
 <!--</figure>-->
 <!--<figure class="r_corners photoframe shadow relative d_xs_inline_b tr_all_hover">-->
-<!--    <!--product preview-->-->
+<!--    <!--product preview-->
 <!--    <a href="#" class="d_block relative pp_wrap">-->
-<!--        <!--sale product-->-->
+<!--        <!--sale product-->
 <!--        <span class="hot_stripe type_2"><img src="images/sale_product_type_2.png" alt=""></span>-->
 <!--        <img src="images/product_img_9.jpg" class="tr_all_hover" alt="">-->
 <!--        <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>-->
 <!--    </a>-->
-<!--    <!--description and price of product-->-->
+<!--    <!--description and price of product-->
 <!--    <figcaption class="t_xs_align_l">-->
 <!--        <h5 class="m_bottom_10"><a href="#" class="color_dark ellipsis">Aliquam erat volutpat</a></h5>-->
 <!--        <div class="clearfix">-->
 <!--            <p class="scheme_color f_left f_size_large m_bottom_15">$36.00</p>-->
-<!--            <!--rating-->-->
+<!--            <!--rating-->
 <!--            <ul class="horizontal_list f_right clearfix rating_list tr_all_hover">-->
 <!--                <li class="active">-->
 <!--                    <i class="fa fa-star-o empty tr_all_hover"></i>-->

@@ -747,7 +747,7 @@ AppAsset::register($this);
 </div>
 <button class="t_align_c r_corners tr_all_hover animate_ftl" id="go_to_top"><i class="fa fa-angle-up"></i></button>
 <?php
-$tmpJs = ["js/jquery-2.1.0.min.js", "js/jquery-migrate-1.2.1.min.js", "js/retina.js", "js/camera.min.js", "js/jquery.easing.1.3.js", "js/jquery-ui.min.js", "js/elevatezoom.min.js", "js/jquery.fancybox-1.3.4.js",
+$tmpJs = ["js/jquery-2.1.0.min.js", "js/jquery-ui.min.js", "js/jquery-migrate-1.2.1.min.js", "js/retina.js", "js/camera.min.js",   "js/elevatezoom.min.js", "js/jquery.fancybox-1.3.4.js",
     "js/waypoints.min.js", "js/jquery.isotope.min.js", "js/owl.carousel.min.js", "js/jquery.tweet.min.js", "js/jquery.custom-scrollbar.js", "js/scripts.js",
 ];
 foreach ($tmpJs as $v) {

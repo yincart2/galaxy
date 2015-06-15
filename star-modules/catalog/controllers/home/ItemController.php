@@ -50,7 +50,7 @@ class ItemController extends Controller
         }
         return $this->render('//site/error', [
             'name' => 'catalog',
-            'message' => 'Catalog does not exist'
+            'message' => 'There is no product'
             ]);
     }
 }
