@@ -26,7 +26,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Galaxy Core Center',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -34,11 +34,11 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+//        ['label' => 'About', 'url' => ['/site/about']],
+//        ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register']];
+//        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
     } else {
         $menuItems[] = ['label' => 'User', 'url' => ['/user/admin/index']];
@@ -60,8 +60,8 @@ AppAsset::register($this);
         $menuItems[] = [
             'label' => 'Marketing', 'url' => ['/marketing/core/coupon/index'],
         ];
-        $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
-        $menuItems[] = ['label' => 'Auth', 'url' => ['/auth/auth/create']];
+//        $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
+//        $menuItems[] = ['label' => 'Auth', 'url' => ['/auth/auth/create']];
         $menuItems[] = [
             'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
             'url' => ['/user/security/logout'],
@@ -86,7 +86,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Yincart2 Galaxy <?= date('Y') ?></p>
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
