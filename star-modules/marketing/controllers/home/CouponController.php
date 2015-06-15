@@ -36,7 +36,7 @@ class CouponController extends Controller
         /**@var $couponModel \star\marketing\models\Coupon **/
         $couponModel = Coupon::find()->where(['coupon_no'=>$couponCode])->one();
         if($couponModel){
-            if($couponModel->start_at<time() && $couponModel->end_at>time() && $couponModel->status == 1 && $couponModel-> user_id ==0){
+            if($couponModel->end_at>time() && $couponModel->status == 1 && $couponModel-> user_id ==0){
                 $couponModel->user_id = Yii::$app->user->id;
                 if($couponModel->save()){
                     return Json::encode(['message'=>Yii::t('coupon','add coupon success!')]);
