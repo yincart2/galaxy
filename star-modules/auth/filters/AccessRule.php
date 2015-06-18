@@ -36,6 +36,9 @@ class AccessRule extends \yii\filters\AccessRule{
 
         if ($action->controller instanceof Controller) {
             $key = get_class($action->controller) . '_' . $action->id;
+            $keys = explode('-', $key);
+            $keys = array_map(function($v) { return ucfirst($v); }, $keys);
+            $key = implode($keys);
             if(\Yii::$app->authManager->getPermission($key)){
                 return $user->can($key, $this->params);
             }else{
