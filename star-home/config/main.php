@@ -33,7 +33,7 @@ return [
             'class' => 'star\blog\Module',
         ],
         'cart' => [
-            'class' =>'home\modules\cart\Module',
+            'class' =>'star\cart\Module',
         ],
         'order' => [
             'class' =>'star\order\Module',
@@ -91,7 +91,7 @@ return [
                     '@star/catalog/views/home'=>'@theme/star/home/modules/catalog',
                     '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
                     '@star/member/views'=>'@theme/star/home/modules/member',
-                    '@app/modules/cart/views'=>'@theme/star/home/modules/cart',
+                    '@star/cart/views'=>'@theme/star/home/modules/cart',
                     '@star/order/views/home'=>'@theme/star/home/modules/order',
                 ],
                 'baseUrl'=>'@theme/star/home'

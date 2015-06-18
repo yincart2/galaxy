@@ -29,6 +29,7 @@ $form = \yii\widgets\ActiveForm::begin();
             </thead>
             <tbody>
             <?php
+            $cartItems = isset($cartItems[0])? $cartItems[0]:$cartItems;
             foreach ($cartItems as $cartItem) {
             /**@var star\catalog\models\Item $item * */
             $sku = $cartItem->sku;
