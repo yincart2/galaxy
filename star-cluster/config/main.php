@@ -47,7 +47,7 @@ return [
             'class' => 'star\catalog\Module',
         ],
         'cart' => [
-            'class' =>'cluster\modules\cart\Module',
+            'class' =>'star\cart\Module',
         ],
         'order' => [
             'class' =>'star\order\Module',
@@ -96,7 +96,7 @@ return [
                     '@app/views'=>'@theme/star/cluster/',
                     '@star/catalog/views/home'=>'@theme/star/cluster/modules/catalog',
                     '@star/member/views'=>'@theme/star/cluster/modules/member',
-                    '@app/modules/cart/views'=>'@theme/star/cluster/modules/cart',
+                    '@star/cart/views'=>'@theme/star/cluster/modules/cart',
                     '@star/order/views/home'=>'@theme/star/cluster/modules/order',
                 ],
                 'baseUrl'=>'@theme/star/cluster'
