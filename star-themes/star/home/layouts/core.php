@@ -50,6 +50,7 @@ AppAsset::register($this);
                 ];
                 $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
                 $menuItems[] = ['label' => 'Auth', 'url' => ['/auth/auth/create']];
+                $menuItems[] = ['label' => 'Payment', 'url' => ['/payment/core/payment/index']];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/user/security/logout'],

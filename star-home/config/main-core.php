@@ -37,6 +37,9 @@ return [
         'order' => [
             'class' =>'star\order\Module',
         ],
+        'payment' => [
+            'class' =>'star\payment\Module',
+        ],
     ],
     'components' => [
         'urlManager'=>[
