@@ -132,7 +132,11 @@ class ItemPropController extends DefaultController
             unset($_POST['PropValue']);
             if (is_array($propValues['value_name']) && $count = count($propValues['value_name'])) {
                 for ($i = 0; $i < $count; $i++) {
-                    $propValue = new PropValue();
+                    if(isset($propValues['value_id'][$i]) && $propValues['value_id'][$i]) {
+                        $propValue = PropValue::find()->where(['value_id' => $propValues['value_id'][$i]])->one();;
+                    } else {
+                        $propValue = new PropValue();
+                    }
                     $propValue->setAttributes(array(
                         'prop_id' => $prop_id,
                         'value_name' => $propValues['value_name'][$i],
@@ -141,7 +145,6 @@ class ItemPropController extends DefaultController
                         'status' => 1,
                     ));
                     if(isset($propValues['value_id'][$i]) && $propValues['value_id'][$i]) {
-                        $propValue->value_id = $propValues['value_id'][$i];
                         $propValue->update();
                     } else {
                         $propValue->save();

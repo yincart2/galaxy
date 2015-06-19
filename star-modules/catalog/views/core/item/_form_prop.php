@@ -108,7 +108,7 @@
 <!--                    <th>标签</th>-->
                     <th><?= Yii::t('catalog','price')?></th>
                     <th><?= Yii::t('catalog','stock')?></th>
-                    <th><?= Yii::t('catalog','EAN')?></th>
+                    <th><?= Yii::t('catalog','Outer ID')?></th>
 <!--                    <th>操作</th>-->
                 </tr>
                 </thead>
