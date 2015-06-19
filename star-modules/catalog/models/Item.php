@@ -240,7 +240,11 @@ class Item extends \yii\db\ActiveRecord
         if (is_array($skus) && count($skus)) {
             $skuArray = array();
             foreach ($skus as $i => $sku) {
-                $skuModel = new Sku();
+                if(isset($sku['sku_id']) && $sku['sku_id']) {
+                    $skuModel = Sku::find()->where(['sku_id' => $sku['sku_id']])->one();
+                } else {
+                    $skuModel = new Sku();
+                }
                 $skuModel->item_id = $item_id;
                 $skuModel->props = $sku['props'];
                 $skuModel->props_name = $sku['props_name'];
@@ -248,7 +252,6 @@ class Item extends \yii\db\ActiveRecord
                 $skuModel->price = $sku['price'];
                 $skuModel->outer_id = $sku['outer_id'];
                 if (isset($sku['sku_id']) && $sku['sku_id']) {
-                    $skuModel->sku_id = $sku['sku_id'];
                     if($skuModel->update()===false) {
                         Yii::$app->session->setFlash('sku-error',Yii::t('catalog','Every sku must have a value !'));
                         $this->addError('props', Yii::t('catalog', null));
