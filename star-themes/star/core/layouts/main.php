@@ -60,6 +60,9 @@ AppAsset::register($this);
         $menuItems[] = [
             'label' => 'Marketing', 'url' => ['/marketing/core/coupon/index'],
         ];
+        $menuItems[] = [
+            'label' => 'Account', 'url' => ['/account/core/account/withdrawal-index'],
+        ];
 //        $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];
 //        $menuItems[] = ['label' => 'Auth', 'url' => ['/auth/auth/create']];
         $menuItems[] = [

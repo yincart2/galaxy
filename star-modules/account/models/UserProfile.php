@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace star\account\models;
 
 use Yii;
 
@@ -57,5 +57,16 @@ class UserProfile extends \yii\db\ActiveRecord
             'birthday' => Yii::t('store', 'Birthday'),
             'rank' => Yii::t('store', 'Rank'),
         ];
+    }
+
+    public function getUserProfileModel(){
+        $model =  self::findOne(['user_id'=>Yii::$app->user->id]);
+        if(!$model){
+            $this->user_id = Yii::$app->user->id;
+            $this->money = 0;
+            $this->save();
+            $model= $this;
+        }
+        return $model;
     }
 }
