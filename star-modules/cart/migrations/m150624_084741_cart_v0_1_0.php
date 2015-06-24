@@ -1,0 +1,25 @@
+<?php
+
+use yii\db\Schema;
+use yii\db\Migration;
+
+class m150624_084741_cart_v0_1_0 extends Migration
+{
+    public function safeUp()
+    {
+        $this->createTable('{{%cart}}', [
+            'cart_id' => Schema::TYPE_PK,
+            'user_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'sku_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'star_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'qty' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'data' => Schema::TYPE_TEXT . ' NOT NULL',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+        ]);
+    }
+
+    public function safeDown()
+    {
+        $this->dropTable('{{%cart}}');
+    }
+}
