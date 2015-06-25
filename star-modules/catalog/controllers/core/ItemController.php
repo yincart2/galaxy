@@ -294,16 +294,16 @@ class ItemController extends DefaultController
                 $props_name[$pname] = array();
                 foreach ($vid as $v) {
                     $props[$pid][] = $pid . ':' . $v;
-                    $itemProp = Yii::createObject(ItemProp::className());
-                    $propValue = $itemProp::findOne(['value_id' => $v]);
+                    $propValue = Yii::createObject(PropValue::className());
+                    $propValue = $propValue::findOne(['value_id' => $v]);
                     $vname = $propValue ? $propValue->value_name : $v;
                     $props_name[$pname][] = $pname . ':' . $vname;
 
                 }
             } else {
                 $props[$pid] = $pid . ':' . $vid;
-                $itemProp = Yii::createObject(ItemProp::className());
-                $propValue = $itemProp::findOne(['value_id' => $vid]);
+                $propValue = Yii::createObject(PropValue::className());
+                $propValue = $propValue::findOne(['value_id' => $vid]);
                 $vname = $propValue ? $propValue->value_name : $vid;
                 $props_name[$pname] = $pname . ':' . $vname;
             }
