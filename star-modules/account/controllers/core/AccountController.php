@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
  */
 class AccountController extends Controller
 {
-
+    public $layout = '/core-account';
     /**
      * Lists all Withdrawal models.
      * @return mixed
