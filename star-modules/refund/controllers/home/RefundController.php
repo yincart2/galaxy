@@ -37,8 +37,9 @@ class RefundController extends Controller
      */
     public function actionIndex()
     {
+        $refund = Yii::createObject(Refund::className());
         $dataProvider = new ActiveDataProvider([
-            'query' => Refund::find(),
+            'query' => $refund::find(),
         ]);
 
         return $this->render('index', [
@@ -66,10 +67,11 @@ class RefundController extends Controller
     public function actionCreate()
     {
         $order_id = Yii::$app->request->get('order_id');
-        $model = new Refund();
+        $model = Yii::createObject(Refund::className());
         $model->order_id = $order_id;
-        $refund = Refund::find()->where(['order_id' => $order_id])->one();
-        $order = Order::find()->where(['order_id'=>$order_id,'user_id'=>Yii::$app->user->id])->one();
+        $refund = $model::find()->where(['order_id' => $order_id])->one();
+        $order = Yii::createObject(Order::className());
+        $order = $order::find()->where(['order_id'=>$order_id,'user_id'=>Yii::$app->user->id])->one();
 
         if(isset($refund)  ) {
             if($order->status != 7){
@@ -77,7 +79,7 @@ class RefundController extends Controller
                     'model' => $refund,
                 ]);
             }else{
-                $model = new Refund();
+                $model = Yii::createObject(Refund::className());
                 $model->order_id = $order_id;
             }
         }
@@ -145,7 +147,8 @@ class RefundController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Refund::findOne($id)) !== null) {
+        $refund = Yii::createObject(Refund::className());
+        if (($model = $refund::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -34,8 +34,9 @@ class CouponController extends Controller
      */
     public function actionIndex()
     {
+        $couponRule = Yii::createObject(CouponRule::className());
         $dataProvider = new ActiveDataProvider([
-            'query' => CouponRule::find(),
+            'query' => $couponRule::find(),
         ]);
 
         return $this->render('index', [
@@ -50,8 +51,9 @@ class CouponController extends Controller
      */
     public function actionView($id)
     {
+        $coupon = Yii::createObject(Coupon::className());
         $dataProvider = new ActiveDataProvider([
-            'query' => Coupon::find()->where(['rule_id' => $id]),
+            'query' => $coupon::find()->where(['rule_id' => $id]),
         ]);
 
         return $this->render('index_coupon', [
@@ -73,7 +75,7 @@ class CouponController extends Controller
      */
     public function actionCreate()
     {
-        $model = new CouponForm();
+        $model = Yii::createObject(CouponForm::className());
         if ($model->load(Yii::$app->request->post()) && $model->saveCoupon()) {
             return $this->redirect(['index']);
         } else {
@@ -91,7 +93,7 @@ class CouponController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = new CouponForm();
+        $model = Yii::createObject(CouponForm::className());
         $model->scenario = 'update';
         if ($model->load(Yii::$app->request->post()) && $model->updateCoupon($id)) {
             return $this->redirect(['index']);
@@ -124,7 +126,8 @@ class CouponController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Coupon::findOne($id)) !== null) {
+        $coupon = Yii::createObject(Coupon::className());
+        if (($model = $coupon::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -134,14 +137,16 @@ class CouponController extends Controller
     public function actionDeleteRule($id)
     {
         $this->findRuleModel($id)->delete();
-        Coupon::deleteAll(['rule_id' => $id]);
+        $coupon = Yii::createObject(Coupon::className());
+        $coupon::deleteAll(['rule_id' => $id]);
 
         return $this->redirect(['index']);
     }
 
     protected function findRuleModel($id)
     {
-        if (($model = CouponRule::findOne($id)) !== null) {
+        $couponRule = Yii::createObject(CouponRule::className());
+        if (($model = $couponRule::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

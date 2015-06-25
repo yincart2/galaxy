@@ -35,7 +35,7 @@ class ItemPropController extends DefaultController
      */
     public function actionIndex()
     {
-        $searchModel = new ItemPropSearch();
+        $searchModel = Yii::createObject(ItemPropSearch::className());
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -63,7 +63,7 @@ class ItemPropController extends DefaultController
      */
     public function actionCreate()
     {
-        $model = new ItemProp();
+        $model = Yii::createObject(ItemProp::className());
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->savePropValue($model->prop_id);
@@ -103,7 +103,8 @@ class ItemPropController extends DefaultController
      */
     public function actionDelete($id)
     {
-        PropValue::deleteAll(['prop_id' => $id]);
+        $propValue = Yii::createObject(PropValue::className());
+        $propValue::deleteAll(['prop_id' => $id]);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -118,7 +119,8 @@ class ItemPropController extends DefaultController
      */
     protected function findModel($id)
     {
-        if (($model = ItemProp::findOne($id)) !== null) {
+        $itemProp = Yii::createObject(ItemProp::className());
+        if (($model = $itemProp::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -133,9 +135,10 @@ class ItemPropController extends DefaultController
             if (is_array($propValues['value_name']) && $count = count($propValues['value_name'])) {
                 for ($i = 0; $i < $count; $i++) {
                     if(isset($propValues['value_id'][$i]) && $propValues['value_id'][$i]) {
-                        $propValue = PropValue::find()->where(['value_id' => $propValues['value_id'][$i]])->one();;
+                        $propValue = Yii::createObject(PropValue::className());
+                        $propValue = $propValue::find()->where(['value_id' => $propValues['value_id'][$i]])->one();;
                     } else {
-                        $propValue = new PropValue();
+                        $propValue = Yii::createObject(PropValue::className());
                     }
                     $propValue->setAttributes(array(
                         'prop_id' => $prop_id,
@@ -151,8 +154,9 @@ class ItemPropController extends DefaultController
                     }
                     $propValues['value_id'][$i] = $propValue->value_id;
                 }
+                $propValueModel = Yii::createObject(PropValue::className());
                 //删除
-                $models = PropValue::findAll(['prop_id' => $prop_id]);
+                $models = $propValueModel::findAll(['prop_id' => $prop_id]);
                 $delArr = array();
                 foreach ($models as $k1 => $v1) {
                     if (!in_array($v1->value_id, $propValues['value_id'])) {
@@ -160,11 +164,13 @@ class ItemPropController extends DefaultController
                     }
                 }
                 if (count($delArr)) {
-                    PropValue::deleteAll('value_id IN (' . implode(', ', $delArr) . ')');
+                    $propValueModel = Yii::createObject(PropValue::className());
+                    $propValueModel::deleteAll('value_id IN (' . implode(', ', $delArr) . ')');
                 }
             } else {
                 //已经没有属性了，要清除数据表内容
-                PropValue::deleteAll('prop_id = ' . $prop_id);
+                $propValueModel = Yii::createObject(PropValue::className());
+                $propValueModel::deleteAll('prop_id = ' . $prop_id);
             }
         }
     }
