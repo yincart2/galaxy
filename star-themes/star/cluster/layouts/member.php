@@ -45,6 +45,11 @@ $this->beginContent('@theme/star/cluster/layouts/main.php');
                             <?= Yii::t('account', 'Withdrawal Log') ?>
                         </a>
                     </li>
+                    <li class="<?= isset($this->params['withdrawal-log']) ? 'current' : ''?>">
+                        <a href="<?= Url::to(['/account/home/account/money-log']) ?>">
+                            <?= Yii::t('account', 'Money Log') ?>
+                        </a>
+                    </li>
                 </ul>
 
             </section>

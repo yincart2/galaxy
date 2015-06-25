@@ -21,6 +21,13 @@ class MoneyLog extends \yii\db\ActiveRecord
     const STATUS_INCOME = 1;
     const STATUS_EXPEND = 2;
 
+    public function getStatusArray()
+    {
+        return [
+            self::STATUS_INCOME => Yii::t('account', 'Wait Pay'),
+            self::STATUS_EXPEND => Yii::t('account', 'Has Payed'),
+        ];
+    }
     /**
      * @inheritdoc
      */

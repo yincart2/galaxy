@@ -8,6 +8,7 @@
 
 namespace star\account\controllers\home;
 
+use star\account\models\MoneyLog;
 use star\account\models\Recharge;
 use Yii;
 use star\account\models\Withdrawal;
@@ -50,5 +51,16 @@ class AccountController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionMoneyLog(){
+        $model = Yii::createObject(MoneyLog::className());
+        $dataProvider = new ActiveDataProvider([
+            'query' => $model::find()->where(['user_id' => Yii::$app->user->id])->orderBy(['create_at' => SORT_DESC]),
+        ]);
+
+        return $this->render('moneyLog', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 } 
