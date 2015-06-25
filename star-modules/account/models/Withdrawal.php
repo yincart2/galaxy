@@ -3,7 +3,9 @@
 namespace star\account\models;
 
 use Yii;
+use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "withdrawal".
@@ -89,4 +91,22 @@ class Withdrawal extends \yii\db\ActiveRecord
             $this->addError('withdrawal_fee', '提现金额大于余额！');
         }
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if (!$insert) {
+            if (isset($changedAttributes['status'])&& $changedAttributes['status'] == self::STATUS_WAIT_CHECK && $this->status == self::STATUS_PASS) {
+                $userProfile = Yii::createObject(UserProfile::className());
+                /**@var $userProfileModel UserProfile  * */
+                $userProfileModel = $userProfile::findOne(['user_id' => Yii::$app->user->id]);
+                $userProfileModel->money -= $this->withdrawal_fee;
+                $userProfileModel->info = Yii::t('account','提现支出');
+               if(!$userProfileModel->save()) {
+                    throw new Exception(Yii::t('account',UserProfile::className().'save fail'));
+               }
+            }
+        }
+        parent::afterSave($insert, $changedAttributes);
+    }
+
 }

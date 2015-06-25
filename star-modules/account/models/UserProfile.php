@@ -3,6 +3,7 @@
 namespace star\account\models;
 
 use Yii;
+use yii\base\Exception;
 
 /**
  * This is the model class for table "user_profile".
@@ -20,6 +21,8 @@ use Yii;
  */
 class UserProfile extends \yii\db\ActiveRecord
 {
+    /** used to log the info of money  */
+    public $info;
     /**
      * @inheritdoc
      */
@@ -36,7 +39,7 @@ class UserProfile extends \yii\db\ActiveRecord
         return [
             [['user_id'], 'required'],
             [['user_id', 'money', 'credit', 'phone', 'pay_password', 'sex', 'birthday', 'rank'], 'integer'],
-            [['avatar'], 'string', 'max' => 255]
+            [['avatar','info'], 'string', 'max' => 255]
         ];
     }
 
@@ -59,14 +62,38 @@ class UserProfile extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getUserProfileModel(){
-        $model =  self::findOne(['user_id'=>Yii::$app->user->id]);
-        if(!$model){
+    public function getUserProfileModel()
+    {
+        $model = self::findOne(['user_id' => Yii::$app->user->id]);
+        if (!$model) {
             $this->user_id = Yii::$app->user->id;
             $this->money = 0;
             $this->save();
-            $model= $this;
+            $model = $this;
         }
         return $model;
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if (!$insert) {
+            if (isset($changedAttributes['money']) ) {
+                /**@var $moneyLogModel MoneyLog **/
+                $moneyLogModel = Yii::createObject(MoneyLog::className());
+                if($changedAttributes['money'] > $this->money){
+                    $moneyLogModel->type = $moneyLogModel::STATUS_EXPEND;
+
+                }else{
+                    $moneyLogModel->type = $moneyLogModel::STATUS_INCOME;
+                }
+                $moneyLogModel->user_id =$this->user_id;
+                $moneyLogModel->money =abs($changedAttributes['money'] - $this->money) ;
+                $moneyLogModel->info =$this->info;
+                if(!$moneyLogModel->save()) {
+                    throw new Exception(Yii::t('money',MoneyLog::className().'save fail'));
+                }
+            }
+        }
+        parent::afterSave($insert, $changedAttributes);
     }
 }

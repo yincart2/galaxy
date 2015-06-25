@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model star\account\models\Withdrawal */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,17 +12,20 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'status')->dropDownList($model->getStatusArray()) ?>
 
-
-    <?= $form->field($model, 'withdrawal_account')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'account_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'create_at')->textInput() ?>
-
-    <?= $form->field($model, 'update_at')->textInput() ?>
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'user_id',
+            'withdrawal_fee',
+            'withdrawal_account',
+            'account_name',
+            'create_at:datetime',
+            'update_at:datetime',
+        ]
+    ]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('coupon', 'Create') : Yii::t('coupon', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

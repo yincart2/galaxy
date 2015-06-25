@@ -83,7 +83,8 @@ class AccountController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Withdrawal::findOne($id)) !== null) {
+        $model = Yii::createObject(Withdrawal::className());
+        if (($model = $model::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
