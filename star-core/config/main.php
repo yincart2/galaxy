@@ -10,7 +10,7 @@ return [
     'id' => 'core',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'core\controllers',
-    'bootstrap' => ['log','star\auth\bootstrap\Bootstrap',[ 'home\models\UserEvent', 'beforeLogin']],
+    'bootstrap' => ['log', 'star\auth\bootstrap\Bootstrap', ['home\models\UserEvent', 'beforeLogin']],
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
@@ -51,13 +51,17 @@ return [
             'class' => 'star\blog\Module',
         ],
         'order' => [
-            'class' =>'star\order\Module',
+            'class' => 'star\order\Module',
         ],
         'marketing' => [
-            'class' =>'star\marketing\Module',
+            'class' => 'star\marketing\Module',
+        ],
+        'account' => [
+            'class' => 'star\account\Module',
         ],
         'refund' => [
             'class' =>'star\refund\Module',
+
         ]
     ],
     'components' => [
@@ -86,12 +90,12 @@ return [
                 ],
             ],
         ],
-        'view'=>[
-            'theme'=>[
-                'pathMap'=>[
-                    '@core/views'=>'@theme/star/core/',
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@core/views' => '@theme/star/core/',
                 ],
-                'baseUrl'=>'@theme/star/home'
+                'baseUrl' => '@theme/star/home'
             ]
         ]
     ],
@@ -114,7 +118,7 @@ return [
                 [
                     'baseUrl' => 'http://localhost/galaxy/star-image',
                     'basePath' => '@image',
-                    'path' =>  '/',
+                    'path' => '/',
                     'name' => 'Images',
                     'access' => ['read' => '*', 'write' => false]
                 ],

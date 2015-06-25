@@ -35,9 +35,19 @@ $this->beginContent('@theme/star/cluster/layouts/main.php');
                             <?= Yii::t('member', 'Delivery Address') ?>
                         </a>
                     </li>
-                    <li class="<?= isset($this->params['order-list']) ? 'current' : ''?>">
+                    <li class="<?= isset($this->params['list']) ? 'current' : ''?>">
                         <a href="<?= Url::to(['/order/home/order/list']) ?>">
                             <?= Yii::t('member', 'Order') ?>
+                        </a>
+                    </li>
+                    <li class="<?= isset($this->params['withdrawal-log']) ? 'current' : ''?>">
+                        <a href="<?= Url::to(['/account/home/account/withdrawal-log']) ?>">
+                            <?= Yii::t('account', 'Withdrawal Log') ?>
+                        </a>
+                    </li>
+                    <li class="<?= isset($this->params['withdrawal-log']) ? 'current' : ''?>">
+                        <a href="<?= Url::to(['/account/home/account/money-log']) ?>">
+                            <?= Yii::t('account', 'Money Log') ?>
                         </a>
                     </li>
                 </ul>

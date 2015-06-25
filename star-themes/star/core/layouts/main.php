@@ -61,6 +61,9 @@ AppAsset::register($this);
             'label' => 'Marketing', 'url' => ['/marketing/core/coupon/index'],
         ];
         $menuItems[] = [
+            'label' => 'Account', 'url' => ['/account/core/account/withdrawal-index'],
+        ];
+        $menuItems[] = [
             'label' => 'Refund', 'url' => ['/refund/core/refund/index'],
         ];
 //        $menuItems[] = ['label' => 'Settings', 'url' => ['/user/settings/profile']];

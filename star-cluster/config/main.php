@@ -58,6 +58,9 @@ return [
         'marketing' => [
             'class' =>'star\marketing\Module',
         ],
+        'account' =>[
+            'class' =>'star\account\Module',
+        ]
     ],
     'components' => [
         'user' => [
@@ -97,6 +100,7 @@ return [
                     '@star/catalog/views/home'=>'@theme/star/cluster/modules/catalog',
                     '@star/member/views'=>'@theme/star/cluster/modules/member',
                     '@star/cart/views'=>'@theme/star/cluster/modules/cart',
+                    '@star/account/views/home'=>'@theme/star/cluster/modules/account',
                     '@star/order/views/home'=>'@theme/star/cluster/modules/order',
                 ],
                 'baseUrl'=>'@theme/star/cluster'
