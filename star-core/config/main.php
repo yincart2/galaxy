@@ -55,6 +55,9 @@ return [
         ],
         'marketing' => [
             'class' =>'star\marketing\Module',
+        ],
+        'refund' => [
+            'class' =>'star\refund\Module',
         ]
     ],
     'components' => [
