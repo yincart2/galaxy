@@ -58,6 +58,10 @@ return [
         ],
         'account' => [
             'class' => 'star\account\Module',
+        ],
+        'refund' => [
+            'class' =>'star\refund\Module',
+
         ]
     ],
     'components' => [

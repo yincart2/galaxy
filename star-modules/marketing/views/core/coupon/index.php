@@ -12,12 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="coupon-index">
 
     <?= GridView::widget([
-        'export'=>false,
-        'responsive'=>false,
         'dataProvider' => $dataProvider,
-        'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
-        'headerRowOptions'=>['class'=>'kartik-sheet-style'],
-        'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -46,19 +41,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
             ],
         ],
+        'export'=>false,
+        'responsive'=>true,
+        'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
+        'headerRowOptions'=>['class'=>'kartik-sheet-style'],
+        'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'panel'=>[
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> '.Yii::t('coupon','Coupon').'</h3>',
             'type'=>'success',
             'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i>'.Yii::t('coupon', 'Create Coupon'), ['create'], ['class' => 'btn btn-success']),
+            'after'=>false,
             'footer'=>false
         ],
-        'toolbar' => [
-
-            '{export}',
-            '{toggleData}'
-        ],
-        'toggleDataContainer' => ['class' => 'btn-group-sm'],
-        'exportContainer' => ['class' => 'btn-group-sm']
     ]); ?>
 
 </div>

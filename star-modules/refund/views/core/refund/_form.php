@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model star\refund\models\Refund */
@@ -11,7 +11,12 @@ use yii\widgets\ActiveForm;
 
 <div class="refund-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'refund-form-horizontal',
+        'type' => ActiveForm::TYPE_HORIZONTAL,
+        'formConfig' => ['labelSpan' => 2],
+        'fullSpan' => 11
+    ]); ?>
 
     <?= $form->field($model, 'order_id')->textInput() ?>
 
@@ -21,16 +26,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'memo')->textInput(['maxlength' => 255]) ?>
 
-    <?php echo $form->field($model, 'create_at')->textInput(['value' => date("Y-m-d H:i",$model->create_at), 'disabled' => TRUE]) ?>
+    <?php echo $form->field($model, 'create_at')->textInput(['value' => date("Y-m-d H:i", $model->create_at), 'disabled' => TRUE]) ?>
 
-<!--    --><?php //echo $form->field($model, 'update_at')->textInput(['value' => date("Y-m-d H:i",$model->update_at), 'disabled' => TRUE]) ?>
+    <!--    --><?php //echo $form->field($model, 'update_at')->textInput(['value' => date("Y-m-d H:i",$model->update_at), 'disabled' => TRUE]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([0 => '待审核', 1 => '审核中', 2 => '审核通过']) ?>
 
-    <img alt="No Image" src="<?= $model->image?>" width="190" height="190">
+    <img alt="No Image" src="<?= $model->image ?>" width="190" height="190">
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <div class="col-sm-offset-2 col-sm-9">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>
