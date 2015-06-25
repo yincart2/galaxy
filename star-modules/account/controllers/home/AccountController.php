@@ -8,6 +8,7 @@
 
 namespace star\account\controllers\home;
 
+use star\account\models\Recharge;
 use Yii;
 use star\account\models\Withdrawal;
 use yii\data\ActiveDataProvider;
@@ -38,5 +39,16 @@ class AccountController extends Controller
         return $this->render('withdrawalLog', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionRecharge(){
+        $model = Yii::createObject(Recharge::className());
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['withdrawal-log',]);
+        } else {
+            return $this->render('createRecharge', [
+                'model' => $model,
+            ]);
+        }
     }
 } 

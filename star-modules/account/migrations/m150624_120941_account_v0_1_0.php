@@ -39,6 +39,14 @@ class m150624_120941_account_v0_1_0 extends Migration
             'create_at' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_at' => Schema::TYPE_INTEGER . '(11) NOT NULL',
         ]);
+        $this->createTable('{{%recharge}}', [
+            'recharge_id' => Schema::TYPE_PK,
+            'user_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'money' => Schema::TYPE_INTEGER . '(11) NOT NULL default 0',
+            'status' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
+            'create_at' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_at' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+        ]);
     }
 
     public function down()
