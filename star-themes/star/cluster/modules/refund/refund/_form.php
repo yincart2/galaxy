@@ -14,7 +14,17 @@ $order = $order::findOne(['order_id' => $order_id]);
 
 <div class="refund-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin([
+        'requiredCssClass' => '',
+        'options' => [
+            'class' => 'type_2',
+            'enctype' => 'multipart/form-data'
+        ],
+        'fieldConfig' => [
+            'labelOptions' => ['class' => 'required'],
+            'template' => "<div class=\"col-lg-2\">{label}</div><div class=\"col-lg-10\">{input}</div>\n<div class=\"col-lg-12\">{error}\n{hint}</div>",
+        ],
+    ]); ?>
 
     <?= $form->field($model, 'order_id')->textInput(['value' => $order_id,'disabled'=>'disabled']) ?>
 

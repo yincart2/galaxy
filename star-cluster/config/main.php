@@ -60,6 +60,9 @@ return [
         ],
         'account' =>[
             'class' =>'star\account\Module',
+        ],
+        'refund' =>[
+            'class' =>'star\refund\Module',
         ]
     ],
     'components' => [
@@ -102,6 +105,7 @@ return [
                     '@star/cart/views'=>'@theme/star/cluster/modules/cart',
                     '@star/account/views/home'=>'@theme/star/cluster/modules/account',
                     '@star/order/views/home'=>'@theme/star/cluster/modules/order',
+                    '@star/refund/views/home'=>'@theme/star/cluster/modules/refund',
                 ],
                 'baseUrl'=>'@theme/star/cluster'
             ]

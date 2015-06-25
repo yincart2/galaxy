@@ -17,7 +17,7 @@ use yii\web\UploadedFile;
  */
 class RefundController extends Controller
 {
-    public $layout = "customer";
+    public $layout = "/member";
 
     public function behaviors()
     {
@@ -71,25 +71,25 @@ class RefundController extends Controller
         $model->order_id = $order_id;
         $refund = $model::find()->where(['order_id' => $order_id])->one();
         $order = Yii::createObject(Order::className());
-        $order = $order::find()->where(['order_id'=>$order_id,'user_id'=>Yii::$app->user->id])->one();
+        $order = $order::find()->where(['order_id' => $order_id, 'user_id' => Yii::$app->user->id])->one();
 
-        if(isset($refund)  ) {
-            if($order->status != 7){
+        if (isset($refund)) {
+            if ($order->status != 7) {
                 return $this->render('view', [
                     'model' => $refund,
                 ]);
-            }else{
+            } else {
                 $model = Yii::createObject(Refund::className());
                 $model->order_id = $order_id;
             }
         }
         $file = UploadedFile::getInstance($model, 'image');
-        if($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post())) {
             if ($file) {
                 $fileDir = \Yii::getAlias('@upload/refund/');
                 if (!file_exists($fileDir)) {
-                    if(!mkdir($fileDir, 0777, true)){
-                        throw new Exception(404,Yii::t('app','Directory create error!'));
+                    if (!mkdir($fileDir, 0777, true)) {
+                        throw new Exception(404, Yii::t('app', 'Directory create error!'));
                     }
                 }
                 $file->saveAs($fileDir . $file->baseName . time() . '.' . $file->extension);
@@ -99,10 +99,10 @@ class RefundController extends Controller
                 return $this->redirect(['view', 'id' => $model->refund_id]);
             }
         }
-            return $this->render('create', [
-                'model' => $model,
-                'order_id' => $order_id,
-            ]);
+        return $this->render('create', [
+            'model' => $model,
+            'order_id' => $order_id,
+        ]);
 
     }
 

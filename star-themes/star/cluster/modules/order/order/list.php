@@ -80,7 +80,7 @@ $this->params['order-list'] = true;
 
                             <li>
 
-                                <a href="<?= Url::to(['/refund/home/refund/create', 'id' => $orderModel->order_id]) ?>"
+                                <a href="<?= Url::to(['/refund/home/refund/create', 'order_id' => $orderModel->order_id]) ?>"
                                    class="button_grey"><?= Yii::t('refund', 'Refund')?></a>
 
                             </li>
