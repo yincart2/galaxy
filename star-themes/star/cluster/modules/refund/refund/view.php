@@ -1,4 +1,4 @@
-refund<?php
+<?php
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -9,6 +9,7 @@ use yii\widgets\DetailView;
 $this->title = '查看退货';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Refunds'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['refund-list'] = true;
 ?>
 <div class="refund-view">
 
@@ -34,5 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <img alt="No Image" src="<?= $model->image?>" width="190" height="190">
+
+    <footer class="bottom_box">
+
+        <a href="<?= \yii\helpers\Url::to(['/refund/home/refund/index'])?>" class="button_grey middle_btn"><?= Yii::t('refund', 'Back to My Refunds')?></a>
+
+    </footer>
 
 </div>

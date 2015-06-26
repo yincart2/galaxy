@@ -86,7 +86,7 @@ class RefundController extends Controller
         $file = UploadedFile::getInstance($model, 'image');
         if ($model->load(Yii::$app->request->post())) {
             if ($file) {
-                $fileDir = \Yii::getAlias('@upload/refund/');
+                $fileDir = \Yii::getAlias('@image/refund/');
                 if (!file_exists($fileDir)) {
                     if (!mkdir($fileDir, 0777, true)) {
                         throw new Exception(404, Yii::t('app', 'Directory create error!'));

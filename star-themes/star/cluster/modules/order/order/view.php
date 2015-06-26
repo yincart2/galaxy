@@ -388,7 +388,7 @@ $this->params['order-list'] = true;
 
     <footer class="bottom_box">
 
-        <a href="shop_orders_list.html" class="button_grey middle_btn">Back to My Orders</a>
+        <a href="<?= \yii\helpers\Url::to(['/order/home/order/list'])?>" class="button_grey middle_btn">Back to My Orders</a>
 
     </footer>
 
