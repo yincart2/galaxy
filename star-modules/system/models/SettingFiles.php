@@ -18,6 +18,19 @@ use Yii;
  */
 class SettingFiles extends \yii\db\ActiveRecord
 {
+    const TYPE_TEXT = 1;
+    const TYPE_RADIO = 2;
+    const TYPE_CHECKLIST = 3;
+
+    public function getStatusArray()
+    {
+        return [
+            self::TYPE_TEXT => Yii::t('system', 'Text'),
+            self::TYPE_RADIO => Yii::t('system', 'Radio'),
+            self::TYPE_CHECKLIST => Yii::t('system', 'Checklist'),
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -32,7 +45,7 @@ class SettingFiles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['setting_files_id', 'setting_id', 'files_code', 'files_label', 'value', 'setting_code'], 'required'],
+            [[ 'setting_id', 'files_code', 'files_label', 'value', 'setting_code'], 'required'],
             [['setting_files_id', 'setting_id', 'type','status'], 'integer'],
             [['files_code', 'files_label', 'value', 'setting_code'], 'string', 'max' => 255]
         ];

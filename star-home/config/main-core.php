@@ -40,6 +40,9 @@ return [
         'payment' => [
             'class' =>'star\payment\Module',
         ],
+        'system' => [
+            'class' =>'star\system\Module',
+        ],
     ],
     'components' => [
         'urlManager'=>[
