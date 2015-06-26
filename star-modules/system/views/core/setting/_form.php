@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model star\system\models\Setting */
 /* @var $form yii\widgets\ActiveForm */
 
-list($path,$url) = Yii::$app->assetManager->publish('@star/catalog/assets');
+list($path,$url) = Yii::$app->assetManager->publish('@star/system/assets');
 
 $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\AppAsset::className()]]);
 ?>
@@ -40,9 +40,8 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
                     <th>删除</th>
                 </tr>
                 <?php
-
+                $SettingFilesModel = Yii::createObject(\star\system\models\SettingFiles::className());
                 if ($model->isNewRecord) {
-                    $SettingFiles = Yii::createObject(\star\system\models\SettingFiles::className());
                     ?>
                     <tr id="add-template">
                         <td class="icons">
@@ -52,7 +51,7 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
                         </td>
                         <td>
                             <?= Html::label(Yii::t('system','type').':')?>
-                            <?= Html::dropDownList('SettingFiles[type][]',null,[$SettingFiles->getStatusArray()],['id'=>'tf1'])?>
+                            <?= Html::dropDownList('SettingFiles[type][]',null,[$SettingFilesModel->getStatusArray()],['id'=>'tf1'])?>
                             <?= Html::label(Yii::t('system','files code').':')?>
                             <?= Html::textInput('SettingFiles[files_code][]',null,['id'=>'tf1'])?>
                             <?= Html::label(Yii::t('system','files label').':')?>
@@ -84,6 +83,7 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
                                      alt="click and drag to rearrange"/>
                             </td>
                             <td>
+                                <?= Html::hiddenInput('SettingFiles[setting_files_id][]',$SettingFilesModel->setting_files_id)?>
                                 <?= Html::label(Yii::t('system','type').':')?>
                                 <?= Html::dropDownList('SettingFiles[type][]',$SettingFilesModel->type,[$SettingFilesModel->getStatusArray()],['id'=>'tf1'])?>
                                 <?= Html::label(Yii::t('system','files code').':')?>
@@ -92,7 +92,6 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
                                 <?= Html::textInput('SettingFiles[files_label][]',$SettingFilesModel->files_label,['id'=>'tf1'])?>
                                 <?= Html::label(Yii::t('system','value').':')?>
                                 <?= Html::textInput('SettingFiles[value][]',$SettingFilesModel->value,['id'=>'tf1'])?>
-                                <?= Html::hiddenInput('SettingFiles[setting_files_id][]',$SettingFilesModel->setting_files_id,['id'=>'tf1'])?>
                             </td>
                             <td class="icons">
                                 <img class="row-cloner"

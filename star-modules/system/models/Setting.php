@@ -102,11 +102,11 @@ class Setting extends \yii\db\ActiveRecord
                     $propValueModel = Yii::createObject(SettingFiles::className());
                     $propValueModel::deleteAll('setting_files_id IN (' . implode(', ', $delArr) . ')');
                 }
-            } else {
-                //已经没有属性了，要清除数据表内容
-                $propValueModel = Yii::createObject(SettingFiles::className());
-                $propValueModel::deleteAll('setting_id = ' . $settingId);
             }
+        }else{
+            //已经没有属性了，要清除数据表内容
+            $propValueModel = Yii::createObject(SettingFiles::className());
+            $propValueModel::deleteAll('setting_id = ' . $settingId);
         }
     }
 
