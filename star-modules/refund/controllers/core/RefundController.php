@@ -16,12 +16,6 @@ use yii\filters\VerbFilter;
  */
 class RefundController extends Controller
 {
-    public function init()
-    {
-        $this->getView()->params['topMenuKey'] = 'yincart';
-        $this->getView()->params['leftMenuKey'] = 'refund';
-    }
-
     public function behaviors()
     {
         return [
@@ -40,8 +34,9 @@ class RefundController extends Controller
      */
     public function actionIndex()
     {
+        $refund = Yii::createObject(Refund::className());
         $dataProvider = new ActiveDataProvider([
-            'query' => Refund::find()->orderBy(['status' => SORT_ASC,'create_at' => SORT_DESC]),
+            'query' => $refund::find()->orderBy(['status' => SORT_ASC,'create_at' => SORT_DESC]),
         ]);
 
         return $this->render('index', [
@@ -68,7 +63,7 @@ class RefundController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Refund();
+        $model = Yii::createObject(Refund::className());
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->refund_id]);
@@ -92,7 +87,8 @@ class RefundController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             /** @var \star\order\models\Order $orderModel */
-            $orderModel = Order::find()->where(['order_id'=>$model->order_id])->one();
+            $order = Yii::createObject(Order::className());
+            $orderModel = $order::find()->where(['order_id'=>$model->order_id])->one();
             if($model->status==0){
                 $orderModel->status = 6;
             }
@@ -140,7 +136,8 @@ class RefundController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Refund::findOne($id)) !== null) {
+        $refund = Yii::createObject(Refund::className());
+        if (($model = $refund::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

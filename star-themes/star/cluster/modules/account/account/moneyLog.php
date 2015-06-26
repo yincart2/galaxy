@@ -10,6 +10,7 @@ $this->title = Yii::t('account', '流水账');
 $this->params['breadcrumbs'] = [
     'title' => '流水账',
 ];
+$this->params['money-log'] = true;
 ?>
 <div class="withdrawal-index">
 

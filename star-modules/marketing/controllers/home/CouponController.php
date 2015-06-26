@@ -17,7 +17,7 @@ class CouponController extends Controller
 
     public function actionValidate(){
         $couponId = Yii::$app->request->post('couponId');
-        $shoppingCoupon = new ShoppingCoupon();
+        $shoppingCoupon = Yii::createObject(ShoppingCoupon::className());
         if($couponId!=0){
             if(in_array($couponId, Yii::$app->getSession()->get($shoppingCoupon::SESSION_KEY))){
                 return $shoppingCoupon->getResult($couponId);
@@ -34,7 +34,8 @@ class CouponController extends Controller
     public function actionAddCoupon(){
         $couponCode = Yii::$app->request->post('couponCode');
         /**@var $couponModel \star\marketing\models\Coupon **/
-        $couponModel = Coupon::find()->where(['coupon_no'=>$couponCode])->one();
+        $coupon = Yii::createObject(Coupon::className());
+        $couponModel = $coupon::find()->where(['coupon_no'=>$couponCode])->one();
         if($couponModel){
             if($couponModel->end_at>time() && $couponModel->status == 1 && $couponModel-> user_id ==0){
                 $couponModel->user_id = Yii::$app->user->id;

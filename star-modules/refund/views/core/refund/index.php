@@ -27,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'label' => '审核状态',
                 'value' => function($model){
-                        return [0 => '待审核', 1 => '审核中', 2 => '审核通过'];
+                        $statusList = [0 => '待审核', 1 => '审核中', 2 => '审核通过'];
+                        return $statusList[$model->status];
                     },
             ],
 

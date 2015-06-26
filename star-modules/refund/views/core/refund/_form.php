@@ -32,7 +32,12 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->dropDownList([0 => '待审核', 1 => '审核中', 2 => '审核通过']) ?>
 
-    <img alt="No Image" src="<?= $model->image ?>" width="190" height="190">
+    <div class="form-group">
+        <label class="control-label col-lg-2" for="refund-image"><?= Yii::t('refund', 'Image')?></label>
+        <div class="col-lg-9">
+            <img alt="No Image" src="<?= $model->image ?>" width="190" height="190">
+        </div>
+    </div>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">

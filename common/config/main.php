@@ -2,6 +2,7 @@
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'zh-CN',
+    'timeZone' => 'Asia/Shanghai',
     'sourceLanguage' => 'en-US',
     'modules' => [
         'blog' => [

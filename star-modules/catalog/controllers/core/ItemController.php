@@ -69,7 +69,7 @@ class ItemController extends DefaultController
      */
     public function actionCreate()
     {
-        $model = new Item();
+        $model = Yii::createObject(Item::className());
         if ($model->load(Yii::$app->request->post()) ) {
             $transaction=Yii::$app->db->beginTransaction();
 
@@ -174,7 +174,8 @@ class ItemController extends DefaultController
      */
     protected function findModel($id)
     {
-        if (($model = Item::findOne($id)) !== null) {
+        $item = Yii::createObject(Item::className());
+        if (($model = $item::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -183,8 +184,10 @@ class ItemController extends DefaultController
 
     public function actionItemProps($category_id,$item_id = 0, $tree_id)
     {
-        $itemProps = ItemProp::findAll(['category_id' => $category_id]);
-        $model = Item::findOne(['item_id' => $item_id]);
+        $itemProp = Yii::createObject(ItemProp::className());
+        $itemProps = $itemProp::findAll(['category_id' => $category_id]);
+        $item = Yii::createObject(Item::className());
+        $model = $item::findOne(['item_id' => $item_id]);
         return $this->renderPartial('_form_prop', array('itemProps' => $itemProps,'model' => $model, 'tree_id' => $tree_id));
     }
 
@@ -193,7 +196,8 @@ class ItemController extends DefaultController
         if (!Yii::$app->request->isAjax && empty($_POST['item_id'])) {
             return;
         }
-        $skus = \star\catalog\models\Sku::findAll(["item_id" => $_POST["item_id"]]);
+        $skuModel = Yii::createObject(Sku::className());
+        $skus = $skuModel::findAll(["item_id" => $_POST["item_id"]]);
         $data = array();
         foreach ($skus as $sku) {
             $arr = array();
@@ -282,21 +286,24 @@ class ItemController extends DefaultController
         $props = array();
         $props_name = array();
         foreach ($itemProps as $pid => $vid) {
-            $itemProp = ItemProp::findOne(['prop_id' => $pid]);
+            $itemProp = Yii::createObject(ItemProp::className());
+            $itemProp = $itemProp::findOne(['prop_id' => $pid]);
             $pname = $itemProp->prop_name;
             if (is_array($vid)) {
                 $props[$pid] = array();
                 $props_name[$pname] = array();
                 foreach ($vid as $v) {
                     $props[$pid][] = $pid . ':' . $v;
-                    $propValue = PropValue::findOne(['value_id' => $v]);
+                    $propValue = Yii::createObject(PropValue::className());
+                    $propValue = $propValue::findOne(['value_id' => $v]);
                     $vname = $propValue ? $propValue->value_name : $v;
                     $props_name[$pname][] = $pname . ':' . $vname;
 
                 }
             } else {
                 $props[$pid] = $pid . ':' . $vid;
-                $propValue = PropValue::findOne(['value_id' => $vid]);
+                $propValue = Yii::createObject(PropValue::className());
+                $propValue = $propValue::findOne(['value_id' => $vid]);
                 $vname = $propValue ? $propValue->value_name : $vid;
                 $props_name[$pname] = $pname . ':' . $vname;
             }

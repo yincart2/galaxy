@@ -17,7 +17,7 @@ use yii\web\UploadedFile;
  */
 class RefundController extends Controller
 {
-    public $layout = "customer";
+    public $layout = "/member";
 
     public function behaviors()
     {
@@ -37,8 +37,9 @@ class RefundController extends Controller
      */
     public function actionIndex()
     {
+        $refund = Yii::createObject(Refund::className());
         $dataProvider = new ActiveDataProvider([
-            'query' => Refund::find(),
+            'query' => $refund::find(),
         ]);
 
         return $this->render('index', [
@@ -66,28 +67,29 @@ class RefundController extends Controller
     public function actionCreate()
     {
         $order_id = Yii::$app->request->get('order_id');
-        $model = new Refund();
+        $model = Yii::createObject(Refund::className());
         $model->order_id = $order_id;
-        $refund = Refund::find()->where(['order_id' => $order_id])->one();
-        $order = Order::find()->where(['order_id'=>$order_id,'user_id'=>Yii::$app->user->id])->one();
+        $refund = $model::find()->where(['order_id' => $order_id])->one();
+        $order = Yii::createObject(Order::className());
+        $order = $order::find()->where(['order_id' => $order_id, 'user_id' => Yii::$app->user->id])->one();
 
-        if(isset($refund)  ) {
-            if($order->status != 7){
+        if (isset($refund)) {
+            if ($order->status != 7) {
                 return $this->render('view', [
                     'model' => $refund,
                 ]);
-            }else{
-                $model = new Refund();
+            } else {
+                $model = Yii::createObject(Refund::className());
                 $model->order_id = $order_id;
             }
         }
         $file = UploadedFile::getInstance($model, 'image');
-        if($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post())) {
             if ($file) {
-                $fileDir = \Yii::getAlias('@upload/refund/');
+                $fileDir = \Yii::getAlias('@image/refund/');
                 if (!file_exists($fileDir)) {
-                    if(!mkdir($fileDir, 0777, true)){
-                        throw new Exception(404,Yii::t('app','Directory create error!'));
+                    if (!mkdir($fileDir, 0777, true)) {
+                        throw new Exception(404, Yii::t('app', 'Directory create error!'));
                     }
                 }
                 $file->saveAs($fileDir . $file->baseName . time() . '.' . $file->extension);
@@ -97,10 +99,10 @@ class RefundController extends Controller
                 return $this->redirect(['view', 'id' => $model->refund_id]);
             }
         }
-            return $this->render('create', [
-                'model' => $model,
-                'order_id' => $order_id,
-            ]);
+        return $this->render('create', [
+            'model' => $model,
+            'order_id' => $order_id,
+        ]);
 
     }
 
@@ -145,7 +147,8 @@ class RefundController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Refund::findOne($id)) !== null) {
+        $refund = Yii::createObject(Refund::className());
+        if (($model = $refund::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

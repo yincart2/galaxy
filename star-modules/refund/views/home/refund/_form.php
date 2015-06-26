@@ -8,7 +8,8 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 /** @var \star\order\models\Order $order */
-$order = \star\order\models\Order::findOne(['order_id' => $order_id]);
+$order = Yii::createObject(\star\order\models\Order::className());
+$order = $order::findOne(['order_id' => $order_id]);
 ?>
 
 <div class="refund-form">
