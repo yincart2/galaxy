@@ -40,7 +40,7 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
                     <th>删除</th>
                 </tr>
                 <?php
-                $SettingFilesModel = Yii::createObject(\star\system\models\SettingFiles::className());
+                $SettingFieldsModel = Yii::createObject(\star\system\models\SettingFields::className());
                 if ($model->isNewRecord) {
                     ?>
                     <tr id="add-template">
@@ -51,13 +51,13 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
                         </td>
                         <td>
                             <?= Html::label(Yii::t('system','type').':')?>
-                            <?= Html::dropDownList('SettingFiles[type][]',null,[$SettingFilesModel->getStatusArray()],['id'=>'tf1'])?>
-                            <?= Html::label(Yii::t('system','files code').':')?>
-                            <?= Html::textInput('SettingFiles[files_code][]',null,['id'=>'tf1'])?>
-                            <?= Html::label(Yii::t('system','files label').':')?>
-                            <?= Html::textInput('SettingFiles[files_label][]',null,['id'=>'tf1'])?>
+                            <?= Html::dropDownList('SettingFields[type][]',null,[$SettingFieldsModel->getStatusArray()],['id'=>'tf1'])?>
+                            <?= Html::label(Yii::t('system','fields code').':')?>
+                            <?= Html::textInput('SettingFields[fields_code][]',null,['id'=>'tf1'])?>
+                            <?= Html::label(Yii::t('system','fields label').':')?>
+                            <?= Html::textInput('SettingFields[fields_label][]',null,['id'=>'tf1'])?>
                             <?= Html::label(Yii::t('system','value').':')?>
-                            <?= Html::textInput('SettingFiles[value][]',null,['id'=>'tf1'])?>
+                            <?= Html::textInput('SettingFields[value][]',null,['id'=>'tf1'])?>
                         </td>
                         <td class="icons">
                             <img class="row-cloner"
@@ -72,9 +72,9 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
                     </tr>
                 <?php
                 } else {
-                    $SettingFiles = $model->settingFiles;
+                    $SettingFields = $model->settingFields;
 
-                    foreach ($SettingFiles as $k => $SettingFilesModel) {
+                    foreach ($SettingFields as $k => $SettingFieldsModel) {
                         ?>
                         <tr id="update-template">
                             <td class="icons">
@@ -83,15 +83,15 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
                                      alt="click and drag to rearrange"/>
                             </td>
                             <td>
-                                <?= Html::hiddenInput('SettingFiles[setting_files_id][]',$SettingFilesModel->setting_files_id)?>
+                                <?= Html::hiddenInput('SettingFields[setting_fields_id][]',$SettingFieldsModel->setting_fields_id)?>
                                 <?= Html::label(Yii::t('system','type').':')?>
-                                <?= Html::dropDownList('SettingFiles[type][]',$SettingFilesModel->type,[$SettingFilesModel->getStatusArray()],['id'=>'tf1'])?>
-                                <?= Html::label(Yii::t('system','files code').':')?>
-                                <?= Html::textInput('SettingFiles[files_code][]',$SettingFilesModel->files_code,['id'=>'tf1'])?>
-                                <?= Html::label(Yii::t('system','files label').':')?>
-                                <?= Html::textInput('SettingFiles[files_label][]',$SettingFilesModel->files_label,['id'=>'tf1'])?>
+                                <?= Html::dropDownList('SettingFields[type][]',$SettingFieldsModel->type,[$SettingFieldsModel->getStatusArray()],['id'=>'tf1'])?>
+                                <?= Html::label(Yii::t('system','fields code').':')?>
+                                <?= Html::textInput('SettingFields[fields_code][]',$SettingFieldsModel->fields_code,['id'=>'tf1'])?>
+                                <?= Html::label(Yii::t('system','fields label').':')?>
+                                <?= Html::textInput('SettingFields[fields_label][]',$SettingFieldsModel->fields_label,['id'=>'tf1'])?>
                                 <?= Html::label(Yii::t('system','value').':')?>
-                                <?= Html::textInput('SettingFiles[value][]',$SettingFilesModel->value,['id'=>'tf1'])?>
+                                <?= Html::textInput('SettingFields[value][]',$SettingFieldsModel->value,['id'=>'tf1'])?>
                             </td>
                             <td class="icons">
                                 <img class="row-cloner"
@@ -113,15 +113,15 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
                                  alt="click and drag to rearrange"/>
                         </td>
                         <td>
-                            <?= Html::hiddenInput('SettingFiles[setting_files_id][]')?>
+                            <?= Html::hiddenInput('SettingFields[setting_fields_id][]')?>
                             <?= Html::label(Yii::t('system','type').':')?>
-                            <?= Html::dropDownList('SettingFiles[type][]',null,[$SettingFilesModel->getStatusArray()],['id'=>'tf1'])?>
-                            <?= Html::label(Yii::t('system','files code').':')?>
-                            <?= Html::textInput('SettingFiles[files_code][]',null,['id'=>'tf1'])?>
-                            <?= Html::label(Yii::t('system','files label').':')?>
-                            <?= Html::textInput('SettingFiles[files_label][]',null,['id'=>'tf1'])?>
+                            <?= Html::dropDownList('SettingFields[type][]',null,[$SettingFieldsModel->getStatusArray()],['id'=>'tf1'])?>
+                            <?= Html::label(Yii::t('system','fields code').':')?>
+                            <?= Html::textInput('SettingFields[fields_code][]',null,['id'=>'tf1'])?>
+                            <?= Html::label(Yii::t('system','fields label').':')?>
+                            <?= Html::textInput('SettingFields[fields_label][]',null,['id'=>'tf1'])?>
                             <?= Html::label(Yii::t('system','value').':')?>
-                            <?= Html::textInput('SettingFiles[value][]',null,['id'=>'tf1'])?>
+                            <?= Html::textInput('SettingFields[value][]',null,['id'=>'tf1'])?>
                         </td>
                         <td class="icons">
                             <img class="row-cloner"

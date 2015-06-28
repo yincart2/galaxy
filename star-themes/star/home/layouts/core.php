@@ -49,6 +49,7 @@ AppAsset::register($this);
                     'label' => 'Order', 'url' => ['/order/core/order/index'],
                 ];
                 $menuItems[] = ['label' => 'Settings', 'url' => ['/system/core/setting/index']];
+                $menuItems[] = ['label' => 'System', 'url' => ['/system/core/system/index']];
                 $menuItems[] = ['label' => 'Auth', 'url' => ['/auth/auth/create']];
                 $menuItems[] = ['label' => 'Payment', 'url' => ['/payment/core/payment/index']];
                 $menuItems[] = [
