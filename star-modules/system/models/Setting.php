@@ -4,6 +4,9 @@ namespace star\system\models;
 
 use Yii;
 use yii\base\Exception;
+use yii\bootstrap\Collapse;
+use yii\bootstrap\Tabs;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "setting".
@@ -112,5 +115,153 @@ class Setting extends \yii\db\ActiveRecord
 
     public function getSettingFields(){
         return self::hasMany(SettingFields::className(),['setting_id'=>'setting_id']);
+    }
+
+    public function getSystemConfig()
+    {
+        $settings = self::find()->all();
+
+        $systemConfig = [];
+
+        /** @var \star\system\models\Setting $setting */
+        foreach($settings as $setting) {
+            $fieldsConfig = [];
+            $groupConfig = [];
+
+            $settingFields = $setting->settingFields;
+            /** @var \star\system\models\SettingFields $settingField */
+            foreach($settingFields as $settingField) {
+                $fieldsConfig[$settingField->fields_code] = [
+                    'label' => $settingField->fields_label,
+                    'inputType' => $settingField->type,
+                    'value' => $settingField->value,
+                    'setting_code' => $settingField->setting_code
+                ];
+            }
+
+            $groupConfig[$setting->group_code] = [
+                'label' => $setting->group_label,
+                'sort' => $setting->group_sort,
+                'fields' => $fieldsConfig
+            ];
+
+            if(isset($systemConfig[$setting->menu_code]) && $systemConfig[$setting->menu_code]) {
+                $preConfig = $systemConfig[$setting->menu_code];
+            }
+            $systemConfig[$setting->menu_code] = [
+                'label' => $setting->menu_label,
+                'sort' => $setting->menu_sort,
+                'groups' => $groupConfig
+            ];
+            if(isset($preConfig)) {
+                $systemConfig[$setting->menu_code] = ArrayHelper::merge($preConfig, $systemConfig[$setting->menu_code]);
+            }
+        }
+
+        return $systemConfig;
+    }
+
+    /**
+     * get the config
+     * @param \yii\bootstrap\ActiveForm $form
+     * @param array $options
+     * @return string
+     */
+    public function renderForm($form, $options = [])
+    {
+        if (!$options) {
+            $template = "{label}\n<div class=\"col-sm-11\">{input}\n<div style=\"width:60%\">{hint}\n</div>{error}</div>";
+            $labelOptions = ['class' => 'control-label col-sm-1'];
+            $options = ['template' => $template, 'labelOptions' => $labelOptions, 'inputOptions' => ['class' => 'form-control', 'style' => 'width: 50%']];
+        }
+
+        $config = $this->getSystemConfig();
+        $tabItems = [];
+        foreach ($config as $tabKey => $tab) {
+            $groupItems = [];
+            foreach ($tab['groups'] as $groupKey => $group) {
+                $groupContent = '';
+                $dataList = [];
+                foreach ($group['fields'] as $fieldKey => $field) {
+                    if (isset($field['depend'])) {
+                        list($dependKey, $dependValue) = $field['depend'];
+                        $dataOptions = [
+                            'depend-key' => $dependKey,
+                            'depend-value' => $dependValue,
+                        ];
+                    }
+                    $options['template'] = "<label class = \"control-label col-sm-1\">" . $field['label'] . "</label>\n<div class=\"col-sm-11\">{input}\n<div style=\"width:60%\">{hint}\n</div>{error}</div>";
+                    $fieldOptions = array_merge($options, ['options' => ['class' => 'form-group', 'data' => $dataOptions]]);
+
+                    /** @var \yii\bootstrap\ActiveField $activeField */
+                    $fieldClass = Yii::createObject(SettingFields::className());
+                    $activeField = $form->field($fieldClass::findOne(['setting_code' => $field['setting_code']]), 'value', $fieldOptions);
+
+                    switch ($field['inputType']) {
+                        case 3:
+                            $activeField->inline()->checkboxList($dataList);
+                            break;
+                        case 2:
+                            $activeField->inline()->radioList($dataList);
+                            break;
+                        case 1:
+                            $activeField->textInput();
+                            break;
+//                        case 'select':
+//                            $activeField->dropDownList($dataList);
+//                            break;
+//                        case 'textarea':
+//                            $activeField->textarea();
+//                            break;
+//                        case 'password':
+//                            $activeField->passwordInput();
+//                            break;
+                    }
+                    if (isset($field['hint'])) {
+                        $activeField->hint($field['hint']);
+                    }
+                    $groupContent .= $activeField->render();
+                }
+
+                $groupItems[$group['label']] = [
+                    'label' => $group['label'],
+                    'content' => $groupContent,
+                ];
+            }
+            $tabContent = Collapse::widget(['items' => $groupItems]);
+            $tabItems[] = [
+                'label' => $tab['label'],
+                'content' => $tabContent,
+            ];
+        }
+
+        $js = <<<JS
+var modelName = 'SettingModel'
+$(document).on('change', 'select, input[type=checkbox], input[type=radio]', function() {
+    var name = $(this).attr('name')
+    var dataKey = name.substring(modelName.length + 1, name.length - 1);
+    var dataValue = $(this).val();
+    if ($('[data-depend-key='+dataKey+']').length) {
+        $('[data-depend-key='+dataKey+']').hide();
+    }
+    if ($('[data-depend-key='+dataKey+'][data-depend-value='+dataValue+']').length) {
+        $('[data-depend-key='+dataKey+'][data-depend-value='+dataValue+']').show();
+    }
+});
+
+$('[data-depend-key]').each(function() {
+    var input = $(this);
+    var valueInput = $('[name="'+modelName+'['+input.data('depend-key')+']"]');
+    if (valueInput.val() == input.data('depend-key')) {
+        input.show();
+    } else {
+        input.hide();
+    }
+});
+JS;
+
+        Yii::$app->view->registerJs($js);
+
+        return Tabs::widget(['items' => $tabItems]);
     }
 }
