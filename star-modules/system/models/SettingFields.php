@@ -5,18 +5,18 @@ namespace star\system\models;
 use Yii;
 
 /**
- * This is the model class for table "setting_files".
+ * This is the model class for table "setting_fields".
  *
- * @property integer $setting_files_id
+ * @property integer $setting_fields_id
  * @property integer $setting_id
- * @property string $files_code
- * @property string $files_label
+ * @property string $fields_code
+ * @property string $fields_label
  * @property string $value
  * @property integer $type
  * @property integer $status
  * @property string $setting_code
  */
-class SettingFiles extends \yii\db\ActiveRecord
+class SettingFields extends \yii\db\ActiveRecord
 {
     const TYPE_TEXT = 1;
     const TYPE_RADIO = 2;
@@ -36,7 +36,7 @@ class SettingFiles extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'setting_files';
+        return 'setting_fields';
     }
 
     /**
@@ -45,9 +45,9 @@ class SettingFiles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'setting_id', 'files_code', 'files_label', 'value', 'setting_code'], 'required'],
-            [['setting_files_id', 'setting_id', 'type','status'], 'integer'],
-            [['files_code', 'files_label', 'value', 'setting_code'], 'string', 'max' => 255]
+            [[ 'setting_id', 'fields_code', 'fields_label', 'value', 'setting_code'], 'required'],
+            [['setting_fields_id', 'setting_id', 'type','status'], 'integer'],
+            [['fields_code', 'fields_label', 'value', 'setting_code'], 'string', 'max' => 255]
         ];
     }
 
@@ -57,10 +57,10 @@ class SettingFiles extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'setting_files_id' => Yii::t('system', 'Setting Files ID'),
+            'setting_fields_id' => Yii::t('system', 'Setting Fields ID'),
             'setting_id' => Yii::t('system', 'Setting ID'),
-            'files_code' => Yii::t('system', 'Files Code'),
-            'files_label' => Yii::t('system', 'Files Label'),
+            'fields_code' => Yii::t('system', 'Fields Code'),
+            'fields_label' => Yii::t('system', 'Fields Label'),
             'value' => Yii::t('system', 'Value'),
             'type' => Yii::t('system', 'Type'),
             'setting_code' => Yii::t('system', 'Setting Code'),

@@ -17,11 +17,11 @@ class m150626_102323_system_v0_1_0 extends Migration
             'group_sort' => Schema::TYPE_INTEGER . '(11) NOT NULL',
         ]);
 
-        $this->createTable('{{%setting_files}}', [
-            'setting_files_id' => Schema::TYPE_PK,
+        $this->createTable('{{%setting_fields}}', [
+            'setting_fields_id' => Schema::TYPE_PK,
             'setting_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'files_code' => Schema::TYPE_STRING . '(255) ',
-            'files_label' => Schema::TYPE_STRING . '(255) ',
+            'fields_code' => Schema::TYPE_STRING . '(255) ',
+            'fields_label' => Schema::TYPE_STRING . '(255) ',
             'value' => Schema::TYPE_STRING . '(255) ',
             'setting_code' => Schema::TYPE_STRING . '(255) ',
             'type' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',

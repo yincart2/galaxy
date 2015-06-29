@@ -4,6 +4,9 @@ namespace star\system\models;
 
 use Yii;
 use yii\base\Exception;
+use yii\bootstrap\Collapse;
+use yii\bootstrap\Tabs;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "setting".
@@ -55,62 +58,210 @@ class Setting extends \yii\db\ActiveRecord
     }
 
     public function afterSave($insert, $changedAttributes){
-        $this->saveSettingFiles($this->setting_id);
+        $this->saveSettingFields($this->setting_id);
         parent::afterSave($insert, $changedAttributes);
     }
 
-    public function saveSettingFiles($settingId){
-        if (isset($_POST['SettingFiles'])) {
-            $settingFiles = $_POST['SettingFiles'];
-            unset($_POST['SettingFiles']);
-            if (is_array($settingFiles['type']) && $count = count($settingFiles['type'])) {
+    public function saveSettingFields($settingId){
+        if (isset($_POST['SettingFields'])) {
+            $settingFields = $_POST['SettingFields'];
+            unset($_POST['SettingFields']);
+            if (is_array($settingFields['type']) && $count = count($settingFields['type'])) {
                 for ($i = 0; $i < $count; $i++) {
-                    if(isset($settingFiles['setting_files_id'][$i]) && $settingFiles['setting_files_id'][$i]) {
-                        $propValue = Yii::createObject(SettingFiles::className());
-                        $settingFilesModel = $propValue::find()->where(['setting_files_id' => $settingFiles['setting_files_id'][$i]])->one();;
+                    if(isset($settingFields['setting_fields_id'][$i]) && $settingFields['setting_fields_id'][$i]) {
+                        $propValue = Yii::createObject(SettingFields::className());
+                        $settingFieldsModel = $propValue::find()->where(['setting_fields_id' => $settingFields['setting_fields_id'][$i]])->one();;
                     } else {
-                        $settingFilesModel = Yii::createObject(SettingFiles::className());
+                        $settingFieldsModel = Yii::createObject(SettingFields::className());
                     }
-                    $settingFilesModel->setAttributes(array(
+                    $settingFieldsModel->setAttributes(array(
                         'setting_id' => $settingId,
-                        'type' => $settingFiles['type'][$i],
-                        'files_code' => $settingFiles['files_code'][$i],
-                        'files_label' => $settingFiles['files_label'][$i],
-                        'value' => $settingFiles['value'][$i],
-                        'setting_code' => $this->menu_code.'_'.$this->group_code.'_'. $settingFiles['files_code'][$i],
+                        'type' => $settingFields['type'][$i],
+                        'fields_code' => $settingFields['fields_code'][$i],
+                        'fields_label' => $settingFields['fields_label'][$i],
+                        'value' => $settingFields['value'][$i],
+                        'setting_code' => $this->menu_code.'_'.$this->group_code.'_'. $settingFields['fields_code'][$i],
                         'status' => 1,
                     ));
-                    if(isset($settingFiles['setting_files_id'][$i]) && $settingFiles['setting_files_id'][$i]) {
-                        $settingFilesModel->update();
+                    if(isset($settingFields['setting_fields_id'][$i]) && $settingFields['setting_fields_id'][$i]) {
+                        $settingFieldsModel->update();
                     } else {
-                        if(!$settingFilesModel->save()){
+                        if(!$settingFieldsModel->save()){
                             throw new Exception(Yii::t('system','save attributes fail'));
                         }
                     }
-                    $settingFiles['setting_files_id'][$i] = $settingFilesModel->setting_files_id;
+                    $settingFields['setting_fields_id'][$i] = $settingFieldsModel->setting_fields_id;
                 }
-                $propValueModel = Yii::createObject(SettingFiles::className());
+                $propValueModel = Yii::createObject(SettingFields::className());
                 //删除
                 $models = $propValueModel::findAll(['setting_id' => $settingId]);
                 $delArr = array();
                 foreach ($models as $k1 => $v1) {
-                    if (!in_array($v1->setting_files_id, $settingFiles['setting_files_id'])) {
-                        $delArr[] = $v1->setting_files_id;
+                    if (!in_array($v1->setting_fields_id, $settingFields['setting_fields_id'])) {
+                        $delArr[] = $v1->setting_fields_id;
                     }
                 }
                 if (count($delArr)) {
-                    $propValueModel = Yii::createObject(SettingFiles::className());
-                    $propValueModel::deleteAll('setting_files_id IN (' . implode(', ', $delArr) . ')');
+                    $propValueModel = Yii::createObject(SettingFields::className());
+                    $propValueModel::deleteAll('setting_fields_id IN (' . implode(', ', $delArr) . ')');
                 }
             }
         }else{
             //已经没有属性了，要清除数据表内容
-            $propValueModel = Yii::createObject(SettingFiles::className());
+            $propValueModel = Yii::createObject(SettingFields::className());
             $propValueModel::deleteAll('setting_id = ' . $settingId);
         }
     }
 
-    public function getSettingFiles(){
-        return self::hasMany(SettingFiles::className(),['setting_id'=>'setting_id']);
+    public function getSettingFields(){
+        return self::hasMany(SettingFields::className(),['setting_id'=>'setting_id']);
+    }
+
+    public function getSystemConfig()
+    {
+        $settings = self::find()->all();
+
+        $systemConfig = [];
+
+        /** @var \star\system\models\Setting $setting */
+        foreach($settings as $setting) {
+            $fieldsConfig = [];
+            $groupConfig = [];
+
+            $settingFields = $setting->settingFields;
+            /** @var \star\system\models\SettingFields $settingField */
+            foreach($settingFields as $settingField) {
+                $fieldsConfig[$settingField->fields_code] = [
+                    'label' => $settingField->fields_label,
+                    'inputType' => $settingField->type,
+                    'value' => $settingField->value,
+                    'setting_code' => $settingField->setting_code
+                ];
+            }
+
+            $groupConfig[$setting->group_code] = [
+                'label' => $setting->group_label,
+                'sort' => $setting->group_sort,
+                'fields' => $fieldsConfig
+            ];
+
+            if(isset($systemConfig[$setting->menu_code]) && $systemConfig[$setting->menu_code]) {
+                $preConfig = $systemConfig[$setting->menu_code];
+            }
+            $systemConfig[$setting->menu_code] = [
+                'label' => $setting->menu_label,
+                'sort' => $setting->menu_sort,
+                'groups' => $groupConfig
+            ];
+            if(isset($preConfig)) {
+                $systemConfig[$setting->menu_code] = ArrayHelper::merge($preConfig, $systemConfig[$setting->menu_code]);
+            }
+        }
+
+        return $systemConfig;
+    }
+
+    /**
+     * get the config
+     * @param \yii\bootstrap\ActiveForm $form
+     * @param array $options
+     * @return string
+     */
+    public function renderForm($form, $options = [])
+    {
+        if (!$options) {
+            $template = "{label}\n<div class=\"col-sm-11\">{input}\n<div style=\"width:60%\">{hint}\n</div>{error}</div>";
+            $labelOptions = ['class' => 'control-label col-sm-1'];
+            $options = ['template' => $template, 'labelOptions' => $labelOptions, 'inputOptions' => ['class' => 'form-control', 'style' => 'width: 50%']];
+        }
+
+        $config = $this->getSystemConfig();
+        $tabItems = [];
+        foreach ($config as $tabKey => $tab) {
+            $groupItems = [];
+            foreach ($tab['groups'] as $groupKey => $group) {
+                $groupContent = '';
+                $dataList = [];
+                foreach ($group['fields'] as $fieldKey => $field) {
+                    if (isset($field['depend'])) {
+                        list($dependKey, $dependValue) = $field['depend'];
+                        $dataOptions = [
+                            'depend-key' => $dependKey,
+                            'depend-value' => $dependValue,
+                        ];
+                    }
+                    $options['template'] = "<label class = \"control-label col-sm-1\">" . $field['label'] . "</label>\n<div class=\"col-sm-11\">{input}\n<div style=\"width:60%\">{hint}\n</div>{error}</div>";
+                    $fieldOptions = array_merge($options, ['options' => ['class' => 'form-group', 'data' => $dataOptions]]);
+
+                    /** @var \yii\bootstrap\ActiveField $activeField */
+                    $fieldClass = Yii::createObject(SettingFields::className());
+                    $activeField = $form->field($fieldClass::findOne(['setting_code' => $field['setting_code']]), 'value', $fieldOptions);
+
+                    switch ($field['inputType']) {
+                        case 3:
+                            $activeField->inline()->checkboxList($dataList);
+                            break;
+                        case 2:
+                            $activeField->inline()->radioList($dataList);
+                            break;
+                        case 1:
+                            $activeField->textInput();
+                            break;
+//                        case 'select':
+//                            $activeField->dropDownList($dataList);
+//                            break;
+//                        case 'textarea':
+//                            $activeField->textarea();
+//                            break;
+//                        case 'password':
+//                            $activeField->passwordInput();
+//                            break;
+                    }
+                    if (isset($field['hint'])) {
+                        $activeField->hint($field['hint']);
+                    }
+                    $groupContent .= $activeField->render();
+                }
+
+                $groupItems[$group['label']] = [
+                    'label' => $group['label'],
+                    'content' => $groupContent,
+                ];
+            }
+            $tabContent = Collapse::widget(['items' => $groupItems]);
+            $tabItems[] = [
+                'label' => $tab['label'],
+                'content' => $tabContent,
+            ];
+        }
+
+        $js = <<<JS
+var modelName = 'SettingModel'
+$(document).on('change', 'select, input[type=checkbox], input[type=radio]', function() {
+    var name = $(this).attr('name')
+    var dataKey = name.substring(modelName.length + 1, name.length - 1);
+    var dataValue = $(this).val();
+    if ($('[data-depend-key='+dataKey+']').length) {
+        $('[data-depend-key='+dataKey+']').hide();
+    }
+    if ($('[data-depend-key='+dataKey+'][data-depend-value='+dataValue+']').length) {
+        $('[data-depend-key='+dataKey+'][data-depend-value='+dataValue+']').show();
+    }
+});
+
+$('[data-depend-key]').each(function() {
+    var input = $(this);
+    var valueInput = $('[name="'+modelName+'['+input.data('depend-key')+']"]');
+    if (valueInput.val() == input.data('depend-key')) {
+        input.show();
+    } else {
+        input.hide();
+    }
+});
+JS;
+
+        Yii::$app->view->registerJs($js);
+
+        return Tabs::widget(['items' => $tabItems]);
     }
 }
