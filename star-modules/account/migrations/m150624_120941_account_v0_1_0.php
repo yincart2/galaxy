@@ -47,6 +47,37 @@ class m150624_120941_account_v0_1_0 extends Migration
             'create_at' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_at' => Schema::TYPE_INTEGER . '(11) NOT NULL',
         ]);
+
+        $this->createTable('activity', [
+            'activity_id' => Schema::TYPE_PK,
+            'activity_type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'activity_send_type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'activity_send_value' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'vaild_date' => Schema::TYPE_INTEGER . '(11) NOT NULL default \'0\'',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '(11)',
+            'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
+
+        ]);
+        $this->createTable('activity_record', [
+            'activity_records_id' => Schema::TYPE_PK,
+            'user_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'activity_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'note' => Schema::TYPE_STRING . '(50)',
+            'create_time' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
+
+        ]);
+
+        $this->createTable('{{%member_sign_record}}', [
+            'member_sign_record_id' => Schema::TYPE_PK,
+            'user_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'target_date' => Schema::TYPE_STRING . '(8) NOT NULL',
+            'ponit' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL',
+
+        ]);
     }
 
     public function down()
