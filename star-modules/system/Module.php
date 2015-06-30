@@ -3,7 +3,9 @@
 namespace star\system;
 
 
-class Module extends \yii\base\Module
+use matter\base\BaseModule;
+
+class Module extends BaseModule
 {
     public function init()
     {

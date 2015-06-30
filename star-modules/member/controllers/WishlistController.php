@@ -16,7 +16,7 @@ class WishlistController extends Controller
         $item_id = Yii::$app->request->post('item_id');
         if($user_id) {
             if ($item_id) {
-                $wishlist = new Wishlist();
+                $wishlist = Yii::createObject(Wishlist::className()) ;
                 if (Wishlist::findOne(['item_id' => $item_id, 'user_id' => $user_id])) {
                     return json_encode('You have already add the item to wishlist !');
                 } else {

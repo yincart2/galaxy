@@ -65,7 +65,7 @@ class ShoppingCoupon extends Component
             }
             $cartItems = $tmp;
         }
-        $orderModel = new CouponForm();
+        $orderModel = Yii::createObject(CouponForm::className());
         if ($cartItems) {
             //todo  $shippingFee
             $totalPrice = $qty = $shippingFee = 0;

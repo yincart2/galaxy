@@ -41,7 +41,7 @@ class ItemController extends DefaultController
      */
     public function actionIndex()
     {
-        $searchModel = new ItemSearch();
+        $searchModel = Yii::createObject(ItemSearch::className()) ;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -89,7 +89,7 @@ class ItemController extends DefaultController
                 $imagesArray = $model->getUploadImages();
                 foreach($imagesArray as $num=> $image){
                     if($image){
-                        $itemImg = new ItemImg();
+                        $itemImg = Yii::createObject(ItemImg::className()) ;
                         $itemImg->item_id = $model->item_id;
                         $itemImg->pic = $image['pic'];
                         $itemImg->title = $image['title'];

@@ -11,7 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'home\controllers',
     'layout'=>'/main',
-    'bootstrap' => ['log',[ 'home\models\UserEvent', 'frontendRegister'],'star\auth\bootstrap\Bootstrap'],
+    'bootstrap' => ['log',[ 'home\models\UserEvent', 'frontendRegister'],'matter\Gravitation',],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',

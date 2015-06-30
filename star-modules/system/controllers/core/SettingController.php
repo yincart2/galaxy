@@ -32,7 +32,7 @@ class SettingController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SettingSearches();
+        $searchModel = Yii::createObject(SettingSearches::className()) ;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +60,7 @@ class SettingController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Setting();
+        $model = Yii::createObject(Setting::className()) ;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->setting_id]);

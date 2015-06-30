@@ -6,14 +6,23 @@
  * Time: 下午1:54
  */
 
-namespace star\auth\bootstrap;
+namespace star\auth;
 
-use yii\base\BootstrapInterface;
+use matter\base\BaseBootstrap;
 use yii\filters\AccessControl;
 
-class Bootstrap implements BootstrapInterface
+class Bootstrap extends BaseBootstrap
 {
+
+    public  $_modelMap = [
+        'AssignModel' => 'star\auth\models\AssignModel',
+        'RoleModel' => 'star\auth\models\RoleModel',
+    ];
+
+
     public function bootstrap($app){
+
+        parent::bootstrap($app);
         $accessControl = [
             'class' => AccessControl::className(),
             'rules' => [

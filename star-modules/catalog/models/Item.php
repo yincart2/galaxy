@@ -243,7 +243,7 @@ class Item extends \yii\db\ActiveRecord
                 if(isset($sku['sku_id']) && $sku['sku_id']) {
                     $skuModel = Sku::find()->where(['sku_id' => $sku['sku_id']])->one();
                 } else {
-                    $skuModel = new Sku();
+                    $skuModel = Yii::createObject(Sku::className()) ;
                 }
                 $skuModel->item_id = $item_id;
                 $skuModel->props = $sku['props'];
