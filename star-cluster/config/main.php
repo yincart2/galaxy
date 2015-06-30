@@ -10,7 +10,7 @@ return [
     'id' => 'cluster',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'cluster\controllers',
-    'bootstrap' => ['log',[ 'cluster\models\Events', 'attachEvents'],'star\auth\bootstrap\Bootstrap'],
+    'bootstrap' => ['log','matter\Gravitation',[ 'cluster\models\Events', 'attachEvents'],'star\auth\bootstrap\Bootstrap'],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -48,6 +48,9 @@ return [
         ],
         'cart' => [
             'class' =>'star\cart\Module',
+            'modelMap' => [
+                'ShoppingCart' =>'cluster\modules\cart\models\ShoppingCart'
+            ]
         ],
         'order' => [
             'class' =>'star\order\Module',

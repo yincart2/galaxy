@@ -10,7 +10,7 @@ return [
     'id' => 'core',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'core\controllers',
-    'bootstrap' => ['log', 'star\auth\bootstrap\Bootstrap', ['home\models\UserEvent', 'beforeLogin']],
+    'bootstrap' => ['log','matter\Gravitation', 'star\auth\bootstrap\Bootstrap', ['home\models\UserEvent', 'beforeLogin']],
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
