@@ -60,7 +60,7 @@ class OrderController extends Controller
     }
 
     public function actionOrderSave(){
-        $orderModel = new Order();
+        $orderModel = Yii::createObject(Order::className()) ;
         $orderModel->address = Yii::$app->request->post('address');
         $orderModel->memo = Yii::$app->request->post('memo');
         $orderModel->items = Yii::$app->request->post('items');
@@ -108,7 +108,7 @@ class OrderController extends Controller
     public function actionCheckout(){
         $star_id = (int)Yii::$app->request->get('star_id');
 
-        $shoppingCart = new ShoppingCart();
+        $shoppingCart = Yii::createObject(ShoppingCart::className());
         $cartItems = $shoppingCart->cartItems;
 
         if($star_id){

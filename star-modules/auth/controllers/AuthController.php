@@ -16,7 +16,7 @@ class AuthController  extends Controller{
 
     public $layout = '/core-auth';
      public function actionCreate(){
-         $role = new RoleModel();
+         $role = \Yii::createObject(RoleModel::className());
          if ($role->load(\Yii::$app->request->post()) ){
              $role->validate();
              if(!$role->hasErrors()){
@@ -29,7 +29,7 @@ class AuthController  extends Controller{
      }
 
     public function actionUpdate($name){
-        $assignModel = new AssignModel();
+        $assignModel = \Yii::createObject(AssignModel::className()) ;
         $assignModel->role_name = $name;
         $permissions = $assignModel->getPermissions();
         if ($assignModel->load(\Yii::$app->request->post()) ){

@@ -32,7 +32,7 @@ class OrderController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new OrderSearch();
+        $searchModel = Yii::createObject(OrderSearch::className()) ;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +60,7 @@ class OrderController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Order();
+        $model = Yii::createObject(Order::className()) ;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->order_id]);

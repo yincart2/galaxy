@@ -93,7 +93,7 @@ class CouponForm extends Model
         if($this->validate()) {
             $transaction = \Yii::$app->db->beginTransaction();
             try {
-                $couponRule = new CouponRule();
+                $couponRule = Yii::createObject(CouponRule::className()) ;
                 if (!$this->shippingFee) {
                     $this->shippingFee = 0;
                 }
@@ -114,7 +114,7 @@ class CouponForm extends Model
                 $couponRule->save();
 
                 for ($i = 0; $i < $this->total; $i++) {
-                    $coupon = new Coupon();
+                    $coupon = Yii::createObject(Coupon::className()) ;
                     $coupon->coupon_no = uniqid();
                     $coupon->rule_id = $couponRule->rule_id;
                     $coupon->status = $this->status;
@@ -138,7 +138,7 @@ class CouponForm extends Model
             $transaction = \Yii::$app->db->beginTransaction();
             try {
                 for ($i = 0; $i < $this->total; $i++) {
-                    $coupon = new Coupon();
+                    $coupon = Yii::createObject(Coupon::className()) ;
                     $coupon->coupon_no = uniqid();
                     $coupon->rule_id = $rule_id;
                     $coupon->status = $this->status;

@@ -8,7 +8,15 @@
 
 namespace star\order;
 
+use matter\base\BaseBootstrap;
 
-class Bootstrap {
+class Bootstrap extends BaseBootstrap{
+
+    public  $_modelMap = [
+        'Order' => 'star\order\models\Order',
+        'OrderItem' => 'star\order\models\OrderItem',
+        'OrderSearch' => 'star\order\models\OrderSearch',
+        'ShoppingCart' => 'star\cart\models\ShoppingCart',
+    ];
 
 } 

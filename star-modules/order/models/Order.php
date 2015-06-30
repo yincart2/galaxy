@@ -138,7 +138,7 @@ class Order extends \yii\db\ActiveRecord
      */
     public function saveOrder()
     {
-        $ShoppingCart = new ShoppingCart();
+        $ShoppingCart = Yii::createObject(ShoppingCart::className()) ;
         $cartItems = $ShoppingCart->cartItems;
         foreach($this->items as $skuId => $v){
             $this->items[$skuId] = $cartItems[$skuId];
@@ -173,7 +173,7 @@ class Order extends \yii\db\ActiveRecord
      * @return bool
      */
     public function saveSingleOrder($carItems,$starId){
-        $ShoppingCart = new ShoppingCart();
+        $ShoppingCart = Yii::createObject(ShoppingCart::className());
         $transaction=\Yii::$app->db->beginTransaction();
         try {
             $this->user_id = Yii::$app->user->id;
@@ -188,7 +188,7 @@ class Order extends \yii\db\ActiveRecord
                     $item = $sku->item;
                     $price_true =$sku->price;
 
-                    $orderItem = new OrderItem();
+                    $orderItem = Yii::createObject(OrderItem::className()) ;
                     $orderItem->order_id = $this->order_id;
                     $orderItem->item_id = $sku->sku_id;
                     $orderItem->price = $price_true;
