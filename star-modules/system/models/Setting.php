@@ -204,7 +204,7 @@ class Setting extends \yii\db\ActiveRecord
                 $dataList = [];
                 foreach ($group['fields'] as $fieldKey => $field) {
                     $options['template'] = "<label class = \"control-label col-sm-1\">" . $field['label'] . "</label>\n<div class=\"col-sm-11\">{input}\n<div style=\"width:60%\">{hint}\n</div>{error}</div>";
-                    $fieldOptions = array_merge($options, ['options' => ['class' => 'form-group']]);
+                    $fieldOptions = array_merge($options, ['options' => ['class' => 'form-group'], 'inputOptions' => ['name' => 'setting_code[' . $field['setting_code'] . ']']]);
 
                     /** @var \yii\bootstrap\ActiveField $activeField */
                     $fieldClass = Yii::createObject(SettingFields::className());
