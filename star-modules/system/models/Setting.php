@@ -96,9 +96,7 @@ class Setting extends \yii\db\ActiveRecord
                         'setting_code' => $this->menu_code . '_' . $this->group_code . '_' . $settingFields['fields_code'][$i],
                     ));
                     if (isset($settingFields['setting_fields_id'][$i]) && $settingFields['setting_fields_id'][$i]) {
-                        if ($settingFieldsModel->update() == false) {
-                            throw new Exception(Yii::t('system', 'save attributes fail'));
-                             }
+                        $settingFieldsModel->update();
                     } else {
                         if (!$settingFieldsModel->save()) {
                             throw new Exception(Yii::t('system', 'save attributes fail'));
