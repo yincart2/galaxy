@@ -19,5 +19,5 @@ class Bootstrap extends BaseBootstrap{
         'CouponRule' => 'star\marketing\models\CouponRule',
         'ShoppingCoupon' => 'star\marketing\models\ShoppingCoupon',
     ];
-
+    public $settingCode = 'system_module_marketing';
 } 

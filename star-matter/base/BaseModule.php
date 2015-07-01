@@ -14,8 +14,6 @@ use yii\base\Module;
 class BaseModule extends Module
 {
 
-    public $settingCode;
-
     public $modelMap = [];
 
     /**

@@ -18,5 +18,5 @@ class Bootstrap extends BaseBootstrap{
         'OrderSearch' => 'star\order\models\OrderSearch',
         'ShoppingCart' => 'star\cart\models\ShoppingCart',
     ];
-
+    public $settingCode = 'system_module_order';
 } 

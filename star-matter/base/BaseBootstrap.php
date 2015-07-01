@@ -8,6 +8,7 @@
 
 namespace matter\base;
 
+use star\system\models\SingletonSetting;
 use yii\base\BootstrapInterface;
 use yii\web\GroupUrlRule;
 
@@ -22,9 +23,16 @@ class BaseBootstrap implements BootstrapInterface
     /** @var  string module's name */
     public $_moduleName;
 
+    /** @var  string  */
+    public $settingCode;
+
     /** @inheritdoc */
     public function bootstrap($app)
     {
+
+        if(!\Yii::createObject(SingletonSetting::className())->getSettingValue($this->settingCode,$this->_moduleName)){
+            $app->setModule($this->_moduleName,null);
+        }
         /** @var $module BaseModule */
         if ($app->hasModule($this->_moduleName) && ($module = $app->getModule($this->_moduleName)) instanceof BaseModule) {
             $this->_modelMap = array_merge($this->_modelMap, $module->modelMap);

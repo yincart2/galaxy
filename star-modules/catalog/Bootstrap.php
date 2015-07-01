@@ -24,5 +24,5 @@ class Bootstrap extends BaseBootstrap{
         'PropValue' => 'star\catalog\models\PropValue',
         'Sku' => 'star\catalog\models\Sku',
     ];
-
+    public $settingCode = 'system_module_catalog';
 } 

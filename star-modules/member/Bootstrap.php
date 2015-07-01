@@ -17,5 +17,5 @@ class Bootstrap extends BaseBootstrap{
         'DeliveryAddress' => 'star\member\models\DeliveryAddress',
         'Wishlist' => 'star\member\models\Wishlist',
     ];
-
+    public $settingCode = 'system_module_member';
 } 

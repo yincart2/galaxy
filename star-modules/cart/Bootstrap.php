@@ -17,5 +17,5 @@ class Bootstrap extends BaseBootstrap{
         'Cart' => 'star\cart\models\Cart',
         'ShoppingCart' => 'star\cart\models\ShoppingCart',
     ];
-
+    public $settingCode = 'system_module_cart';
 } 

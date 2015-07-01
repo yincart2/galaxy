@@ -9,6 +9,7 @@
 namespace star\auth;
 
 use matter\base\BaseBootstrap;
+use matter\base\BaseModule;
 use yii\filters\AccessControl;
 
 class Bootstrap extends BaseBootstrap
@@ -19,22 +20,24 @@ class Bootstrap extends BaseBootstrap
         'RoleModel' => 'star\auth\models\RoleModel',
     ];
 
+    public $settingCode = 'system_module_auth';
 
     public function bootstrap($app){
-
         parent::bootstrap($app);
-        $accessControl = [
-            'class' => AccessControl::className(),
-            'rules' => [
-                // deny all POST requests
-                [
-                    'class' => 'star\auth\filters\AccessRule',
-                    'allow' => true,
+
+        if ($app->hasModule($this->_moduleName) && ($module = $app->getModule($this->_moduleName)) instanceof BaseModule) {
+            $accessControl = [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    // deny all POST requests
+                    [
+                        'class' => 'star\auth\filters\AccessRule',
+                        'allow' => true,
+                    ],
                 ],
-            ],
-        ];
+            ];
 
-        \Yii::$app->attachBehavior('accessControl', $accessControl);
-
+            \Yii::$app->attachBehavior('accessControl', $accessControl);
+        }
     }
 } 
