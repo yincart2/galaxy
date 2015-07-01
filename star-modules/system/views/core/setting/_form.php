@@ -29,6 +29,7 @@ $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\App
     <?= $form->field($model, 'group_sort')->textInput() ?>
 
     <h2><a id="add-row" href="javascript:void(0) ">添加属性值</a></h2>
+    如果选择type是 radio或者Checklist，  value填入的值需要是json数组，例子：{"1":"激活","2":"未激活"} 默认选择放在最后的值
     <fieldset>
         <legend>属性值</legend>
         <div class="PropValues">

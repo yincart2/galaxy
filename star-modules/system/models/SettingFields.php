@@ -45,9 +45,10 @@ class SettingFields extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'setting_id', 'fields_code', 'fields_label', 'value', 'setting_code'], 'required'],
+            [[ 'setting_id', 'fields_code', 'fields_label', 'value', 'setting_code','chosen_value'], 'required'],
             [['setting_fields_id', 'setting_id', 'type'], 'integer'],
-            [['fields_code', 'fields_label', 'value', 'setting_code','chosen_value'], 'string', 'max' => 255]
+            [['fields_code', 'fields_label', 'value', 'setting_code'], 'string', 'max' => 255],
+            ['setting_code','unique']
         ];
     }
 

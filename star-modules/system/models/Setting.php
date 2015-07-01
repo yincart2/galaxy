@@ -7,6 +7,7 @@ use yii\base\Exception;
 use yii\bootstrap\Collapse;
 use yii\bootstrap\Tabs;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "setting".
@@ -72,9 +73,19 @@ class Setting extends \yii\db\ActiveRecord
                 for ($i = 0; $i < $count; $i++) {
                     if (isset($settingFields['setting_fields_id'][$i]) && $settingFields['setting_fields_id'][$i]) {
                         $propValue = Yii::createObject(SettingFields::className());
+                        /** @var  $settingFieldsModel  SettingFields*/
                         $settingFieldsModel = $propValue::find()->where(['setting_fields_id' => $settingFields['setting_fields_id'][$i]])->one();;
                     } else {
                         $settingFieldsModel = Yii::createObject(SettingFields::className());
+                    }
+                    if($settingFields['type'][$i]!=SettingFields::TYPE_TEXT){
+                        $settingFieldsModel->setAttributes([
+                            'chosen_value' => end(array_keys(Json::decode($settingFields['value'][$i]))),
+                        ]);
+                    }else{
+                        $settingFieldsModel->setAttributes([
+                            'chosen_value' =>  $settingFields['value'][$i],
+                        ]);
                     }
                     $settingFieldsModel->setAttributes(array(
                         'setting_id' => $settingId,
@@ -83,10 +94,11 @@ class Setting extends \yii\db\ActiveRecord
                         'fields_label' => $settingFields['fields_label'][$i],
                         'value' => $settingFields['value'][$i],
                         'setting_code' => $this->menu_code . '_' . $this->group_code . '_' . $settingFields['fields_code'][$i],
-                        'status' => 1,
                     ));
                     if (isset($settingFields['setting_fields_id'][$i]) && $settingFields['setting_fields_id'][$i]) {
-                        $settingFieldsModel->update();
+                        if ($settingFieldsModel->update() == false) {
+                            throw new Exception(Yii::t('system', 'save attributes fail'));
+                             }
                     } else {
                         if (!$settingFieldsModel->save()) {
                             throw new Exception(Yii::t('system', 'save attributes fail'));
