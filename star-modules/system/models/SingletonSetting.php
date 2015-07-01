@@ -15,9 +15,9 @@ use yii\base\Model;
 class SingletonSetting extends Model{
 
     public static  function getSettingValue($code,$moduleName){
-        $settingFieldsModel = SettingFields::find()->where(['setting_code'=>$code,'status'=>1])->one();
+        $settingFieldsModel = SettingFields::findOne(['setting_code'=>$code]);
         if($settingFieldsModel){
-            return $settingFieldsModel->value;
+            return $settingFieldsModel->chosen_value;
         }else{
            throw new Exception(\Yii::t('system','the '.$moduleName.' Module\'s setting code is not exist:'. $code));
         }

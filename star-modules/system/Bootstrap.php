@@ -11,6 +11,7 @@ namespace star\system;
 
 use matter\base\BaseBootstrap;
 use matter\base\BaseModule;
+use yii\helpers\Json;
 use yii\web\GroupUrlRule;
 
 class Bootstrap extends BaseBootstrap{

@@ -13,7 +13,7 @@ use Yii;
  * @property string $fields_label
  * @property string $value
  * @property integer $type
- * @property integer $status
+ * @property integer $chosen_value
  * @property string $setting_code
  */
 class SettingFields extends \yii\db\ActiveRecord
@@ -46,8 +46,8 @@ class SettingFields extends \yii\db\ActiveRecord
     {
         return [
             [[ 'setting_id', 'fields_code', 'fields_label', 'value', 'setting_code'], 'required'],
-            [['setting_fields_id', 'setting_id', 'type','status'], 'integer'],
-            [['fields_code', 'fields_label', 'value', 'setting_code'], 'string', 'max' => 255]
+            [['setting_fields_id', 'setting_id', 'type'], 'integer'],
+            [['fields_code', 'fields_label', 'value', 'setting_code','chosen_value'], 'string', 'max' => 255]
         ];
     }
 
