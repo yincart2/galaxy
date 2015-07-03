@@ -73,18 +73,18 @@ class Setting extends \yii\db\ActiveRecord
                 for ($i = 0; $i < $count; $i++) {
                     if (isset($settingFields['setting_fields_id'][$i]) && $settingFields['setting_fields_id'][$i]) {
                         $propValue = Yii::createObject(SettingFields::className());
-                        /** @var  $settingFieldsModel  SettingFields*/
+                        /** @var  $settingFieldsModel  SettingFields */
                         $settingFieldsModel = $propValue::find()->where(['setting_fields_id' => $settingFields['setting_fields_id'][$i]])->one();;
                     } else {
                         $settingFieldsModel = Yii::createObject(SettingFields::className());
                     }
-                    if($settingFields['type'][$i]!=SettingFields::TYPE_TEXT){
+                    if ($settingFields['type'][$i] != SettingFields::TYPE_TEXT) {
                         $settingFieldsModel->setAttributes([
                             'chosen_value' => end(array_keys(Json::decode($settingFields['value'][$i]))),
                         ]);
-                    }else{
+                    } else {
                         $settingFieldsModel->setAttributes([
-                            'chosen_value' =>  $settingFields['value'][$i],
+                            'chosen_value' => $settingFields['value'][$i],
                         ]);
                     }
                     $settingFieldsModel->setAttributes(array(
@@ -145,8 +145,7 @@ class Setting extends \yii\db\ActiveRecord
             /** @var \star\system\models\SettingFields $settingField */
             foreach ($settingFields as $settingField) {
                 if ($settingField->type == 2 || $settingField->type == 3) {
-                    $data = [];
-                    $data[$settingField->value] = $settingField->value;
+                    $data = json_decode($settingField->value);
 
                     if (isset($fieldsConfig[$settingField->setting_code])) {
                         $data = ArrayHelper::merge($fieldsConfig[$settingField->setting_code]['value'], $data);
@@ -198,12 +197,6 @@ class Setting extends \yii\db\ActiveRecord
      */
     public function renderForm($form, $options = [])
     {
-        if (!$options) {
-            $template = "{label}\n<div class=\"col-sm-11\">{input}\n<div style=\"width:60%\">{hint}\n</div>{error}</div>";
-            $labelOptions = ['class' => 'control-label col-sm-1'];
-            $options = ['template' => $template, 'labelOptions' => $labelOptions, 'inputOptions' => ['class' => 'form-control', 'style' => 'width: 50%']];
-        }
-
         $config = $this->getSystemConfig();
 
         $tabItems = [];
@@ -211,21 +204,26 @@ class Setting extends \yii\db\ActiveRecord
             $groupItems = [];
             foreach ($tab['groups'] as $groupKey => $group) {
                 $groupContent = '';
-                $dataList = [];
                 foreach ($group['fields'] as $fieldKey => $field) {
+
+                    $inlineRadioListTemplate = "<label class = \"control-label col-sm-1\">" . $field['label'] . "</label>\n<div class=\"col-sm-11\">{input}\n{hint}\n{error}</div>";
+                    $inlineCheckboxListTemplate = "<label class = \"control-label col-sm-1\">" . $field['label'] . "</label>\n<div class=\"col-sm-11\">{input}\n{hint}\n{error}</div>";
+
                     $options['template'] = "<label class = \"control-label col-sm-1\">" . $field['label'] . "</label>\n<div class=\"col-sm-11\">{input}\n<div style=\"width:60%\">{hint}\n</div>{error}</div>";
                     $fieldOptions = array_merge($options, ['options' => ['class' => 'form-group'], 'inputOptions' => ['name' => 'setting_code[' . $field['setting_code'] . ']']]);
 
                     /** @var \yii\bootstrap\ActiveField $activeField */
                     $fieldClass = Yii::createObject(SettingFields::className());
-                    $activeField = $form->field($fieldClass::findOne(['setting_code' => $field['setting_code']]), 'value', $fieldOptions);
+                    $fieldModel = $fieldClass::findOne(['setting_code' => $field['setting_code']]);
+//                    $fieldModel->chosen_value = json_decode($fieldModel->chosen_value);
+                    $activeField = $form->field($fieldModel, 'chosen_value', $fieldOptions);
 
                     switch ($field['inputType']) {
                         case 3:
-                            $activeField->inline()->checkboxList($field['value'], $fieldOptions);
+                            $activeField->inline()->checkboxList($field['value'], ['name' => 'setting_code[' . $field['setting_code'] . ']', 'template' => $inlineCheckboxListTemplate]);
                             break;
                         case 2:
-                            $activeField->inline()->radioList($field['value'], $fieldOptions);
+                            $activeField->inline()->radioList($field['value'], ['name' => 'setting_code[' . $field['setting_code'] . ']', 'template' => $inlineRadioListTemplate]);
                             break;
                         case 1:
                             $activeField->textInput();
