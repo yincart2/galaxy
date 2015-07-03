@@ -215,7 +215,9 @@ class Setting extends \yii\db\ActiveRecord
                     /** @var \yii\bootstrap\ActiveField $activeField */
                     $fieldClass = Yii::createObject(SettingFields::className());
                     $fieldModel = $fieldClass::findOne(['setting_code' => $field['setting_code']]);
-//                    $fieldModel->chosen_value = json_decode($fieldModel->chosen_value);
+                    if($field['inputType'] == 3) {
+                        $fieldModel->chosen_value = json_decode($fieldModel->chosen_value, true);
+                    }
                     $activeField = $form->field($fieldModel, 'chosen_value', $fieldOptions);
 
                     switch ($field['inputType']) {
