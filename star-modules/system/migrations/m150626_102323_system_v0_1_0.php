@@ -30,7 +30,8 @@ class m150626_102323_system_v0_1_0 extends Migration
 
         $this->batchInsert('{{%setting}}', ['setting_id', 'menu_code', 'menu_label', 'group_code', 'group_label', 'menu_sort','group_sort'],
             [
-                [1,'system','系统','module','模块','1','1']
+                [1,'system','系统','module','模块','1','1'],
+                [2,'payment','支付','alipay','支付宝','2','1'],
             ]);
 
         $this->batchInsert('{{%setting_fields}}', ['setting_id', 'fields_code', 'fields_label', 'value', 'setting_code', 'type','chosen_value'],
@@ -42,6 +43,10 @@ class m150626_102323_system_v0_1_0 extends Migration
                 [1,'member','Member','["未激活","激活"]','system_module_member',2,1],
                 [1,'order','Order','["未激活","激活"]','system_module_order',2,1],
                 [1,'shipment','Shipment','["未激活","激活"]','system_module_shipment',2,1],
+                [1,'payment','Payment','["未激活","激活"]','system_module_payment',2,1],
+                [2,'pid','PID','1','payment_alipay_pid',1,1],
+                [2,'key','KEY','1','payment_alipay_key',1,1],
+                [2,'sellerEmail','卖家邮箱','1','payment_alipay_sellerEmail',1,1],
             ]);
     }
 

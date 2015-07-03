@@ -66,7 +66,7 @@ class OrderController extends Controller
         $orderModel->items = Yii::$app->request->post('items');
         if ($orderModel->saveOrder()) {
 
-//            return $this->redirect(['alipay/index', 'id' => $orderModel->order_id]);
+            return $this->redirect(['/payment/home/alipay/index', 'id' => $orderModel->order_id]);
             return Json::encode(['message' => \Yii::t('app', 'create order success'), 'redirect' => 'success']);
         } else {
             return Json::encode(['message' =>'下单失败', 'redirect' => Url::to(['/order/order/index'])]);

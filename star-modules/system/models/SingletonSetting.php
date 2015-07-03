@@ -14,7 +14,7 @@ use yii\base\Model;
 
 class SingletonSetting extends Model{
 
-    public static  function getSettingValue($code,$moduleName){
+    public static  function getSettingValue($code,$moduleName=null){
         $settingFieldsModel = SettingFields::findOne(['setting_code'=>$code]);
         if($settingFieldsModel){
             return $settingFieldsModel->chosen_value;

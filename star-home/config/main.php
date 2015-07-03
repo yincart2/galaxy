@@ -38,6 +38,12 @@ return [
         'order' => [
             'class' =>'star\order\Module',
         ],
+        'shipment' => [
+            'class' =>'star\shipment\Module',
+        ],
+        'payment' => [
+            'class' =>'star\payment\Module',
+        ],
     ],
     'components' => [
         'urlManager'=>[

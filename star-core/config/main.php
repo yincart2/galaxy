@@ -66,6 +66,9 @@ return [
         'shipment' => [
             'class' =>'star\shipment\Module',
         ],
+        'payment' => [
+            'class' =>'star\payment\Module',
+        ],
     ],
     'components' => [
         'user' => [
