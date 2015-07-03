@@ -13,11 +13,8 @@ use matter\base\BaseBootstrap;
 class Bootstrap extends BaseBootstrap{
 
     public  $_modelMap = [
+        'Payment' => 'star\payment\models\Payment',
         'Order' => 'star\order\models\Order',
-        'OrderItem' => 'star\order\models\OrderItem',
-        'OrderSearch' => 'star\order\models\OrderSearch',
-        'ShoppingCart' => 'star\cart\models\ShoppingCart',
-        'Shipment' => 'star\shipment\models\Shipment',
     ];
     public $settingCode = 'system_module_payment';
 } 
