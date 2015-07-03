@@ -34,7 +34,6 @@ class AlipayController extends \yii\web\Controller
 
     public function actionIndex($id)
     {
-//        return $this->render('index', ['model' => Kiwi::getAlipayForm()]);
         $order = \Yii::createObject(Order::className())->findOne($id);
 
         $addressArray = explode(' ', $order->address);
@@ -85,11 +84,6 @@ class AlipayController extends \yii\web\Controller
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
 
-                $payment = \Yii::createObject(Payment::className());
-                $payment->transcation_no = \Yii::$app->request->post('trade_no');
-                $payment->status = 0;
-                $order->payment = $payment;
-                $order->save();
 
                 echo "success"; //请不要修改或删除
 
@@ -102,10 +96,14 @@ class AlipayController extends \yii\web\Controller
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
 
-                $payment = $order->payment;
-                $payment->status = 1;
-                $order->payment = $payment;
-                $order->status = 2;
+                $payment = \Yii::createObject(Payment::className());
+                $payment->order_id = $order->order_id;
+                $payment->status = $payment::STATUS_BUYER_PAY;
+                $payment->payment_method = $payment::ALIPAY;
+                $payment->payment_fee = \Yii::$app->request->post('price');
+                $payment->transcation_no = \Yii::$app->request->post('subject');
+                $payment->save();
+                $order->status = $order::STATUS_WAIT_SHIPMENT;
                 $order->save();
 
                 echo "success"; //请不要修改或删除

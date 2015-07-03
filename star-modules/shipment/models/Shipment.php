@@ -3,6 +3,7 @@
 namespace star\shipment\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "shipment".
@@ -30,7 +31,7 @@ class Shipment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'shipment_method', 'trace_no', 'create_at', 'status'], 'required'],
+            [['order_id', 'shipment_method', 'trace_no', 'status'], 'required'],
             [['order_id', 'create_at', 'status'], 'integer'],
             [['shipment_method', 'trace_no'], 'string', 'max' => 255]
         ];
@@ -48,6 +49,17 @@ class Shipment extends \yii\db\ActiveRecord
             'trace_no' => Yii::t('shipment', 'Trace No'),
             'create_at' => Yii::t('shipment', 'Create At'),
             'status' => Yii::t('shipment', 'Status'),
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_at',
+                'updatedAtAttribute' => false,
+            ]
         ];
     }
 }

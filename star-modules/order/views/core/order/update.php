@@ -50,31 +50,52 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
         'model' => $model,
     ]) ;
 
-    if ($model->shipment) {
-        if($model->shipment->status!= 1){
+    if ($model->payment) {
+        $paymentInfo = DetailView::widget([
+            'model' => $model->payment,
+            'attributes' => [
+                'payment_method',
+                'payment_fee',
+                'transcation_no',
+                'create_at:datetime',
+
+            ]
+        ]);
+    } else {
+        $paymentInfo = Yii::t('order', 'Not Paid');
+    }
+
+    if ($model->payment) {
+        if ($model->shipment) {
+            if($model->shipment->status!= 1){
+                $shipmentInfo = $this->render('_shipment', [
+                    'model' => $model->shipment,
+                ]);
+            }else{
+                $shipmentInfo = DetailView::widget([
+                    'model' => $model->shipment,
+                    'attributes' => [
+                        'shipment_method',
+                        'trace_no',
+                        'create_at:datetime',
+                    ]
+                ]);
+            }
+        } else {
+            $shipment = Yii::createObject(\star\shipment\models\Shipment::className());
             $shipmentInfo = $this->render('_shipment', [
-                'model' => $model->shipment,
-            ]);
-        }else{
-            $shipmentInfo = DetailView::widget([
-                'model' => $model->shipment,
-                'attributes' => [
-                    'shipment_method',
-                    'trace_no',
-                    'create_at:datetime',
-                ]
+                'model' => $shipment,
+                'orderModel'=>$model,
             ]);
         }
     } else {
-        $shipment =  Yii::createObject(\star\shipment\models\Shipment::className());
-        $shipmentInfo = $this->render('_shipment', [
-            'model' => $shipment,
-        ]);
+        $shipmentInfo = Yii::t('order', 'Not Paid');
     }
+
 
      $items = [
          ['label' => Yii::t('order', 'Order'), 'content' => $orderItemArray.$orderInfo.$orderInfo2],
-//         ['label' => Yii::t('app', 'Payment'), 'content' => $paymentInfo],
+         ['label' => Yii::t('app', 'Payment'), 'content' => $paymentInfo],
          ['label' => Yii::t('order', 'Shipment'), 'content' => $shipmentInfo],
 //        ['label' => Yii::t('app', 'Refund'), 'content' => ''],
      ];

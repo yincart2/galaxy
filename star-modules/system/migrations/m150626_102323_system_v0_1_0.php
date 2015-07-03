@@ -46,7 +46,7 @@ class m150626_102323_system_v0_1_0 extends Migration
                 [1,'payment','Payment','["未激活","激活"]','system_module_payment',2,1],
                 [2,'pid','PID','1','payment_alipay_pid',1,1],
                 [2,'key','KEY','1','payment_alipay_key',1,1],
-                [2,'sellerEmail','卖家邮箱','1','payment_alipay_sellerEmail',1,1],
+                [2,'sellerEmail','支付宝账号','1','payment_alipay_sellerEmail',1,1],
             ]);
     }
 

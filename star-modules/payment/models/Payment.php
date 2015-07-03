@@ -3,6 +3,7 @@
 namespace star\payment\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "payment".
@@ -17,6 +18,11 @@ use Yii;
  */
 class Payment extends \yii\db\ActiveRecord
 {
+    const ALIPAY = 1;
+
+
+    const STATUS_WAIT_BUYER_PAY = 0;
+    const STATUS_BUYER_PAY = 1;
     /**
      * @inheritdoc
      */
@@ -31,7 +37,7 @@ class Payment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'payment_method', 'payment_fee', 'transcation_no', 'create_at', 'status'], 'required'],
+            [['order_id', 'payment_method', 'payment_fee', 'transcation_no',  'status'], 'required'],
             [['order_id', 'payment_method', 'create_at', 'status'], 'integer'],
             [['payment_fee'], 'number'],
             [['transcation_no'], 'string', 'max' => 255]
@@ -51,6 +57,17 @@ class Payment extends \yii\db\ActiveRecord
             'transcation_no' => Yii::t('payment', 'Transcation No'),
             'create_at' => Yii::t('payment', 'Create At'),
             'status' => Yii::t('payment', 'Status'),
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_at',
+                'updatedAtAttribute' => false,
+            ]
         ];
     }
 }

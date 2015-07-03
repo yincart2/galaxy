@@ -5,6 +5,7 @@ namespace star\order\models;
 use dektrium\user\models\User;
 use cluster\modules\cart\models\ShoppingCart;
 use star\catalog\models\Sku;
+use star\payment\models\Payment;
 use star\shipment\models\Shipment;
 use Yii;
 use yii\base\ModelEvent;
@@ -104,10 +105,10 @@ class Order extends \yii\db\ActiveRecord
     }
 
     //todo
-//    public function getPayment()
-//    {
-//        return $this->hasOne(Payment::className(), ['order_id' => 'order_id']);
-//    }
+    public function getPayment()
+    {
+        return $this->hasOne(Payment::className(), ['order_id' => 'order_id']);
+    }
 
     //todo
     public function getShipment()
