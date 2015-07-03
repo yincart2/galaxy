@@ -50,6 +50,28 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
         'model' => $model,
     ]) ;
 
+    if ($model->shipment) {
+        if($model->shipment->status!= 1){
+            $shipmentInfo = $this->render('_shipment', [
+                'model' => $model->shipment,
+            ]);
+        }else{
+            $shipmentInfo = DetailView::widget([
+                'model' => $model->shipment,
+                'attributes' => [
+                    'shipment_method',
+                    'trace_no',
+                    'create_at:datetime',
+                ]
+            ]);
+        }
+    } else {
+        $shipment =  Yii::createObject(\star\shipment\models\Shipment::className());
+        $shipmentInfo = $this->render('_shipment', [
+            'model' => $shipment,
+        ]);
+    }
+
      $items = [
          ['label' => Yii::t('order', 'Order'), 'content' => $orderItemArray.$orderInfo.$orderInfo2],
 //         ['label' => Yii::t('app', 'Payment'), 'content' => $paymentInfo],

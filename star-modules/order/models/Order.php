@@ -5,6 +5,7 @@ namespace star\order\models;
 use dektrium\user\models\User;
 use cluster\modules\cart\models\ShoppingCart;
 use star\catalog\models\Sku;
+use star\shipment\models\Shipment;
 use Yii;
 use yii\base\ModelEvent;
 use yii\behaviors\TimestampBehavior;
@@ -109,10 +110,10 @@ class Order extends \yii\db\ActiveRecord
 //    }
 
     //todo
-//    public function getShipment()
-//    {
-//        return $this->hasOne(Shipment::className(), ['order_id' => 'order_id']);
-//    }
+    public function getShipment()
+    {
+        return $this->hasOne(Shipment::className(), ['order_id' => 'order_id']);
+    }
 
     //todo
 //    public function getRefund()

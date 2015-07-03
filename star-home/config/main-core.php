@@ -43,6 +43,9 @@ return [
         'system' => [
             'class' =>'star\system\Module',
         ],
+        'shipment' => [
+            'class' =>'star\shipment\Module',
+        ],
     ],
     'components' => [
         'urlManager'=>[

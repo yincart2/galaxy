@@ -41,6 +41,7 @@ class m150626_102323_system_v0_1_0 extends Migration
                 [1,'marketing','Marketing','["未激活","激活"]','system_module_marketing',2,1],
                 [1,'member','Member','["未激活","激活"]','system_module_member',2,1],
                 [1,'order','Order','["未激活","激活"]','system_module_order',2,1],
+                [1,'shipment','Shipment','["未激活","激活"]','system_module_shipment',2,1],
             ]);
     }
 

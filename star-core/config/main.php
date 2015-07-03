@@ -62,7 +62,10 @@ return [
         'refund' => [
             'class' =>'star\refund\Module',
 
-        ]
+        ],
+        'shipment' => [
+            'class' =>'star\shipment\Module',
+        ],
     ],
     'components' => [
         'user' => [
