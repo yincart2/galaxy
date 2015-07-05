@@ -92,15 +92,15 @@ return [
         'view'=>[
             'theme'=>[
                 'pathMap'=>[
-                    '@app/views'=>'@theme/star/home/',
-                    '@star/blog/views/home'=>'@theme/star/home/views/blog',
-                    '@star/catalog/views/home'=>'@theme/star/home/modules/catalog',
-                    '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
-                    '@star/member/views'=>'@theme/star/home/modules/member',
-                    '@star/cart/views'=>'@theme/star/home/modules/cart',
-                    '@star/order/views/home'=>'@theme/star/home/modules/order',
+                    '@app/views'=>'@theme/home/default/',
+                    '@star/blog/views/home'=>'@theme/home/default/views/blog',
+                    '@star/catalog/views/home'=>'@theme/home/default/modules/catalog',
+                    '@app/blog/widgets/home/views'=>'@theme/home/default/views/blog/widgets',
+                    '@star/member/views'=>'@theme/home/default/modules/member',
+                    '@star/cart/views'=>'@theme/home/default/modules/cart',
+                    '@star/order/views/home'=>'@theme/home/default/modules/order',
                 ],
-                'baseUrl'=>'@theme/star/home'
+                'baseUrl'=>'@theme/home/default'
             ]
         ]
     ],

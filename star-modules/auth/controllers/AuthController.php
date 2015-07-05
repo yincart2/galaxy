@@ -14,7 +14,7 @@ use dektrium\rbac\models\Search;
 
 class AuthController  extends Controller{
 
-    public $layout = '/core-auth';
+    public $layout = '/auth';
      public function actionCreate(){
          $role = \Yii::createObject(RoleModel::className());
          if ($role->load(\Yii::$app->request->post()) ){

@@ -3,7 +3,7 @@
 namespace star\catalog\models;
 
 use Yii;
-use common\models\Tree;
+use star\system\models\Tree;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Json;
 use yii\imagine\Image;

@@ -5,7 +5,7 @@ namespace star\blog\models;
 use matter\behaviors\ArrayToStringBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use common\models\Tree;
+use star\system\models\Tree;
 use dektrium\user\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;

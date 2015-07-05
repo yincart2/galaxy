@@ -61,13 +61,15 @@ return [
         ],
         'refund' => [
             'class' =>'star\refund\Module',
-
         ],
         'shipment' => [
             'class' =>'star\shipment\Module',
         ],
         'payment' => [
             'class' =>'star\payment\Module',
+        ],
+        'system' => [
+            'class' =>'star\system\Module',
         ],
     ],
     'components' => [
@@ -99,9 +101,9 @@ return [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    '@core/views' => '@theme/star/core/',
+                    '@core/views' => '@theme/core/default/',
                 ],
-                'baseUrl' => '@theme/star/home'
+                'baseUrl' => '@theme/core/default/'
             ]
         ]
     ],

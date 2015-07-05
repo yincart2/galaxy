@@ -2,7 +2,7 @@
 
 namespace star\order\models;
 
-use common\models\Tree;
+use star\system\models\Tree;
 use Yii;
 use yii\helpers\ArrayHelper;
 

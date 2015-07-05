@@ -9,7 +9,7 @@
 namespace cluster\controllers;
 
 use yii\web\Controller;
-use common\models\Tree;
+use star\system\models\Tree;
 
 class TreeController extends Controller
 {

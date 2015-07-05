@@ -66,7 +66,7 @@ if (isset($model->start_at) && isset($model->end_at)) {
     $fields[] = $form->field($model, 'total_price')->textInput(['maxlength' => true]);
     $fields[] = $form->field($model, 'qty')->textInput(['maxlength' => true]);
 
-    $root = \common\models\Tree::find()->where(['name' => '商品分类'])->one();
+    $root = \star\system\models\Tree::find()->where(['name' => '商品分类'])->one();
     $categories = $root->children(1)->all();
     $categories = ArrayHelper::map($categories, 'id', 'name');
     $fields[] = $form->field($model, 'category_id')->widget(Select2::classname(), [

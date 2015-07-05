@@ -2,7 +2,7 @@
 
 namespace star\catalog\controllers\home;
 
-use common\models\Tree;
+use star\system\models\Tree;
 use star\catalog\models\Item;
 use yii\web\Controller;
 use yii\data\Pagination;

@@ -2,7 +2,7 @@
 
 namespace star\member\controllers;
 
-use common\models\Area;
+use star\system\models\Area;
 use yii\helpers\Json;
 use star\member\models\DeliveryAddress;
 use yii\web\Controller;

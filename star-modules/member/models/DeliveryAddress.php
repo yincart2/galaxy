@@ -2,7 +2,7 @@
 
 namespace star\member\models;
 
-use common\models\Area;
+use star\system\models\Area;
 use Yii;
 
 /**
@@ -19,9 +19,9 @@ use Yii;
  * @property string $name
  * @property integer $is_default
  *
- * @property \common\models\Area $provinceArea
- * @property \common\models\Area $cityArea
- * @property \common\models\Area $districtArea
+ * @property \star\system\models\Area $provinceArea
+ * @property \star\system\models\Area $cityArea
+ * @property \star\system\models\Area $districtArea
  */
 class DeliveryAddress extends \yii\db\ActiveRecord
 {

@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\Tree;
+use star\system\models\Tree;
 use mihaildev\ckeditor\CKEditor;
 use kartik\widgets\Select2;
 use common\modules\blog\models\Tag;

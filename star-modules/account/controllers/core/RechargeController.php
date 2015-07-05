@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
  */
 class RechargeController extends Controller
 {
-    public $layout = '/core-account';
+    public $layout = '/account';
     public function behaviors()
     {
         return [

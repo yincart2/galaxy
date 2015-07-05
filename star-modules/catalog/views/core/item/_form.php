@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\Tree;
+use star\system\models\Tree;
 use yii\bootstrap\Tabs;
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Url;

@@ -47,6 +47,10 @@ cluster.dev 对应star-cluster
 
 数据库位于console/data/galaxy_latest.sql
 
+Migration
+--------
+yii migrate/up system_v0_1_0 --migrationPath=@star/system/migrations
+
 YII2 DIRECTORY STRUCTURE
 -------------------
 

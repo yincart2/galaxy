@@ -29,3 +29,8 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 star-image/
+
+star-merchant/runtime
+star-cluster/runtime
+star-core/runtime
+star-citizen/runtime
