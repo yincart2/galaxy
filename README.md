@@ -29,6 +29,14 @@ Yincart2 Galaxy System
 
 微信商城
 
+### star Merchant
+
+商家后台
+
+### star Image
+
+图片空间
+
 虚拟域名配置说明
 ----------------
 
@@ -37,6 +45,10 @@ core.dev 对应star-core目录
 home.dev 对应star-home
 
 cluster.dev 对应star-cluster
+
+image.dev 对应star-image
+
+merchant.dev 对应star-merchant
 
 ....
 

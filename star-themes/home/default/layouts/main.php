@@ -26,7 +26,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php
     $this->head();
-    list($path, $link) = $this->getAssetManager()->publish('@theme/star/home/assets');
+    list($path, $link) = $this->getAssetManager()->publish('@theme/home/default/assets');
     $this->registerCssFile($link . '/css/camera.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
     $this->registerCssFile($link . '/css/owl.carousel.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
     $this->registerCssFile($link . '/css/owl.transitions.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
