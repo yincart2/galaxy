@@ -19,6 +19,7 @@ $this->beginContent('@theme/core/default/layouts/main.php');
                         'encodeLabels' => false,
                         'heading' => $heading,
                         'items' => [
+                            ['label' => Yii::t('system','System'), 'icon' => 'book', 'url' => Url::to(['/system/core/system/index', $type]), 'active' => ($item == 'tree')],
                             ['label' => Yii::t('system','Tree'), 'icon' => 'book', 'url' => Url::to(['/system/core/tree/index', $type]), 'active' => ($item == 'tree')],
                             ['label' => Yii::t('system','Station'), 'icon' => 'tags', 'url' => Url::to(['/system/core/station/index', $type]), 'active' => ($item == 'stations')],
                         ],
