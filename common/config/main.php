@@ -55,6 +55,11 @@ return [
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@star/account/messages',
                 ],
+                'refund' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/refund/messages',
+                ],
             ],
         ],
         'urlManager' => [
