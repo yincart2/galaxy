@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel star\account\models\WithdrawalSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('coupon', 'Withdrawals');
+$this->title = Yii::t('account', 'Withdrawals');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="withdrawal-index">

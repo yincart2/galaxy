@@ -6,7 +6,7 @@ use kartik\grid\GridView;
 /* @var $searchModel star\account\models\RechargeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('order', 'Recharges');
+$this->title = Yii::t('account', 'Recharges');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="recharge-index">

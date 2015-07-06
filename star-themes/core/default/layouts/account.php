@@ -13,7 +13,7 @@ $this->beginContent('@theme/core/default/layouts/main.php');
                 <div class="col-md-2 col-sm-4">
                     <?php
                     $type = 'http';
-                    $heading = Yii::t('account','Account');
+                    $heading = Yii::t('account','Account Manage');
                     $item = 'home';
 
                     echo SideNav::widget([
@@ -21,8 +21,8 @@ $this->beginContent('@theme/core/default/layouts/main.php');
                         'encodeLabels' => false,
                         'heading' => $heading,
                         'items' => [
-                            ['label' => Yii::t('catalog','Withdrawal'), 'icon' => 'book', 'url' => Url::to(['/account/core/account/withdrawal-index', $type]), 'active' => ($item == 'withdrawal-index')],
-                            ['label' => Yii::t('catalog','Recharge'), 'icon' => 'tags', 'url' => Url::to(['/account/core/recharge/index', $type]), 'active' => ($item == 'recharge')],
+                            ['label' => Yii::t('account','Withdrawal'), 'icon' => 'book', 'url' => Url::to(['/account/core/account/withdrawal-index', $type]), 'active' => ($item == 'withdrawal-index')],
+                            ['label' => Yii::t('account','Recharge'), 'icon' => 'tags', 'url' => Url::to(['/account/core/recharge/index', $type]), 'active' => ($item == 'recharge')],
                         ],
                     ]);
                     ?>

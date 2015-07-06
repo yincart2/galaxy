@@ -49,7 +49,12 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@star/marketing/messages',
-                ]
+                ],
+                'account' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/account/messages',
+                ],
             ],
         ],
         'urlManager' => [
