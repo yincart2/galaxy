@@ -8,7 +8,7 @@ use yii\helpers\Url;
 
 /** @var  $itemModel  \star\catalog\models\Item*/
 
-$link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
+$link = $this->getAssetManager()->getPublishedUrl('@theme/home/default/assets');
 
 $this->registerJsFile($link . '/js/fsku.js',['depends' => [\yii\web\JqueryAsset::className()]] );
 $this->registerCssFile($link . '/css/sku.css');

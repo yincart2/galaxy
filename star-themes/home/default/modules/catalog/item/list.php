@@ -3,7 +3,7 @@ use star\system\models\Tree;
 use yii\widgets\LinkPager;
 use yii\helpers\Url;
 
-$link = $this->getAssetManager()->getPublishedUrl('@theme/star/home/assets');
+$link = $this->getAssetManager()->getPublishedUrl('@theme/home/default/assets');
 $this->registerJsFile($link . '/js/wishlist.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile($link . '/js/compare.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 

@@ -7,6 +7,7 @@ class m150624_084848_auth_v0_1_0 extends Migration
 {
     public function up()
     {
+
         $this->batchInsert('{{%auth_item}}', ['name', 'type', 'description', 'rule_name', 'data', 'created_at', 'updated_at'],
             [
                 ['Administrator', 1, '', NULL, NULL, 1432554006, 1432554059],
@@ -184,6 +185,10 @@ class m150624_084848_auth_v0_1_0 extends Migration
                 ['Merchant', 'star\\system\\controllers\\core\\SystemController_Update'],
                 ['Merchant', 'star\\system\\controllers\\core\\TreeController_Index'],
 
+            ]);
+        $this->batchInsert('{{%auth_assignment}}', ['item_name', 'user_id', 'created_at'],
+            [
+                    ['Administrator',1,1436169982]
             ]);
     }
 
