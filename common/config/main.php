@@ -11,14 +11,17 @@ return [
         'utility' => [
             'class' => 'c006\utility\migration\Module',
         ],
-        'gridview' =>  [
+        'gridview' => [
             'class' => '\kartik\grid\Module',
             'i18n' => [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => '@kvgrid/messages',
                 'forceTranslation' => true
             ]
-        ]
+        ],
+        'auth' => [
+            'class'=>'star\auth\Module',
+        ],
     ],
     'components' => [
         'i18n' => [
@@ -41,6 +44,11 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@star/order/messages',
+                ],
+                'marketing' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/marketing/messages',
                 ]
             ],
         ],
@@ -50,7 +58,7 @@ return [
             'enableStrictParsing' => false,
             'rules' => [
                 '<controller:\w+>s' => '<controller>/index',
-                '<controller:\w+>/<id:\d+>'        => '<controller>/view',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
             ],
         ],
         'cache' => [

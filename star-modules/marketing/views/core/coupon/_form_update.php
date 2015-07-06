@@ -59,7 +59,7 @@ $stationArray = ArrayHelper::map($stations, 'id', 'name');
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">
-            <?= Html::submitButton(Yii::t('coupon', 'Update'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('marketing', 'Create Coupon'), ['class' => 'btn btn-primary']) ?>
         </div>
     </div>
 

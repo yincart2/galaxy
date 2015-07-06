@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model star\marketing\models\Coupon */
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('coupon', 'Coupons'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = Yii::t('coupon', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('marketing', 'Coupons'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = Yii::t('marketing', 'Update');
 ?>
 <div class="coupon-update">
 

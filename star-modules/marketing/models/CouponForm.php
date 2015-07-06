@@ -58,19 +58,19 @@ class CouponForm extends Model
     public function attributeLabels()
     {
         return [
-            'status' => Yii::t('coupon', 'Status'),
-            'start_at' => Yii::t('coupon', 'Start At'),
-            'end_at' => Yii::t('coupon', 'End At'),
-            'star_id' => Yii::t('coupon', 'Star ID'),
-            'total' => Yii::t('coupon', 'Total'),
-            'desc' => Yii::t('coupon', 'Description'),
-            'total_price' => Yii::t('coupon', 'Total Price'),
-            'qty' => Yii::t('coupon', 'quantity'),
-            'category_id' => Yii::t('coupon', 'Categories'),
-            'type' => Yii::t('coupon', 'Type'),
-            'number' => Yii::t('coupon', 'Number'),
-            'shipping' => Yii::t('coupon', 'Shipping'),
-            'shippingFee' => Yii::t('coupon', 'Shipping Fee'),
+            'status' => Yii::t('marketing', 'Status'),
+            'start_at' => Yii::t('marketing', 'Start At'),
+            'end_at' => Yii::t('marketing', 'End At'),
+            'star_id' => Yii::t('marketing', 'Star ID'),
+            'total' => Yii::t('marketing', 'Total'),
+            'desc' => Yii::t('marketing', 'Description'),
+            'total_price' => Yii::t('marketing', 'Total Price'),
+            'qty' => Yii::t('marketing', 'quantity'),
+            'category_id' => Yii::t('marketing', 'Categories'),
+            'type' => Yii::t('marketing', 'Type'),
+            'number' => Yii::t('marketing', 'Number'),
+            'shipping' => Yii::t('marketing', 'Shipping'),
+            'shippingFee' => Yii::t('marketing', 'Shipping Fee'),
         ];
     }
 

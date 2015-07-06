@@ -51,17 +51,17 @@ class Coupon extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'coupon_id' => Yii::t('coupon', 'Coupon ID'),
-            'coupon_no' => Yii::t('coupon', 'Coupon No'),
-            'rule_id' => Yii::t('coupon', 'Rule ID'),
-            'order_id' => Yii::t('coupon', 'Order ID'),
-            'user_id' => Yii::t('coupon', 'User ID'),
-            'status' => Yii::t('coupon', 'Status'),
-            'created_at' => Yii::t('coupon', 'Created At'),
-            'updated_at' => Yii::t('coupon', 'Updated At'),
-            'start_at' => Yii::t('coupon', 'Start At'),
-            'end_at' => Yii::t('coupon', 'End At'),
-            'star_id' => Yii::t('coupon', 'Star ID'),
+            'coupon_id' => Yii::t('marketing', 'Coupon ID'),
+            'coupon_no' => Yii::t('marketing', 'Coupon No'),
+            'rule_id' => Yii::t('marketing', 'Rule ID'),
+            'order_id' => Yii::t('marketing', 'Order ID'),
+            'user_id' => Yii::t('marketing', 'User ID'),
+            'status' => Yii::t('marketing', 'Status'),
+            'created_at' => Yii::t('marketing', 'Created At'),
+            'updated_at' => Yii::t('marketing', 'Updated At'),
+            'start_at' => Yii::t('marketing', 'Start At'),
+            'end_at' => Yii::t('marketing', 'End At'),
+            'star_id' => Yii::t('marketing', 'Star ID'),
         ];
     }
 

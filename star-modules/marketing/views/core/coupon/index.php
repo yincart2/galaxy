@@ -6,7 +6,7 @@ use kartik\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('coupon', 'Coupons');
+$this->title = Yii::t('marketing', 'Coupons');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="coupon-index">
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'delete' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete-rule', 'id' => $model->rule_id], [
                                 'data' => [
-                                    'confirm' => Yii::t('coupon', 'Are you sure you want to delete this item?'),
+                                    'confirm' => Yii::t('marketing', 'Are you sure you want to delete this item?'),
                                     'method' => 'post',
                                 ],
                             ]);
@@ -47,9 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'headerRowOptions'=>['class'=>'kartik-sheet-style'],
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'panel'=>[
-            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> '.Yii::t('coupon','Coupon').'</h3>',
+            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> '.Yii::t('marketing','Coupon').'</h3>',
             'type'=>'success',
-            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i>'.Yii::t('coupon', 'Create Coupon'), ['create'], ['class' => 'btn btn-success']),
+            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i>'.Yii::t('marketing', 'Create Coupon'), ['create'], ['class' => 'btn btn-success']),
             'after'=>false,
             'footer'=>false
         ],

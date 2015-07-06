@@ -6,7 +6,7 @@
 use yii\helpers\Url;
 use kartik\sidenav\SideNav;
 
-$this->beginContent('@theme/core/default/layouts/core.php');
+$this->beginContent('@theme/core/default/layouts/main.php');
 ?>
         <div class="col-sm-12">
             <div class="row">

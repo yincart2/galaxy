@@ -39,8 +39,8 @@ if (isset($model->start_at) && isset($model->end_at)) {
     $stations = \core\models\Station::findAll(['enabled' => 1]);
     $stationArray = ArrayHelper::map($stations, 'id', 'name');
     $fields[] = $form->field($model, 'star_id')->dropDownList($stationArray);
-    $fields[] = $form->field($model, 'total')->textInput(['maxlength' => true]);
-    $fields[] = $form->field($model, 'desc')->textarea(['maxlength' => true]);
+    $fields[] = $form->field($model, 'total')->textInput(['maxlength' => true,'placeholder'=>'创建多少个优惠券']);
+    $fields[] = $form->field($model, 'desc')->textarea(['maxlength' => true,'placeholder'=>'优惠券描述，例如：满1千减100']);
     $fields[] = $form->field($model, 'status')->dropDownList([1 => '是', 0 => '否']);
     $fields[] = $form->field($model, 'start_at')->widget(DateTimePicker::className(), [
         'options' => [
@@ -63,8 +63,8 @@ if (isset($model->start_at) && isset($model->end_at)) {
     $fieldGroups[] = ['label' => Yii::t('marketing', 'Coupon Info'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
-    $fields[] = $form->field($model, 'total_price')->textInput(['maxlength' => true]);
-    $fields[] = $form->field($model, 'qty')->textInput(['maxlength' => true]);
+    $fields[] = $form->field($model, 'total_price')->textInput(['maxlength' => true,'placeholder'=>'订单总价满足多少钱，则优惠开始生效']);
+    $fields[] = $form->field($model, 'qty')->textInput(['maxlength' => true,'placeholder'=>'订单里包含多少个商品，则优惠开始生效']);
 
     $root = \star\system\models\Tree::find()->where(['name' => '商品分类'])->one();
     $categories = $root->children(1)->all();
@@ -73,7 +73,7 @@ if (isset($model->start_at) && isset($model->end_at)) {
         'data' => $categories,
         'language' => 'en',
         'pluginOptions' => [
-            'placeholder' => 'Select a state ...',
+            'placeholder' => '选择生效分类，可不选',
         ],
         'options' => [
             'multiple' => true,
@@ -84,7 +84,7 @@ if (isset($model->start_at) && isset($model->end_at)) {
 
     $fields = ['<br />'];
     $fields[] = $form->field($model, 'type')->dropDownList([0 => '满减', 1 => '打折']);
-    $fields[] = $form->field($model, 'number')->textInput(['maxlength' => true]);
+    $fields[] = $form->field($model, 'number')->textInput(['maxlength' => true,'placeholder'=>'若是满减，填入整数，即优惠多少钱；若是打折，输入0.1，即打一折']);
     $fields[] = $form->field($model, 'shipping')->dropDownList([0 => '邮费不变', 1 => '减邮费', 2 => '包邮']);
     $fields[] = $form->field($model, 'shippingFee')->textInput(['maxlength' => true]);
     $fieldGroups[] = ['label' => Yii::t('marketing', 'Coupon Result'), 'content' => implode('', $fields)];
@@ -97,7 +97,7 @@ if (isset($model->start_at) && isset($model->end_at)) {
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">
-            <?= Html::submitButton(Yii::t('coupon', 'Create'), ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton(Yii::t('marketing', 'Create'), ['class' => 'btn btn-success']) ?>
         </div>
     </div>
 

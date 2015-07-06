@@ -6,7 +6,7 @@ use kartik\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('coupon', 'Coupons');
+$this->title = Yii::t('marketing', 'Coupons');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="coupon-index">
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'headerRowOptions'=>['class'=>'kartik-sheet-style'],
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'panel'=>[
-            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> '.Yii::t('coupon','Coupon').'</h3>',
+            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> '.Yii::t('marketing','Coupon').'</h3>',
             'type'=>'success',
             'before' => false,
             'after' => false,
