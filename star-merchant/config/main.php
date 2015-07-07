@@ -94,10 +94,10 @@ return [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    '@merchant/views' => '@theme/merchant/ultra/',
-                    '@star' => '@theme/merchant/default/modules',
+                    '@merchant/views' => '@theme/merchant/ultra',
+                    '@star' => '@theme/merchant/ultra/modules',
                 ],
-                'baseUrl' => '@theme/star/merchant'
+                'baseUrl' => '@theme/merchant'
             ]
         ]
     ],

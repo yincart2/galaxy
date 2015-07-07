@@ -6,7 +6,8 @@ use merchant\assets\AppAsset;
 
 AppAsset::register($this);
 
-list($path, $url) = Yii::$app->assetManager->publish('@theme/merchant/ultra');
+list($assetsPath, $assetsUrl) = Yii::$app->assetManager->publish('@theme/merchant/ultra/assets');
+list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ultra/data');
 list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 ?>
 <?php $this->beginPage() ?>
@@ -26,59 +27,36 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
     <meta content="" name="description"/>
     <meta content="" name="author"/>
 
-    <link rel="shortcut icon" href="<?= $url ?>/assets/images/favicon.png" type="image/x-icon"/>
+    <link rel="shortcut icon" href="<?= $assetsUrl ?>/images/favicon.png" type="image/x-icon"/>
     <!-- Favicon -->
-    <link rel="apple-touch-icon-precomposed" href="<?= $url ?>/assets/images/apple-touch-icon-57-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="<?= $assetsUrl ?>/images/apple-touch-icon-57-precomposed.png">
     <!-- For iPhone -->
     <link rel="apple-touch-icon-precomposed" sizes="114x114"
-          href="<?= $url ?>/assets/images/apple-touch-icon-114-precomposed.png">
+          href="<?= $assetsUrl ?>/images/apple-touch-icon-114-precomposed.png">
     <!-- For iPhone 4 Retina display -->
     <link rel="apple-touch-icon-precomposed" sizes="72x72"
-          href="<?= $url ?>/assets/images/apple-touch-icon-72-precomposed.png">
+          href="<?= $assetsUrl ?>/images/apple-touch-icon-72-precomposed.png">
     <!-- For iPad -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
-          href="<?= $url ?>/assets/images/apple-touch-icon-144-precomposed.png">
+          href="<?= $assetsUrl ?>/images/apple-touch-icon-144-precomposed.png">
     <!-- For iPad Retina display -->
 
-
     <!-- CORE CSS FRAMEWORK - START -->
-    <link href="<?= $url ?>/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $url ?>/assets/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $url ?>/assets/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $url ?>/assets/css/animate.min.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $url ?>/assets/plugins/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= $assetsUrl ?>/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="<?= $assetsUrl ?>/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= $assetsUrl ?>/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= $assetsUrl ?>/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= $assetsUrl ?>/css/animate.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= $assetsUrl ?>/plugins/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css"/>
     <!-- CORE CSS FRAMEWORK - END -->
 
     <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
-    <link href="<?= $url ?>/assets/plugins/morris-chart/css/morris.css" rel="stylesheet" type="text/css"
-          media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/jquery-ui/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"
-          media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/rickshaw-chart/css/graph.css" rel="stylesheet" type="text/css"
-          media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/rickshaw-chart/css/detail.css" rel="stylesheet" type="text/css"
-          media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/rickshaw-chart/css/legend.css" rel="stylesheet" type="text/css"
-          media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/rickshaw-chart/css/extensions.css" rel="stylesheet" type="text/css"
-          media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/rickshaw-chart/css/rickshaw.min.css" rel="stylesheet" type="text/css"
-          media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/rickshaw-chart/css/lines.css" rel="stylesheet" type="text/css"
-          media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/jvectormap/jquery-jvectormap-2.0.1.css" rel="stylesheet" type="text/css"
-          media="screen"/>
-    <link href="<?= $url ?>/assets/plugins/icheck/skins/minimal/white.css" rel="stylesheet" type="text/css"
-          media="screen"/>
     <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
 
-
     <!-- CORE CSS TEMPLATE - START -->
-    <link href="<?= $url ?>/assets/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $url ?>/assets/css/responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= $assetsUrl ?>/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= $assetsUrl ?>/css/responsive.css" rel="stylesheet" type="text/css"/>
     <!-- CORE CSS TEMPLATE - END -->
-
 </head>
 <!-- END HEAD -->
 
@@ -110,136 +88,136 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <li class="unread status-available">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="data/profile/avatar-1.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-1.png" alt="user-image" class="img-circle img-inline">
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Clarine Vassar</strong>
-                                                        <span class="time small">- 15 mins ago</span>
-                                                        <span class="profile-status available pull-right"></span>
-                                                    </span>
-                                                    <span class="desc small">
-                                                        Sometimes it takes a lifetime to win a battle.
-                                                    </span>
+                            <span class="name">
+                                <strong>Clarine Vassar</strong>
+                                <span class="time small">- 15 mins ago</span>
+                                <span class="profile-status available pull-right"></span>
+                            </span>
+                            <span class="desc small">
+                                Sometimes it takes a lifetime to win a battle.
+                            </span>
                         </div>
                     </a>
                 </li>
                 <li class=" status-away">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="data/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Brooks Latshaw</strong>
-                                                        <span class="time small">- 45 mins ago</span>
-                                                        <span class="profile-status away pull-right"></span>
-                                                    </span>
-                                                    <span class="desc small">
-                                                        Sometimes it takes a lifetime to win a battle.
-                                                    </span>
+                            <span class="name">
+                                <strong>Brooks Latshaw</strong>
+                                <span class="time small">- 45 mins ago</span>
+                                <span class="profile-status away pull-right"></span>
+                            </span>
+                            <span class="desc small">
+                                Sometimes it takes a lifetime to win a battle.
+                            </span>
                         </div>
                     </a>
                 </li>
                 <li class=" status-busy">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="data/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Clementina Brodeur</strong>
-                                                        <span class="time small">- 1 hour ago</span>
-                                                        <span class="profile-status busy pull-right"></span>
-                                                    </span>
-                                                    <span class="desc small">
-                                                        Sometimes it takes a lifetime to win a battle.
-                                                    </span>
+                            <span class="name">
+                                <strong>Clementina Brodeur</strong>
+                                <span class="time small">- 1 hour ago</span>
+                                <span class="profile-status busy pull-right"></span>
+                            </span>
+                            <span class="desc small">
+                                Sometimes it takes a lifetime to win a battle.
+                            </span>
                         </div>
                     </a>
                 </li>
                 <li class=" status-offline">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="data/profile/avatar-4.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-4.png" alt="user-image" class="img-circle img-inline">
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Carri Busey</strong>
-                                                        <span class="time small">- 5 hours ago</span>
-                                                        <span class="profile-status offline pull-right"></span>
-                                                    </span>
-                                                    <span class="desc small">
-                                                        Sometimes it takes a lifetime to win a battle.
-                                                    </span>
+                            <span class="name">
+                                <strong>Carri Busey</strong>
+                                <span class="time small">- 5 hours ago</span>
+                                <span class="profile-status offline pull-right"></span>
+                            </span>
+                            <span class="desc small">
+                                Sometimes it takes a lifetime to win a battle.
+                            </span>
                         </div>
                     </a>
                 </li>
                 <li class=" status-offline">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="data/profile/avatar-5.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-5.png" alt="user-image" class="img-circle img-inline">
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Melissa Dock</strong>
-                                                        <span class="time small">- Yesterday</span>
-                                                        <span class="profile-status offline pull-right"></span>
-                                                    </span>
-                                                    <span class="desc small">
-                                                        Sometimes it takes a lifetime to win a battle.
-                                                    </span>
+                            <span class="name">
+                                <strong>Melissa Dock</strong>
+                                <span class="time small">- Yesterday</span>
+                                <span class="profile-status offline pull-right"></span>
+                            </span>
+                            <span class="desc small">
+                                Sometimes it takes a lifetime to win a battle.
+                            </span>
                         </div>
                     </a>
                 </li>
                 <li class=" status-available">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="data/profile/avatar-1.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-1.png" alt="user-image" class="img-circle img-inline">
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Verdell Rea</strong>
-                                                        <span class="time small">- 14th Mar</span>
-                                                        <span class="profile-status available pull-right"></span>
-                                                    </span>
-                                                    <span class="desc small">
-                                                        Sometimes it takes a lifetime to win a battle.
-                                                    </span>
+                            <span class="name">
+                                <strong>Verdell Rea</strong>
+                                <span class="time small">- 14th Mar</span>
+                                <span class="profile-status available pull-right"></span>
+                            </span>
+                            <span class="desc small">
+                                Sometimes it takes a lifetime to win a battle.
+                            </span>
                         </div>
                     </a>
                 </li>
                 <li class=" status-busy">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="data/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Linette Lheureux</strong>
-                                                        <span class="time small">- 16th Mar</span>
-                                                        <span class="profile-status busy pull-right"></span>
-                                                    </span>
-                                                    <span class="desc small">
-                                                        Sometimes it takes a lifetime to win a battle.
-                                                    </span>
+                            <span class="name">
+                                <strong>Linette Lheureux</strong>
+                                <span class="time small">- 16th Mar</span>
+                                <span class="profile-status busy pull-right"></span>
+                            </span>
+                            <span class="desc small">
+                                Sometimes it takes a lifetime to win a battle.
+                            </span>
                         </div>
                     </a>
                 </li>
                 <li class=" status-away">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="data/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Araceli Boatright</strong>
-                                                        <span class="time small">- 16th Mar</span>
-                                                        <span class="profile-status away pull-right"></span>
-                                                    </span>
-                                                    <span class="desc small">
-                                                        Sometimes it takes a lifetime to win a battle.
-                                                    </span>
+                            <span class="name">
+                                <strong>Araceli Boatright</strong>
+                                <span class="time small">- 16th Mar</span>
+                                <span class="profile-status away pull-right"></span>
+                            </span>
+                            <span class="desc small">
+                                Sometimes it takes a lifetime to win a battle.
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -263,10 +241,10 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
     </a>
     <ul class="dropdown-menu notifications animated fadeIn">
         <li class="total">
-                                    <span class="small">
-                                        You have <strong>3</strong> new notifications.
-                                        <a href="javascript:;" class="pull-right">Mark all as Read</a>
-                                    </span>
+            <span class="small">
+                You have <strong>3</strong> new notifications.
+                <a href="javascript:;" class="pull-right">Mark all as Read</a>
+            </span>
         </li>
         <li class="list">
 
@@ -277,10 +255,10 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                             <i class="fa fa-check"></i>
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Server needs to reboot</strong>
-                                                        <span class="time small">15 mins ago</span>
-                                                    </span>
+                            <span class="name">
+                                <strong>Server needs to reboot</strong>
+                                <span class="time small">15 mins ago</span>
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -290,10 +268,10 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                             <i class="fa fa-envelope"></i>
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>45 new messages</strong>
-                                                        <span class="time small">45 mins ago</span>
-                                                    </span>
+                            <span class="name">
+                                <strong>45 new messages</strong>
+                                <span class="time small">45 mins ago</span>
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -303,10 +281,10 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                             <i class="fa fa-times"></i>
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Server IP Blocked</strong>
-                                                        <span class="time small">1 hour ago</span>
-                                                    </span>
+                            <span class="name">
+                                <strong>Server IP Blocked</strong>
+                                <span class="time small">1 hour ago</span>
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -316,10 +294,10 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                             <i class="fa fa-user"></i>
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>10 Orders Shipped</strong>
-                                                        <span class="time small">5 hours ago</span>
-                                                    </span>
+                            <span class="name">
+                                <strong>10 Orders Shipped</strong>
+                                <span class="time small">5 hours ago</span>
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -329,10 +307,10 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                             <i class="fa fa-user"></i>
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>New Comment on blog</strong>
-                                                        <span class="time small">Yesterday</span>
-                                                    </span>
+                            <span class="name">
+                                <strong>New Comment on blog</strong>
+                                <span class="time small">Yesterday</span>
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -342,10 +320,10 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                             <i class="fa fa-check"></i>
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Great Speed Notify</strong>
-                                                        <span class="time small">14th Mar</span>
-                                                    </span>
+                            <span class="name">
+                                <strong>Great Speed Notify</strong>
+                                <span class="time small">14th Mar</span>
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -355,10 +333,10 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                             <i class="fa fa-times"></i>
                         </div>
                         <div>
-                                                    <span class="name">
-                                                        <strong>Team Meeting at 6PM</strong>
-                                                        <span class="time small">16th Mar</span>
-                                                    </span>
+                            <span class="name">
+                                <strong>Team Meeting at 6PM</strong>
+                                <span class="time small">16th Mar</span>
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -376,9 +354,9 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 </li>
 <li class="hidden-sm hidden-xs searchform">
     <div class="input-group">
-                                <span class="input-group-addon input-focus">
-                                    <i class="fa fa-search"></i>
-                                </span>
+        <span class="input-group-addon input-focus">
+            <i class="fa fa-search"></i>
+        </span>
 
         <form action="search-page.html" method="post">
             <input type="text" class="form-control animated fadeIn" placeholder="Search & Enter">
@@ -392,7 +370,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
     <ul class="info-menu right-links list-inline list-unstyled">
         <li class="profile">
             <a href="#" data-toggle="dropdown" class="toggle">
-                <img src="data/profile/profile.png" alt="user-image" class="img-circle img-inline">
+                <img src="<?= $dataUrl ?>/profile/profile.png" alt="user-image" class="img-circle img-inline">
                 <span>Jason Bourne <i class="fa fa-angle-down"></i></span>
             </a>
             <ul class="dropdown-menu profile animated fadeIn">
@@ -449,7 +427,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 
     <div class="profile-image col-md-4 col-sm-4 col-xs-4">
         <a href="ui-profile.html">
-            <img src="data/profile/profile.png" class="img-responsive img-circle">
+            <img src="<?= $dataUrl ?>/profile/profile.png" class="img-responsive img-circle">
         </a>
     </div>
 
@@ -768,7 +746,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 <div class="project-info">
 
     <div class="block1">
-        <div class="data">
+        <div class="<?= $dataUrl ?>">
             <span class='title'>New&nbsp;Orders</span>
             <span class='total'>2,345</span>
         </div>
@@ -778,7 +756,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
     </div>
 
     <div class="block2">
-        <div class="data">
+        <div class="<?= $dataUrl ?>">
             <span class='title'>Visitors</span>
             <span class='total'>345</span>
         </div>
@@ -858,13 +836,12 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 
         </ul>
 
-
         <h4 class="group-head">Favourites</h4>
         <ul class="contact-list">
 
             <li class="user-row" id='chat_user_1' data-user-id='1'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-1.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-1.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Clarine Vassar</a></h4>
@@ -876,7 +853,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_2' data-user-id='2'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-2.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-2.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Brooks Latshaw</a></h4>
@@ -888,7 +865,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_3' data-user-id='3'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-3.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-3.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Clementina Brodeur</a></h4>
@@ -901,13 +878,12 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 
         </ul>
 
-
         <h4 class="group-head">More Contacts</h4>
         <ul class="contact-list">
 
             <li class="user-row" id='chat_user_4' data-user-id='4'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-4.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-4.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Carri Busey</a></h4>
@@ -919,7 +895,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_5' data-user-id='5'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-5.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-5.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Melissa Dock</a></h4>
@@ -931,7 +907,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_6' data-user-id='6'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-1.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-1.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Verdell Rea</a></h4>
@@ -943,7 +919,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_7' data-user-id='7'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-2.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-2.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Linette Lheureux</a></h4>
@@ -955,7 +931,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_8' data-user-id='8'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-3.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-3.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Araceli Boatright</a></h4>
@@ -967,7 +943,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_9' data-user-id='9'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-4.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-4.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Clay Peskin</a></h4>
@@ -979,7 +955,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_10' data-user-id='10'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-5.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-5.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Loni Tindall</a></h4>
@@ -991,7 +967,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_11' data-user-id='11'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-1.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-1.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Tanisha Kimbro</a></h4>
@@ -1003,7 +979,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </li>
             <li class="user-row" id='chat_user_12' data-user-id='12'>
                 <div class="user-img">
-                    <a href="#"><img src="data/profile/avatar-2.png" alt=""></a>
+                    <a href="#"><img src="<?= $dataUrl ?>/profile/avatar-2.png" alt=""></a>
                 </div>
                 <div class="user-info">
                     <h4><a href="#">Jovita Tisdale</a></h4>
@@ -1016,36 +992,31 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 
         </ul>
     </div>
-
 </div>
 
-
 <div class="chatapi-windows ">
-
 
 </div>
 </div>
 <!-- END CONTAINER -->
 <!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-
 <!-- CORE JS FRAMEWORK - START -->
-<script src="<?= $url ?>/assets/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-<script src="<?= $url ?>/assets/js/jquery.easing.min.js" type="text/javascript"></script>
-<script src="<?= $url ?>/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="<?= $url ?>/assets/plugins/pace/pace.min.js" type="text/javascript"></script>
-<script src="<?= $url ?>/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script>
-<script src="<?= $url ?>/assets/plugins/viewport/viewportchecker.js" type="text/javascript"></script>
+<script src="<?= $assetsUrl ?>/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script src="<?= $assetsUrl ?>/js/jquery.easing.min.js" type="text/javascript"></script>
+<script src="<?= $assetsUrl ?>/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?= $assetsUrl ?>/plugins/pace/pace.min.js" type="text/javascript"></script>
+<script src="<?= $assetsUrl ?>/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script>
+<script src="<?= $assetsUrl ?>/plugins/viewport/viewportchecker.js" type="text/javascript"></script>
 <!-- CORE JS FRAMEWORK - END -->
 
-
 <!-- CORE TEMPLATE JS - START -->
-<script src="<?= $url ?>/assets/js/scripts.js" type="text/javascript"></script>
+<script src="<?= $assetsUrl ?>/js/scripts.js" type="text/javascript"></script>
 <!-- END CORE TEMPLATE JS - END -->
 
 <!-- Sidebar Graph - START -->
-<script src="<?= $url ?>/assets/plugins/sparkline-chart/jquery.sparkline.min.js" type="text/javascript"></script>
-<script src="<?= $url ?>/assets/js/chart-sparkline.js" type="text/javascript"></script>
+<script src="<?= $assetsUrl ?>/plugins/sparkline-chart/jquery.sparkline.min.js" type="text/javascript"></script>
+<script src="<?= $assetsUrl ?>/js/chart-sparkline.js" type="text/javascript"></script>
 <!-- Sidebar Graph - END -->
 
 <script type="text/javascript" src="<?php echo $yiiUrl ?>/yii.js"></script>
@@ -1060,9 +1031,7 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <h4 class="modal-title">Section Settings</h4>
             </div>
             <div class="modal-body">
-
                 Body goes here...
-
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
