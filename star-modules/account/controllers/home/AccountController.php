@@ -13,10 +13,25 @@ use star\account\models\Recharge;
 use Yii;
 use star\account\models\Withdrawal;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 class AccountController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     public $layout = '/member';
 
     public function actionWithdrawal()

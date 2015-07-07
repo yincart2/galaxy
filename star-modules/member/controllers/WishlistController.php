@@ -10,6 +10,21 @@ use yii;
 
 class WishlistController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionAddWishlist()
     {
         $user_id = Yii::$app->user->id;

@@ -93,12 +93,7 @@ return [
             'theme'=>[
                 'pathMap'=>[
                     '@app/views'=>'@theme/home/default/',
-                    '@star/blog/views/home'=>'@theme/home/default/views/blog',
-                    '@star/catalog/views/home'=>'@theme/home/default/modules/catalog',
-                    '@app/blog/widgets/home/views'=>'@theme/home/default/views/blog/widgets',
-                    '@star/member/views'=>'@theme/home/default/modules/member',
-                    '@star/cart/views'=>'@theme/home/default/modules/cart',
-                    '@star/order/views/home'=>'@theme/home/default/modules/order',
+                    '@star'=>'@theme/home/default/modules',
                 ],
                 'baseUrl'=>'@theme/home/default'
             ]

@@ -7,6 +7,7 @@ use star\order\models\Order;
 use star\catalog\models\Sku;
 use Yii;
 use yii\data\Pagination;
+use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Json;
@@ -17,6 +18,20 @@ use yii\web\Controller;
  */
 class OrderController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     /**
      * Displays a single Order model in member center.
      * @param integer $id
