@@ -11,10 +11,26 @@ use star\payment\models\alipay\AlipayNotify;
 use star\payment\models\alipay\AlipaySubmit;
 use star\payment\models\Payment;
 use star\system\models\SingletonSetting;
+use yii\filters\AccessControl;
 use yii\helpers\Url;
 
 class AlipayController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public $config = [];
 
     public function init()

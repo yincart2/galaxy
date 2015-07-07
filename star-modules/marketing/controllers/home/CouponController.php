@@ -9,11 +9,27 @@ namespace star\marketing\controllers\home;
 
 use star\marketing\models\Coupon;
 use star\marketing\models\ShoppingCoupon;
+use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\web\Controller;
 use Yii;
 class CouponController extends Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' =>AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
 
     public function actionValidate(){
         $couponId = Yii::$app->request->post('couponId');

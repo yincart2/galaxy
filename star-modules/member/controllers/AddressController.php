@@ -11,6 +11,20 @@ use yii;
 
 class AddressController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     /**
      * find member's address
      * @author Cangzhou Wu<wucang.zhou@jago-ag.cn>
