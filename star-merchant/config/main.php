@@ -10,9 +10,8 @@ return [
     'id' => 'star-merchant',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'merchant\controllers',
-    'defaultRoute' => 'core',
-    'layout'=>'/core',
-    'bootstrap' => ['log',[ 'home\models\UserEvent', 'beforeLogin'],'matter\Gravitation',],
+    'layout' => '/main',
+    'bootstrap' => ['log', ['home\models\UserEvent', 'beforeLogin'], 'matter\Gravitation',],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -29,26 +28,26 @@ return [
             'class' => 'star\catalog\Module',
         ],
         'core' => [
-            'class' =>'home\modules\core\Module',
+            'class' => 'home\modules\core\Module',
         ],
         'auth' => [
-            'class'=>'star\auth\Module',
+            'class' => 'star\auth\Module',
         ],
         'order' => [
-            'class' =>'star\order\Module',
+            'class' => 'star\order\Module',
         ],
         'payment' => [
-            'class' =>'star\payment\Module',
+            'class' => 'star\payment\Module',
         ],
         'system' => [
-            'class' =>'star\system\Module',
+            'class' => 'star\system\Module',
         ],
         'shipment' => [
-            'class' =>'star\shipment\Module',
+            'class' => 'star\shipment\Module',
         ],
     ],
     'components' => [
-        'urlManager'=>[
+        'urlManager' => [
             'showScriptName' => true,
             'enablePrettyUrl' => false,
         ],
@@ -92,14 +91,13 @@ return [
                 ],
             ],
         ],
-        'view'=>[
-            'theme'=>[
-                'pathMap'=>[
-                    '@merchant/views'=>'@theme/home/default/',
-                    '@star/catalog/views/merchant'=>'@theme/star/merchant/modules/catalog',
-                    '@app/modules/member/views'=>'@theme/star/merchant/modules/member',
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@merchant/views' => '@theme/merchant/ultra/',
+                    '@star' => '@theme/merchant/default/modules',
                 ],
-                'baseUrl'=>'@theme/star/merchant'
+                'baseUrl' => '@theme/star/merchant'
             ]
         ]
     ],
@@ -122,7 +120,7 @@ return [
                 [
                     'baseUrl' => 'http://localhost/galaxy/star-image',
                     'basePath' => '@image',
-                    'path' =>  '/',
+                    'path' => '/',
                     'name' => 'Images',
                     'access' => ['read' => '*', 'write' => false]
                 ],
