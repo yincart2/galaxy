@@ -9,39 +9,67 @@ $params = array_merge(
 return [
     'id' => 'star-merchant',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'merchant\controllers',
+    'defaultRoute' => 'core',
+    'layout'=>'/core',
+    'bootstrap' => ['log',[ 'home\models\UserEvent', 'beforeLogin'],'matter\Gravitation',],
     'modules' => [
-        'site' => [
-            'class' => 'merchant\modules\site\Module',
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'admins' => ['admin'],
+            'enableRegistration' => false,
         ],
-//        'user' => [
-//            'class' => 'dektrium\user\Module',
-//            'controllerMap' => [
-//                'login' => 'app\modules\site\controllers\LoginController'
-//            ],
-//        ],
+        'rbac' => [
+            'class' => 'dektrium\rbac\Module',
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
+        ],
+        'catalog' => [
+            'class' => 'star\catalog\Module',
+        ],
+        'core' => [
+            'class' =>'home\modules\core\Module',
+        ],
+        'auth' => [
+            'class'=>'star\auth\Module',
+        ],
+        'order' => [
+            'class' =>'star\order\Module',
+        ],
+        'payment' => [
+            'class' =>'star\payment\Module',
+        ],
+        'system' => [
+            'class' =>'star\system\Module',
+        ],
+        'shipment' => [
+            'class' =>'star\shipment\Module',
+        ],
     ],
     'components' => [
+        'urlManager'=>[
+            'showScriptName' => true,
+            'enablePrettyUrl' => false,
+        ],
         'user' => [
             'identityClass' => 'dektrium\user\models\User',
             'enableAutoLogin' => true,
-            'loginUrl' => ['/site/login/index'],
+            'identityCookie' => [
+                'name' => '_backendUser', // unique for backend
+            ]
         ],
-        'view' => [
-//            'theme' => [
-//                'pathMap' => [
-////                    '@app/views' => '@theme/merchant/ultra',
-////                    '@star/blog/views/lab' => '@theme/merchant/ultra/modules/blog/views',
-////                    '@star/blog/widgets/lab/views' => '@theme/merchant/ultra/modules/blog/views/widgets',
-////                    '@star/portfolio/views/lab' => '@theme/merchant/ultra/modules/portfolio/views',
-////                    '@star/task/views/lab' => '@theme/merchant/ultra/modules/task/views',
-////                    '@star/catalog/views/lab' => '@theme/merchant/ultra/modules/catalog/views',
-////                    '@app/modules' => '@theme/merchant/ultra/modules',
-////                    '@dektrium/user/views' => '@theme/merchant/ultra/modules/user/views'
-//                ],
-////                'baseUrl' => '@theme/merchant/ultra',
-//            ],
+        'session' => [
+            'name' => 'PHPBACKSESSID',
+            'savePath' => sys_get_temp_dir(),
+        ],
+        'request' => [
+            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'cookieValidationKey' => '[DIFFERENT UNIQUE KEY]',
+            'csrfParam' => '_backendCSRF',
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -53,11 +81,53 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/default/error',
+            'errorAction' => 'site/error',
         ],
-//        'authManager' => [
-//            'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-//        ],
+        'i18n' => [
+            'translations' => [
+                'rbac-admin' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@vendor/mdmsoft/yii2-admin/messages',
+                    'sourceLanguage' => 'en',
+                ],
+            ],
+        ],
+        'view'=>[
+            'theme'=>[
+                'pathMap'=>[
+                    '@merchant/views'=>'@theme/home/default/',
+                    '@star/catalog/views/merchant'=>'@theme/star/merchant/modules/catalog',
+                    '@app/modules/member/views'=>'@theme/star/merchant/modules/member',
+                ],
+                'baseUrl'=>'@theme/star/merchant'
+            ]
+        ]
+    ],
+//    'as access' => [
+//        'class' => 'mdm\admin\components\AccessControl',
+//        'allowActions' => [
+//            'site/index',
+//            'user/registration/register',
+//            'user/security/login',
+//            'site/error',
+//            'gii',
+//        ]
+//    ],
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
+            'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
+            'roots' => [
+                [
+                    'baseUrl' => 'http://localhost/galaxy/star-image',
+                    'basePath' => '@image',
+                    'path' =>  '/',
+                    'name' => 'Images',
+                    'access' => ['read' => '*', 'write' => false]
+                ],
+            ]
+        ],
     ],
     'params' => $params,
 ];
