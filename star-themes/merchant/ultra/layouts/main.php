@@ -1,5 +1,6 @@
 <?php
 use merchant\assets\AppAsset;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -8,8 +9,8 @@ AppAsset::register($this);
 
 list($assetsPath, $assetsUrl) = Yii::$app->assetManager->publish('@theme/merchant/ultra/assets');
 list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ultra/data');
-list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html class=" ">
@@ -41,22 +42,25 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
           href="<?= $assetsUrl ?>/images/apple-touch-icon-144-precomposed.png">
     <!-- For iPad Retina display -->
 
-    <!-- CORE CSS FRAMEWORK - START -->
-    <link href="<?= $assetsUrl ?>/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="<?= $assetsUrl ?>/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $assetsUrl ?>/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $assetsUrl ?>/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $assetsUrl ?>/css/animate.min.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $assetsUrl ?>/plugins/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css"/>
-    <!-- CORE CSS FRAMEWORK - END -->
+    <?php
+    $this->head();
 
-    <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
-    <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
+    $this->registerCssFile($assetsUrl . '/plugins/pace/pace-theme-flash.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerCssFile($assetsUrl . '/plugins/bootstrap/css/bootstrap-theme.min.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerCssFile($assetsUrl . '/fonts/font-awesome/css/font-awesome.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerCssFile($assetsUrl . '/css/animate.min.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerCssFile($assetsUrl . '/plugins/perfect-scrollbar/perfect-scrollbar.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerCssFile($assetsUrl . '/css/style.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerCssFile($assetsUrl . '/css/responsive.css', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
-    <!-- CORE CSS TEMPLATE - START -->
-    <link href="<?= $assetsUrl ?>/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= $assetsUrl ?>/css/responsive.css" rel="stylesheet" type="text/css"/>
-    <!-- CORE CSS TEMPLATE - END -->
+    $this->registerJsFile($assetsUrl . '/js/jquery.easing.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerJsFile($assetsUrl . '/plugins/perfect-scrollbar/perfect-scrollbar.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerJsFile($assetsUrl . '/plugins/pace/pace.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerJsFile($assetsUrl . '/plugins/viewport/viewportchecker.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerJsFile($assetsUrl . '/js/scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerJsFile($assetsUrl . '/plugins/sparkline-chart/jquery.sparkline.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    $this->registerJsFile($assetsUrl . '/js/chart-sparkline.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    ?>
 </head>
 <!-- END HEAD -->
 
@@ -88,7 +92,8 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <li class="unread status-available">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="<?= $dataUrl ?>/profile/avatar-1.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-1.png" alt="user-image"
+                                 class="img-circle img-inline">
                         </div>
                         <div>
                             <span class="name">
@@ -105,7 +110,8 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <li class=" status-away">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="<?= $dataUrl ?>/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-2.png" alt="user-image"
+                                 class="img-circle img-inline">
                         </div>
                         <div>
                             <span class="name">
@@ -122,7 +128,8 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <li class=" status-busy">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="<?= $dataUrl ?>/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-3.png" alt="user-image"
+                                 class="img-circle img-inline">
                         </div>
                         <div>
                             <span class="name">
@@ -139,7 +146,8 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <li class=" status-offline">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="<?= $dataUrl ?>/profile/avatar-4.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-4.png" alt="user-image"
+                                 class="img-circle img-inline">
                         </div>
                         <div>
                             <span class="name">
@@ -156,7 +164,8 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <li class=" status-offline">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="<?= $dataUrl ?>/profile/avatar-5.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-5.png" alt="user-image"
+                                 class="img-circle img-inline">
                         </div>
                         <div>
                             <span class="name">
@@ -173,7 +182,8 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <li class=" status-available">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="<?= $dataUrl ?>/profile/avatar-1.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-1.png" alt="user-image"
+                                 class="img-circle img-inline">
                         </div>
                         <div>
                             <span class="name">
@@ -190,7 +200,8 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <li class=" status-busy">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="<?= $dataUrl ?>/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-2.png" alt="user-image"
+                                 class="img-circle img-inline">
                         </div>
                         <div>
                             <span class="name">
@@ -207,7 +218,8 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                 <li class=" status-away">
                     <a href="javascript:;">
                         <div class="user-img">
-                            <img src="<?= $dataUrl ?>/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
+                            <img src="<?= $dataUrl ?>/profile/avatar-3.png" alt="user-image"
+                                 class="img-circle img-inline">
                         </div>
                         <div>
                             <span class="name">
@@ -418,355 +430,147 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 <!-- SIDEBAR - START -->
 <div class="page-sidebar ">
 
+    <!-- MAIN MENU - START -->
+    <div class="page-sidebar-wrapper" id="main-menu-wrapper">
 
-<!-- MAIN MENU - START -->
-<div class="page-sidebar-wrapper" id="main-menu-wrapper">
+        <!-- USER INFO - START -->
+        <div class="profile-info row">
 
-<!-- USER INFO - START -->
-<div class="profile-info row">
+            <div class="profile-image col-md-4 col-sm-4 col-xs-4">
+                <a href="ui-profile.html">
+                    <img src="<?= $dataUrl ?>/profile/profile.png" class="img-responsive img-circle">
+                </a>
+            </div>
 
-    <div class="profile-image col-md-4 col-sm-4 col-xs-4">
-        <a href="ui-profile.html">
-            <img src="<?= $dataUrl ?>/profile/profile.png" class="img-responsive img-circle">
-        </a>
-    </div>
+            <div class="profile-details col-md-8 col-sm-8 col-xs-8">
 
-    <div class="profile-details col-md-8 col-sm-8 col-xs-8">
+                <h3>
+                    <a href="ui-profile.html">Jason Bourne</a>
 
-        <h3>
-            <a href="ui-profile.html">Jason Bourne</a>
+                    <!-- Available statuses: online, idle, busy, away and offline -->
+                    <span class="profile-status online"></span>
+                </h3>
 
-            <!-- Available statuses: online, idle, busy, away and offline -->
-            <span class="profile-status online"></span>
-        </h3>
+                <p class="profile-title">Web Developer</p>
 
-        <p class="profile-title">Web Developer</p>
+            </div>
 
-    </div>
-
-</div>
-<!-- USER INFO - END -->
-
-
-<ul class='wraplist'>
-
-
-<li class="">
-    <a href="index.html">
-        <i class="fa fa-dashboard"></i>
-        <span class="title">Dashboard</span>
-    </a>
-</li>
-<li class="">
-    <a href="widgets.html">
-        <i class="fa fa-th"></i>
-        <span class="title">Widgets</span><span class="label label-orange nosubmenu">HOT</span>
-    </a>
-</li>
-<li class="">
-    <a href="javascript:;">
-        <i class="fa fa-suitcase"></i>
-        <span class="title">UI Elements</span>
-        <span class="arrow "></span>
-    </a>
-    <ul class="sub-menu">
-        <li>
-            <a class="" href="ui-typography.html">Typography</a>
-        </li>
-        <li>
-            <a class="" href="ui-accordion.html">Tabs & Accordions</a>
-        </li>
-        <li>
-            <a class="" href="ui-progress.html">Progress Bars</a>
-        </li>
-        <li>
-            <a class="" href="ui-icons.html">Icons</a>
-        </li>
-        <li>
-            <a class="" href="ui-buttons.html">Buttons</a>
-        </li>
-        <li>
-            <a class="" href="ui-modals.html">Modals</a>
-        </li>
-        <li>
-            <a class="" href="ui-notifications.html">Alert & Notifications</a>
-        </li>
-        <li>
-            <a class="" href="ui-tooltips.html">Tooltips & Popovers</a>
-        </li>
-        <li>
-            <a class="" href="ui-sortable.html">Sortable Group</a>
-        </li>
-        <li>
-            <a class="" href="ui-navbars.html">Navbars & Dropdowns</a>
-        </li>
-        <li>
-            <a class="" href="ui-extra.html">Other Elements</a>
-        </li>
-        <li>
-            <a class="" href="ui-carousel.html">Carousel Slider</a>
-        </li>
-        <li>
-            <a class="" href="ui-tree.html">Tree</a>
-        </li>
-        <li>
-            <a class="" href="ui-panels.html">Draggable Panels</a>
-        </li>
-        <li>
-            <a class="" href="ui-grids.html">Grids</a>
-        </li>
-        <li>
-            <a class="" href="ui-tiles.html">Tile Widgets</a>
-        </li>
-    </ul>
-</li>
-<li class="">
-    <a href="javascript:;">
-        <i class="fa fa-sliders"></i>
-        <span class="title">Forms</span>
-        <span class="arrow "></span>
-    </a>
-    <ul class="sub-menu">
-        <li>
-            <a class="" href="form-elements.html">Form Elements</a>
-        </li>
-        <li>
-            <a class="" href="form-components.html">Form Components</a>
-        </li>
-        <li>
-            <a class="" href="form-wizard.html">Form Wizard</a>
-        </li>
-        <li>
-            <a class="" href="form-validation.html">Form Validations</a>
-        </li>
-        <li>
-            <a class="" href="form-fileupload.html">File Upload & Dropzone</a>
-        </li>
-        <li>
-            <a class="" href="form-editors.html">Editors</a>
-        </li>
-        <li>
-            <a class="" href="form-masks.html">Input Masks</a>
-        </li>
-    </ul>
-</li>
-<li class="">
-    <a href="javascript:;">
-        <i class="fa fa-gift"></i>
-        <span class="title">Extra</span>
-        <span class="arrow "></span><span class="label label-orange">NEW</span>
-    </a>
-    <ul class="sub-menu">
-        <li>
-            <a class="" href="ui-calendar.html">Calendar</a>
-        </li>
-        <li>
-            <a class="" href="ui-pricing.html">Pricing tables</a>
-        </li>
-        <li>
-            <a class="" href="ui-profile.html">Profile</a>
-        </li>
-        <li>
-            <a class="" href="ui-login.html">Login</a>
-        </li>
-        <li>
-            <a class="" href="ui-register.html">Registration</a>
-        </li>
-        <li>
-            <a class="" href="ui-timeline.html">Timeline</a>
-        </li>
-        <li>
-            <a class="" href="ui-invoice.html">Invoice</a>
-        </li>
-        <li>
-            <a class="" href="ui-members.html">Members</a>
-        </li>
-        <li>
-            <a class="" href="ui-gallery.html">Gallery</a>
-        </li>
-        <li>
-            <a class="" href="ui-search.html">Search</a>
-        </li>
-        <li>
-            <a class="" href="ui-blogs.html">Blogs</a>
-        </li>
-        <li>
-            <a class="" href="ui-imagecrop.html">Image cropper</a>
-        </li>
-        <li>
-            <a class="" href="ui-tocify.html">Tocify</a>
-        </li>
-        <li>
-            <a class="" href="ui-faq.html">FAQ</a>
-        </li>
-        <li>
-            <a class="" href="ui-404.html">404</a>
-        </li>
-        <li>
-            <a class="" href="ui-500.html">500</a>
-        </li>
-        <li>
-            <a class="" href="ui-lockscreen.html">Lock Screen</a>
-        </li>
-    </ul>
-</li>
-<li class="">
-    <a href="javascript:;">
-        <i class="fa fa-envelope"></i>
-        <span class="title">Mailbox</span>
-        <span class="arrow "></span><span class="label label-orange">4</span>
-    </a>
-    <ul class="sub-menu">
-        <li>
-            <a class="" href="mail-inbox.html">Inbox</a>
-        </li>
-        <li>
-            <a class="" href="mail-compose.html">Compose</a>
-        </li>
-        <li>
-            <a class="" href="mail-view.html">View</a>
-        </li>
-    </ul>
-</li>
-<li class="">
-    <a href="javascript:;">
-        <i class="fa fa-bar-chart"></i>
-        <span class="title">Charts</span>
-        <span class="arrow "></span>
-    </a>
-    <ul class="sub-menu">
-        <li>
-            <a class="" href="charts-morris.html">Morris Charts</a>
-        </li>
-        <li>
-            <a class="" href="charts-chartjs.html">Chart JS</a>
-        </li>
-        <li>
-            <a class="" href="charts-flot.html">Flot Charts</a>
-        </li>
-        <li>
-            <a class="" href="charts-sparkline.html">Sparkline Charts</a>
-        </li>
-        <li>
-            <a class="" href="charts-easypiechart.html">PIE charts & Knobs</a>
-        </li>
-        <li>
-            <a class="" href="charts-rickshaw.html">Rickshaw Charts</a>
-        </li>
-    </ul>
-</li>
-<li class="">
-    <a href="javascript:;">
-        <i class="fa fa-table"></i>
-        <span class="title">Tables</span>
-        <span class="arrow "></span>
-    </a>
-    <ul class="sub-menu">
-        <li>
-            <a class="" href="tables-basic.html">Basic tables</a>
-        </li>
-        <li>
-            <a class="" href="tables-data.html">Data Tables</a>
-        </li>
-        <li>
-            <a class="" href="tables-responsive.html">Responsive Tables</a>
-        </li>
-    </ul>
-</li>
-<li class="open">
-    <a href="javascript:;">
-        <i class="fa fa-columns"></i>
-        <span class="title">Layouts</span>
-        <span class="arrow open"></span>
-    </a>
-    <ul class="sub-menu" style='display:block;'>
-        <li>
-            <a class="active" href="layout-default.html">Default Layout</a>
-        </li>
-        <li>
-            <a class="" href="layout-collapsed.html">Collapsed Menu</a>
-        </li>
-        <li>
-            <a class="" href="layout-chat.html">Chat Open</a>
-        </li>
-        <li>
-            <a class="" href="layout-boxed.html">Boxed Layout</a>
-        </li>
-    </ul>
-</li>
-<li class="">
-    <a href="javascript:;">
-        <i class="fa fa-map-marker"></i>
-        <span class="title">Maps</span>
-        <span class="arrow "></span>
-    </a>
-    <ul class="sub-menu">
-        <li>
-            <a class="" href="ui-vectormaps.html">Vector Maps</a>
-        </li>
-        <li>
-            <a class="" href="ui-googlemaps.html">Google Maps</a>
-        </li>
-        <li>
-            <a class="" href="ui-googlemapfull.html">Advanced Google Maps</a>
-        </li>
-    </ul>
-</li>
-
-<li class=""><a href="javascript:;"> <i class="fa fa-folder-open"></i> <span class="title">Menu Levels</span> <span
-            class="arrow "></span> </a>
-    <ul class="sub-menu">
-        <li><a href="javascript:;"> <span class="title">Level 1.1</span> </a></li>
-        <li><a href="javascript:;"> <span class="title">Level 1.2</span> <span class="arrow "></span> </a>
-            <ul class="sub-menu">
-                <li><a href="javascript:;"> <span class="title">Level 2.1</span> </a></li>
-                <li><a href="ujavascript:;"> <span class="title">Level 2.2</span> <span class="arrow "></span></a>
-                    <ul class="sub-menu">
-                        <li><a href="javascript:;"> <span class="title">Level 3.1</span> <span
-                                    class="arrow "></span></a>
-                            <ul class="sub-menu">
-                                <li><a href="ujavascript:;"> <span class="title">Level 4.1</span> </a></li>
-                                <li><a href="ujavascript:;"> <span class="title">Level 4.2</span> </a></li>
-                            </ul>
-                        </li>
-                        <li><a href="ujavascript:;"> <span class="title">Level 3.2</span> </a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</li>
-
-</ul>
-
-</div>
-<!-- MAIN MENU - END -->
-
-
-<div class="project-info">
-
-    <div class="block1">
-        <div class="<?= $dataUrl ?>">
-            <span class='title'>New&nbsp;Orders</span>
-            <span class='total'>2,345</span>
         </div>
-        <div class="graph">
-            <span class="sidebar_orders">...</span>
-        </div>
+        <!-- USER INFO - END -->
+
+        <ul class='wraplist'>
+            <li class="">
+                <a href="<?= Url::to(['/']) ?>">
+                    <i class="fa fa-dashboard"></i>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="<?= Url::to(['/user/admin/index']) ?>">
+                    <i class="fa fa-th"></i>
+                    <span class="title"><?= Yii::t('user', 'User') ?></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-suitcase"></i>
+                    <span class="title"><?= Yii::t('catalog', 'Catalog') ?></span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class=""
+                           href="<?= Url::to(['/catalog/core/item-prop/index']) ?>"><?= Yii::t('catalog', 'Item Props') ?></a>
+                    </li>
+                    <li>
+                        <a class=""
+                           href="<?= Url::to(['/catalog/core/item/index']) ?>"><?= Yii::t('catalog', 'Item List') ?></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="<?= Url::to(['/order/core/order/index']) ?>">
+                    <i class="fa fa-sliders"></i>
+                    <span class="title"><?= Yii::t('order', 'Order') ?></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-gift"></i>
+                    <span class="title"><?= Yii::t('system', 'System') ?></span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class=""
+                           href="<?= Url::to(['/system/core/setting/index']) ?>"><?= Yii::t('system', 'Setting') ?></a>
+                    </li>
+                    <li>
+                        <a class=""
+                           href="<?= Url::to(['/system/core/system/index']) ?>"><?= Yii::t('system', 'System') ?></a>
+                    </li>
+                    <li>
+                        <a class=""
+                           href="<?= Url::to(['/system/core/tree/index']) ?>"><?= Yii::t('system', 'Tree') ?></a>
+                    </li>
+                    <li>
+                        <a class=""
+                           href="<?= Url::to(['/system/core/station/index']) ?>"><?= Yii::t('system', 'Station') ?></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-envelope"></i>
+                    <span class="title"><?= Yii::t('auth', 'Auth') ?></span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class=""
+                           href="<?= Url::to(['/auth/auth/create']) ?>"><?= Yii::t('auth', 'Create Permissions') ?></a>
+                    </li>
+                    <li>
+                        <a class=""
+                           href="<?= Url::to(['/auth/auth/list-role']) ?>"><?= Yii::t('auth', 'Role List') ?></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="<?= Url::to(['/payment/core/payment/index']) ?>">
+                    <i class="fa fa-bar-chart"></i>
+                    <span class="title"><?= Yii::t('payment', 'Payment') ?></span>
+                </a>
+            </li>
+
+        </ul>
+
     </div>
+    <!-- MAIN MENU - END -->
 
-    <div class="block2">
-        <div class="<?= $dataUrl ?>">
-            <span class='title'>Visitors</span>
-            <span class='total'>345</span>
+    <div class="project-info">
+
+        <div class="block1">
+            <div class="data">
+                <span class='title'>New&nbsp;Orders</span>
+                <span class='total'>2,345</span>
+            </div>
+            <div class="graph">
+                <span class="sidebar_orders">...</span>
+            </div>
         </div>
-        <div class="graph">
-            <span class="sidebar_visitors">...</span>
+
+        <div class="block2">
+            <div class="data">
+                <span class='title'>Visitors</span>
+                <span class='total'>345</span>
+            </div>
+            <div class="graph">
+                <span class="sidebar_visitors">...</span>
+            </div>
         </div>
+
     </div>
-
-</div>
-
 
 </div>
 <!--  SIDEBAR - END -->
@@ -804,7 +608,6 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
             </section>
         </div>
 
-
     </section>
 </section>
 <!-- END CONTENT -->
@@ -833,7 +636,6 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                     <h4><a href="#">Friends</a></h4>
                 </div>
             </li>
-
         </ul>
 
         <h4 class="group-head">Favourites</h4>
@@ -875,7 +677,6 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                     <i class="fa fa-circle"></i>
                 </div>
             </li>
-
         </ul>
 
         <h4 class="group-head">More Contacts</h4>
@@ -989,7 +790,6 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
                     <i class="fa fa-circle"></i>
                 </div>
             </li>
-
         </ul>
     </div>
 </div>
@@ -1000,26 +800,6 @@ list($yiipPath, $yiiUrl) = Yii::$app->assetManager->publish('@yii/assets');
 </div>
 <!-- END CONTAINER -->
 <!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
-<!-- CORE JS FRAMEWORK - START -->
-<script src="<?= $assetsUrl ?>/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-<script src="<?= $assetsUrl ?>/js/jquery.easing.min.js" type="text/javascript"></script>
-<script src="<?= $assetsUrl ?>/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="<?= $assetsUrl ?>/plugins/pace/pace.min.js" type="text/javascript"></script>
-<script src="<?= $assetsUrl ?>/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script>
-<script src="<?= $assetsUrl ?>/plugins/viewport/viewportchecker.js" type="text/javascript"></script>
-<!-- CORE JS FRAMEWORK - END -->
-
-<!-- CORE TEMPLATE JS - START -->
-<script src="<?= $assetsUrl ?>/js/scripts.js" type="text/javascript"></script>
-<!-- END CORE TEMPLATE JS - END -->
-
-<!-- Sidebar Graph - START -->
-<script src="<?= $assetsUrl ?>/plugins/sparkline-chart/jquery.sparkline.min.js" type="text/javascript"></script>
-<script src="<?= $assetsUrl ?>/js/chart-sparkline.js" type="text/javascript"></script>
-<!-- Sidebar Graph - END -->
-
-<script type="text/javascript" src="<?php echo $yiiUrl ?>/yii.js"></script>
 
 <!-- General section box modal start -->
 <div class="modal" id="section-settings" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label"
