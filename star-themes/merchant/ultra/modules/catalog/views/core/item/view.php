@@ -15,8 +15,6 @@ $this->params['sub-menu']['item-list'] = true;
 ?>
 <div class="item-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->item_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->item_id], [

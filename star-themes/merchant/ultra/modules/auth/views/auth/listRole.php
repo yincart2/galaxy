@@ -23,7 +23,7 @@ use yii\helpers\Url;
 $this->title = Yii::t('rbac', 'Roles');
 $this->params['breadcrumbs'][] = $this->title;
 
-
+$this->params['title'] = $this->title;
 $this->params['menu']['auth'] = true;
 $this->params['sub-menu']['list-role'] = true;
 ?>

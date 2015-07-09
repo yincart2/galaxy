@@ -10,11 +10,11 @@ use yii\grid\GridView;
 $this->title = Yii::t('payment', 'Payments');
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['payment'] = true;
 ?>
 <div class="payment-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

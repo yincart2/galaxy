@@ -10,6 +10,7 @@ use kartik\grid\GridView;
 $this->title = Yii::t('catalog', 'Item Props');
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['catalog'] = true;
 $this->params['sub-menu']['item-prop'] = true;
 ?>

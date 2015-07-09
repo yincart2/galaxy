@@ -5,16 +5,18 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+
 $this->title = Yii::t('auth', 'Create Controller Permissions');
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['auth'] = true;
 $this->params['sub-menu']['create'] = true;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        This generator helps you to quickly generate permissions list from a controller.
-    </p>
+
+<p>
+    This generator helps you to quickly generate permissions list from a controller.
+</p>
 <p>This is the name of the controller class to be generated. You should
     provide a fully qualified namespaced class (e.g. <code>app\controllers\PostController</code>),
     and class name should be in CamelCase ending with the word <code>Controller</code>. Make sure the class
@@ -22,11 +24,11 @@ $this->params['sub-menu']['create'] = true;
 
 <?php
 $form = ActiveForm::begin([
-          'method' => 'post',
-      ]);
+    'method' => 'post',
+]);
 echo $form->field($roleModel, 'controllerClass');
 ?>
 <div class="form-group">
-        <?= Html::submitButton(Yii::t('catalog','Create'),['class' =>'btn btn-success']) ?>
+    <?= Html::submitButton(Yii::t('catalog', 'Create'), ['class' => 'btn btn-success']) ?>
 </div>
-<?php $form->end();?>
+<?php $form->end(); ?>

@@ -10,11 +10,10 @@ $this->title = $model->payment_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('payment', 'Payments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['payment'] = true;
 ?>
 <div class="payment-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('payment', 'Update'), ['update', 'id' => $model->payment_id], ['class' => 'btn btn-primary']) ?>

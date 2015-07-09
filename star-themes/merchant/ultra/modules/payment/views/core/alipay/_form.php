@@ -11,7 +11,6 @@ use yii\widgets\ActiveForm;
 /* @var $model star\payment\forms\AlipayForm */
 /* @var $form ActiveForm */
 
-$this->params['menu']['payment'] = true;
 ?>
 <div class="AlipayForm">
 

@@ -10,12 +10,11 @@ $this->title = $model->prop_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Item Props'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['catalog'] = true;
 $this->params['sub-menu']['item-prop'] = true;
 ?>
 <div class="item-prop-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->prop_id], ['class' => 'btn btn-primary']) ?>

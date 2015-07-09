@@ -6,17 +6,16 @@ use yii\helpers\Html;
 /* @var $model star\payment\models\Payment */
 
 $this->title = Yii::t('payment', 'Update {modelClass}: ', [
-    'modelClass' => 'Payment',
-]) . ' ' . $model->payment_id;
+        'modelClass' => 'Payment',
+    ]) . ' ' . $model->payment_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('payment', 'Payments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->payment_id, 'url' => ['view', 'id' => $model->payment_id]];
 $this->params['breadcrumbs'][] = Yii::t('payment', 'Update');
 
+$this->params['title'] = $this->title;
 $this->params['menu']['payment'] = true;
 ?>
 <div class="payment-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -7,7 +7,6 @@ use yii\helpers\Url;
 /* @var $model star\shipment\models\Shipment */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->params['menu']['order'] = true;
 ?>
 
 <div class="shipment-form">

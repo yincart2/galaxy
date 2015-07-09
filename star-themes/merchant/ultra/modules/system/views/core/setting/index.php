@@ -10,12 +10,12 @@ use yii\grid\GridView;
 $this->title = Yii::t('system', 'Settings');
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['system'] = true;
 $this->params['sub-menu']['setting'] = true;
 ?>
 <div class="setting-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

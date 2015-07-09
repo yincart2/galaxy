@@ -10,12 +10,12 @@ $this->title = Yii::t('catalog', 'Create Item');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('catalog', 'Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['catalog'] = true;
 $this->params['sub-menu']['item-list'] = true;
 ?>
 <div class="item-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php if (Yii::$app->session->getFlash('sku-error')) { ?>
         <div class="alert alert-danger"><?= Yii::$app->session->getFlash('sku-error') ?></div>
     <?php } ?>

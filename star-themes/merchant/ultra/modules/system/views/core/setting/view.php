@@ -10,12 +10,11 @@ $this->title = $model->setting_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('system', 'Settings'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['system'] = true;
 $this->params['sub-menu']['setting'] = true;
 ?>
 <div class="setting-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('system', 'Update'), ['update', 'id' => $model->setting_id], ['class' => 'btn btn-primary']) ?>

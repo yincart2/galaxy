@@ -17,8 +17,6 @@ use yii\helpers\ArrayHelper;
 list($path,$url) = Yii::$app->assetManager->publish('@star/catalog/assets/js');
 $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::className()]]);
 
-$this->params['menu']['catalog'] = true;
-$this->params['sub-menu']['item-list'] = true;
 ?>
 
 <div class="item-form">

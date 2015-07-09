@@ -7,7 +7,6 @@ use yii\widgets\ActiveForm;
 /* @var $model star\order\models\Order */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->params['menu']['order'] = true;
 ?>
 
 <div class="order-form">
