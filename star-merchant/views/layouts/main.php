@@ -68,6 +68,7 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; Galaxy生态圈 <?= date('Y') ?></p>
+
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
