@@ -17,7 +17,6 @@ $this->params['sub-menu']['item-prop'] = true;
 <div class="item-prop-index">
 
     <?= GridView::widget([
-        'export' => false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -51,11 +50,14 @@ $this->params['sub-menu']['item-prop'] = true;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'export' => false,
+        'responsive' => true,
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> ' . Yii::t('catalog', 'Item Props') . '</h3>',
             'type' => 'success',
             'before' => Html::a('<i class="glyphicon glyphicon-plus"></i>' . Yii::t('catalog', 'Create Item Props'), ['create'], ['class' => 'btn btn-success']),
-            'footer' => false
+            'footer' => false,
+            'after' => false
         ],
     ]); ?>
 

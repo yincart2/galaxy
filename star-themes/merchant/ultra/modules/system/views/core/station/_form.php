@@ -12,43 +12,47 @@ $model->end_date = date('Y-m-d', $model->end_date);
 
 ?>
 
-<div class="station-form">
+<div class="content-body">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
 
-    <?php $form = ActiveForm::begin(); ?>
+            <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 100]) ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => 100]) ?>
 
-    <?= $form->field($model, 'detail')->widget(\mihaildev\ckeditor\CKEditor::className(), [
-        'editorOptions' => [
-            'preset' => 'full',
-            'inline' => false,
-        ],
-    ]) ?>
+            <?= $form->field($model, 'detail')->widget(\mihaildev\ckeditor\CKEditor::className(), [
+                'editorOptions' => [
+                    'preset' => 'full',
+                    'inline' => false,
+                ],
+            ]) ?>
 
-    <?= $form->field($model, 'enabled')->dropDownList(['0' => '不启用', '1' => '启用']) ?>
+            <?= $form->field($model, 'enabled')->dropDownList(['0' => '不启用', '1' => '启用']) ?>
 
-    <?= $form->field($model, 'start_date')->widget(\kartik\widgets\DatePicker::className(), [
-        'options' => ['placeholder' => 'Select operating time ...', 'value' => date('Y-m-d', time())],
-        'convertFormat' => true,
-        'pluginOptions' => [
-            'format' => 'yyyy-MM-dd',
-            'todayHighlight' => true
-        ]
-    ]) ?>
+            <?= $form->field($model, 'start_date')->widget(\kartik\widgets\DatePicker::className(), [
+                'options' => ['placeholder' => 'Select operating time ...', 'value' => date('Y-m-d', time())],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'yyyy-MM-dd',
+                    'todayHighlight' => true
+                ]
+            ]) ?>
 
-    <?= $form->field($model, 'end_date')->widget(\kartik\widgets\DatePicker::className(), [
-        'options' => ['placeholder' => 'Select operating time ...', 'value' => date('Y-m-d', time() + 365 * 24 * 60 * 60)],
-        'convertFormat' => true,
-        'pluginOptions' => [
-            'format' => 'yyyy-MM-dd',
-            'todayHighlight' => true
-        ]
-    ]) ?>
+            <?= $form->field($model, 'end_date')->widget(\kartik\widgets\DatePicker::className(), [
+                'options' => ['placeholder' => 'Select operating time ...', 'value' => date('Y-m-d', time() + 365 * 24 * 60 * 60)],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'yyyy-MM-dd',
+                    'todayHighlight' => true
+                ]
+            ]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <div class="form-group pull-right">
+                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>
