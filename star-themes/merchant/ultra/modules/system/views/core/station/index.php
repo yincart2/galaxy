@@ -16,7 +16,6 @@ $this->params['sub-menu']['station'] = true;
 ?>
 <div class="station-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
