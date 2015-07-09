@@ -7,6 +7,7 @@ class m150703_054416_shipment_v0_1_0 extends Migration
 {
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->createTable('{{%shipment}}', [
             'shipment_id' => Schema::TYPE_PK,
             'order_id' => Schema::TYPE_INTEGER . ' NOT NULL',
@@ -14,7 +15,7 @@ class m150703_054416_shipment_v0_1_0 extends Migration
             'trace_no' => Schema::TYPE_STRING . ' NOT NULL',
             'create_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'status' => Schema::TYPE_INTEGER . ' NOT NULL',
-        ]);
+        ],$tableOptions);
 
     }
 

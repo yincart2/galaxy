@@ -21,9 +21,6 @@ $this->params['order-list'] = true;
 
 
 
-
-<h1>My Orders</h1>
-
 <header class="top_box on_the_sides">
 
 

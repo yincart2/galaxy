@@ -60,6 +60,11 @@ return [
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@star/refund/messages',
                 ],
+                'member' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/member/messages',
+                ],
             ],
         ],
         'urlManager' => [

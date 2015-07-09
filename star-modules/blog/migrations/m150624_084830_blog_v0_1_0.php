@@ -7,6 +7,7 @@ class m150624_084830_blog_v0_1_0 extends Migration
 {
     public function safeUp()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->createTable('{{%comment}}', [
             'id' => Schema::TYPE_PK,
             'parent_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
@@ -16,7 +17,7 @@ class m150624_084830_blog_v0_1_0 extends Migration
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'status' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%lookup}}', [
             'id' => Schema::TYPE_PK,
@@ -24,7 +25,7 @@ class m150624_084830_blog_v0_1_0 extends Migration
             'code' => Schema::TYPE_STRING . '(11) NOT NULL',
             'type' => Schema::TYPE_SMALLINT . '(1) NOT NULL',
             'position' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%post}}', [
             'id' => Schema::TYPE_PK,
@@ -45,13 +46,13 @@ class m150624_084830_blog_v0_1_0 extends Migration
             'allow_comment' => Schema::TYPE_SMALLINT . '(1) NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%tag}}', [
             'id' => Schema::TYPE_PK,
             'name' => Schema::TYPE_STRING . '(128) NOT NULL',
             'frequency' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-        ]);
+        ],$tableOptions);
     }
 
     public function safeDown()

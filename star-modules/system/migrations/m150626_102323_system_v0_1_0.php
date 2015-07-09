@@ -7,6 +7,7 @@ class m150626_102323_system_v0_1_0 extends Migration
 {
     public function up()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->createTable('{{%setting}}', [
             'setting_id' => Schema::TYPE_PK,
             'menu_code' => Schema::TYPE_STRING . '(255) NOT NULL',
@@ -15,7 +16,7 @@ class m150626_102323_system_v0_1_0 extends Migration
             'group_label' => Schema::TYPE_STRING . '(255) NOT NULL',
             'menu_sort' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'group_sort' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%setting_fields}}', [
             'setting_fields_id' => Schema::TYPE_PK,
@@ -26,7 +27,20 @@ class m150626_102323_system_v0_1_0 extends Migration
             'setting_code' => Schema::TYPE_STRING . '(255) ',
             'type' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
             'chosen_value' => Schema::TYPE_STRING . '(255)',
-        ]);
+        ],$tableOptions);
+
+        $this->createTable('{{%file}}', [
+            'file_id' => Schema::TYPE_PK,
+            'model' => Schema::TYPE_STRING . '(60) NOT NULL',
+            'model_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'type' => Schema::TYPE_SMALLINT . '(4) NOT NULL',
+            'name' => Schema::TYPE_STRING . '(255) ',
+            'url' => Schema::TYPE_STRING . '(255) ',
+            'detail' => Schema::TYPE_TEXT ,
+            'position' => Schema::TYPE_STRING . '(255) ',
+            'create_at' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'update_at' => Schema::TYPE_INTEGER . ' NOT NULL',
+        ],$tableOptions);
 
         $this->batchInsert('{{%setting}}', ['setting_id', 'menu_code', 'menu_label', 'group_code', 'group_label', 'menu_sort','group_sort'],
             [
@@ -49,6 +63,8 @@ class m150626_102323_system_v0_1_0 extends Migration
                 [2,'key','KEY','1','payment_alipay_key',1,1],
                 [2,'sellerEmail','支付宝账号','1','payment_alipay_sellerEmail',1,1],
             ]);
+
+
     }
 
 
