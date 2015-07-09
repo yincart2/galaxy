@@ -16,7 +16,7 @@ class m150624_084741_cart_v0_1_0 extends Migration
             'qty' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'data' => Schema::TYPE_TEXT . ' NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-        ]);
+        ],$tableOptions);
     }
 
     public function safeDown()
