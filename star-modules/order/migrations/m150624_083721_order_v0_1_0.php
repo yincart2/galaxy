@@ -7,6 +7,7 @@ class m150624_083721_order_v0_1_0 extends Migration
 {
     public function safeUp()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->createTable('{{%order}}', [
             'order_id' => Schema::TYPE_PK,
             'user_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
@@ -20,7 +21,7 @@ class m150624_083721_order_v0_1_0 extends Migration
             'create_at' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_at' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'status' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%order_item}}', [
             'order_item_id' => Schema::TYPE_PK,
@@ -30,7 +31,7 @@ class m150624_083721_order_v0_1_0 extends Migration
             'qty' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'name' => Schema::TYPE_STRING . '(255) NOT NULL',
             'picture' => Schema::TYPE_STRING . '(255) NOT NULL',
-        ]);
+        ],$tableOptions);
     }
 
     public function safeDown()

@@ -7,6 +7,7 @@ class m150624_084702_catalog_v0_1_0 extends Migration
 {
     public function safeUp()
     {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->createTable('{{%currency}}', [
             'currency_id' => Schema::TYPE_PK,
             'code' => Schema::TYPE_STRING . '(45) NOT NULL',
@@ -15,7 +16,7 @@ class m150624_084702_catalog_v0_1_0 extends Migration
             'rate' => Schema::TYPE_DECIMAL . '(10, 4) NOT NULL',
             'is_default' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
             'enabled' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
-        ]);
+        ],$tableOptions);
         $this->insert('{{%currency}}', [
             'currency_id' => 1,
             'code' => 'CNY',
@@ -72,7 +73,7 @@ class m150624_084702_catalog_v0_1_0 extends Migration
             'country' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'state' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'city' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%item_img}}', [
             'img_id' => Schema::TYPE_PK,
@@ -81,7 +82,7 @@ class m150624_084702_catalog_v0_1_0 extends Migration
             'title' => Schema::TYPE_STRING . '(255) NOT NULL',
             'position' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%item_prop}}', [
             'prop_id' => Schema::TYPE_PK,
@@ -98,13 +99,13 @@ class m150624_084702_catalog_v0_1_0 extends Migration
             'multi' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
             'status' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
             'sort_order' => Schema::TYPE_INTEGER . '(3) NOT NULL',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%language}}', [
             'language_id' => Schema::TYPE_PK,
             'code' => Schema::TYPE_STRING . '(45) NOT NULL',
             'name' => Schema::TYPE_STRING . '(45) NOT NULL',
-        ]);
+        ],$tableOptions);
         $this->insert('{{%language}}', [
             'language_id' => 1,
             'code' => 'zh-cn',
@@ -137,7 +138,7 @@ class m150624_084702_catalog_v0_1_0 extends Migration
             'item_prop_value' => Schema::TYPE_STRING . '(255) NOT NULL',
             'pic' => Schema::TYPE_STRING . '(255) NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%prop_value}}', [
             'value_id' => Schema::TYPE_PK,
@@ -146,7 +147,7 @@ class m150624_084702_catalog_v0_1_0 extends Migration
             'value_alias' => Schema::TYPE_STRING . '(45) NOT NULL',
             'status' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
             'sort_order' => Schema::TYPE_INTEGER . '(3) NOT NULL',
-        ]);
+        ],$tableOptions);
 
         $this->createTable('{{%sku}}', [
             'sku_id' => Schema::TYPE_PK,
@@ -158,7 +159,7 @@ class m150624_084702_catalog_v0_1_0 extends Migration
             'price' => Schema::TYPE_DECIMAL . '(10, 2) NOT NULL',
             'outer_id' => Schema::TYPE_STRING . '(45) NOT NULL',
             'status' => Schema::TYPE_SMALLINT . '(1) NOT NULL default 0',
-        ]);
+        ],$tableOptions);
     }
 
     public function safeDown()
