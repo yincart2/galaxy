@@ -20,21 +20,7 @@ $this->params['order-list'] = true;
 <div class="row">
 
 
-
-<header class="top_box on_the_sides">
-
-
-    <div class="right_side">
-
-            <?= \yii\widgets\LinkPager::widget([
-                'pagination' => $pages,
-                'options' => ['class' => 'pagination pags']
-            ]); ?>
-
-    </div>
-
-</header><!--/ .top_box -->
-
+    <h2 class="tt_uppercase color_dark m_bottom_20">订单</h2>
 <div class="table_wrap">
 
     <table class="table_type_1 orders_table">
@@ -43,12 +29,11 @@ $this->params['order-list'] = true;
 
         <tr>
 
-            <th class="order_number_col">Order Number</th>
-            <th>Order Date</th>
-            <th class="ship_col">Ship To</th>
-            <th>Order Status</th>
-            <th class="order_total_col">Total</th>
-            <th class="product_action_col">Action</th>
+            <th class="order_number_col">订单号</th>
+            <th>下单日期</th>
+            <th>订单状态</th>
+            <th class="order_total_col">总价</th>
+            <th class="product_action_col">操作</th>
 
         </tr>
 
@@ -62,8 +47,6 @@ $this->params['order-list'] = true;
 
             <td data-title="Order Date"><?= date('m/d/Y H:i:s',$orderModel->create_at)?></td>
 
-            <td data-title="Ship To">John Doe</td>
-
             <td data-title="Order Status"><?= $orderModel->getStatusArray()[$orderModel->status]?> </td>
 
             <td data-title="Total" class="total"><?= $orderModel->total_price?></td>
@@ -74,7 +57,7 @@ $this->params['order-list'] = true;
 
                     <li>
 
-                        <a href="<?= Url::to(['/order/home/order/view','id'=>$orderModel->order_id])?>" class="button_grey">View Order</a>
+                        <a href="<?= Url::to(['/order/home/order/view','id'=>$orderModel->order_id])?>" class="button_grey">查看</a>
 
                     </li>
 
@@ -94,14 +77,12 @@ $this->params['order-list'] = true;
         </tbody>
 
     </table>
-
+    <?= \yii\widgets\LinkPager::widget([
+        'pagination' => $pages,
+        'options' => ['class' => 'pagination pags']
+    ]); ?>
 </div>
 
-<footer class="bottom_box">
-
-    <a href="#" class="button_grey middle_btn">Back</a>
-
-</footer><!--/ .bottom_box -->
 
 
 
