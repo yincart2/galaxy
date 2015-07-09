@@ -21,10 +21,10 @@ class ItemImgController extends DefaultController
      */
     public function actionCreate()
     {
-        $itemModel = new Item();
+        $itemModel = Yii::createObject(Item::className());
         $imagesArray = $itemModel->getUploadImages();
         foreach($imagesArray as  $image){
-            $itemImg = new ItemImg();
+            $itemImg = Yii::createObject(ItemImg::className());
             $itemImg->item_id = Yii::$app->request->post('item_id');
             $itemImg->pic = $image['pic'];
             $itemImg->title = $image['title'];
@@ -62,7 +62,8 @@ class ItemImgController extends DefaultController
      */
     protected function findModel($id)
     {
-        if (($model = ItemImg::findOne($id)) !== null) {
+        $itemImg = Yii::createObject(ItemImg::className());
+        if (($model = $itemImg::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

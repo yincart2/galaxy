@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\Tree;
+use star\system\models\Tree;
 
 /* @var $this yii\web\View */
 /* @var $model star\catalog\models\ItemProp */

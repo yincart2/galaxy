@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Flot Examples: Series Types</title>
+	<link href="../examples.css" rel="stylesheet" type="text/css">
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
+	<script language="javascript" type="text/javascript" src="../../jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="../../jquery.flot.js"></script>
+	<script type="text/javascript">
+
+	$(function() {
+
+		var typed1 = [];
+		for (var i = 0; i < 14; i += 0.5) {
+			typed1.push([i, Math.sin(i)]);
+		}
+
+		var typed2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+
+		var typed3 = [];
+		for (var i = 0; i < 14; i += 0.5) {
+			typed3.push([i, Math.cos(i)]);
+		}
+
+		var typed4 = [];
+		for (var i = 0; i < 14; i += 0.1) {
+			typed4.push([i, Math.sqrt(i * 10)]);
+		}
+
+		var typed5 = [];
+		for (var i = 0; i < 14; i += 0.5) {
+			typed5.push([i, Math.sqrt(i)]);
+		}
+
+		var typed6 = [];
+		for (var i = 0; i < 14; i += 0.5 + Math.random()) {
+			typed6.push([i, Math.sqrt(2*i + Math.sin(i) + 5)]);
+		}
+
+		$.plot("#flot-types", [{
+			data: typed1,
+			lines: { show: true, fill: true }
+		}, {
+			data: typed2,
+			bars: { show: true }
+		}, {
+			data: typed3,
+			points: { show: true }
+		}, {
+			data: typed4,
+			lines: { show: true }
+		}, {
+			data: typed5,
+			lines: { show: true },
+			points: { show: true }
+		}, {
+			data: typed6,
+			lines: { show: true, steps: true }
+		}]);
+
+	});
+
+	</script>
+</head>
+<body>
+
+		<div class="demo-container">
+			<div id="flot-types" class="demo-placeholder"></div>
+		</div>
+
+</body>
+</html>

@@ -12,7 +12,7 @@ return [
     'controllerNamespace' => 'home\controllers',
     'defaultRoute' => 'core',
     'layout'=>'/core',
-    'bootstrap' => ['log',[ 'home\models\UserEvent', 'beforeLogin'],'star\auth\bootstrap\Bootstrap'],
+    'bootstrap' => ['log',[ 'home\models\UserEvent', 'beforeLogin'],'matter\Gravitation',],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -39,6 +39,12 @@ return [
         ],
         'payment' => [
             'class' =>'star\payment\Module',
+        ],
+        'system' => [
+            'class' =>'star\system\Module',
+        ],
+        'shipment' => [
+            'class' =>'star\shipment\Module',
         ],
     ],
     'components' => [
@@ -89,13 +95,9 @@ return [
         'view'=>[
             'theme'=>[
                 'pathMap'=>[
-                    '@app/views'=>'@theme/star/home/',
-                    '@star/blog/views/home'=>'@theme/star/home/views/blog',
-                    '@star/catalog/views/home'=>'@theme/star/home/modules/catalog',
-                    '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
-                    '@app/modules/member/views'=>'@theme/star/home/modules/member',
+                    '@app/views'=>'@theme/home/default',
                 ],
-                'baseUrl'=>'@theme/star/home'
+                'baseUrl'=>'@theme/home'
             ]
         ]
     ],

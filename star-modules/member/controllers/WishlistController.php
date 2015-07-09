@@ -10,13 +10,28 @@ use yii;
 
 class WishlistController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionAddWishlist()
     {
         $user_id = Yii::$app->user->id;
         $item_id = Yii::$app->request->post('item_id');
         if($user_id) {
             if ($item_id) {
-                $wishlist = new Wishlist();
+                $wishlist = Yii::createObject(Wishlist::className()) ;
                 if (Wishlist::findOne(['item_id' => $item_id, 'user_id' => $user_id])) {
                     return json_encode('You have already add the item to wishlist !');
                 } else {

@@ -1,0 +1,18 @@
+<h3>What is Graphic Design?</h3>
+<p>Graphic design is the art of visual communication through the use of images, words, and ideas to give information to the viewers. Graphic design can be used for advertising, or just for entertainment intended for the mind.</p>
+<br>
+<h3>Balance</h3>
+<p>Designs in balance (or equilibrium) have their parts arrangement planned, keeping a coherent visual pattern (color, shape, space). "Balance" is a concept based on human perception and the complex nature of the human senses of weight and proportion. Humans can evaluate these visual elements in several situations to find a sense of balance. A design composition does not have to be symmetrical or linear to be considered balanced, the balance is global to all elements even the absence of content. In this context perfectly symmetrical and linear compositions are not necessarily balanced and so asymmetrical or radial distributions of text and graphic elements can achieve balance in a composition.</p>
+<br>
+<h3>Contrast</h3>
+<p>Distinguishing by comparing/creating differences. Some ways of creating contrast among elements in the design include using contrasting colors, sizes, shapes, locations, or relationships. For text, contrast is achieved by mixing serif and sans-serif on the page, by using very different type styles, or by using type in surprising or unusual ways. Another way to describe contrast, is to say "a small object next to a large object will look smaller". As contrast in size diminishes, monotony is approached.</p>
+<br>
+<h3>Emphasis</h3>
+<p>Making a specific element stand out or draw attention to the eye. Emphasis can be achieved in graphic design by placing elements on the page in positions where the eye is naturally drawn, by using other principles such as contrast, repetition, or movement. Bold and italic type provides emphasis for text. Graphic elements gain emphasis through size, visual weight, color, complexity, uniqueness, placement on the page, and other features.</p>
+<br>
+<h3>Gestalt</h3>
+<p>Sometimes considered a distinct principle of design, gestalt is the concept that "the whole is greater than the sum of its parts." Gestalt is a concept from psychology, where theorists note the propensity of humans to conceptually group things together to make a meaningful whole. When viewing designs, humans apply this principle unconsciously by seeing connections and relationships among and between the elements in the design. The overall perception of gestalt in a design is created through harmony, unity, balance, proportion, proximity, and other visual cues. Designers can use this principle to create visual connections and relationships that clarify and strengthen the overall "feel" and meaning of the design.</p>
+<br>
+<h3>Harmony</h3>
+<p>As with music, graphical elements can be said to be working in harmony - the individual parts come together as visually compelling and a meaningful whole. Disharmony can also be used just as it is in musical compositions: to enhance the emotional complexity, to challenge the viewer, and to give a contrast within the overall composition.</p>
+

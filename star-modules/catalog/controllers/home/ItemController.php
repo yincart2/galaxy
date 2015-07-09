@@ -2,7 +2,7 @@
 
 namespace star\catalog\controllers\home;
 
-use common\models\Tree;
+use star\system\models\Tree;
 use star\catalog\models\Item;
 use yii\web\Controller;
 use yii\data\Pagination;
@@ -19,7 +19,8 @@ class ItemController extends Controller
 
     public function actionView($id){
         /** @var  $itemModel  \star\catalog\models\Item*/
-        $itemModel = Item::find()->where(['item_id'=>$id])->one();
+        $item = Yii::createObject(Item::className());
+        $itemModel = $item::find()->where(['item_id'=>$id])->one();
         if($itemModel){
             return $this->render('view', [
                 'itemModel' => $itemModel,
@@ -34,8 +35,10 @@ class ItemController extends Controller
 
     public function actionList(){
         $catalog = Yii::$app->request->get('catalog');
-        $items = Item::getItemsByCategory($catalog);
-        $categories = Tree::getCategoriesById($catalog);
+        $item = Yii::createObject(Item::className());
+        $items = $item::getItemsByCategory($catalog);
+        $tree = Yii::createObject(Tree::className());
+        $categories = $tree::getCategoriesById($catalog);
         if($items && $categories) {
             $pages = new Pagination(['totalCount' => $items->count(), 'pageSize' => '3']);
             $items = $items->offset($pages->offset)->limit($pages->limit)->all();

@@ -9,6 +9,20 @@ use Yii;
 class DefaultController extends Controller
 {
 
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     public function actionIndex()
     {
         if(!Yii::$app->user->isGuest) {

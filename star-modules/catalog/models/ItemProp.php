@@ -3,7 +3,7 @@
 namespace star\catalog\models;
 
 use Yii;
-use common\models\Tree;
+use star\system\models\Tree;
 
 /**
  * This is the model class for table "{{%item_prop}}".

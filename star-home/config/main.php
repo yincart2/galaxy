@@ -11,7 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'home\controllers',
     'layout'=>'/main',
-    'bootstrap' => ['log',[ 'home\models\UserEvent', 'frontendRegister'],'star\auth\bootstrap\Bootstrap'],
+    'bootstrap' => ['log',[ 'home\models\UserEvent', 'frontendRegister'],'matter\Gravitation',],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -37,6 +37,12 @@ return [
         ],
         'order' => [
             'class' =>'star\order\Module',
+        ],
+        'shipment' => [
+            'class' =>'star\shipment\Module',
+        ],
+        'payment' => [
+            'class' =>'star\payment\Module',
         ],
     ],
     'components' => [
@@ -86,15 +92,10 @@ return [
         'view'=>[
             'theme'=>[
                 'pathMap'=>[
-                    '@app/views'=>'@theme/star/home/',
-                    '@star/blog/views/home'=>'@theme/star/home/views/blog',
-                    '@star/catalog/views/home'=>'@theme/star/home/modules/catalog',
-                    '@app/blog/widgets/home/views'=>'@theme/star/home/views/blog/widgets',
-                    '@star/member/views'=>'@theme/star/home/modules/member',
-                    '@star/cart/views'=>'@theme/star/home/modules/cart',
-                    '@star/order/views/home'=>'@theme/star/home/modules/order',
+                    '@app/views'=>'@theme/home/default/',
+                    '@star'=>'@theme/home/default/modules',
                 ],
-                'baseUrl'=>'@theme/star/home'
+                'baseUrl'=>'@theme/home/default'
             ]
         ]
     ],

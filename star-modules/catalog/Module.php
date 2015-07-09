@@ -2,10 +2,11 @@
 
 namespace star\catalog;
 
+use matter\base\BaseModule;
 use Yii;
 use yii\web\ForbiddenHttpException;
 
-class Module extends \yii\base\Module
+class Module extends BaseModule
 {
     public $controllerNamespace = 'star\catalog\controllers';
 

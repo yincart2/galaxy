@@ -29,6 +29,14 @@ Yincart2 Galaxy System
 
 微信商城
 
+### star Merchant
+
+商家后台
+
+### star Image
+
+图片空间
+
 虚拟域名配置说明
 ----------------
 
@@ -38,6 +46,10 @@ home.dev 对应star-home
 
 cluster.dev 对应star-cluster
 
+image.dev 对应star-image
+
+merchant.dev 对应star-merchant
+
 ....
 
 命名规则为xxx.dev对应star-xxx
@@ -46,6 +58,10 @@ cluster.dev 对应star-cluster
 -------
 
 数据库位于console/data/galaxy_latest.sql
+
+Migration
+--------
+yii migrate/up system_v0_1_0 --migrationPath=@star/system/migrations
 
 YII2 DIRECTORY STRUCTURE
 -------------------

@@ -39,10 +39,10 @@ class CouponRule extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'rule_id' => Yii::t('coupon', 'Rule ID'),
-            'desc' => Yii::t('coupon', 'Desc'),
-            'condition' => Yii::t('coupon', 'Condition'),
-            'result' => Yii::t('coupon', 'Result'),
+            'rule_id' => Yii::t('marketing', 'Rule ID'),
+            'desc' => Yii::t('marketing', 'Desc'),
+            'condition' => Yii::t('marketing', 'Condition'),
+            'result' => Yii::t('marketing', 'Result'),
         ];
     }
 }

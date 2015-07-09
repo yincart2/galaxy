@@ -10,7 +10,7 @@ return [
     'id' => 'cluster',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'cluster\controllers',
-    'bootstrap' => ['log',[ 'cluster\models\Events', 'attachEvents'],'star\auth\bootstrap\Bootstrap'],
+    'bootstrap' => ['log','matter\Gravitation',[ 'cluster\models\Events', 'attachEvents']],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -48,6 +48,9 @@ return [
         ],
         'cart' => [
             'class' =>'star\cart\Module',
+            'modelMap' => [
+                'ShoppingCart' =>'cluster\modules\cart\models\ShoppingCart'
+            ]
         ],
         'order' => [
             'class' =>'star\order\Module',
@@ -58,6 +61,12 @@ return [
         'marketing' => [
             'class' =>'star\marketing\Module',
         ],
+        'account' =>[
+            'class' =>'star\account\Module',
+        ],
+        'refund' =>[
+            'class' =>'star\refund\Module',
+        ]
     ],
     'components' => [
         'user' => [
@@ -93,13 +102,15 @@ return [
         'view'=>[
             'theme'=>[
                 'pathMap'=>[
-                    '@app/views'=>'@theme/star/cluster/',
-                    '@star/catalog/views/home'=>'@theme/star/cluster/modules/catalog',
-                    '@star/member/views'=>'@theme/star/cluster/modules/member',
-                    '@star/cart/views'=>'@theme/star/cluster/modules/cart',
-                    '@star/order/views/home'=>'@theme/star/cluster/modules/order',
+                    '@app/views'=>'@theme/cluster/default/',
+                    '@star/catalog/views/home'=>'@theme/cluster/default/modules/catalog',
+                    '@star/member/views'=>'@theme/cluster/default/modules/member',
+                    '@star/cart/views'=>'@theme/cluster/default/modules/cart',
+                    '@star/account/views/home'=>'@theme/cluster/default/modules/account',
+                    '@star/order/views/home'=>'@theme/cluster/default/modules/order',
+                    '@star/refund/views/home'=>'@theme/cluster/default/modules/refund',
                 ],
-                'baseUrl'=>'@theme/star/cluster'
+                'baseUrl'=>'@theme/cluster/default'
             ]
         ]
     ],

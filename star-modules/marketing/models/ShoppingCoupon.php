@@ -43,7 +43,6 @@ class ShoppingCoupon extends Component
 
     /**
      * get Order's validate attributes and save them in CouponForm model.
-     * @author cangzhou.wu(wucangzhou@gmail.com)
      * @param $category_id
      * @param $cartItems
      * @return CouponForm
@@ -65,7 +64,7 @@ class ShoppingCoupon extends Component
             }
             $cartItems = $tmp;
         }
-        $orderModel = new CouponForm();
+        $orderModel = Yii::createObject(CouponForm::className());
         if ($cartItems) {
             //todo  $shippingFee
             $totalPrice = $qty = $shippingFee = 0;
@@ -84,7 +83,6 @@ class ShoppingCoupon extends Component
 
     /**
      * get current user's coupon
-     * @author cangzhou.wu(wucangzhou@gmail.com)
      * @param $cartItems
      * @return array
      */
@@ -108,7 +106,6 @@ class ShoppingCoupon extends Component
 
     /**
      * return couponRule's result to order view
-     * @author cangzhou.wu(wucangzhou@gmail.com)
      * @param $couponId
      * @return array
      */
@@ -124,7 +121,6 @@ class ShoppingCoupon extends Component
 
     /**
      * use coupon before create order
-     * @author cangzhou.wu(wucangzhou@gmail.com)
      * @param $event
      */
     public function useCoupon($event){
@@ -153,7 +149,6 @@ class ShoppingCoupon extends Component
 
     /**
      * update coupon's status after order is created
-     * @author cangzhou.wu(wucangzhou@gmail.com)
      * @param $event
      */
     public  function updateCouponStatus($event){

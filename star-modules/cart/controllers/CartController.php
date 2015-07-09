@@ -12,7 +12,7 @@ class CartController extends Controller
 {
     public function actionIndex()
     {
-        $shoppingCartModel = new ShoppingCart();
+        $shoppingCartModel = Yii::createObject(ShoppingCart::className());
         $cartItems = $shoppingCartModel->serialCartItems();
 
         return $this->render('index', [
@@ -43,7 +43,7 @@ class CartController extends Controller
             $sku_id = $sku->sku_id;
         }
 
-        $shoppingCartModel = new ShoppingCart();
+        $shoppingCartModel = Yii::createObject(ShoppingCart::className()) ;
         if($shoppingCartModel->add($sku_id,$star_id, $qty,$data)) {
             return Json::encode(['message' => \Yii::t('app', 'add to cart success')]);
         } else {
@@ -56,7 +56,7 @@ class CartController extends Controller
      */
     public function actionUpdate()
     {
-        $shoppingCartModel = new ShoppingCart();
+        $shoppingCartModel =Yii::createObject(ShoppingCart::className());
         $cart = Yii::$app->request->post('Cart');
         $message = null;
         foreach($cart as $cartItem){
@@ -74,7 +74,7 @@ class CartController extends Controller
      */
     public function actionRemove()
     {
-        $shoppingCartModel = new ShoppingCart();
+        $shoppingCartModel = Yii::createObject(ShoppingCart::className());
         $sku_id = Yii::$app->request->post('sku_id');
         if ($shoppingCartModel->remove($sku_id)) {
             echo Json::encode(['message' => 'remove success','redirect' =>'index']);
@@ -87,7 +87,7 @@ class CartController extends Controller
      * remove all items
      */
     public function actionClearAll(){
-        $shoppingCartModel = new ShoppingCart();
+        $shoppingCartModel = Yii::createObject(ShoppingCart::className());
         if ($shoppingCartModel->clearAll()) {
             echo Json::encode(['message' => 'remove success','redirect' =>'index']);
         } else {

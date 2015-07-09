@@ -2,6 +2,7 @@
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'zh-CN',
+    'timeZone' => 'Asia/Shanghai',
     'sourceLanguage' => 'en-US',
     'modules' => [
         'blog' => [
@@ -10,14 +11,17 @@ return [
         'utility' => [
             'class' => 'c006\utility\migration\Module',
         ],
-        'gridview' =>  [
+        'gridview' => [
             'class' => '\kartik\grid\Module',
             'i18n' => [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => '@kvgrid/messages',
                 'forceTranslation' => true
             ]
-        ]
+        ],
+        'auth' => [
+            'class'=>'star\auth\Module',
+        ],
     ],
     'components' => [
         'i18n' => [
@@ -40,7 +44,27 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@star/order/messages',
-                ]
+                ],
+                'marketing' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/marketing/messages',
+                ],
+                'account' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/account/messages',
+                ],
+                'refund' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/refund/messages',
+                ],
+                'member' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/member/messages',
+                ],
             ],
         ],
         'urlManager' => [
@@ -49,7 +73,7 @@ return [
             'enableStrictParsing' => false,
             'rules' => [
                 '<controller:\w+>s' => '<controller>/index',
-                '<controller:\w+>/<id:\d+>'        => '<controller>/view',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
             ],
         ],
         'cache' => [

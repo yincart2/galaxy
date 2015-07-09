@@ -2,7 +2,7 @@
 
 namespace star\blog\controllers\home;
 
-use common\models\Tree;
+use star\system\models\Tree;
 use yii\web\Controller;
 use yii\widgets\ListView;
 use yii\data\ActiveDataProvider;

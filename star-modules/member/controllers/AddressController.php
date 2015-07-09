@@ -2,7 +2,7 @@
 
 namespace star\member\controllers;
 
-use common\models\Area;
+use star\system\models\Area;
 use yii\helpers\Json;
 use star\member\models\DeliveryAddress;
 use yii\web\Controller;
@@ -11,13 +11,27 @@ use yii;
 
 class AddressController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     /**
      * find member's address
      * @author Cangzhou Wu<wucang.zhou@jago-ag.cn>
      * @return string
      */
     public function actionDeliveryAddress(){
-        $model = new DeliveryAddress();
+        $model = Yii::createObject(DeliveryAddress::className()) ;
 
         $dataProvider = new ActiveDataProvider([
             'query' =>  $model::find()->where(['user_id'=>Yii::$app->user->id]),
@@ -153,11 +167,11 @@ class AddressController extends Controller
      */
     protected function findDeliveryAddressModel($id)
     {
-        $model = new DeliveryAddress();
+        $model = Yii::createObject(DeliveryAddress::className()) ;
         if (($model = $model::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new yii\web\NotFoundHttpException('The requested page does not exist.');
         }
     }
 }

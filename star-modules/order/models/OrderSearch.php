@@ -35,14 +35,13 @@ class OrderSearch extends Order
 
     /**
      * Creates data provider instance with search query applied
-     *
      * @param array $params
      *
      * @return ActiveDataProvider
      */
     public function search($params)
     {
-        $query = Order::find();
+        $query = Order::find()->orderBy([ 'create_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

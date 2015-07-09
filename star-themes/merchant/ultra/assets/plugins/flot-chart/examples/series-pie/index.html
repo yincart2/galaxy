@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Flot Examples: Pie Charts</title>
+	<link href="../examples.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+
+	.demo-container {
+		position: relative;
+		height: 400px;
+	}
+
+	#flotpie {
+		width: 550px;
+	}
+
+	#flotpiemenu {
+		position: absolute;
+		top: 20px;
+		left: 625px;
+		bottom: 20px;
+		right: 20px;
+		width: 200px;
+	}
+
+	#flotpiemenu button {
+		display: inline-block;
+		width: 200px;
+		padding: 3px 0 2px 0;
+		margin-bottom: 4px;
+		background: #eee;
+		border: 1px solid #999;
+		border-radius: 2px;
+		font-size: 16px;
+		-o-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+		-ms-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+		-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+		box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+		cursor: pointer;
+	}
+
+	</style>
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
+	<script language="javascript" type="text/javascript" src="../../jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="../../jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="../../jquery.flot.pie.js"></script>
+	<script type="text/javascript">
+
+	$(function() {
+
+
+		var data = [],
+			series = Math.floor(Math.random() * 6) + 3;
+
+		for (var i = 0; i < series; i++) {
+			data[i] = {
+				label: "Series" + (i + 1),
+				data: Math.floor(Math.random() * 100) + 1
+			}
+		}
+
+		var flotpie = $("#flotpie");
+
+		$("#pieexample-1").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true
+					}
+				}
+			});
+
+		});
+
+		$("#pieexample-2").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+			
+		});
+
+		$("#pieexample-3").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 1,
+							formatter: labelFormatter,
+							background: {
+								opacity: 0.8
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+		});
+
+		$("#pieexample-4").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 3/4,
+							formatter: labelFormatter,
+							background: {
+								opacity: 0.5
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+		});
+
+		$("#pieexample-5").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 3/4,
+							formatter: labelFormatter,
+							background: { 
+								opacity: 0.5,
+								color: "#000"
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+		});
+
+		$("#pieexample-6").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 3/4,
+						label: {
+							show: true,
+							radius: 3/4,
+							formatter: labelFormatter,
+							background: { 
+								opacity: 0.5,
+								color: "#000"
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+		});
+
+		$("#pieexample-7").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 2/3,
+							formatter: labelFormatter,
+							threshold: 0.1
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+		});
+
+		$("#pieexample-8").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true,
+						combine: {
+							color: "#999",
+							threshold: 0.05
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+		});
+
+		$("#pieexample-9").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 500,
+						label: {
+							show: true,
+							formatter: labelFormatter,
+							threshold: 0.1
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+		});
+
+		$("#pieexample-10").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						tilt: 0.5,
+						label: {
+							show: true,
+							radius: 1,
+							formatter: labelFormatter,
+							background: {
+								opacity: 0.8
+							}
+						},
+						combine: {
+							color: "#999",
+							threshold: 0.1
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+		});
+
+		$("#pieexample-11").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						innerRadius: 0.5,
+						show: true
+					}
+				}
+			});
+
+		});
+
+		$("#pieexample-12").click(function() {
+
+			flotpie.unbind();
+
+			$.plot(flotpie, data, {
+				series: {
+					pie: { 
+						show: true
+					}
+				},
+				grid: {
+					hoverable: true,
+					clickable: true
+				}
+			});
+
+
+			flotpie.bind("plothover", function(event, pos, obj) {
+
+				if (!obj) {
+					return;
+				}
+
+				var percent = parseFloat(obj.series.percent).toFixed(2);
+				$("#hover").html("<span style='font-weight:bold; color:" + obj.series.color + "'>" + obj.series.label + " (" + percent + "%)</span>");
+			});
+
+			flotpie.bind("plotclick", function(event, pos, obj) {
+
+				if (!obj) {
+					return;
+				}
+
+				percent = parseFloat(obj.series.percent).toFixed(2);
+				alert(""  + obj.series.label + ": " + percent + "%");
+			});
+		});
+
+		// Show the initial default chart
+
+		$("#pieexample-1").click();
+
+	});
+
+	// A custom label formatter used by several of the plots
+
+	function labelFormatter(label, series) {
+		return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+	}
+
+	</script>
+</head>
+<body>
+
+		<h3 id="title"></h3>
+		<div class="demo-container">
+			<div id="flotpie" class="demo-placeholder"></div>
+			<div id="flotpiemenu">
+				<button id="pieexample-1">Default Options</button>
+				<button id="pieexample-2">Without Legend</button>
+				<button id="pieexample-3">Label Formatter</button>
+				<button id="pieexample-4">Label Radius</button>
+				<button id="pieexample-5">Label Styles #1</button>
+				<button id="pieexample-6">Label Styles #2</button>
+				<button id="pieexample-7">Hidden Labels</button>
+				<button id="pieexample-8">Combined Slice</button>
+				<button id="pieexample-9">Rectangular Pie</button>
+				<button id="pieexample-10">Tilted Pie</button>
+				<button id="pieexample-11">Donut Hole</button>
+				<button id="pieexample-12">Interactivity</button>
+			</div>
+		</div>
+
+</body>
+</html>
