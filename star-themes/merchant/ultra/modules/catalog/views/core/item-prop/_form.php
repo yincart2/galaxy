@@ -12,8 +12,6 @@ list($path, $url) = Yii::$app->assetManager->publish('@star/catalog/assets');
 
 $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\AppAsset::className()]]);
 
-$this->params['menu']['catalog'] = true;
-$this->params['sub-menu']['item-prop'] = true;
 ?>
 
 <div class="item-prop-form">

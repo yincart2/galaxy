@@ -10,12 +10,11 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Stations', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['system'] = true;
 $this->params['sub-menu']['station'] = true;
 ?>
 <div class="station-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

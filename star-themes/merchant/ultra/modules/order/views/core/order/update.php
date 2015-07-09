@@ -14,11 +14,11 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('order', 'Orders'), 'url' =>
 $this->params['breadcrumbs'][] = ['label' => $model->order_no, 'url' => ['view', 'id' => $model->order_id]];
 $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
 
+$this->params['title'] = $this->title;
 $this->params['menu']['order'] = true;
 ?>
 <div class="order-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php
     $items = [];
     $orderItemArray = '';

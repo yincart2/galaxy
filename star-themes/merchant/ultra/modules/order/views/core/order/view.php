@@ -10,11 +10,10 @@ $this->title = $model->order_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('order', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['order'] = true;
 ?>
 <div class="order-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('order', 'Update'), ['update', 'id' => $model->order_id], ['class' => 'btn btn-primary']) ?>

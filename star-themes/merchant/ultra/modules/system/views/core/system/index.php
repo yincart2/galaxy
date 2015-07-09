@@ -17,11 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['topMenuKey'] = 'setting';
 $this->params['leftMenuKey'] = 'setting';
 
+$this->params['title'] = $this->title;
 $this->params['menu']['system'] = true;
 $this->params['sub-menu']['system'] = true;
 ?>
 <div class="setting-index">
-    <h2><?= Html::encode($this->title) ?></h2>
+
     <?php
     $form = ActiveForm::begin(['options' => ['class' => 'form-horizontal']]);
     echo $setting->renderForm($form);

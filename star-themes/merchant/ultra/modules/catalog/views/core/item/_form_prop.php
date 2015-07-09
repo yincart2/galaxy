@@ -2,9 +2,6 @@
     <?php
     use yii\helpers\Html;
 
-    $this->params['menu']['catalog'] = true;
-    $this->params['sub-menu']['item-list'] = true;
-
     if ($model && $model->props) {
         $itemPropValues = json_decode($model->props, true);
     }

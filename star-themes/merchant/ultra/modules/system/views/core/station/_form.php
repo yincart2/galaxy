@@ -10,8 +10,6 @@ use yii\widgets\ActiveForm;
 $model->start_date = date('Y-m-d', $model->start_date);
 $model->end_date = date('Y-m-d', $model->end_date);
 
-$this->params['menu']['system'] = true;
-$this->params['sub-menu']['station'] = true;
 ?>
 
 <div class="station-form">

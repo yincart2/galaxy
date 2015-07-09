@@ -10,6 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Stations';
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['system'] = true;
 $this->params['sub-menu']['station'] = true;
 ?>

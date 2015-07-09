@@ -1,6 +1,7 @@
 <?php
 use merchant\assets\AppAsset;
 use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -582,20 +583,24 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
             <div class="page-title">
 
                 <div class="pull-left">
-                    <h1 class="title">Default Layout</h1></div>
+                    <h1 class="title"><?php if (isset($this->params['title'])) {
+                            echo $this->params['title'];
+                        } else {
+                            echo Yii::t('app', 'Admin Manage');
+                        } ?></h1>
+                </div>
 
                 <div class="pull-right hidden-xs">
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.html"><i class="fa fa-home"></i>Home</a>
-                        </li>
-                        <li>
-                            <a href="layout-default.html">Layouts</a>
-                        </li>
-                        <li class="active">
-                            <strong>Default Layout</strong>
-                        </li>
-                    </ol>
+                    <?=
+                    Breadcrumbs::widget([
+                        'homeLink' => [
+                            'label' => Yii::t('app', 'Home'),
+//                            'url' => Yii::$app->homeUrl,
+                            'template' => '<li> <a href="' . Yii::$app->homeUrl . '"><i class="fa fa-home"></i>Home</a></li>'
+                        ],
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]);
+                    ?>
                 </div>
 
             </div>

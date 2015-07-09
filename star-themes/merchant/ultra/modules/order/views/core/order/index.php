@@ -9,6 +9,7 @@ use kartik\grid\GridView;
 $this->title = Yii::t('order', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['order'] = true;
 ?>
 <div class="order-index">

@@ -1,7 +1,5 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
 /* @var $model star\system\models\Setting */
 
@@ -12,12 +10,11 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('system', 'Settings'), 'url'
 $this->params['breadcrumbs'][] = ['label' => $model->setting_id, 'url' => ['view', 'id' => $model->setting_id]];
 $this->params['breadcrumbs'][] = Yii::t('system', 'Update');
 
+$this->params['title'] = $this->title;
 $this->params['menu']['system'] = true;
 $this->params['sub-menu']['setting'] = true;
 ?>
 <div class="setting-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

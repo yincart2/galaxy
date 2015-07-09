@@ -11,6 +11,7 @@ use yii\widgets\ActiveForm;
 $this->title = Yii::t('catalog','Items');
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['catalog'] = true;
 $this->params['sub-menu']['item-list'] = true;
 ?>

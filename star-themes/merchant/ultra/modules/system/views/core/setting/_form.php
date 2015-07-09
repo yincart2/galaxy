@@ -11,8 +11,6 @@ list($path, $url) = Yii::$app->assetManager->publish('@star/system/assets');
 
 $this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\AppAsset::className()]]);
 
-$this->params['menu']['system'] = true;
-$this->params['sub-menu']['setting'] = true;
 ?>
 
 <div class="setting-form">

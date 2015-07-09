@@ -10,12 +10,11 @@ $this->title = Yii::t('catalog', 'Create Item Prop');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('catalog', 'Item Props'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['title'] = $this->title;
 $this->params['menu']['catalog'] = true;
 $this->params['sub-menu']['item-prop'] = true;
 ?>
 <div class="item-prop-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

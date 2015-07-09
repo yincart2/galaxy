@@ -7,7 +7,6 @@ use yii\widgets\ActiveForm;
 /* @var $model star\payment\models\Payment */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->params['menu']['payment'] = true;
 ?>
 
 <div class="payment-form">

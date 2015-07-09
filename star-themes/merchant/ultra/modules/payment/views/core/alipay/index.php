@@ -17,12 +17,13 @@
  * 以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
  */
 
+$this->params['title'] = '支付宝纯担保交易接口接口';
 $this->params['menu']['payment'] = true;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-    <title>支付宝纯担保交易接口接口</title>
+<!--    <title>支付宝纯担保交易接口接口</title>-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
         *{
