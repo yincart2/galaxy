@@ -2,9 +2,11 @@
 
 namespace star\order\models;
 
+use star\catalog\models\Sku;
 use star\system\models\Tree;
 use Yii;
 use yii\helpers\ArrayHelper;
+use star\catalog\models\Item;
 
 /**
  * This is the model class for table "{{%order_item}}".
@@ -83,5 +85,13 @@ order by total desc
 limit 5
 EOF;
         return Yii::$app->db->createCommand($sql)->queryAll();
+    }
+
+
+    public function getItem(){
+        return $this->hasOne(Item::className(),['item_id' => 'item_id']);
+    }
+    public function getSku(){
+        return $this->hasOne(Sku::className(),['item_id' => 'item_id']);
     }
 }

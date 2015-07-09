@@ -100,10 +100,9 @@ class OrderController extends Controller
     public function actionList(){
         $this->layout = '/member';
         //@todo add status
-        $condition = '';
-        $query = Order::find()->where($condition)->addOrderBy('create_at DESC');
+        $query = Order::find()->addOrderBy('create_at DESC');
         $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $pages = new Pagination(['totalCount' => $countQuery->count(),'pageSize'=>10]);
         $orderModels = $query->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
