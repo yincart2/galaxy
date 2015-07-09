@@ -15,13 +15,8 @@ $this->params['menu']['order'] = true;
 <div class="order-index">
 
     <?= GridView::widget([
-        'export' => false,
-        'responsive' => false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
-        'headerRowOptions' => ['class' => 'kartik-sheet-style'],
-        'filterRowOptions' => ['class' => 'kartik-sheet-style'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -53,13 +48,19 @@ $this->params['menu']['order'] = true;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'export' => false,
+        'responsive' => true,
+        'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
+        'headerRowOptions' => ['class' => 'kartik-sheet-style'],
+        'filterRowOptions' => ['class' => 'kartik-sheet-style'],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> ' . Yii::t('order', 'Orders') . '</h3>',
             'type' => 'success',
-            'footer' => false
+            'footer' => false,
+            'before' => false,
+            'after' => false
         ],
         'toolbar' => [
-
             '{export}',
             '{toggleData}'
         ],
