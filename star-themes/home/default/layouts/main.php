@@ -49,8 +49,8 @@ AppAsset::register($this);
                 <?php
                 if (Yii::$app->user->isGuest) {
                     ?>
-                    <p class="f_size_small">Welcome visitor can you <a href="<?= Url::to(['/user/login'])?>">Log In</a> or
-                        <a href="<?= Url::to(['/user/registration/register']) ?>">Create an Account</a></p>
+                    <p class="f_size_small">欢迎,您可以 <a href="<?= Url::to(['/user/login'])?>">登陆</a> 或者
+                        <a href="<?= Url::to(['/user/registration/register']) ?>">创建账号</a></p>
                 <?php } ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
@@ -62,11 +62,11 @@ AppAsset::register($this);
                 $countWishlist = count(Wishlist::findAll(['user_id' => Yii::$app->user->id]));
                 ?>
                 <ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
-                    <li><a href="<?= Url::to(['/member']) ?>" class="default_t_color">My Account</a></li>
-                    <li><a href="#" class="default_t_color">Orders List</a></li>
-                    <li><a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="default_t_color">Wishlist</a></li>
-                    <li><a href="<?= Url::to(['/order/order/index']) ?>" class="default_t_color">Checkout</a></li>
-                    <li><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>Logout</a>
+                    <li><a href="<?= Url::to(['/member']) ?>" class="default_t_color">我的的账号</a></li>
+                    <li><a href="<?= Url::to(['/order/home/order/list'])?>" class="default_t_color">订单列表</a></li>
+                    <li><a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="default_t_color">愿望清单</a></li>
+                    <li><a href="<?= Url::to(['/cart/cart/index']) ?>" class="default_t_color">购物车</a></li>
+                    <li><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>登出</a>
                     </li>
                 </ul>
             </nav>
