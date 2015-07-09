@@ -28,6 +28,19 @@ class m150626_102323_system_v0_1_0 extends Migration
             'chosen_value' => Schema::TYPE_STRING . '(255)',
         ]);
 
+        $this->createTable('{{%file}}', [
+            'file_id' => Schema::TYPE_PK,
+            'model' => Schema::TYPE_STRING . '(60) NOT NULL',
+            'model_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'type' => Schema::TYPE_SMALLINT . '(4) NOT NULL',
+            'name' => Schema::TYPE_STRING . '(255) ',
+            'url' => Schema::TYPE_STRING . '(255) ',
+            'detail' => Schema::TYPE_TEXT ,
+            'position' => Schema::TYPE_STRING . '(255) ',
+            'create_at' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'update_at' => Schema::TYPE_INTEGER . ' NOT NULL',
+        ]);
+
         $this->batchInsert('{{%setting}}', ['setting_id', 'menu_code', 'menu_label', 'group_code', 'group_label', 'menu_sort','group_sort'],
             [
                 [1,'system','系统','module','模块','1','1'],
@@ -49,6 +62,8 @@ class m150626_102323_system_v0_1_0 extends Migration
                 [2,'key','KEY','1','payment_alipay_key',1,1],
                 [2,'sellerEmail','支付宝账号','1','payment_alipay_sellerEmail',1,1],
             ]);
+
+
     }
 
 
