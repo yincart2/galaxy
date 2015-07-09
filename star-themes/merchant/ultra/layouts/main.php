@@ -459,7 +459,7 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
         <!-- USER INFO - END -->
 
         <ul class='wraplist'>
-            <li class="">
+            <li class="<?= isset($this->params['menu']['dashboard']) ? 'open' : '' ?>">
                 <a href="<?= Url::to(['/']) ?>">
                     <i class="fa fa-dashboard"></i>
                     <span class="title">Dashboard</span>
@@ -471,7 +471,7 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
                     <span class="title"><?= Yii::t('user', 'User') ?></span>
                 </a>
             </li>
-            <li class="">
+            <li class="<?= isset($this->params['menu']['catalog']) ? 'open' : '' ?>">
                 <a href="javascript:;">
                     <i class="fa fa-suitcase"></i>
                     <span class="title"><?= Yii::t('catalog', 'Catalog') ?></span>
@@ -479,22 +479,22 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a class=""
+                        <a class="<?= isset($this->params['sub-menu']['item-prop']) ? 'active' : '' ?>"
                            href="<?= Url::to(['/catalog/core/item-prop/index']) ?>"><?= Yii::t('catalog', 'Item Props') ?></a>
                     </li>
                     <li>
-                        <a class=""
+                        <a class="<?= isset($this->params['sub-menu']['item-list']) ? 'active' : '' ?>"
                            href="<?= Url::to(['/catalog/core/item/index']) ?>"><?= Yii::t('catalog', 'Item List') ?></a>
                     </li>
                 </ul>
             </li>
-            <li class="">
+            <li class="<?= isset($this->params['menu']['order']) ? 'open' : '' ?>">
                 <a href="<?= Url::to(['/order/core/order/index']) ?>">
                     <i class="fa fa-sliders"></i>
                     <span class="title"><?= Yii::t('order', 'Order') ?></span>
                 </a>
             </li>
-            <li class="">
+            <li class="<?= isset($this->params['menu']['system']) ? 'open' : '' ?>">
                 <a href="javascript:;">
                     <i class="fa fa-gift"></i>
                     <span class="title"><?= Yii::t('system', 'System') ?></span>
@@ -502,24 +502,24 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a class=""
+                        <a class="<?= isset($this->params['sub-menu']['setting']) ? 'active' : '' ?>"
                            href="<?= Url::to(['/system/core/setting/index']) ?>"><?= Yii::t('system', 'Setting') ?></a>
                     </li>
                     <li>
-                        <a class=""
+                        <a class="<?= isset($this->params['sub-menu']['system']) ? 'active' : '' ?>"
                            href="<?= Url::to(['/system/core/system/index']) ?>"><?= Yii::t('system', 'System') ?></a>
                     </li>
                     <li>
-                        <a class=""
+                        <a class="<?= isset($this->params['sub-menu']['tree']) ? 'active' : '' ?>"
                            href="<?= Url::to(['/system/core/tree/index']) ?>"><?= Yii::t('system', 'Tree') ?></a>
                     </li>
                     <li>
-                        <a class=""
+                        <a class="<?= isset($this->params['sub-menu']['station']) ? 'active' : '' ?>"
                            href="<?= Url::to(['/system/core/station/index']) ?>"><?= Yii::t('system', 'Station') ?></a>
                     </li>
                 </ul>
             </li>
-            <li class="">
+            <li class="<?= isset($this->params['menu']['auth']) ? 'open' : '' ?>">
                 <a href="javascript:;">
                     <i class="fa fa-envelope"></i>
                     <span class="title"><?= Yii::t('auth', 'Auth') ?></span>
@@ -527,16 +527,16 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a class=""
+                        <a class="<?= isset($this->params['sub-menu']['create']) ? 'active' : '' ?>"
                            href="<?= Url::to(['/auth/auth/create']) ?>"><?= Yii::t('auth', 'Create Permissions') ?></a>
                     </li>
                     <li>
-                        <a class=""
+                        <a class="<?= isset($this->params['sub-menu']['list-role']) ? 'active' : '' ?>"
                            href="<?= Url::to(['/auth/auth/list-role']) ?>"><?= Yii::t('auth', 'Role List') ?></a>
                     </li>
                 </ul>
             </li>
-            <li class="">
+            <li class="<?= isset($this->params['menu']['payment']) ? 'open' : '' ?>">
                 <a href="<?= Url::to(['/payment/core/payment/index']) ?>">
                     <i class="fa fa-bar-chart"></i>
                     <span class="title"><?= Yii::t('payment', 'Payment') ?></span>

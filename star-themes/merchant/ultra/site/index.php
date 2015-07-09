@@ -1,7 +1,8 @@
 <?php
 list($path, $url) = Yii::$app->assetManager->getPublishedPath('@theme/merchant/ultra');
-?>
 
+$this->params['menu']['dashboard'] = true;
+?>
 
 <div class="col-lg-12">
 <section class="box nobox">
