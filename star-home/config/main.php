@@ -44,6 +44,9 @@ return [
         'payment' => [
             'class' =>'star\payment\Module',
         ],
+        'refund' =>[
+            'class' =>'star\refund\Module',
+        ]
     ],
     'components' => [
         'urlManager'=>[

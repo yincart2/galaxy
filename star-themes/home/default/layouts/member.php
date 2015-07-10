@@ -41,6 +41,11 @@ $this->beginContent('@theme/home/default/layouts/main.php');
                                         <b><?= Yii::t('member', 'Order') ?></b>
                                     </a>
                                 </li>
+                                <li >
+                                    <a href="<?= Url::to(['/refund/home/refund/index']) ?>" class="f_size_large color_dark d_block">
+                                        <b><?= Yii::t('refund', 'Refund Log') ?> </b>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </figure>

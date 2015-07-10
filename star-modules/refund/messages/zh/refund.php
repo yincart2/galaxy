@@ -24,4 +24,5 @@ return [
     'Create At' => '创建时间',
     'Update At' => '更新时间',
     'Status' => '状态',
+    'Refund Log' => '退货日志',
 ];
