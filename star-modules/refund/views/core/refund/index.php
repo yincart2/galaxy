@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => '订单号',
                 'format' => 'raw',
                 'value' => function($model){
-                        return Html::a($model->order->order_no,\yii\helpers\Url::to(['/order/home/order/view','id'=>$model->order_id]));
+                        return Html::a($model->order->order_no,\yii\helpers\Url::to(['/order/core/order/update','id'=>$model->order_id]));
                     },
             ],
             'refund_fee',

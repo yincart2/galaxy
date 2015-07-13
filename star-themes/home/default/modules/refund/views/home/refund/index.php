@@ -42,7 +42,7 @@ $this->params['refund-list'] = true;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '<div style="width: 32px">{view} {delete}</div>'
+                'template' => '<div style="width: 32px">{view} </div>'
             ],
         ],
     ]); ?>
