@@ -6,7 +6,7 @@ use himiklab\thumbnail\EasyThumbnailImage;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-list($url,$link) = $this->getAssetManager()->publish('@home/modules/cart/web');
+list($url,$link) = $this->getAssetManager()->publish('@star/cart/web');
 $this->registerJsFile($link . '/js/cart.js',['depends' => [\yii\web\JqueryAsset::className()]] );
 
 $form = \yii\widgets\ActiveForm::begin();

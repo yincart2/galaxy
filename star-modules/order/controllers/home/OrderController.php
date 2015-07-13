@@ -2,7 +2,7 @@
 
 namespace star\order\controllers\home;
 
-use cluster\modules\cart\models\ShoppingCart;
+use star\cart\models\ShoppingCart;
 use star\order\models\Order;
 use star\catalog\models\Sku;
 use Yii;
