@@ -92,27 +92,17 @@ $this->params['breadcrumbs'][] = [
                     <i class="fa fa-star active tr_all_hover"></i>
                 </li>
             </ul>
-            <a href="#" class="d_inline_middle default_t_color f_size_small m_left_5">1 Review(s) </a>
+            <a href="#" class="d_inline_middle default_t_color f_size_small m_left_5">1 评论 </a>
         </div>
         <hr class="m_bottom_10 divider_type_3">
         <table class="description_table m_bottom_10">
             <tr>
-                <td>Manufacturer:</td>
-                <td><a href="#" class="color_dark">Chanel</a></td>
+                <td>库存:</td>
+                <td ><span class="color_green"></span> <span id="stock"><?= $itemModel->stock?></span> </td>
             </tr>
-            <tr>
-                <td>Availability:</td>
-                <td ><span class="color_green">in stock</span> <span id="stock"><?= $itemModel->stock?></span> item(s)</td>
-            </tr>
-            <tr>
-                <td>Product Code:</td>
-                <td>PS06</td>
-            </tr>
-        </table>
 
-        <hr class="divider_type_3 m_bottom_10">
-        <p class="m_bottom_10">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem ipsum dolor sit amet, consecvtetuer adipiscing. </p>
-        <hr class="divider_type_3 m_bottom_15">
+        </table>
+       <hr class="divider_type_3 m_bottom_15">
         <div class="m_bottom_15 deal_price">
             <s class="v_align_b f_size_ex_large">$152.00</s><span class="v_align_b f_size_big m_left_5 scheme_color fw_medium"><strong><?= $itemModel->price ?></strong></span>
         </div>
@@ -195,7 +185,7 @@ $this->params['breadcrumbs'][] = [
 
             <!-- Price Ends -->
             <tr>
-                <td class="v_align_m">Quantity:</td>
+                <td class="v_align_m">数量:</td>
                 <td class="v_align_m">
                     <div class="clearfix quantity r_corners d_inline_middle f_size_medium color_dark">
                         <button type="button" class="bg_tr d_block f_left" data-direction="down">-</button>
@@ -207,12 +197,12 @@ $this->params['breadcrumbs'][] = [
         </table>
         </div>
         <div class="d_ib_offset_0 m_bottom_20">
-            <button type="button" class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large deal_add_car" data-url="<?= Url::to(['/cart/cart/add']); ?>">Add to Cart</button>
-            <button type="button" class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Wishlist</span><i class="fa fa-heart-o f_size_big"></i></button>
-            <button type="button" class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Compare</span><i class="fa fa-files-o f_size_big"></i></button>
-            <button type="button" class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0 relative"><i class="fa fa-question-circle f_size_big"></i><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Ask a Question</span></button>
+            <button type="button" class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large deal_add_car" data-url="<?= Url::to(['/cart/cart/add']); ?>">加入购物车</button>
+            <button type="button" class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">加入心愿单</span><i class="fa fa-heart-o f_size_big"></i></button>
+            <button type="button" class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">对比</span><i class="fa fa-files-o f_size_big"></i></button>
+            <button type="button" class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0 relative"><i class="fa fa-question-circle f_size_big"></i><span class="tooltip tr_all_hover r_corners color_dark f_size_small">提问</span></button>
         </div>
-        <p class="d_inline_middle">Share this:</p>
+        <p class="d_inline_middle">分享:</p>
         <div class="d_inline_middle m_left_5 addthis_widget_container">
             <!-- AddThis Button BEGIN -->
             <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
@@ -234,9 +224,9 @@ $this->params['breadcrumbs'][] = [
 <!--tabs navigation-->
 <nav>
     <ul class="tabs_nav horizontal_list clearfix">
-        <li class="f_xs_none"><a href="#tab-1" class="bg_light_color_1 color_dark tr_delay_hover r_corners d_block">Description</a></li>
-        <li class="f_xs_none"><a href="#tab-2" class="bg_light_color_1 color_dark tr_delay_hover r_corners d_block">Specifications</a></li>
-        <li class="f_xs_none"><a href="#tab-3" class="bg_light_color_1 color_dark tr_delay_hover r_corners d_block">Reviews</a></li>
+        <li class="f_xs_none"><a href="#tab-1" class="bg_light_color_1 color_dark tr_delay_hover r_corners d_block">描述</a></li>
+        <li class="f_xs_none"><a href="#tab-2" class="bg_light_color_1 color_dark tr_delay_hover r_corners d_block">属性</a></li>
+        <li class="f_xs_none"><a href="#tab-3" class="bg_light_color_1 color_dark tr_delay_hover r_corners d_block">评论</a></li>
     </ul>
 </nav>
 <section class="tabs_content shadow r_corners">
@@ -693,8 +683,6 @@ $this->params['breadcrumbs'][] = [
 <!--    </figcaption>-->
 <!--</figure>-->
 <!--</div>-->
-<hr class="divider_type_3 m_bottom_15">
-<a href="category_grid.html" role="button" class="d_inline_b bg_light_color_2 color_dark tr_all_hover button_type_4 r_corners"><i class="fa fa-reply m_left_5 m_right_10 f_size_large"></i>Back to: Woman</a>
 </section>
 <!--right column-->
 <aside class="col-lg-3 col-md-3 col-sm-3">

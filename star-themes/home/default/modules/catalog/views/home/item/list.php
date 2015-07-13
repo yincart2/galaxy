@@ -1,4 +1,8 @@
 <?php
+/**
+ * if this view can't show , you should install imagick for php,The EasyThumbnailImage depend on it
+ */
+use himiklab\thumbnail\EasyThumbnailImage;
 use star\system\models\Tree;
 use yii\widgets\LinkPager;
 use yii\helpers\Url;
@@ -102,7 +106,13 @@ foreach($items as $key=>$item) {
         <a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
             <!--hot product-->
             <span class="hot_stripe"><img src="<?= $link ?>/images/hot_product.png" alt=""></span>
-            <img src="<?= $link ?>/images/product_img_1.jpg" class="tr_all_hover" alt="">
+            <?= EasyThumbnailImage::thumbnailImg(
+                '@image/'.$item->getMainImage(),
+                242,
+                242,
+                EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+                ['class'=>"tr_all_hover"]
+            )?>
             <span role="button" data-popup="#quick_view_product"
                   class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
         </a>
@@ -145,7 +155,7 @@ foreach($items as $key=>$item) {
                     <p class="scheme_color f_size_large m_bottom_15"><span class="fw_medium"><?= $item->price ?></span></p>
                     <button
                         class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15 m_sm_bottom_0 d_sm_inline_middle">
-                        Add to Cart
+                        加入购物车
                     </button>
                     <br class="d_sm_none">
                     <button

@@ -113,7 +113,7 @@ $this->params['breadcrumbs'][] = [
             <div class="box-content">
                 <div class="memo" style="float:left"><h3>
                         给卖家留言：</h3>
-                    <textarea id="memo" name="memo" placeholder="选填，可以告诉卖家您对商品的特殊要求，如：颜色、尺码等" rows="5"></textarea>
+                    <textarea id="memo" name="memo" placeholder="选填，可以告诉卖家您对商品的特殊要求，如：颜色、尺码等" rows="7"></textarea>
                 </div>
             </div>
 

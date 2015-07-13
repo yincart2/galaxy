@@ -21,7 +21,7 @@ $form = \yii\widgets\ActiveForm::begin();
             <tr class="f_size_large">
                 <!--titles for td-->
                 <th>商品图片 &amp; 名称</th>
-                <th>SKU</th>
+                <th>属性</th>
                 <th>价钱</th>
                 <th>数量</th>
                 <th>总价</th>
@@ -69,7 +69,7 @@ $form = \yii\widgets\ActiveForm::begin();
                         <button type="button" class="bg_tr d_block f_left" data-direction="up">+</button>
                     </div>
                     <div>
-                        <a href="javascript:;" class="color_dark remove-item" data-item="<?= $sku->sku_id?>" data-url="<?= Url::to(['/cart/cart/remove'])?>"><i class="fa fa-times f_size_medium m_right_5"></i>Remove</a><br>
+                        <a href="javascript:;" class="color_dark remove-item" data-item="<?= $sku->sku_id?>" data-url="<?= Url::to(['/cart/cart/remove'])?>"><i class="fa fa-times f_size_medium m_right_5"></i>删除</a><br>
                     </div>
                 </td>
                 <!--subtotal-->
