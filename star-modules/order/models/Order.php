@@ -36,9 +36,10 @@ class Order extends \yii\db\ActiveRecord
     const STATUS_WAIT_SHIPMENT = 2;
     const STATUS_WAIT_CONFIRM  = 3;
     const STATUS_COMPLETE  = 4;
-    const STATUS_WAIT_REFUND  = 5;
-    const STATUS_REFUND_FAILED  = 6;
-    const STATUS_REFUND_PASS  = 7;
+    const STATUS_WAIT_REFUND_CHECK  = 5;
+    const STATUS_WAIT_REFUND  = 6;
+    const STATUS_REFUND_FAILED  = 7;
+    const STATUS_REFUND_PASS  = 8;
 
     const EVENT_CHANGE_PRICE  = 'changeOrderPrice';
 
@@ -48,6 +49,7 @@ class Order extends \yii\db\ActiveRecord
             self::STATUS_WAIT_SHIPMENT => Yii::t('order','Wait Shipment'),
             self::STATUS_WAIT_CONFIRM => Yii::t('order','Wait Confirm'),
             self::STATUS_COMPLETE => Yii::t('order','Complete'),
+            self::STATUS_WAIT_REFUND_CHECK =>  Yii::t('order','Wait Refund Checks'),
             self::STATUS_WAIT_REFUND =>  Yii::t('order','Wait Refund'),
             self::STATUS_REFUND_FAILED =>  Yii::t('order','Refund Failed'),
             self::STATUS_REFUND_PASS => Yii::t('order','Refund Pass'),

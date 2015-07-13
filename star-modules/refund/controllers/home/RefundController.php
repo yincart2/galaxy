@@ -96,6 +96,10 @@ class RefundController extends Controller
                 $model->image = Yii::$app->params['imageDomain'] . '/refund/' . $file->baseName . time() . '.' . $file->extension;
             }
             if ($model->save()) {
+                $order->status = $order::STATUS_WAIT_REFUND_CHECK;
+                if(!$order->save()){
+                    throw new Exception(404, Yii::t('app', 'order create error!'));
+                }
                 return $this->redirect(['view', 'id' => $model->refund_id]);
             }
         }

@@ -19,18 +19,23 @@ $this->params['refund-list'] = true;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//            'refund_id',
-            'order_id',
+            [
+                'attribute' => 'order_id',
+                'label' => '订单号',
+                'format' => 'raw',
+                'value' => function($model){
+                        return Html::a($model->order->order_no,\yii\helpers\Url::to(['/order/home/order/view','id'=>$model->order_id]));
+                    },
+            ],
             'refund_fee',
             'reason',
             'memo',
-             'create_at:date',
-            // 'update_at',
+             'create_at:datetime',
             [
                 'attribute' => 'status',
                 'label' => '审核状态',
                 'value' => function($model){
-                    $statusList = [0 => '待审核', 1 => '审核中', 2 => '审核通过'];
+                        $statusList = $model->getStatusArray();
                     return $statusList[$model->status];
                 },
             ],
