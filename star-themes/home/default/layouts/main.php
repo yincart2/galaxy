@@ -141,9 +141,9 @@ AppAsset::register($this);
 										<span class="d_inline_middle shop_icon m_mxs_right_0">
 											<i class="fa fa-shopping-cart"></i>
 											<span class="count tr_delay_hover type_2 circle t_align_c" id="shopping_car"><?php
-                                                $shoppingCartModel = new \home\modules\cart\models\ShoppingCart();
-                                                $cartItems = $shoppingCartModel->cartItems;
-                                                echo count($cartItems);
+                                                $shoppingCartModel = new \star\cart\models\ShoppingCart();
+
+                                                echo $shoppingCartModel->getTotalQty();
                                                 ?></span>
 										</span>
                         <b class="d_mxs_none">$<?= $shoppingCartModel->getTotal() ?></b>
