@@ -7,7 +7,7 @@ use dektrium\user\models\LoginForm;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use star\member\models\Wishlist;
-
+use himiklab\thumbnail\EasyThumbnailImage;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -39,6 +39,51 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+<!--login popup-->
+<div class="popup_wrap d_none" id="login_popup">
+    <section class="popup r_corners shadow">
+        <button class="bg_tr color_dark tr_all_hover text_cs_hover close f_size_large"><i class="fa fa-times"></i>
+        </button>
+        <h3 class="m_bottom_20 color_dark">登陆</h3>
+        <?php $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'enableAjaxValidation' => true,
+            'enableClientValidation' => false,
+            'validateOnBlur' => false,
+            'validateOnType' => false,
+            'validateOnChange' => false,
+            'action' => Url::to(['/user/security/login']),
+        ]);
+        /** @var dektrium\user\models\LoginForm $model */
+        $model = \Yii::createObject(LoginForm::className());;
+
+        ?>
+        <ul>
+            <li class="m_bottom_15">
+                <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'r_corners full_width', 'tabindex' => '1']])->textInput()->label('用户名', ['class' => 'm_bottom_5 d_inline_b']) ?>
+            </li>
+            <li class="m_bottom_25">
+                <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'r_corners full_width', 'tabindex' => '2']])->passwordInput()->label(Yii::t('user', 'Password')) ?>
+            </li>
+            <li class="m_bottom_15">
+                <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '4', 'class' => 'd_none']) ?>
+            </li>
+            <li class="clearfix m_bottom_30">
+                <?= Html::submitButton(Yii::t('user', 'Sign in'), ['class' => 'button_type_4 tr_all_hover r_corners f_left bg_scheme_color color_light f_mxs_none m_mxs_bottom_15']) ?>
+                <div class="f_right f_size_medium f_mxs_none">
+                    <a href="<?= Url::to(['/user/security/login']) ?>" class="color_dark">忘记密码?</a>
+                </div>
+            </li>
+        </ul>
+        <?php ActiveForm::end(); ?>
+
+        <footer class="bg_light_color_1 t_mxs_align_c">
+            <h3 class="color_dark d_inline_middle d_mxs_block m_mxs_bottom_15">新用户?    </h3>
+            <a href="<?= Url::to(['/user/registration/register']) ?>" role="button"
+               class="tr_all_hover r_corners button_type_4 bg_dark_color bg_cs_hover color_light d_inline_middle m_mxs_left_0">创建账号</a>
+        </footer>
+    </section>
+</div>
 <div class="boxed_layout relative w_xs_auto">
 <header role="banner">
 <!--header top part-->
@@ -49,7 +94,7 @@ AppAsset::register($this);
                 <?php
                 if (Yii::$app->user->isGuest) {
                     ?>
-                    <p class="f_size_small">欢迎,您可以 <a href="<?= Url::to(['/user/login'])?>">登陆</a> 或者
+                    <p class="f_size_small">欢迎,您可以 <a href="#" data-popup="#login_popup">登陆</a> 或者
                         <a href="<?= Url::to(['/user/registration/register']) ?>">创建账号</a></p>
                 <?php } ?>
             </div>
@@ -78,7 +123,7 @@ AppAsset::register($this);
 <section class="h_bot_part container">
     <div class="clearfix row">
         <div class="col-lg-6 col-md-6 col-sm-4 t_xs_align_c">
-            <a href="index.html" class="logo m_xs_bottom_15 d_xs_inline_b">
+            <a href="<?= Url::to(['/']) ?>" class="logo m_xs_bottom_15 d_xs_inline_b">
                 <img src="<?= $link ?>/images/logo.png" alt="">
             </a>
         </div>
@@ -136,7 +181,7 @@ AppAsset::register($this);
                 </li>
                 <!--shopping cart-->
                 <li class="m_left_5 relative container3d" id="shopping_button">
-                    <a role="button" href="<?= Url::to(['/cart/cart/index'])?>"
+                    <a role="button" href="#"
                        class="button_type_3 color_light bg_scheme_color d_block r_corners tr_delay_hover box_s_none">
 										<span class="d_inline_middle shop_icon m_mxs_right_0">
 											<i class="fa fa-shopping-cart"></i>
@@ -149,91 +194,55 @@ AppAsset::register($this);
                         <b class="d_mxs_none">$<?= $shoppingCartModel->getTotal() ?></b>
                     </a>
 
-<!--                    <div class="shopping_cart top_arrow tr_all_hover r_corners">-->
-<!--                        <div class="f_size_medium sc_header">Recently added item(s)</div>-->
-<!--                        <ul class="products_list">-->
-<!--                            <li>-->
-<!--                                <div class="clearfix">-->
-<!--                                    <!--product image-->
-<!--                                    <img class="f_left m_right_10" src="--><?//= $link ?><!--/images/shopping_c_img_1.jpg"-->
-<!--                                         alt="">-->
-<!--                                    <!--product description-->
-<!--                                    <div class="f_left product_description">-->
-<!--                                        <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean-->
-<!--                                            auctor wisi et urna</a>-->
-<!--                                        <span class="f_size_medium">Product Code PS34</span>-->
-<!--                                    </div>-->
-<!--                                    <!--product price-->
-<!--                                    <div class="f_left f_size_medium">-->
-<!--                                        <div class="clearfix">-->
-<!--                                            1 x <b class="color_dark">$99.00</b>-->
-<!--                                        </div>-->
-<!--                                        <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i>-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <div class="clearfix">-->
-<!--                                    <!--product image-->
-<!--                                    <img class="f_left m_right_10" src="--><?//= $link ?><!--/images/shopping_c_img_2.jpg"-->
-<!--                                         alt="">-->
-<!--                                    <!--product description-->
-<!--                                    <div class="f_left product_description">-->
-<!--                                        <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean-->
-<!--                                            auctor wisi et urna</a>-->
-<!--                                        <span class="f_size_medium">Product Code PS34</span>-->
-<!--                                    </div>-->
-<!--                                    <!--product price-->
-<!--                                    <div class="f_left f_size_medium">-->
-<!--                                        <div class="clearfix">-->
-<!--                                            1 x <b class="color_dark">$99.00</b>-->
-<!--                                        </div>-->
-<!--                                        <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i>-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <div class="clearfix">-->
-<!--                                    <!--product image-->
-<!--                                    <img class="f_left m_right_10" src="--><?//= $link ?><!--/images/shopping_c_img_3.jpg"-->
-<!--                                         alt="">-->
-<!--                                    <!--product description-->
-<!--                                    <div class="f_left product_description">-->
-<!--                                        <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean-->
-<!--                                            auctor wisi et urna</a>-->
-<!--                                        <span class="f_size_medium">Product Code PS34</span>-->
-<!--                                    </div>-->
-<!--                                    <!--product price-->
-<!--                                    <div class="f_left f_size_medium">-->
-<!--                                        <div class="clearfix">-->
-<!--                                            1 x <b class="color_dark">$99.00</b>-->
-<!--                                        </div>-->
-<!--                                        <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i>-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </li>-->
-<!--                        </ul>-->
+                    <div class="shopping_cart top_arrow tr_all_hover r_corners">
+                        <div class="f_size_medium sc_header">最近添加的商品</div>
+                        <ul class="products_list">
+                            <?php
+                            $cartItems = $shoppingCartModel->cartItems;
+                            foreach ($cartItems as $cartItem) {
+                                /**@var star\catalog\models\Item $item * */
+                                $sku = $cartItem->sku;
+                                $item = $sku->item;
+                            ?>
+                                <li>
+                                    <div class="clearfix">
+    <!--                                    <!--product image-->
+                                        <?= EasyThumbnailImage::thumbnailImg(
+                                            '@image/'.$item->getMainImage(),
+                                            30,
+                                            30,
+                                            EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+                                            ['class'=>"f_left m_right_10"]
+                                        )?>
+    <!--                                    <!--product description-->
+                                        <div class="f_left product_description">
+                                            <a href="<?= Url::to(['/catalog/home/item/view','id' => $item->item_id])?>" class="color_dark m_bottom_5 d_block"><?= $item->title?></a>
+                                        </div>
+    <!--                                    <!--product price-->
+                                        <div class="f_left f_size_medium">
+                                            <div class="clearfix">
+                                                <?=  $cartItem->qty ?> x <b class="color_dark">￥<?= $sku->price?></b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php  } ?>
+                        </ul>
 <!--                        <!--total price-->
-<!--                        <ul class="total_price bg_light_color_1 t_align_r color_dark">-->
-<!--                            <li class="m_bottom_10">Tax: <span-->
-<!--                                    class="f_size_large sc_price t_align_l d_inline_b m_left_15">$0.00</span></li>-->
-<!--                            <li class="m_bottom_10">Discount: <span-->
-<!--                                    class="f_size_large sc_price t_align_l d_inline_b m_left_15">$37.00</span></li>-->
-<!--                            <li>Total: <b-->
-<!--                                    class="f_size_large bold scheme_color sc_price t_align_l d_inline_b m_left_15">$999.00</b>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                        <div class="sc_footer t_align_c">-->
-<!--                            <a href="#" role="button"-->
-<!--                               class="button_type_4 d_inline_middle bg_light_color_2 r_corners color_dark t_align_c tr_all_hover m_mxs_bottom_5">View-->
-<!--                                Cart</a>-->
-<!--                            <a href="#" role="button"-->
-<!--                               class="button_type_4 bg_scheme_color d_inline_middle r_corners tr_all_hover color_light">Checkout</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                        <ul class="total_price bg_light_color_1 t_align_r color_dark">
+                            <li class="m_bottom_10">运费: <span
+                                    class="f_size_large sc_price t_align_l d_inline_b m_left_15">￥<?=  $shoppingCartModel->getShippingFee() ?></span></li>
+                            <li>总价: <b
+                                    class="f_size_large bold scheme_color sc_price t_align_l d_inline_b m_left_15">￥<?=  $shoppingCartModel->getTotal() ?></b>
+                            </li>
+                        </ul>
+                        <div class="sc_footer t_align_c">
+                            <a href="<?= Url::to(['/cart/cart/index'])?>" role="button"
+                               class="button_type_4 d_inline_middle bg_light_color_2 r_corners color_dark t_align_c tr_all_hover m_mxs_bottom_5">查看购物车</a>
+                            <a href="<?= Url::to(['/order/home/order/checkout'])?>" role="button"
+                               class="button_type_4 bg_scheme_color d_inline_middle r_corners tr_all_hover color_light">下单</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -252,7 +261,7 @@ AppAsset::register($this);
         <nav role="navigation" class="f_left f_xs_none d_xs_none">
             <ul class="horizontal_list main_menu clearfix">
                 <li class="<?= Yii::$app->request->get('catalog') || Yii::$app->request->get('tab') ? '' : 'current'?> relative f_xs_none m_xs_bottom_5">
-                    <a href="<?= Url::to(['/'])?>" class="tr_delay_hover color_light tt_uppercase"><b>Home</b></a>
+                    <a href="<?= Url::to(['/'])?>" class="tr_delay_hover color_light tt_uppercase"><b>首页</b></a>
                 </li>
                 <?php
                 $root = \star\system\models\Tree::find()->where(['name' => '商品分类'])->one();
@@ -531,52 +540,7 @@ AppAsset::register($this);
         </div>
     </li>
 </ul>
-<!--login popup-->
-<div class="popup_wrap d_none" id="login_popup">
-    <section class="popup r_corners shadow">
-        <button class="bg_tr color_dark tr_all_hover text_cs_hover close f_size_large"><i class="fa fa-times"></i>
-        </button>
-        <h3 class="m_bottom_20 color_dark">Log In</h3>
-        <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
-            'enableAjaxValidation' => true,
-            'enableClientValidation' => false,
-            'validateOnBlur' => false,
-            'validateOnType' => false,
-            'validateOnChange' => false,
-            'action' => Url::to(['/user/security/login']),
-        ]);
-        /** @var dektrium\user\models\LoginForm $model */
-        $model = \Yii::createObject(LoginForm::className());;
 
-        ?>
-        <ul>
-            <li class="m_bottom_15">
-                <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'r_corners full_width', 'tabindex' => '1']])->textInput()->label('Username', ['class' => 'm_bottom_5 d_inline_b']) ?>
-            </li>
-            <li class="m_bottom_25">
-                <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'r_corners full_width', 'tabindex' => '2']])->passwordInput()->label(Yii::t('user', 'Password')) ?>
-            </li>
-            <li class="m_bottom_15">
-                <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '4', 'class' => 'd_none']) ?>
-            </li>
-            <li class="clearfix m_bottom_30">
-                <?= Html::submitButton(Yii::t('user', 'Sign in'), ['class' => 'button_type_4 tr_all_hover r_corners f_left bg_scheme_color color_light f_mxs_none m_mxs_bottom_15']) ?>
-                <div class="f_right f_size_medium f_mxs_none">
-                    <a href="<?= Url::to(['/user/security/login']) ?>" class="color_dark">Forgot your password?</a>
-                </div>
-            </li>
-        </ul>
-        <?php ActiveForm::end(); ?>
-
-        <footer class="bg_light_color_1 t_mxs_align_c">
-            <h3 class="color_dark d_inline_middle d_mxs_block m_mxs_bottom_15">New Customer?</h3>
-            <a href="<?= Url::to(['/user/registration/register']) ?>" role="button"
-               class="tr_all_hover r_corners button_type_4 bg_dark_color bg_cs_hover color_light d_inline_middle m_mxs_left_0">Create
-                an Account</a>
-        </footer>
-    </section>
-</div>
 <!--custom popup-->
 
 <button class="t_align_c r_corners tr_all_hover animate_ftl" id="go_to_top"><i class="fa fa-angle-up"></i></button>
