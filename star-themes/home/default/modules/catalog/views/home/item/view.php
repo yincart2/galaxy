@@ -14,7 +14,7 @@ $this->registerJsFile($link . '/js/fsku.js',['depends' => [\yii\web\JqueryAsset:
 $this->registerCssFile($link . '/css/sku.css');
 
 $this->params['breadcrumbs'][] = [
-    'label' => Yii::t('catalog','Item View'),
+    'label' => '商品详情',
     'template' => '<li><span>{link}</span></li>',
 ];
 ?>

@@ -75,6 +75,11 @@ return [
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@star/shipment/messages',
                 ],
+                'cart' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/cart/messages',
+                ],
             ],
         ],
         'urlManager' => [

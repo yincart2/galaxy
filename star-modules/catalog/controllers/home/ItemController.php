@@ -36,11 +36,11 @@ class ItemController extends Controller
     public function actionList(){
         $catalog = Yii::$app->request->get('catalog');
         $item = Yii::createObject(Item::className());
-        $items = $item::getItemsByCategory($catalog);
+        $items = $item::getItemsByCategory($catalog)->andWhere(['is_show'=>1]);
         $tree = Yii::createObject(Tree::className());
         $categories = $tree::getCategoriesById($catalog);
         if($items && $categories) {
-            $pages = new Pagination(['totalCount' => $items->count(), 'pageSize' => '3']);
+            $pages = new Pagination(['totalCount' => $items->count(), 'pageSize' => '24']);
             $items = $items->offset($pages->offset)->limit($pages->limit)->all();
             if ($items) {
                 return $this->render('list', [
@@ -53,7 +53,7 @@ class ItemController extends Controller
         }
         return $this->render('//site/error', [
             'name' => 'catalog',
-            'message' => 'There is no product'
+            'message' => Yii::t('catalog','There is no product'),
             ]);
     }
 }

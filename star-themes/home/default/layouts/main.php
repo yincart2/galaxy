@@ -272,6 +272,19 @@ AppAsset::register($this);
                 ?>
                 <li class="<?= Yii::$app->request->get('catalog') == $category->id ? 'current' : ''?> relative f_xs_none m_xs_bottom_5">
                     <a href="<?= Url::to(['/catalog/home/item/list','catalog' => $category->id])?>" class="tr_delay_hover color_light tt_uppercase"><b><?= $category->name?></b></a>
+                    <?php
+                    $children = $category->children(1)->indexBy('id')->all();
+                    if($children){
+                    ?>
+                    <div class="sub_menu_wrap top_arrow d_xs_none type_2 tr_all_hover clearfix r_corners">
+                        <ul class="sub_menu">
+                            <?php  foreach($children as $child){?>
+                            <li><a class="color_dark tr_delay_hover" href="<?= Url::to(['/catalog/home/item/list','catalog' => $child->id])?>"><?= $child->name?></a></li>
+                            <?php } ?>
+
+                        </ul>
+                    </div>
+                    <?php } ?>
                 </li>
                 <?php } } } ?>
                 <li class="<?= Yii::$app->request->get('tab') ? 'current' : ''?> relative f_xs_none m_xs_bottom_5">
