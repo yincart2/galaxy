@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "248b145643ff6e231f643914764eac8c",
+    "hash": "44c06a4c27282fe6b59797b4a0598a8a",
     "packages": [
         {
             "name": "2amigos/yii2-file-upload-widget",
@@ -599,7 +599,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dektrium/yii2-rbac/zipball/b00d739a876c2a90f18367ecfd4788543a5d8682",
+                "url": "https://api.github.com/repos/dektrium/yii2-rbac/zipball/e2afa7510dd7bae63988c619651a3d38789b8a6e",
                 "reference": "b00d739a876c2a90f18367ecfd4788543a5d8682",
                 "shasum": ""
             },
@@ -2383,6 +2383,54 @@
                 "yii"
             ],
             "time": "2015-04-06 08:15:34"
+        },
+        {
+            "name": "paypal/rest-api-sdk-php",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
+                "reference": "18e4eaaf319b48de2457abb7b2b1807cfe704c0a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/18e4eaaf319b48de2457abb7b2b1807cfe704c0a",
+                "reference": "18e4eaaf319b48de2457abb7b2b1807cfe704c0a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PayPal": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "PayPal",
+                    "homepage": "https://github.com/paypal/rest-api-sdk-php/contributors"
+                }
+            ],
+            "description": "PayPal's PHP SDK for REST APIs",
+            "homepage": "http://paypal.github.io/PayPal-PHP-SDK/",
+            "keywords": [
+                "payments",
+                "paypal",
+                "rest",
+                "sdk"
+            ],
+            "time": "2015-06-25 17:12:03"
         },
         {
             "name": "pheme/yii2-settings",

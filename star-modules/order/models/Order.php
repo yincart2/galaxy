@@ -181,9 +181,9 @@ class Order extends \yii\db\ActiveRecord
         $transaction=\Yii::$app->db->beginTransaction();
         try {
             $this->user_id = Yii::$app->user->id;
-            $this->total_price = $ShoppingCart->getSubTotal(0,$starId);
             $this->shipping_fee = $ShoppingCart->getShippingFee();
             $this->payment_fee = 0;
+            $this->total_price = $ShoppingCart->getSubTotal(0,$starId)+$this->shipping_fee+$this->payment_fee;
             $this->status =  self::STATUS_WAIT_PAYMENT;
             $this->changePrice();
             if ($this->save()) {

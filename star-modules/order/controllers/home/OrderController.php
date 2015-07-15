@@ -5,6 +5,8 @@ namespace star\order\controllers\home;
 use star\cart\models\ShoppingCart;
 use star\order\models\Order;
 use star\catalog\models\Sku;
+use star\payment\models\Payment;
+use star\payment\models\paypal\PayPal;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -81,8 +83,9 @@ class OrderController extends Controller
         $orderModel->items = Yii::$app->request->post('items');
         if ($orderModel->saveOrder()) {
 
-            return $this->redirect(['/payment/home/alipay/index', 'id' => $orderModel->order_id]);
-            return Json::encode(['message' => \Yii::t('app', 'create order success'), 'redirect' => 'success']);
+            $redirectUrl = Yii::createObject(Payment::className())->getRedirectUrl(Yii::$app->request->post('payment'),$orderModel->order_id);
+//            var_dump($redirectUrl);exit;
+            return $this->redirect($redirectUrl);
         } else {
             return Json::encode(['message' =>'下单失败', 'redirect' => Url::to(['/order/order/index'])]);
         }

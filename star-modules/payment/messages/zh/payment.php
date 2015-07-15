@@ -23,5 +23,6 @@ return [
     'Transcation No' => '交易号码',
     'Create At' => '创建时间',
     'Update At' => '更新时间',
+    'AliPay' => '支付宝',
 
 ];
