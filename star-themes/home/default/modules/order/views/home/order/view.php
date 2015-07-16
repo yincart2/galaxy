@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model  star\order\models\order */
-
+use \himiklab\thumbnail\EasyThumbnailImage;
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('member','Member Center'),
     'url' => ['/member/default/index'],
@@ -99,7 +99,14 @@ if($shipment){
                 foreach($orderItems as $orderItem){
                 ?>
                 <tr>
-                    <td data-title="SKU"><img src="<?=Yii::$app->params['imageDomain'].'/'.$orderItem->item->getMainImage()?>" alt=""></td>
+                    <td data-title="SKU">
+                        <?= EasyThumbnailImage::thumbnailImg(
+                            '@image/'.$orderItem->picture,
+                            90,
+                            90,
+                            EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+                            ['class'=>"tr_all_hover"]
+                        )?></td>
                     <td data-title="Product Name">
                         <a href="#" class="color_dark d_inline_b m_bottom_5"><?= $orderItem->name?></a><br>
                         <ul>

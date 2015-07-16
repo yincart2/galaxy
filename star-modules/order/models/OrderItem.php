@@ -88,10 +88,7 @@ EOF;
     }
 
 
-    public function getItem(){
-        return $this->hasOne(Item::className(),['item_id' => 'item_id']);
-    }
     public function getSku(){
-        return $this->hasOne(Sku::className(),['item_id' => 'item_id']);
+        return $this->hasOne(Sku::className(),['sku_id' => 'item_id']);
     }
 }
