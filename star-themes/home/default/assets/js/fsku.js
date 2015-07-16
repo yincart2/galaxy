@@ -136,6 +136,7 @@ $(function () {
                     num=parseInt(num)+1;
                     $('#shopping_car').text(num);
                     alert(response.message);
+                    location.reload(false);
                 }else
                     alert(response.message);
             },'json');

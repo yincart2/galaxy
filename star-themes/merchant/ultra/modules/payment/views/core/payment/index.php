@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel star\payment\models\PaymentSearch */
@@ -16,10 +16,6 @@ $this->params['menu']['payment'] = true;
 <div class="payment-index">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('payment', 'Create Payment'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -36,6 +32,15 @@ $this->params['menu']['payment'] = true;
             // 'status',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'export' => false,
+        'responsive' => true,
+        'panel' => [
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> ' . Yii::t('payment', 'Payments') . '</h3>',
+            'type' => 'success',
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i>' . Yii::t('payment', 'Create Payment'), ['create'], ['class' => 'btn btn-success']),
+            'footer' => false,
+            'after' => false
         ],
     ]); ?>
 

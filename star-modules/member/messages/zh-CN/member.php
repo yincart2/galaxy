@@ -27,4 +27,7 @@ return [
     'My Orders' => '摘要',
     'Tags' => '标签',
     'Title' => '标题',
+    'Phone' => '手机号',
+    'Is Default' => '默认地址',
+    'Zip Code' => '邮政编码',
 ];

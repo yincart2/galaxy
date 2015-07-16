@@ -7,8 +7,8 @@ use himiklab\thumbnail\EasyThumbnailImage;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-list($path, $link) = $this->getAssetManager()->publish('@star/order/web/js');
-$this->registerJsFile($link . '/order.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+list($path, $link) = $this->getAssetManager()->publish('@star/order/web');
+$this->registerJsFile($link . '/js/order.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('order','Check Out'),
@@ -34,17 +34,11 @@ $this->params['breadcrumbs'][] = [
         <div class="breadcrumb">
             <div class="box-title container_24">支付方式</div>
             <div class="box-content" style="vertical-align:middle;">
-                <!--        --><?php
-                //        $cri = new CDbCriteria(array(
-                //            'condition' => 'enabled = 1'
-                //        ));
-                //        $paymentMethod = PaymentMethod::model()->findAll($cri);
-                //        $list = CHtml::listData($paymentMethod, 'payment_method_id', 'name');
-                //        echo CHtml::radioButtonList('payment_method_id', '0', $list);
-                //
-                ?>
 
-                <input type="radio" value="alipay" name="payment" checked>支付宝
+                <?php
+                $payment = Yii::createObject(\star\payment\models\Payment::className());
+                echo Html::radioList('payment',[$payment::ALIPAY],$payment->getPayList());
+                ?>
             </div>
         </div>
 
@@ -113,7 +107,7 @@ $this->params['breadcrumbs'][] = [
             <div class="box-content">
                 <div class="memo" style="float:left"><h3>
                         给卖家留言：</h3>
-                    <textarea id="memo" name="memo" placeholder="选填，可以告诉卖家您对商品的特殊要求，如：颜色、尺码等" rows="5"></textarea>
+                    <textarea id="memo" name="memo" placeholder="选填，可以告诉卖家您对商品的特殊要求，如：颜色、尺码等" rows="8"></textarea>
                 </div>
             </div>
 
@@ -122,8 +116,25 @@ $this->params['breadcrumbs'][] = [
                     [
                         'class' => 'btn btn-danger pull-right create-order',
                         'data-create' => true, 'data-url' => Url::to(['/order/home/order/order-save']),
-                        'style' => "line-height:20px;margin-right:150px;margin-bottom:30px;"
+                        'style' => "line-height:20px;margin-right:150px;margin-bottom:30px;",
+                        'data-toggle'=>"modal" ,
+                         'data-target'=>"#myModal",
                     ]) ?>
             </div>
+            <div class="clear"></div>
         </div>
     </form>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div align="center">
+                <?= Html::img($link.'/img/loading.gif')?><br/>
+                    提交中......
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -65,6 +65,21 @@ return [
                     'sourceLanguage' => 'en-US',
                     'basePath' => '@star/member/messages',
                 ],
+                'payment' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/payment/messages',
+                ],
+                'shipment' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/shipment/messages',
+                ],
+                'cart' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@star/cart/messages',
+                ],
             ],
         ],
         'urlManager' => [

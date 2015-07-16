@@ -34,7 +34,8 @@
         "c006/yii2-migration-utility": "dev-master",
         "yiisoft/yii2-imagine": " *",
         "himiklab/yii2-easy-thumbnail-image-helper": "*",
-        "dektrium/yii2-rbac": "dev-master"
+        "dektrium/yii2-rbac": "dev-master",
+        "paypal/rest-api-sdk-php": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

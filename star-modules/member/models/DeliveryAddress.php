@@ -51,16 +51,16 @@ class DeliveryAddress extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'delivery_address_id' => Yii::t('app', 'Delivery Address ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'province' => Yii::t('app', 'Province'),
-            'city' => Yii::t('app', 'City'),
-            'district' => Yii::t('app', 'District'),
-            'address' => Yii::t('app', 'Address'),
-            'zip_code' => Yii::t('app', 'Zip Code'),
-            'phone' => Yii::t('app', 'Phone'),
-            'name' => Yii::t('app', 'Name'),
-            'is_default' => Yii::t('app', 'Is Default'),
+            'delivery_address_id' => Yii::t('member', 'Delivery Address ID'),
+            'user_id' => Yii::t('member', 'User ID'),
+            'province' => Yii::t('member', 'Province'),
+            'city' => Yii::t('member', 'City'),
+            'district' => Yii::t('member', 'District'),
+            'address' => Yii::t('member', 'Address'),
+            'zip_code' => Yii::t('member', 'Zip Code'),
+            'phone' => Yii::t('member', 'Phone'),
+            'name' => Yii::t('member', 'Name'),
+            'is_default' => Yii::t('member', 'Is Default'),
         ];
     }
 

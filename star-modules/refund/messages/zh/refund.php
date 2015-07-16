@@ -24,4 +24,8 @@ return [
     'Create At' => '创建时间',
     'Update At' => '更新时间',
     'Status' => '状态',
+    'Refund Log' => '退货日志',
+    'Wait Check' => '等待审核',
+    'Pass' => '审核通过',
+    'Failed' => '审核未通过',
 ];

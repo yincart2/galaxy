@@ -45,9 +45,9 @@ class CartController extends Controller
 
         $shoppingCartModel = Yii::createObject(ShoppingCart::className()) ;
         if($shoppingCartModel->add($sku_id,$star_id, $qty,$data)) {
-            return Json::encode(['message' => \Yii::t('app', 'add to cart success')]);
+            return Json::encode(['status'=>'success','message' => \Yii::t('cart', 'add to cart success')]);
         } else {
-            return Json::encode(['message' => \Yii::t('app', 'add to cart fail')]);
+            return Json::encode(['status'=>'fail','message' => \Yii::t('cart', 'add to cart fail')]);
         }
     }
 
@@ -77,9 +77,9 @@ class CartController extends Controller
         $shoppingCartModel = Yii::createObject(ShoppingCart::className());
         $sku_id = Yii::$app->request->post('sku_id');
         if ($shoppingCartModel->remove($sku_id)) {
-            echo Json::encode(['message' => 'remove success','redirect' =>'index']);
+            echo Json::encode(['message' => \Yii::t('cart', 'remove success'),'redirect' =>'index']);
         } else {
-            echo Json::encode(['message' => 'remove fail','redirect' =>'index']);
+            echo Json::encode(['message' =>\Yii::t('cart', 'remove fail') ,'redirect' =>'index']);
         }
     }
 
@@ -89,9 +89,9 @@ class CartController extends Controller
     public function actionClearAll(){
         $shoppingCartModel = Yii::createObject(ShoppingCart::className());
         if ($shoppingCartModel->clearAll()) {
-            echo Json::encode(['message' => 'remove success','redirect' =>'index']);
+            echo Json::encode(['message' => \Yii::t('cart', 'remove success'),'redirect' =>'index']);
         } else {
-            echo Json::encode(['message' => 'remove fail','redirect' =>'index']);
+            echo Json::encode(['message' => \Yii::t('cart', 'remove fail'),'redirect' =>'index']);
         }
     }
 } 

@@ -30,8 +30,8 @@ return [
     'Wait Confirm' => '待收货',
     'Complete' => '订单完成',
     'Wait Refund' => '退货中',
-    'Refund Failed' => '退货未通过',
-    'Refund Pass' => '退货通过',
+    'Refund Failed' => '退货申请未通过',
+    'Refund Pass' => '退货申请通过',
     'Order No' => '订单号',
     'Orders' => '订单',
     'Order' => '订单',
@@ -41,5 +41,6 @@ return [
     'Picture' => '图片',
     'Item Name' => '货物名称',
     'Shipment' => '物流',
+    'Wait Refund Checks' => '申请退货',
 
 ];

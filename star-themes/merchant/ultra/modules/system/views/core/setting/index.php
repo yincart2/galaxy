@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel star\system\models\SettingSearches */
@@ -18,10 +18,6 @@ $this->params['sub-menu']['setting'] = true;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('system', 'Create Setting'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -37,6 +33,15 @@ $this->params['sub-menu']['setting'] = true;
             // 'group_sort',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'export' => false,
+        'responsive' => true,
+        'panel' => [
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> ' . Yii::t('system', 'Setting') . '</h3>',
+            'type' => 'success',
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i>' . Yii::t('system', 'Create Setting'), ['create'], ['class' => 'btn btn-success']),
+            'footer' => false,
+            'after' => false
         ],
     ]); ?>
 

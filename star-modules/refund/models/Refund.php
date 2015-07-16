@@ -9,6 +9,7 @@
 namespace star\refund\models;
 
 
+use star\order\models\Order;
 use yii\db\ActiveRecord;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -30,6 +31,17 @@ use yii\behaviors\TimestampBehavior;
  */
 
 class Refund extends ActiveRecord {
+    const STATUS_WAIT_CHECK = 0;
+    const STATUS_PASS = 1;
+    const STATUS_FAILED  = 2;
+
+    public function getStatusArray(){
+        return [
+            self::STATUS_WAIT_CHECK => Yii::t('refund','Wait Check'),
+            self::STATUS_PASS => Yii::t('refund','Pass'),
+            self::STATUS_FAILED => Yii::t('refund','Failed'),
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -79,5 +91,9 @@ class Refund extends ActiveRecord {
             'update_at' => Yii::t('refund', 'Update At'),
             'status' => Yii::t('refund', 'Status'),
         ];
+    }
+
+    public function getOrder(){
+        return $this->hasOne(Order::className(),['order_id'=>'order_id']);
     }
 } 

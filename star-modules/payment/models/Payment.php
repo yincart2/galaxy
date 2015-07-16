@@ -2,8 +2,10 @@
 
 namespace star\payment\models;
 
+use star\payment\models\paypal\PayPal;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "payment".
@@ -19,7 +21,7 @@ use yii\behaviors\TimestampBehavior;
 class Payment extends \yii\db\ActiveRecord
 {
     const ALIPAY = 1;
-
+    const PAYPAL = 2;
 
     const STATUS_WAIT_BUYER_PAY = 0;
     const STATUS_BUYER_PAY = 1;
@@ -69,5 +71,21 @@ class Payment extends \yii\db\ActiveRecord
                 'updatedAtAttribute' => false,
             ]
         ];
+    }
+
+    public function getPayList(){
+        return [
+            self::ALIPAY=>Yii::t('payment','AliPay'),
+            self::PAYPAL=>Yii::t('payment','PayPal'),
+        ];
+    }
+
+    public function getRedirectUrl($payMethod,$orderId){
+        switch($payMethod){
+            case  self::ALIPAY:
+                return Url::to(['/payment/home/alipay/index', 'id' => $orderId]);
+            case  self::PAYPAL:
+                return Yii::createObject(PayPal::className())->pay($orderId);
+        }
     }
 }

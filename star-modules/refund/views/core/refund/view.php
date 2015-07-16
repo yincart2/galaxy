@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php
-    $dataList = [0 => '待审核', 1 => '审核中', 2 => '审核通过'];
+    $dataList = $model->getStatusArray();
     $model->create_at = date("Y-m-d H:i",$model->create_at);
     $model->status = $dataList[$model->status];
     ?>

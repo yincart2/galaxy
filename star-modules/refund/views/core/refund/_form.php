@@ -30,7 +30,7 @@ use kartik\widgets\ActiveForm;
 
     <!--    --><?php //echo $form->field($model, 'update_at')->textInput(['value' => date("Y-m-d H:i",$model->update_at), 'disabled' => TRUE]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList([0 => '待审核', 1 => '审核中', 2 => '审核通过']) ?>
+    <?= $form->field($model, 'status')->dropDownList($model->getStatusArray()) ?>
 
     <div class="form-group">
         <label class="control-label col-lg-2" for="refund-image"><?= Yii::t('refund', 'Image')?></label>

@@ -280,6 +280,13 @@ class ShoppingCart extends Component
         return $this->getSubTotal() + $this->getShippingFee();
     }
 
+    public function getTotalQty(){
+        $qty = 0;
+        foreach($this->cartItems as  $carItem) {
+            $qty += $carItem->qty;
+        }
+        return $qty;
+    }
     /**
      * serial cart
      * return array like cart['star_id']['sku_id'] = cartModel

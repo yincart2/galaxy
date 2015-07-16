@@ -58,4 +58,5 @@ return [
     'stock' => '库存数量',
     'Image(If update,Please upload first)'=>'图片（若更新,请先上传图片）',
     'The requested Item could not be found.'=>'您搜索的商品不存在',
+    'There is no product'=>'没有商品',
 ];

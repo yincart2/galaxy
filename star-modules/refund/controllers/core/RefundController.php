@@ -89,21 +89,16 @@ class RefundController extends Controller
             /** @var \star\order\models\Order $orderModel */
             $order = Yii::createObject(Order::className());
             $orderModel = $order::find()->where(['order_id'=>$model->order_id])->one();
-            if($model->status==0){
-                $orderModel->status = 6;
-            }
-            if($model->status==1){
-                $orderModel->status = 8;
-                $orderItems = $orderModel->orderItems;
-                foreach($orderItems as $orderItem) {
-                    /** @var \star\catalog\models\Sku $sku */
-                    $sku = Sku::findOne(['item_id' => $orderItem->item_id]);
-                    $sku->quantity += $orderItem->qty;
-                    $sku->update();
-                }
-            }
-            if($model->status==3){
-                $orderModel->status = 7;
+            switch($model->status){
+                case $model::STATUS_WAIT_CHECK:
+                    $orderModel->status = $orderModel::STATUS_WAIT_REFUND_CHECK;
+                    break;
+                case $model::STATUS_PASS:
+                    $orderModel->status = $orderModel::STATUS_REFUND_PASS;
+                    break;
+                case $model::STATUS_FAILED:
+                    $orderModel->status = $orderModel::STATUS_REFUND_FAILED;
+                    break;
             }
             $orderModel->save();
             return $this->redirect(['view', 'id' => $model->refund_id]);

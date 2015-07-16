@@ -21,13 +21,20 @@ $this->params['title'] = $this->title;
 $this->params['menu']['system'] = true;
 $this->params['sub-menu']['system'] = true;
 ?>
-<div class="setting-index">
+<div class="row">
+    <div class="item-form col-md-12 col-sm-12 col-xs-12">
 
-    <?php
-    $form = ActiveForm::begin(['options' => ['class' => 'form-horizontal']]);
-    echo $setting->renderForm($form);
-    echo Html::submitButton(Yii::t('core_system', 'Save'), ['class' => 'btn btn-primary']);
-    $form->end();
-    ?>
+        <?php
+        $form = ActiveForm::begin(['options' => ['class' => 'form-horizontal']]);
+        echo $setting->renderForm($form);
+        ?>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group pull-right">
+                <?= Html::submitButton(Yii::t('core_system', 'Save'), ['class' => 'btn btn-primary']); ?>
+            </div>
+        </div>
+
+    </div>
 </div>
 

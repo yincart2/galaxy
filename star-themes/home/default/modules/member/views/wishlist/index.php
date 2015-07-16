@@ -1,4 +1,5 @@
 <?php
+use himiklab\thumbnail\EasyThumbnailImage;
 use yii\widgets\LinkPager;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -38,7 +39,13 @@ if($items) {
     ?>
     <tr>
         <!--product image-->
-        <td data-title="Product Image"><img src="<?=Yii::$app->params['imageDomain'].'/'.$item->getMainImage()?>" alt=""></td>
+        <td data-title="Product Image"><?= EasyThumbnailImage::thumbnailImg(
+                '@image/'.$item->getMainImage(),
+                90,
+                90,
+                EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+                ['class'=>"tr_all_hover"]
+            )?></td>
         <!--product name and category-->
         <td data-title="Product Name">
             <a href="<?= Url::to(['/catalog/home/item/view','id' => $item->item_id])?>" class="fw_medium d_inline_b f_size_ex_large color_dark m_bottom_5"><?= $item->title ?></a><br>

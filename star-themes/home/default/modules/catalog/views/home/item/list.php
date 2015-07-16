@@ -1,4 +1,8 @@
 <?php
+/**
+ * if this view can't show , you should install imagick for php,The EasyThumbnailImage depend on it
+ */
+use himiklab\thumbnail\EasyThumbnailImage;
 use star\system\models\Tree;
 use yii\widgets\LinkPager;
 use yii\helpers\Url;
@@ -90,82 +94,58 @@ $this->params['breadcrumbs'][] = [
 <hr class="m_bottom_10 divider_type_3">
 
 <!--products list type-->
-<section class="products_container list_type clearfix m_bottom_5 m_left_0 m_right_0">
+<section class="products_container category_grid clearfix m_bottom_15">
 <!--product item-->
 <?php
 /** @var \star\catalog\models\Item $item */
 foreach($items as $key=>$item) {
 ?>
-<div class="product_item full_width list_type hit m_left_0 m_right_0">
-    <figure class="r_corners photoframe tr_all_hover type_2 shadow relative clearfix">
-        <!--product preview-->
-        <a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" class="d_block f_left relative pp_wrap m_right_30 m_xs_right_25">
-            <!--hot product-->
-            <span class="hot_stripe"><img src="<?= $link ?>/images/hot_product.png" alt=""></span>
-            <img src="<?= $link ?>/images/product_img_1.jpg" class="tr_all_hover" alt="">
-            <span role="button" data-popup="#quick_view_product"
-                  class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
-        </a>
-        <!--description and price of product-->
-        <figcaption>
-            <div class="clearfix">
-                <div class="f_left p_list_description f_sm_none w_sm_full m_xs_bottom_10">
-                    <h4 class="fw_medium"><a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" class="color_dark"><?= $item->title ?></a></h4>
+    <div class="product_item hit w_xs_full">
+        <figure class="r_corners photoframe type_2 t_align_c tr_all_hover shadow relative">
+            <!--product preview-->
+            <a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" class="d_block relative wrapper pp_wrap m_bottom_15">
+                <?= EasyThumbnailImage::thumbnailImg(
+                    '@image/'.$item->getMainImage(),
+                    242,
+                    242,
+                    EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+                    ['class'=>"tr_all_hover"]
+                )?>
+                <span role="button" data-popup="#quick_view_product" class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
+            </a>
+            <!--description and price of product-->
+            <figcaption>
+                <h5 class="m_bottom_10"><a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" class="color_dark"><?= $item->title ?></a></h5>
+                <!--rating-->
+                <ul class="horizontal_list d_inline_b m_bottom_10 clearfix rating_list type_2 tr_all_hover">
+                    <li class="active">
+                        <i class="fa fa-star-o empty tr_all_hover"></i>
+                        <i class="fa fa-star active tr_all_hover"></i>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-star-o empty tr_all_hover"></i>
+                        <i class="fa fa-star active tr_all_hover"></i>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-star-o empty tr_all_hover"></i>
+                        <i class="fa fa-star active tr_all_hover"></i>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-star-o empty tr_all_hover"></i>
+                        <i class="fa fa-star active tr_all_hover"></i>
+                    </li>
+                    <li>
+                        <i class="fa fa-star-o empty tr_all_hover"></i>
+                        <i class="fa fa-star active tr_all_hover"></i>
+                    </li>
+                </ul>
+                <p class="scheme_color f_size_large m_bottom_15">￥<?= $item->price ?></p>
+                <a href="<?= Url::to(['home/item/view','id' => $item->item_id])?>" class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15">查看</a>
 
-                    <div class="m_bottom_10">
-                        <!--rating-->
-                        <ul class="horizontal_list d_inline_middle clearfix rating_list type_2 tr_all_hover">
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                        </ul>
-                        <a href="#" class="d_inline_middle default_t_color f_size_medium m_left_10">1 Review(s) </a>
-                    </div>
-                    <hr class="m_bottom_10">
-                    <div class="d_sm_none d_xs_block" style="height: 166px;overflow: hidden"><?= $item->desc ?></div>
-                </div>
-                <div class="f_right f_sm_none t_align_r t_sm_align_l">
-                    <p class="scheme_color f_size_large m_bottom_15"><span class="fw_medium"><?= $item->price ?></span></p>
-                    <button
-                        class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15 m_sm_bottom_0 d_sm_inline_middle">
-                        Add to Cart
-                    </button>
-                    <br class="d_sm_none">
-                    <button
-                        class="compare  button_type_4 bg_light_color_2 tr_all_hover f_right r_corners color_dark mw_0 m_left_5 p_hr_0 d_sm_inline_middle f_sm_none"
-                        data-compare_id="<?= $key?>"
-                        data-item_id="<?= $item->item_id?>"
-                        data-category_id="<?= $item->category_id?>"
-                        data-selected= 0>
-                        <i class="fa fa-files-o"></i></button>
-                    <button
-                        class="wishlist button_type_4 bg_light_color_2 tr_all_hover f_right m_sm_left_5 r_corners color_dark mw_0 p_hr_0 d_sm_inline_middle f_sm_none"
-                        data-url="<?= Url::to(['/member/wishlist/add-wishlist'])?>"
-                        data-csrf="<?= Yii::$app->request->csrfToken?>"
-                        data-item_id="<?= $item->item_id?>">
-                        <i class="fa fa-heart-o"></i></button>
-                </div>
-            </div>
-        </figcaption>
-    </figure>
-</div>
+            </figcaption>
+        </figure>
+    </div>
+
 <?php } ?>
 </section>
 <hr class="m_bottom_10 divider_type_3">

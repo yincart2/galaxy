@@ -7,7 +7,7 @@ use dektrium\user\models\LoginForm;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use star\member\models\Wishlist;
-
+use himiklab\thumbnail\EasyThumbnailImage;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -39,6 +39,51 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+<!--login popup-->
+<div class="popup_wrap d_none" id="login_popup">
+    <section class="popup r_corners shadow">
+        <button class="bg_tr color_dark tr_all_hover text_cs_hover close f_size_large"><i class="fa fa-times"></i>
+        </button>
+        <h3 class="m_bottom_20 color_dark">登陆</h3>
+        <?php $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'enableAjaxValidation' => true,
+            'enableClientValidation' => false,
+            'validateOnBlur' => false,
+            'validateOnType' => false,
+            'validateOnChange' => false,
+            'action' => Url::to(['/user/security/login']),
+        ]);
+        /** @var dektrium\user\models\LoginForm $model */
+        $model = \Yii::createObject(LoginForm::className());;
+
+        ?>
+        <ul>
+            <li class="m_bottom_15">
+                <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'r_corners full_width', 'tabindex' => '1']])->textInput()->label('用户名', ['class' => 'm_bottom_5 d_inline_b']) ?>
+            </li>
+            <li class="m_bottom_25">
+                <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'r_corners full_width', 'tabindex' => '2']])->passwordInput()->label(Yii::t('user', 'Password')) ?>
+            </li>
+            <li class="m_bottom_15">
+                <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '4', 'class' => 'd_none']) ?>
+            </li>
+            <li class="clearfix m_bottom_30">
+                <?= Html::submitButton(Yii::t('user', 'Sign in'), ['class' => 'button_type_4 tr_all_hover r_corners f_left bg_scheme_color color_light f_mxs_none m_mxs_bottom_15']) ?>
+                <div class="f_right f_size_medium f_mxs_none">
+                    <a href="<?= Url::to(['/user/security/login']) ?>" class="color_dark">忘记密码?</a>
+                </div>
+            </li>
+        </ul>
+        <?php ActiveForm::end(); ?>
+
+        <footer class="bg_light_color_1 t_mxs_align_c">
+            <h3 class="color_dark d_inline_middle d_mxs_block m_mxs_bottom_15">新用户?    </h3>
+            <a href="<?= Url::to(['/user/registration/register']) ?>" role="button"
+               class="tr_all_hover r_corners button_type_4 bg_dark_color bg_cs_hover color_light d_inline_middle m_mxs_left_0">创建账号</a>
+        </footer>
+    </section>
+</div>
 <div class="boxed_layout relative w_xs_auto">
 <header role="banner">
 <!--header top part-->
@@ -49,8 +94,8 @@ AppAsset::register($this);
                 <?php
                 if (Yii::$app->user->isGuest) {
                     ?>
-                    <p class="f_size_small">Welcome visitor can you <a href="<?= Url::to(['/user/login'])?>">Log In</a> or
-                        <a href="<?= Url::to(['/user/registration/register']) ?>">Create an Account</a></p>
+                    <p class="f_size_small">欢迎,您可以 <a href="#" data-popup="#login_popup">登陆</a> 或者
+                        <a href="<?= Url::to(['/user/registration/register']) ?>">创建账号</a></p>
                 <?php } ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
@@ -62,11 +107,11 @@ AppAsset::register($this);
                 $countWishlist = count(Wishlist::findAll(['user_id' => Yii::$app->user->id]));
                 ?>
                 <ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
-                    <li><a href="<?= Url::to(['/member']) ?>" class="default_t_color">My Account</a></li>
-                    <li><a href="#" class="default_t_color">Orders List</a></li>
-                    <li><a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="default_t_color">Wishlist</a></li>
-                    <li><a href="<?= Url::to(['/order/order/index']) ?>" class="default_t_color">Checkout</a></li>
-                    <li><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>Logout</a>
+                    <li><a href="<?= Url::to(['/member']) ?>" class="default_t_color">我的的账号</a></li>
+                    <li><a href="<?= Url::to(['/order/home/order/list'])?>" class="default_t_color">订单列表</a></li>
+                    <li><a href="<?= Url::to(['/member/wishlist/get-wishlist'])?>" class="default_t_color">愿望清单</a></li>
+                    <li><a href="<?= Url::to(['/cart/cart/index']) ?>" class="default_t_color">购物车</a></li>
+                    <li><a href="<?= Url::to(['/user/security/logout']) ?>" class="default_t_color" data-method='post'>登出</a>
                     </li>
                 </ul>
             </nav>
@@ -78,7 +123,7 @@ AppAsset::register($this);
 <section class="h_bot_part container">
     <div class="clearfix row">
         <div class="col-lg-6 col-md-6 col-sm-4 t_xs_align_c">
-            <a href="index.html" class="logo m_xs_bottom_15 d_xs_inline_b">
+            <a href="<?= Url::to(['/']) ?>" class="logo m_xs_bottom_15 d_xs_inline_b">
                 <img src="<?= $link ?>/images/logo.png" alt="">
             </a>
         </div>
@@ -136,104 +181,68 @@ AppAsset::register($this);
                 </li>
                 <!--shopping cart-->
                 <li class="m_left_5 relative container3d" id="shopping_button">
-                    <a role="button" href="<?= Url::to(['/cart/cart/index'])?>"
+                    <a role="button" href="#"
                        class="button_type_3 color_light bg_scheme_color d_block r_corners tr_delay_hover box_s_none">
 										<span class="d_inline_middle shop_icon m_mxs_right_0">
 											<i class="fa fa-shopping-cart"></i>
 											<span class="count tr_delay_hover type_2 circle t_align_c" id="shopping_car"><?php
-                                                $shoppingCartModel = new \home\modules\cart\models\ShoppingCart();
-                                                $cartItems = $shoppingCartModel->cartItems;
-                                                echo count($cartItems);
+                                                $shoppingCartModel = new \star\cart\models\ShoppingCart();
+
+                                                echo $shoppingCartModel->getTotalQty();
                                                 ?></span>
 										</span>
                         <b class="d_mxs_none">$<?= $shoppingCartModel->getTotal() ?></b>
                     </a>
 
-<!--                    <div class="shopping_cart top_arrow tr_all_hover r_corners">-->
-<!--                        <div class="f_size_medium sc_header">Recently added item(s)</div>-->
-<!--                        <ul class="products_list">-->
-<!--                            <li>-->
-<!--                                <div class="clearfix">-->
-<!--                                    <!--product image-->
-<!--                                    <img class="f_left m_right_10" src="--><?//= $link ?><!--/images/shopping_c_img_1.jpg"-->
-<!--                                         alt="">-->
-<!--                                    <!--product description-->
-<!--                                    <div class="f_left product_description">-->
-<!--                                        <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean-->
-<!--                                            auctor wisi et urna</a>-->
-<!--                                        <span class="f_size_medium">Product Code PS34</span>-->
-<!--                                    </div>-->
-<!--                                    <!--product price-->
-<!--                                    <div class="f_left f_size_medium">-->
-<!--                                        <div class="clearfix">-->
-<!--                                            1 x <b class="color_dark">$99.00</b>-->
-<!--                                        </div>-->
-<!--                                        <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i>-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <div class="clearfix">-->
-<!--                                    <!--product image-->
-<!--                                    <img class="f_left m_right_10" src="--><?//= $link ?><!--/images/shopping_c_img_2.jpg"-->
-<!--                                         alt="">-->
-<!--                                    <!--product description-->
-<!--                                    <div class="f_left product_description">-->
-<!--                                        <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean-->
-<!--                                            auctor wisi et urna</a>-->
-<!--                                        <span class="f_size_medium">Product Code PS34</span>-->
-<!--                                    </div>-->
-<!--                                    <!--product price-->
-<!--                                    <div class="f_left f_size_medium">-->
-<!--                                        <div class="clearfix">-->
-<!--                                            1 x <b class="color_dark">$99.00</b>-->
-<!--                                        </div>-->
-<!--                                        <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i>-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <div class="clearfix">-->
-<!--                                    <!--product image-->
-<!--                                    <img class="f_left m_right_10" src="--><?//= $link ?><!--/images/shopping_c_img_3.jpg"-->
-<!--                                         alt="">-->
-<!--                                    <!--product description-->
-<!--                                    <div class="f_left product_description">-->
-<!--                                        <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean-->
-<!--                                            auctor wisi et urna</a>-->
-<!--                                        <span class="f_size_medium">Product Code PS34</span>-->
-<!--                                    </div>-->
-<!--                                    <!--product price-->
-<!--                                    <div class="f_left f_size_medium">-->
-<!--                                        <div class="clearfix">-->
-<!--                                            1 x <b class="color_dark">$99.00</b>-->
-<!--                                        </div>-->
-<!--                                        <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i>-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </li>-->
-<!--                        </ul>-->
+                    <div class="shopping_cart top_arrow tr_all_hover r_corners">
+                        <div class="f_size_medium sc_header">最近添加的商品</div>
+                        <ul class="products_list">
+                            <?php
+                            $cartItems = $shoppingCartModel->cartItems;
+                            foreach ($cartItems as $cartItem) {
+                                /**@var star\catalog\models\Item $item * */
+                                $sku = $cartItem->sku;
+                                $item = $sku->item;
+                            ?>
+                                <li>
+                                    <div class="clearfix">
+    <!--                                    <!--product image-->
+                                        <?= EasyThumbnailImage::thumbnailImg(
+                                            '@image/'.$item->getMainImage(),
+                                            30,
+                                            30,
+                                            EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+                                            ['class'=>"f_left m_right_10"]
+                                        )?>
+    <!--                                    <!--product description-->
+                                        <div class="f_left product_description">
+                                            <a href="<?= Url::to(['/catalog/home/item/view','id' => $item->item_id])?>" class="color_dark m_bottom_5 d_block"><?= $item->title?></a>
+                                        </div>
+    <!--                                    <!--product price-->
+                                        <div class="f_left f_size_medium">
+                                            <div class="clearfix">
+                                                <?=  $cartItem->qty ?> x <b class="color_dark">￥<?= $sku->price?></b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php  } ?>
+                        </ul>
 <!--                        <!--total price-->
-<!--                        <ul class="total_price bg_light_color_1 t_align_r color_dark">-->
-<!--                            <li class="m_bottom_10">Tax: <span-->
-<!--                                    class="f_size_large sc_price t_align_l d_inline_b m_left_15">$0.00</span></li>-->
-<!--                            <li class="m_bottom_10">Discount: <span-->
-<!--                                    class="f_size_large sc_price t_align_l d_inline_b m_left_15">$37.00</span></li>-->
-<!--                            <li>Total: <b-->
-<!--                                    class="f_size_large bold scheme_color sc_price t_align_l d_inline_b m_left_15">$999.00</b>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                        <div class="sc_footer t_align_c">-->
-<!--                            <a href="#" role="button"-->
-<!--                               class="button_type_4 d_inline_middle bg_light_color_2 r_corners color_dark t_align_c tr_all_hover m_mxs_bottom_5">View-->
-<!--                                Cart</a>-->
-<!--                            <a href="#" role="button"-->
-<!--                               class="button_type_4 bg_scheme_color d_inline_middle r_corners tr_all_hover color_light">Checkout</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                        <ul class="total_price bg_light_color_1 t_align_r color_dark">
+                            <li class="m_bottom_10">运费: <span
+                                    class="f_size_large sc_price t_align_l d_inline_b m_left_15">￥<?=  $shoppingCartModel->getShippingFee() ?></span></li>
+                            <li>总价: <b
+                                    class="f_size_large bold scheme_color sc_price t_align_l d_inline_b m_left_15">￥<?=  $shoppingCartModel->getTotal() ?></b>
+                            </li>
+                        </ul>
+                        <div class="sc_footer t_align_c">
+                            <a href="<?= Url::to(['/cart/cart/index'])?>" role="button"
+                               class="button_type_4 d_inline_middle bg_light_color_2 r_corners color_dark t_align_c tr_all_hover m_mxs_bottom_5">查看购物车</a>
+                            <a href="<?= Url::to(['/order/home/order/checkout'])?>" role="button"
+                               class="button_type_4 bg_scheme_color d_inline_middle r_corners tr_all_hover color_light">下单</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -252,7 +261,7 @@ AppAsset::register($this);
         <nav role="navigation" class="f_left f_xs_none d_xs_none">
             <ul class="horizontal_list main_menu clearfix">
                 <li class="<?= Yii::$app->request->get('catalog') || Yii::$app->request->get('tab') ? '' : 'current'?> relative f_xs_none m_xs_bottom_5">
-                    <a href="<?= Url::to(['/'])?>" class="tr_delay_hover color_light tt_uppercase"><b>Home</b></a>
+                    <a href="<?= Url::to(['/'])?>" class="tr_delay_hover color_light tt_uppercase"><b>首页</b></a>
                 </li>
                 <?php
                 $root = \star\system\models\Tree::find()->where(['name' => '商品分类'])->one();
@@ -263,6 +272,19 @@ AppAsset::register($this);
                 ?>
                 <li class="<?= Yii::$app->request->get('catalog') == $category->id ? 'current' : ''?> relative f_xs_none m_xs_bottom_5">
                     <a href="<?= Url::to(['/catalog/home/item/list','catalog' => $category->id])?>" class="tr_delay_hover color_light tt_uppercase"><b><?= $category->name?></b></a>
+                    <?php
+                    $children = $category->children(1)->indexBy('id')->all();
+                    if($children){
+                    ?>
+                    <div class="sub_menu_wrap top_arrow d_xs_none type_2 tr_all_hover clearfix r_corners">
+                        <ul class="sub_menu">
+                            <?php  foreach($children as $child){?>
+                            <li><a class="color_dark tr_delay_hover" href="<?= Url::to(['/catalog/home/item/list','catalog' => $child->id])?>"><?= $child->name?></a></li>
+                            <?php } ?>
+
+                        </ul>
+                    </div>
+                    <?php } ?>
                 </li>
                 <?php } } } ?>
                 <li class="<?= Yii::$app->request->get('tab') ? 'current' : ''?> relative f_xs_none m_xs_bottom_5">
@@ -531,224 +553,13 @@ AppAsset::register($this);
         </div>
     </li>
 </ul>
-<!--login popup-->
-<div class="popup_wrap d_none" id="login_popup">
-    <section class="popup r_corners shadow">
-        <button class="bg_tr color_dark tr_all_hover text_cs_hover close f_size_large"><i class="fa fa-times"></i>
-        </button>
-        <h3 class="m_bottom_20 color_dark">Log In</h3>
-        <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
-            'enableAjaxValidation' => true,
-            'enableClientValidation' => false,
-            'validateOnBlur' => false,
-            'validateOnType' => false,
-            'validateOnChange' => false,
-            'action' => Url::to(['/user/security/login']),
-        ]);
-        /** @var dektrium\user\models\LoginForm $model */
-        $model = \Yii::createObject(LoginForm::className());;
 
-        ?>
-        <ul>
-            <li class="m_bottom_15">
-                <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'r_corners full_width', 'tabindex' => '1']])->textInput()->label('Username', ['class' => 'm_bottom_5 d_inline_b']) ?>
-            </li>
-            <li class="m_bottom_25">
-                <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'r_corners full_width', 'tabindex' => '2']])->passwordInput()->label(Yii::t('user', 'Password')) ?>
-            </li>
-            <li class="m_bottom_15">
-                <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '4', 'class' => 'd_none']) ?>
-            </li>
-            <li class="clearfix m_bottom_30">
-                <?= Html::submitButton(Yii::t('user', 'Sign in'), ['class' => 'button_type_4 tr_all_hover r_corners f_left bg_scheme_color color_light f_mxs_none m_mxs_bottom_15']) ?>
-                <div class="f_right f_size_medium f_mxs_none">
-                    <a href="<?= Url::to(['/user/security/login']) ?>" class="color_dark">Forgot your password?</a>
-                </div>
-            </li>
-        </ul>
-        <?php ActiveForm::end(); ?>
-
-        <footer class="bg_light_color_1 t_mxs_align_c">
-            <h3 class="color_dark d_inline_middle d_mxs_block m_mxs_bottom_15">New Customer?</h3>
-            <a href="<?= Url::to(['/user/registration/register']) ?>" role="button"
-               class="tr_all_hover r_corners button_type_4 bg_dark_color bg_cs_hover color_light d_inline_middle m_mxs_left_0">Create
-                an Account</a>
-        </footer>
-    </section>
-</div>
 <!--custom popup-->
-<div class="popup_wrap d_none" id="quick_view_product">
-    <section class="popup r_corners shadow">
-        <button class="bg_tr color_dark tr_all_hover text_cs_hover close f_size_large"><i class="fa fa-times"></i>
-        </button>
-        <div class="clearfix">
-            <div class="custom_scrollbar">
-                <!--left popup column-->
-                <div class="f_left half_column">
-                    <div class="relative d_inline_b m_bottom_10 qv_preview">
-                        <span class="hot_stripe"><img src="<?= $link ?>/images/sale_product.png" alt=""></span>
-                        <img src="<?= $link ?>/images/quick_view_img_1.jpg" class="tr_all_hover" alt="">
-                    </div>
-                    <!--carousel-->
-                    <div class="relative qv_carousel_wrap m_bottom_20">
-                        <button
-                            class="button_type_11 t_align_c f_size_ex_large bg_cs_hover r_corners d_inline_middle bg_tr tr_all_hover qv_btn_prev">
-                            <i class="fa fa-angle-left "></i>
-                        </button>
-                        <ul class="qv_carousel d_inline_middle">
-                            <li data-src="<?= $link ?>/images/quick_view_img_1.jpg"><img
-                                    src="<?= $link ?>/images/quick_view_img_4.jpg" alt=""></li>
-                            <li data-src="<?= $link ?>/images/quick_view_img_2.jpg"><img
-                                    src="<?= $link ?>/images/quick_view_img_5.jpg" alt=""></li>
-                            <li data-src="<?= $link ?>/images/quick_view_img_3.jpg"><img
-                                    src="<?= $link ?>/images/quick_view_img_6.jpg" alt=""></li>
-                            <li data-src="<?= $link ?>/images/quick_view_img_1.jpg"><img
-                                    src="<?= $link ?>/images/quick_view_img_4.jpg" alt=""></li>
-                            <li data-src="<?= $link ?>/images/quick_view_img_2.jpg"><img
-                                    src="<?= $link ?>/images/quick_view_img_5.jpg" alt=""></li>
-                            <li data-src="<?= $link ?>/images/quick_view_img_3.jpg"><img
-                                    src="<?= $link ?>/images/quick_view_img_6.jpg" alt=""></li>
-                        </ul>
-                        <button
-                            class="button_type_11 t_align_c f_size_ex_large bg_cs_hover r_corners d_inline_middle bg_tr tr_all_hover qv_btn_next">
-                            <i class="fa fa-angle-right "></i>
-                        </button>
-                    </div>
-                    <div class="d_inline_middle">Share this:</div>
-                    <div class="d_inline_middle m_left_5">
-                        <!-- AddThis Button BEGIN -->
-                        <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-                            <a class="addthis_button_preferred_1"></a>
-                            <a class="addthis_button_preferred_2"></a>
-                            <a class="addthis_button_preferred_3"></a>
-                            <a class="addthis_button_preferred_4"></a>
-                            <a class="addthis_button_compact"></a>
-                            <a class="addthis_counter addthis_bubble_style"></a>
-                        </div>
-                        <!-- AddThis Button END -->
-                    </div>
-                </div>
-                <!--right popup column-->
-                <div class="f_right half_column">
-                    <!--description-->
-                    <h2 class="m_bottom_10"><a href="#" class="color_dark fw_medium">Eget elementum vel</a></h2>
 
-                    <div class="m_bottom_10">
-                        <!--rating-->
-                        <ul class="horizontal_list d_inline_middle type_2 clearfix rating_list tr_all_hover">
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-star-o empty tr_all_hover"></i>
-                                <i class="fa fa-star active tr_all_hover"></i>
-                            </li>
-                        </ul>
-                        <a href="#" class="d_inline_middle default_t_color f_size_small m_left_5">1 Review(s) </a>
-                    </div>
-                    <hr class="m_bottom_10 divider_type_3">
-                    <table class="description_table m_bottom_10">
-                        <tr>
-                            <td>Manufacturer:</td>
-                            <td><a href="#" class="color_dark">Chanel</a></td>
-                        </tr>
-                        <tr>
-                            <td>Availability:</td>
-                            <td><span class="color_green">in stock</span> 20 item(s)</td>
-                        </tr>
-                        <tr>
-                            <td>Product Code:</td>
-                            <td>PS06</td>
-                        </tr>
-                    </table>
-                    <h5 class="fw_medium m_bottom_10">Product Dimensions and Weight</h5>
-                    <table class="description_table m_bottom_5">
-                        <tr>
-                            <td>Product Length:</td>
-                            <td><span class="color_dark">10.0000M</span></td>
-                        </tr>
-                        <tr>
-                            <td>Product Weight:</td>
-                            <td>10.0000KG</td>
-                        </tr>
-                    </table>
-                    <hr class="divider_type_3 m_bottom_10">
-                    <p class="m_bottom_10">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean
-                        auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem ipsum
-                        dolor sit amet, consecvtetuer adipiscing elit. </p>
-                    <hr class="divider_type_3 m_bottom_15">
-                    <div class="m_bottom_15">
-                        <s class="v_align_b f_size_ex_large">$152.00</s><span
-                            class="v_align_b f_size_big m_left_5 scheme_color fw_medium">$102.00</span>
-                    </div>
-                    <table class="description_table type_2 m_bottom_15">
-                        <tr>
-                            <td class="v_align_m">Size:</td>
-                            <td class="v_align_m">
-                                <div class="custom_select f_size_medium relative d_inline_middle">
-                                    <div class="select_title r_corners relative color_dark">s</div>
-                                    <ul class="select_list d_none"></ul>
-                                    <select name="product_name">
-                                        <option value="s">s</option>
-                                        <option value="m">m</option>
-                                        <option value="l">l</option>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="v_align_m">Quantity:</td>
-                            <td class="v_align_m">
-                                <div class="clearfix quantity r_corners d_inline_middle f_size_medium color_dark">
-                                    <button class="bg_tr d_block f_left" data-direction="down">-</button>
-                                    <input type="text" name="" readonly value="1" class="f_left">
-                                    <button class="bg_tr d_block f_left" data-direction="up">+</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="clearfix m_bottom_15">
-                        <button
-                            class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover f_left f_size_large">
-                            Add to Cart
-                        </button>
-                        <button
-                            class="button_type_12 bg_light_color_2 tr_delay_hover f_left r_corners color_dark m_left_5 p_hr_0">
-                            <i class="fa fa-heart-o f_size_big"></i><span
-                                class="tooltip tr_all_hover r_corners color_dark f_size_small">Wishlist</span></button>
-                        <button
-                            class="button_type_12 bg_light_color_2 tr_delay_hover f_left r_corners color_dark m_left_5 p_hr_0">
-                            <i class="fa fa-files-o f_size_big"></i><span
-                                class="tooltip tr_all_hover r_corners color_dark f_size_small">Compare</span></button>
-                        <button
-                            class="button_type_12 bg_light_color_2 tr_delay_hover f_left r_corners color_dark m_left_5 p_hr_0 relative">
-                            <i class="fa fa-question-circle f_size_big"></i><span
-                                class="tooltip tr_all_hover r_corners color_dark f_size_small">Ask a Question</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
 <button class="t_align_c r_corners tr_all_hover animate_ftl" id="go_to_top"><i class="fa fa-angle-up"></i></button>
 <?php
 $tmpJs = ["js/jquery-2.1.0.min.js", "js/jquery-ui.min.js", "js/jquery-migrate-1.2.1.min.js", "js/retina.js", "js/camera.min.js",   "js/elevatezoom.min.js", "js/jquery.fancybox-1.3.4.js",
-    "js/waypoints.min.js", "js/jquery.isotope.min.js", "js/owl.carousel.min.js", "js/jquery.tweet.min.js", "js/jquery.custom-scrollbar.js", "js/scripts.js",
+    "js/waypoints.min.js", "js/jquery.isotope.min.js", "js/owl.carousel.min.js", "js/jquery.tweet.min.js", "js/jquery.custom-scrollbar.js", "js/scripts.js",'js/bootstrap.min.js',
 ];
 foreach ($tmpJs as $v) {
     $this->registerJsFile($link . '/' . $v);

@@ -15,9 +15,8 @@
  * @var $this         yii\web\View
  */
 
-
 use yii\grid\ActionColumn;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\Url;
 
 $this->title = Yii::t('rbac', 'Roles');
@@ -27,8 +26,6 @@ $this->params['title'] = $this->title;
 $this->params['menu']['auth'] = true;
 $this->params['sub-menu']['list-role'] = true;
 ?>
-
-
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -66,6 +63,15 @@ $this->params['sub-menu']['list-role'] = true;
                 'style' => 'width: 5%'
             ],
         ]
+    ],
+    'export' => false,
+    'responsive' => true,
+    'panel' => [
+        'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> ' . Yii::t('rbac', 'Roles') . '</h3>',
+        'type' => 'success',
+        'before' => false,
+        'footer' => false,
+        'after' => false
     ],
 ]) ?>
 

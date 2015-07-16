@@ -1,13 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel star\system\models\StationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Stations';
+$this->title = Yii::t('system', 'Stations');
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->params['title'] = $this->title;
@@ -16,12 +16,7 @@ $this->params['sub-menu']['station'] = true;
 ?>
 <div class="station-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Station', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -39,6 +34,15 @@ $this->params['sub-menu']['station'] = true;
             // 'update_time:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'export' => false,
+        'responsive' => true,
+        'panel' => [
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> ' . Yii::t('system', 'Stations') . '</h3>',
+            'type' => 'success',
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i>' . Yii::t('system', 'Create Station'), ['create'], ['class' => 'btn btn-success']),
+            'footer' => false,
+            'after' => false
         ],
     ]); ?>
 
