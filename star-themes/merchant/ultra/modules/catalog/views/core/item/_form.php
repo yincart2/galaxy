@@ -101,6 +101,7 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
         }
         $fieldGroups[] = ['label' => '<i class="fa fa-file-image-o"></i>' . Yii::t('catalog', 'Product Image'), 'content' => implode('', $fields)];
         echo Tabs::widget(['items' => $fieldGroups, 'navType' => 'nav-tabs', 'encodeLabels' => false]);
+        echo Html::hiddenInput('_backendCSRF',Yii::$app->request->csrfToken);
         ?>
 
         <div class="col-md-12 col-sm-12 col-xs-12">

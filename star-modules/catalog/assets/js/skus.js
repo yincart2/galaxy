@@ -209,7 +209,7 @@ function fillData() {
         $.ajax
         ({
             type: "POST",
-            data: {item_id: item_id, YII_CSRF_TOKEN: $("[name=YII_CSRF_TOKEN]").val()},
+            data: {item_id: item_id, _backendCSRF: $("[name=_backendCSRF]").val()},
             url: skus_url,
             dataType: "html",
             success: function (res) {
