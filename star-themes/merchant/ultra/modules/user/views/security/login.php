@@ -78,34 +78,40 @@ list($path,$url) = Yii::$app->assetManager->publish('@theme/merchant/ultra');
 
 <div class="login-wrapper">
     <div id="login" class="login loginpage col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-8">
-        <h1><a href="#" title="Login Page" tabindex="-1">Ultra Admin</a></h1>
+        <h1><a href="#" title="Login Page" tabindex="-1">Yincart Admin</a></h1>
+
+        <?php $form = ActiveForm::begin([
+            'id'                     => 'login-form',
+            'enableAjaxValidation'   => true,
+            'enableClientValidation' => false,
+            'validateOnBlur'         => false,
+            'validateOnType'         => false,
+            'validateOnChange'       => false,
+        ]) ?>
 
         <form name="loginform" id="loginform" action="index.html" method="post">
             <p>
-                <label for="user_login">Username<br />
-                    <input type="text" name="log" id="user_login" class="input" value="demo" size="20" /></label>
+                <label for="user_login">用户名<br />
+                    <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'input', 'size' => '20']])->label(false) ?>
+
             </p>
             <p>
-                <label for="user_pass">Password<br />
-                    <input type="password" name="pwd" id="user_pass" class="input" value="demo" size="20" /></label>
+                <label for="user_pass">密码<br />
+                    <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'input', 'size' => '20']])->passwordInput()->label(false) ?>
+
             </p>
             <p class="forgetmenot">
-                <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="skin-square-orange" checked> Remember me</label>
+                <?= $form->field($model, 'rememberMe')->checkbox(['uncheck'=>true,'class' => 'skin-square-orange']) ?>
             </p>
 
 
 
             <p class="submit">
-                <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-orange btn-block" value="Sign In" />
+                <?= Html::submitButton(Yii::t('user', '登陆'), ['class' => 'btn btn-orange btn-block', 'tabindex' => '3']) ?>
             </p>
-        </form>
-
-        <p id="nav">
-            <a class="pull-left" href="#" title="Password Lost and Found">Forgot password?</a>
-            <a class="pull-right" href="ui-register.html" title="Sign Up">Sign Up</a>
-        </p>
 
 
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
 
@@ -172,46 +178,6 @@ list($path,$url) = Yii::$app->assetManager->publish('@theme/merchant/ultra');
     </div>
 </div>
 <!-- modal end -->
-
-<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
-
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-            </div>
-            <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'id'                     => 'login-form',
-                    'enableAjaxValidation'   => true,
-                    'enableClientValidation' => false,
-                    'validateOnBlur'         => false,
-                    'validateOnType'         => false,
-                    'validateOnChange'       => false,
-                ]) ?>
-
-                <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control', 'tabindex' => '1']]) ?>
-
-                <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'form-control', 'tabindex' => '2']])->passwordInput()->label(Yii::t('user', 'Password') . ($module->enablePasswordRecovery ? ' (' . Html::a(Yii::t('user', 'Forgot password?'), ['/user/recovery/request'], ['tabindex' => '5']) . ')' : '')) ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '4']) ?>
-
-                <?= Html::submitButton(Yii::t('user', 'Sign in'), ['class' => 'btn btn-primary btn-block', 'tabindex' => '3']) ?>
-
-                <?php ActiveForm::end(); ?>
-            </div>
-        </div>
-        <?php if ($module->enableConfirmation): ?>
-            <p class="text-center">
-                <?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/user/registration/resend']) ?>
-            </p>
-        <?php endif ?>
-        <?= Connect::widget([
-            'baseAuthUrl' => ['/user/security/auth']
-        ]) ?>
-    </div>
-</div>
 
 
 </body>

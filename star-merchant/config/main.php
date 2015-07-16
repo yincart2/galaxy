@@ -96,6 +96,7 @@ return [
                 'pathMap' => [
                     '@merchant/views' => '@theme/merchant/ultra',
                     '@star' => '@theme/merchant/ultra/modules',
+                    '@dektrium/user/views' => '@theme/merchant/ultra/modules/user/views'
                 ],
                 'baseUrl' => '@theme/merchant'
             ]

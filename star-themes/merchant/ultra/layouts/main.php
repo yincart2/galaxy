@@ -2,7 +2,7 @@
 use merchant\assets\AppAsset;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-
+use yii\helpers\Html;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -24,11 +24,11 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
     -->
     <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
     <meta charset="utf-8"/>
-    <title>Ultra Admin : Dashboard</title>
+    <title>Yincart Admin : Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
-
+    <?= Html::csrfMetaTags() ?>
     <link rel="shortcut icon" href="<?= $assetsUrl ?>/images/favicon.png" type="image/x-icon"/>
     <!-- Favicon -->
     <link rel="apple-touch-icon-precomposed" href="<?= $assetsUrl ?>/images/apple-touch-icon-57-precomposed.png">
@@ -64,7 +64,7 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
     ?>
 </head>
 <!-- END HEAD -->
-
+<?php if(!Yii::$app->user->isGuest){?>
 <!-- BEGIN BODY -->
 <body class=" "><!-- START TOPBAR -->
 <?php $this->beginBody() ?>
@@ -406,10 +406,8 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
                     </a>
                 </li>
                 <li class="last">
-                    <a href="ui-login.html">
-                        <i class="fa fa-lock"></i>
-                        Logout
-                    </a>
+                    <?= Html::a('<i class="fa fa-lock"></i>
+                        Logout',Url::to(['/user/security/logout']),['data-method' => 'post'])?>
                 </li>
             </ul>
         </li>
@@ -828,8 +826,8 @@ list($dataPath, $dataUrl) = Yii::$app->assetManager->publish('@theme/merchant/ul
 <!-- modal end -->
 <?php $this->endBody() ?>
 </body>
+<?php }else{
+    echo $content;
+} ?>
 </html>
 <?php $this->endPage() ?>
-<script type="text/javascript">
-
-</script>
