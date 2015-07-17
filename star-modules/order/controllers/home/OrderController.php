@@ -140,4 +140,17 @@ class OrderController extends Controller
             'cartItems' => $cartItems,
         ]);
     }
+
+    public function actionConfirm($id){
+       $orderModel = Yii::createObject(Order::className())->find()->where(['order_id'=>$id,'user_id'=>Yii::$app->user->id])->one();
+        if($orderModel){
+            $orderModel->status= $orderModel::STATUS_COMPLETE;
+            if($orderModel->save()){
+                return $this->render('view', [
+                    'model' => $orderModel,
+                ]);
+            }
+        }
+
+    }
 }

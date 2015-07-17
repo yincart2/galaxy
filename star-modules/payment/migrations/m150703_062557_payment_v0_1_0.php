@@ -15,6 +15,7 @@ class m150703_062557_payment_v0_1_0 extends Migration
             'payment_fee' => Schema::TYPE_DECIMAL . '(10, 2) NOT NULL',
             'transcation_no' => Schema::TYPE_STRING . ' NOT NULL',
             'create_at' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'update_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'status' => Schema::TYPE_INTEGER . ' NOT NULL',
         ],$tableOptions);
     }

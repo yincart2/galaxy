@@ -30,6 +30,7 @@ $this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::c
         $fieldGroups = [];
         $fields = [];
         $fields[] = $form->field($model, 'title')->textInput(['maxlength' => 255]);
+        $fields[] = $form->field($model, 'price')->textInput(['maxlength' => 255]);
         $currency = Currency::find()->all();
         $fields[] = $form->field($model, 'currency')->dropDownList(ArrayHelper::map($currency, 'currency_id', 'name'));
         $language = Language::find()->all();

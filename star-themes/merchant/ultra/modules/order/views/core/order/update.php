@@ -13,12 +13,10 @@ $this->title = Yii::t('order', 'Update {modelClass}: ', [
 $this->params['breadcrumbs'][] = ['label' => Yii::t('order', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->order_no, 'url' => ['view', 'id' => $model->order_id]];
 $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
-
-$this->params['title'] = $this->title;
-$this->params['menu']['order'] = true;
 ?>
 <div class="order-update">
 
+    <h1><?= Html::encode($this->title) ?></h1>
     <?php
     $items = [];
     $orderItemArray = '';
@@ -56,18 +54,24 @@ $this->params['menu']['order'] = true;
         $paymentInfo = DetailView::widget([
             'model' => $model->payment,
             'attributes' => [
-                'payment_method',
+                [ // the owner name of the model
+                    'attribute' => 'payment_method',
+                    'value' => $model->payment->getPaymentMethod()[$model->payment->payment_method],
+                ],
                 'payment_fee',
                 'transcation_no',
                 'create_at:datetime',
-
+                [ // the owner name of the model
+                    'attribute' => 'status',
+                    'value' => $model->payment->getStatus()[$model->payment->status],
+                ],
             ]
         ]);
     } else {
         $paymentInfo = Yii::t('order', 'Not Paid');
     }
 
-    if ($model->payment) {
+    if ($model->payment && $model->payment->status) {
         if ($model->shipment) {
             if ($model->shipment->status != 1) {
                 $shipmentInfo = $this->render('_shipment', [

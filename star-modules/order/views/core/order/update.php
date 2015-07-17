@@ -8,8 +8,8 @@ use yii\bootstrap\Tabs;
 /* @var $model star\order\models\Order */
 
 $this->title = Yii::t('order', 'Update {modelClass}: ', [
-    'modelClass' => 'Order',
-]) . ' ' . $model->order_no;
+        'modelClass' => 'Order',
+    ]) . ' ' . $model->order_no;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('order', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->order_no, 'url' => ['view', 'id' => $model->order_id]];
 $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
     $orderItemArray = '';
     $orderItems = $model->orderItem;
 
-    foreach($orderItems as $orderItem){
+    foreach ($orderItems as $orderItem) {
         $orderItemArray .= DetailView::widget([
             'model' => $orderItem,
             'attributes' => [
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
             ]
         ]);
     }
-    $orderInfo =  DetailView::widget([
+    $orderInfo = DetailView::widget([
         'model' => $model,
         'attributes' => [
             'total_price',
@@ -46,32 +46,38 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
         ]
     ]);
 
-    $orderInfo2 =  $this->render('_status', [
+    $orderInfo2 = $this->render('_status', [
         'model' => $model,
-    ]) ;
+    ]);
 
     if ($model->payment) {
         $paymentInfo = DetailView::widget([
             'model' => $model->payment,
             'attributes' => [
-                'payment_method',
+                [ // the owner name of the model
+                    'attribute' => 'payment_method',
+                    'value' => $model->payment->getPaymentMethod()[$model->payment->payment_method],
+                ],
                 'payment_fee',
                 'transcation_no',
                 'create_at:datetime',
-                'status',
+                [ // the owner name of the model
+                    'attribute' => 'status',
+                    'value' => $model->payment->getStatus()[$model->payment->status],
+                ],
             ]
         ]);
     } else {
         $paymentInfo = Yii::t('order', 'Not Paid');
     }
 
-    if ($model->payment&&$model->payment->status) {
+    if ($model->payment && $model->payment->status) {
         if ($model->shipment) {
-            if($model->shipment->status!= 1){
+            if ($model->shipment->status != 1) {
                 $shipmentInfo = $this->render('_shipment', [
                     'model' => $model->shipment,
                 ]);
-            }else{
+            } else {
                 $shipmentInfo = DetailView::widget([
                     'model' => $model->shipment,
                     'attributes' => [
@@ -85,7 +91,7 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
             $shipment = Yii::createObject(\star\shipment\models\Shipment::className());
             $shipmentInfo = $this->render('_shipment', [
                 'model' => $shipment,
-                'orderModel'=>$model,
+                'orderModel' => $model,
             ]);
         }
     } else {
@@ -93,12 +99,12 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
     }
 
 
-     $items = [
-         ['label' => Yii::t('order', 'Order'), 'content' => $orderItemArray.$orderInfo.$orderInfo2],
-         ['label' => Yii::t('app', 'Payment'), 'content' => $paymentInfo],
-         ['label' => Yii::t('order', 'Shipment'), 'content' => $shipmentInfo],
+    $items = [
+        ['label' => Yii::t('order', 'Order'), 'content' => $orderItemArray . $orderInfo . $orderInfo2],
+        ['label' => Yii::t('app', 'Payment'), 'content' => $paymentInfo],
+        ['label' => Yii::t('order', 'Shipment'), 'content' => $shipmentInfo],
 //        ['label' => Yii::t('app', 'Refund'), 'content' => ''],
-     ];
+    ];
 
     echo Tabs::widget(['items' => $items]);
 

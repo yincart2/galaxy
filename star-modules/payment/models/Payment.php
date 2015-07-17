@@ -18,6 +18,7 @@ use yii\helpers\Url;
  * @property string $payment_fee
  * @property string $transcation_no
  * @property integer $create_at
+ * @property integer $update_at
  * @property integer $status
  */
 class Payment extends \yii\db\ActiveRecord
@@ -27,6 +28,20 @@ class Payment extends \yii\db\ActiveRecord
 
     const STATUS_WAIT_BUYER_PAY = 0;
     const STATUS_BUYER_PAY = 1;
+
+    public function getPaymentMethod(){
+        return [
+            self::ALIPAY => Yii::t('payment','AliPay'),
+            self::PAYPAL => Yii::t('payment','PayPal'),
+        ];
+    }
+
+    public function getStatus(){
+        return [
+            self::STATUS_WAIT_BUYER_PAY => Yii::t('payment','Waited to be Paid'),
+            self::STATUS_BUYER_PAY => Yii::t('payment','Paid'),
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -42,7 +57,7 @@ class Payment extends \yii\db\ActiveRecord
     {
         return [
             [['order_id', 'payment_method', 'payment_fee', 'transcation_no',  'status'], 'required'],
-            [['order_id', 'payment_method', 'create_at', 'status'], 'integer'],
+            [['order_id', 'payment_method', 'create_at', 'status','update_at'], 'integer'],
             [['payment_fee'], 'number'],
             [['transcation_no'], 'string', 'max' => 255]
         ];
@@ -70,7 +85,7 @@ class Payment extends \yii\db\ActiveRecord
             'time' => [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'create_at',
-                'updatedAtAttribute' => false,
+                'updatedAtAttribute' => 'update_at',
             ]
         ];
     }

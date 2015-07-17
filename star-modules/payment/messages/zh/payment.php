@@ -24,5 +24,7 @@ return [
     'Create At' => '创建时间',
     'Update At' => '更新时间',
     'AliPay' => '支付宝',
-
+    'Waited to be Paid'=>'未支付',
+    'Paid'=>'已支付',
+    'Status'=>'状态',
 ];

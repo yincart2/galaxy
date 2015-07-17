@@ -2,7 +2,9 @@
 
 namespace star\shipment\models;
 
+use star\order\models\Order;
 use Yii;
+use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -61,5 +63,20 @@ class Shipment extends \yii\db\ActiveRecord
                 'updatedAtAttribute' => false,
             ]
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        if($insert){
+            $order =$this->order;
+            $order->status = $order::STATUS_WAIT_CONFIRM;
+            if(!$order->save()){
+                throw new Exception('change order status fail');
+            }
+        }
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function getOrder(){
+        return $this->hasOne(Order::className(),['order_id'=>'order_id']);
     }
 }

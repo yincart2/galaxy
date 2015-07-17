@@ -64,6 +64,7 @@ $this->params['order-list'] = true;
                     <li>
                         <?php   if($orderModel->status == $orderModel::STATUS_WAIT_CONFIRM){  ?>
                         <a href="<?= Url::to(['/refund/home/refund/create', 'order_id' => $orderModel->order_id]) ?>" class="button_grey">退货</a>
+                        <a href="<?= Url::to(['/order/home/order/confirm', 'id' => $orderModel->order_id]) ?>" class="button_grey">确认收货</a>
                         <?php } ?>
                     </li>
 
