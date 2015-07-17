@@ -58,14 +58,14 @@ $this->params['breadcrumbs'][] = Yii::t('order', 'Update');
                 'payment_fee',
                 'transcation_no',
                 'create_at:datetime',
-
+                'status',
             ]
         ]);
     } else {
         $paymentInfo = Yii::t('order', 'Not Paid');
     }
 
-    if ($model->payment) {
+    if ($model->payment&&$model->payment->status) {
         if ($model->shipment) {
             if($model->shipment->status!= 1){
                 $shipmentInfo = $this->render('_shipment', [

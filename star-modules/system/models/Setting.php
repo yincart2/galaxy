@@ -83,9 +83,7 @@ class Setting extends \yii\db\ActiveRecord
                             'chosen_value' => end(array_keys(Json::decode($settingFields['value'][$i]))),
                         ]);
                     } else {
-                        $settingFieldsModel->setAttributes([
-                            'chosen_value' => $settingFields['value'][$i],
-                        ]);
+                        $settingFieldsModel->chosen_value= $settingFields['value'][$i];
                     }
                     $settingFieldsModel->setAttributes(array(
                         'setting_id' => $settingId,

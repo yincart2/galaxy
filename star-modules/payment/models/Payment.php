@@ -2,8 +2,10 @@
 
 namespace star\payment\models;
 
+use star\order\models\Order;
 use star\payment\models\paypal\PayPal;
 use Yii;
+use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Url;
 
@@ -87,5 +89,20 @@ class Payment extends \yii\db\ActiveRecord
             case  self::PAYPAL:
                 return Yii::createObject(PayPal::className())->pay($orderId);
         }
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        if(!$insert&& $this->status){
+            $order =$this->order;
+            $order->status = $order::STATUS_WAIT_SHIPMENT;
+            if(!$order->save()){
+                throw new Exception('change order status fail');
+            }
+        }
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function getOrder(){
+        return $this->hasOne(Order::className(),['order_id'=>'order_id']);
     }
 }

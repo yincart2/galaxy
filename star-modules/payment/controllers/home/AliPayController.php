@@ -119,8 +119,7 @@ class AlipayController extends \yii\web\Controller
                 $payment->payment_fee = \Yii::$app->request->post('price');
                 $payment->transcation_no = \Yii::$app->request->post('subject');
                 $payment->save();
-                $order->status = $order::STATUS_WAIT_SHIPMENT;
-                $order->save();
+
 
                 echo "success"; //请不要修改或删除
 

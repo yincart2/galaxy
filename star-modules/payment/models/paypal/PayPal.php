@@ -9,15 +9,20 @@
 namespace star\payment\models\paypal;
 
 use PayPal\Api\Amount;
+use PayPal\Api\Authorization;
+use PayPal\Api\Capture;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use star\order\models\Order;
+use star\system\models\SingletonSetting;
 use yii\base\ErrorException;
+use yii\base\Exception;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use PayPal\Rest\ApiContext;
@@ -36,14 +41,15 @@ class PayPal extends Model
     const LOG_LEVEL_ERROR = 'ERROR';
 
     private $_apiContext = null;
-    public $clientId =  'AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS';
-    public $clientSecret ='EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL';
+    public $clientId;
+    public $clientSecret;
     public $isProduction = false;
     public $currency = 'USD';
     public $config = [];
 
     private function setConfig()
     {
+        $setting = \Yii::createObject(SingletonSetting::className());
         // ### Api context
         // Use an ApiContext object to authenticate
         // API calls. The clientId and clientSecret for the
@@ -51,16 +57,16 @@ class PayPal extends Model
         // developer.paypal.com
         $this->_apiContext = new ApiContext(
             new OAuthTokenCredential(
-                $this->clientId,
-                $this->clientSecret
+                $this->clientId = trim($setting->getSettingValue('payment_paypal_clientId')),
+                $this->clientSecret = trim($setting->getSettingValue('payment_paypal_clientSecret'))
             )
         );
         $this->_apiContext->setConfig(ArrayHelper::merge(
                 [
-                    'mode'                      => self::MODE_SANDBOX, // development (sandbox) or production (live) mode
+                    'mode'                      => $setting->getSettingValue('payment_paypal_mode'), // development (sandbox) or production (live) mode
                     'http.ConnectionTimeOut'    => 30,
                     'http.Retry'                => 1,
-                    'log.LogEnabled'            => YII_DEBUG ? 1 : 0,
+                    'log.LogEnabled'            => $setting->getSettingValue('payment_paypal_log'),
                     'log.FileName'              => Yii::getAlias('@runtime/logs/paypal.log'),
                     'log.LogLevel'              => self::LOG_LEVEL_FINE,
                     'validation.level'          => 'log',
@@ -153,8 +159,8 @@ class PayPal extends Model
 // payment approval/ cancellation.
 
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl(Url::to(['/Payment/home/payment/index'],true))
-            ->setCancelUrl(Url::to(['/Payment/home/payment/index'],true));
+        $redirectUrls->setReturnUrl(Url::to(['/payment/home/pay-pal/return','success'=>true],true))
+            ->setCancelUrl(Url::to(['/','success'=>false],true));
 
 // ### Payment
 // A Payment Resource; create one using
@@ -166,9 +172,6 @@ class PayPal extends Model
             ->setTransactions(array($transaction));
 
 
-// For Sample Purposes Only.
-        $request = clone $payment;
-
 // ### Create Payment
 // Create a payment by calling the 'create' method
 // passing it a valid apiContext.
@@ -176,24 +179,80 @@ class PayPal extends Model
 // The return object contains the state and the
 // url to which the buyer must be redirected to
 // for payment approval
-        try {
-            $payment->create($this->_apiContext);
-        } catch (\Exception $ex) {
-            // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-//            ResultPrinter::printError("Created Payment Order Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex);
-            var_dump($ex);exit;
-            exit(1);
-        }
+
+       $payment->create($this->_apiContext);
+
 
 // ### Get redirect url
 // The API response provides the url that you must redirect
 // the buyer to. Retrieve the url from the $payment->getApprovalLink()
 // method
-        $approvalUrl = $payment->getApprovalLink();
 
-// NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-//        ResultPrinter::printResult("Created Payment Order Using PayPal. Please visit the URL to Approve.", "Payment", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $payment);
+        $approvalUrl = $payment->getApprovalLink();
+        /** @var  $paymentModel \star\payment\models\Payment*/
+        $paymentModel = Yii::createObject(\star\payment\models\Payment::className());
+        $paymentModel->setAttributes([
+            'order_id'=>$order->order_id,
+            'payment_method'=>$paymentModel::PAYPAL,
+            'payment_fee'=>0,
+            'transcation_no'=>$payment->id,
+            'status'=>$paymentModel::STATUS_WAIT_BUYER_PAY,
+        ]);
+        if(!$paymentModel->save()){
+            throw new Exception(Yii::t('payment','create payment record fail'));
+        }
 
         return $approvalUrl;
+    }
+
+    public function executePayment($paymentId,$payerID){
+        $payment = Payment::get($paymentId, $this->_apiContext);
+
+        $execution = new PaymentExecution();
+        $execution->setPayerId($payerID);
+        try {
+             $payment->execute($execution, $this->_apiContext);
+            try {
+                $payment = Payment::get($paymentId, $this->_apiContext);
+            } catch (Exception $ex) {
+
+                exit(1);
+            }
+        } catch (Exception $ex) {
+
+            exit(1);
+        }
+
+        return $payment;
+    }
+
+    /**
+     * 看着官方的文档执行了下面的步骤  不过搞不懂有什么用
+     * @param $payment
+     * @return Capture
+     */
+    public function getOrder($payment){
+        $transactions = $payment->getTransactions();
+        $transaction = $transactions[0];
+        $relatedResources = $transaction->getRelatedResources();
+        $relatedResource = $relatedResources[0];
+        $order = $relatedResource->getOrder();
+
+        $order  = \PayPal\Api\Order::get($order->getId(), $this->_apiContext);
+
+        $authorization = new Authorization();
+        $amount = $order->getAmount();
+        $amount->setDetails(null);
+        $authorization->setAmount($amount);
+
+        $order->authorize($authorization, $this->_apiContext);
+
+
+        $capture = new Capture();
+        $capture->setIsFinalCapture(true);
+        $capture->setAmount($amount);
+        $result = $order->capture($capture,$this->_apiContext);
+
+        return $result;
     }
 } 

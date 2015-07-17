@@ -46,6 +46,7 @@ class m150626_102323_system_v0_1_0 extends Migration
             [
                 [1,'system','系统','module','模块','1','1'],
                 [2,'payment','支付','alipay','支付宝','2','1'],
+                [3,'payment','支付','paypal','Paypal','2','2'],
             ]);
 
         $this->batchInsert('{{%setting_fields}}', ['setting_id', 'fields_code', 'fields_label', 'value', 'setting_code', 'type','chosen_value'],
@@ -62,6 +63,10 @@ class m150626_102323_system_v0_1_0 extends Migration
                 [2,'pid','PID','1','payment_alipay_pid',1,1],
                 [2,'key','KEY','1','payment_alipay_key',1,1],
                 [2,'sellerEmail','支付宝账号','1','payment_alipay_sellerEmail',1,1],
+                [3,'clientId','PayPal clientId','AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS','payment_paypal_clientId',1,'AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS'],
+                [3,'clientSecret','PayPal clientSecret','EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL','payment_paypal_clientSecret',1,'EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL'],
+                [3,'mode','模式','{"sandbox":"沙盒模式","live":"真实环境"} ','payment_paypal_mode',2,'sandbox'],
+                [3,'log','日志','["未激活","激活"] ','payment_paypal_log',2,'1'],
             ]);
 
 
