@@ -63,6 +63,19 @@ Migration
 --------
 yii migrate/up system_v0_1_0 --migrationPath=@star/system/migrations
 
+安装流程
+---------
+
+1. composer update
+
+2. php init
+
+3. 修改数据库连接 账号
+
+4. yii migrate/up system_v0_1_0 --migrationPath=@star/system/migrations
+
+5. 将 console/data/galaxy_latest.sql 导入数据库
+
 YII2 DIRECTORY STRUCTURE
 -------------------
 
