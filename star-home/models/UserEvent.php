@@ -20,7 +20,7 @@ class UserEvent
      */
     public static  function frontendRegister()
     {
-        Event::on(User::className(), User::USER_REGISTER_DONE, function($event) {
+        Event::on(User::className(), User::AFTER_REGISTER, function($event) {
             /** @var \yii\base\ModelEvent $event */
             $user = $event->sender;
             $auth = new DbManager();
