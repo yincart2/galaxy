@@ -37,8 +37,9 @@ class Gravitation implements BootstrapInterface
             $namespaceDirs = DirHelper::findDirs($codePoolDir);
             foreach ($namespaceDirs as $namespaceDir) {
                 $dirNames = explode(DIRECTORY_SEPARATOR, $namespaceDir);
-                $namespace = $namespaceSuffix . DIRECTORY_SEPARATOR . end($dirNames);
-                $bootstrap = $namespace . DIRECTORY_SEPARATOR . 'Bootstrap';
+               
+                $namespace = $namespaceSuffix . '\\' . end($dirNames);
+                $bootstrap = $namespace . '\\'. 'Bootstrap';
 
                 if (class_exists($bootstrap)) {
                     $component = Yii::createObject($bootstrap);
