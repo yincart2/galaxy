@@ -37,6 +37,7 @@ class Gravitation implements BootstrapInterface
             $namespaceDirs = DirHelper::findDirs($codePoolDir);
             foreach ($namespaceDirs as $namespaceDir) {
                 $dirNames = explode(DIRECTORY_SEPARATOR, $namespaceDir);
+               
                 $namespace = $namespaceSuffix . '\\' . end($dirNames);
                 $bootstrap = $namespace . '\\'. 'Bootstrap';
 
