@@ -10,7 +10,7 @@ use star\system\models\Tree;
 
 list($path, $url) = Yii::$app->assetManager->publish('@star/catalog/assets');
 
-$this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\AppAsset::className()]]);
+$this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\center\assets\AppAsset::className()]]);
 
 ?>
 <div class="content-body">

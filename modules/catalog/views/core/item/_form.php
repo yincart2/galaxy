@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 /* @var $form yii\widgets\ActiveForm */
 
 list($path,$url) = Yii::$app->assetManager->publish('@star/catalog/assets/js');
-$this->registerJsFile($url . '/skus.js', ['depends' => [\core\assets\AppAsset::className()]]);
+$this->registerJsFile($url . '/skus.js', ['depends' => [\center\assets\AppAsset::className()]]);
 ?>
 
 <div class="item-form">

@@ -11,7 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'merchant\controllers',
     'layout' => '/main',
-    'bootstrap' => ['log', ['home\models\UserEvent', 'beforeLogin'], 'matter\Gravitation',],
+    'bootstrap' => ['log', ['store\models\UserEvent', 'beforeLogin'], 'matter\Gravitation',],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',

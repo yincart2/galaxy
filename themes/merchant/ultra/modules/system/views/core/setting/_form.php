@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 
 list($path, $url) = Yii::$app->assetManager->publish('@star/system/assets');
 
-$this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\core\assets\AppAsset::className()]]);
+$this->registerJsFile($url . '/js/dynoTable.js', ['depends' => [\center\assets\AppAsset::className()]]);
 
 ?>
 <div class="content-body">

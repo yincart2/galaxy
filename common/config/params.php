@@ -2,7 +2,8 @@
 return [
     'commentNeedApproval' => true,
     'adminEmail' => '7895056@qq.com',
-    'supportEmail' => 'support@example.com',
+    'supportEmail' => '7895056@qq.com',
     'user.passwordResetTokenExpire' => 3600,
-    'imageDomain' => 'http://localhost/galaxy/star-image',
+    'imageDomain' => 'upload.star/image',
+    'fileDomain' => 'upload.star/file',
 ];

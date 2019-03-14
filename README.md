@@ -1,58 +1,125 @@
 Yincart2 Galaxy System
 ===================================
 
-电商星系系统，提供零售、批发、特卖、垂直电商、分销、O2O、C2C、移动电商、微信电商、社交电商、P2P、众筹等电商解决方案，根据需要选择不同的模块组合
+Yincart2电商星系系统：
 
-结构说明
+基础版本提供多商户平台商城(B2B2C)，可用于垂直电商平台或者综合电商平台
+
+根据自己需要，可以扩展为分销、C2C、移动电商、微信小程序、社区团购等电商解决方案
+
+Galaxy目录结构说明
 -----------
-### star citizen
 
-用户中心
-
-### star cluster
-
-垂直电商
-
-### star core
-
-后台管理
-
-### star home
-
-单商户/店铺 主站
-
-### star matter
-
-公用的一些类库
-
-### star wechat
-
-微信商城
-
-### star Merchant
-
-商家后台
-
-### star Image
-
-图片空间
+```
+common
+    config/              contains shared configurations
+    mail/                contains view files for e-mails
+console
+    config/              contains console configurations
+    controllers/         contains console controllers (commands)
+    migrations/          contains database migrations
+    models/              contains console-specific model classes
+    runtime/             contains files generated during runtime
+matter                   电商引擎核心基础
+    base/                基础类
+    behaviors/           行为类
+    helpers/             助手类
+modules                  公用模块
+    account              账户模块
+    auth                 权限模块
+    blog                 博客文章模块
+    cart                 购物车模块
+    catalog              商品模块
+    marketing            市场营销模块
+    member               会员模块
+    order                订单模块
+    payment              支付模块
+    refund               退货模块
+    shipment             物流模块
+    store                商店模块
+    system               系统模块
+star-center              平台后台      
+star-mall                商城前台：如天猫、京东
+star-merchant            商家后台   
+star-store               商店前台  
+star-upload              上传的文件图片等  
+themes                   主题皮肤          
+vendor/                  contains dependent 3rd-party packages
+environments/            contains environment-based overrides
+tests                    contains various tests for the advanced application
+    codeception/         contains tests developed with Codeception PHP Testing Framework
+```
 
 虚拟域名配置说明
 ----------------
 
-core.dev 对应star-core目录
+命名规则为xxx.star对应star-xxx，遵循“见名知意”的原则
 
-home.dev 对应star-home
+本地测试hosts：
+```
+127.0.0.1 center.star
+127.0.0.1 mall.star
+127.0.0.1 merchant.star
+127.0.0.1 store.star
+127.0.0.1 upload.star
 
-cluster.dev 对应star-cluster
+```
 
-image.dev 对应star-image
+apache httpd-vhosts.conf:
 
-merchant.dev 对应star-merchant
+```
+<VirtualHost *:80>
+  ServerName center.star
+  ServerAlias center.star
+  DocumentRoot "E:\wamp64\www\galaxy\star-center\web"
+  <Directory "E:\wamp64\www\galaxy\star-center\web">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require local
+  </Directory>
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName store.star
+  ServerAlias store.star
+  DocumentRoot "E:\wamp64\www\galaxy\star-store\web"
+  <Directory "E:\wamp64\www\galaxy\star-store\web">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require local
+  </Directory>
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName mall.star
+  ServerAlias mall.star
+  DocumentRoot "E:\wamp64\www\galaxy\star-mall\web"
+  <Directory "E:\wamp64\www\galaxy\star-mall\web">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require local
+  </Directory>
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName merchant.star
+  ServerAlias merchant.star
+  DocumentRoot "E:\wamp64\www\galaxy\star-merchant\web"
+  <Directory "E:\wamp64\www\galaxy\star-merchant\web">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require local
+  </Directory>
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName upload.star
+  ServerAlias upload.star
+  DocumentRoot "E:\wamp64\www\galaxy\star-upload"
+  <Directory "E:\wamp64\www\galaxy\star-upload">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require local
+  </Directory>
+</VirtualHost>
 
-....
-
-命名规则为xxx.dev对应star-xxx
+```
 
 数据库
 -------
@@ -66,9 +133,9 @@ yii migrate/up system_v0_1_0 --migrationPath=@star/system/migrations
 安装流程
 ---------
 
-1. composer update
+1. composer update(目前暂停使用compose更新，可直接使用根目录的vendor.zip解压到当前目录即可)
 
-2. php init
+2. php init （本地选择 0 - 开发环境，线上选择 1 - 生产环境）
 
 3. 修改数据库连接 账号
 
@@ -76,60 +143,15 @@ yii migrate/up system_v0_1_0 --migrationPath=@star/system/migrations
 
 5. 将 console/data/galaxy_latest.sql 导入数据库
 
-YII2 DIRECTORY STRUCTURE
--------------------
+账户
+---------
 
-```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
-tests                    contains various tests for the advanced application
-    codeception/         contains tests developed with Codeception PHP Testing Framework
-```
-分布式部署采用N个分支模式？
+平台后台：admin 123456
 
 REQUIREMENTS
 ------------
 
 The minimum requirement by this application template that your Web server supports PHP 5.4.0.
-
-
-INSTALLATION
-------------
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `advanced` that is directly under the Web root.
-
-Then follow the instructions given in "GETTING STARTED".
-
 
 ### Install via Composer
 
@@ -142,21 +164,3 @@ You can then install the application using the following command:
 php composer.phar global require "fxp/composer-asset-plugin:1.0.0"
 php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-advanced advanced
 ~~~
-
-
-GETTING STARTED
----------------
-
-After you install the application, you have to conduct the following steps to initialize
-the installed application. You only need to do these once for all.
-
-1. Run command `init` to initialize the application with a specific environment.
-2. Create a new database and adjust the `components['db']` configuration in `common/config/main-local.php` accordingly.
-3. Apply migrations with console command `yii migrate`. This will create tables needed for the application to work.
-4. Set document roots of your Web server:
-
-- for frontend `/path/to/yii-application/frontend/web/` and using the URL `http://frontend/`
-- for backend `/path/to/yii-application/backend/web/` and using the URL `http://backend/`
-
-To login into the application, you need to first sign up, with any of your email address, username and password.
-Then, you can login into the application with same email address and password at any time.
