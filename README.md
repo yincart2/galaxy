@@ -1,13 +1,13 @@
 Yincart2 Galaxy System
 ===================================
 
-Yincart2电商星系系统：
+终极电商系统解决方案：
 
-基础版本提供多商户平台商城(B2B2C)，可用于垂直电商平台或者综合电商平台
+基础版本提供多商户平台商城(B2B2C)，可用于垂直电商平台或者综合电商平台。若要作为B2C商城使用，关闭商家后台即可
 
 根据自己需要，可以扩展为分销、C2C、移动电商、微信小程序、社区团购等电商解决方案
 
-Galaxy目录结构说明
+目录结构说明
 -----------
 
 ```
@@ -42,7 +42,7 @@ star-center              平台后台
 star-mall                商城前台：如天猫、京东
 star-merchant            商家后台   
 star-store               商店前台  
-star-upload              上传的文件图片等  
+star-upload              上传的文件图片等（新安装需要自己创建此目录）
 themes                   主题皮肤          
 vendor/                  contains dependent 3rd-party packages
 environments/            contains environment-based overrides
