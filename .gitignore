@@ -17,6 +17,8 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
+star-upload/file
+star-upload/image
 
 # composer itself is not needed
 composer.phar
@@ -28,9 +30,9 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
-star-image/
 
+star-center/runtime
+star-cms/runtime
+star-mall/runtime
 star-merchant/runtime
-star-cluster/runtime
-star-core/runtime
-star-citizen/runtime
+star-store/runtime

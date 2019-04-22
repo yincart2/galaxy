@@ -1,6 +1,7 @@
 <?php
 Yii::setAlias('common', dirname(__DIR__));
 Yii::setAlias('console', dirname(dirname(__DIR__)) . '/console');
+Yii::setAlias('cms', dirname(dirname(__DIR__)) . '/star-cms');
 Yii::setAlias('mall', dirname(dirname(__DIR__)) . '/star-mall');
 Yii::setAlias('store', dirname(dirname(__DIR__)) . '/star-store');
 Yii::setAlias('center', dirname(dirname(__DIR__)) . '/star-center');

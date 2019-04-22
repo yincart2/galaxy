@@ -1,0 +1,293 @@
+.ilightbox-overlay.smooth {
+	background: #0F0F0F;
+}
+
+.ilightbox-loader.smooth {
+	-webkit-box-shadow: rgba(0,0,0,1) 0px 0px 55px, rgba(0,0,0,.3) 0px 0px 55px;
+	        box-shadow: rgba(0,0,0,1) 0px 0px 55px, rgba(0,0,0,.3) 0px 0px 55px;
+}
+.ilightbox-loader.smooth div {
+	background: #000 url('preloader.gif') no-repeat center;
+}
+
+.ilightbox-holder.smooth {
+	border/*\**/: black 1px solid\9;  /* IE7-8 */
+
+	-webkit-box-shadow: 0 0 45px rgba(0,0,0,.9);
+	        box-shadow: 0 0 45px rgba(0,0,0,.9);
+}
+
+.ilightbox-holder.smooth .ilightbox-container > * {
+	pointer-events: all;
+}
+
+.ilightbox-holder.smooth .ilightbox-container:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	
+	-webkit-box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.11);
+	        box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.11);
+}
+
+.ilightbox-holder.smooth .ilightbox-container .ilightbox-caption {
+	background: url('caption-bg.png');
+	border: 1px solid rgba(0,0,0,0.2);
+	left: 1px;
+	right: 1px;
+	bottom: 1px;
+	color: #FFF;
+	text-shadow: 0 0 3px rgba(0, 0, 0, .75);
+	
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+}
+
+.ilightbox-holder.smooth .ilightbox-container .ilightbox-social {
+	background: url('caption-bg.png');
+	border: 1px solid rgba(0,0,0,0.2);
+	left: 1px;
+	top: 1px;
+	
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+}
+
+.ilightbox-holder.smooth .ilightbox-alert {
+	background: url('alert.png') no-repeat center top;
+	color: #555;
+}
+
+/* Style toolbar */
+.ilightbox-toolbar.smooth {
+	top: 8px;
+	left: 8px;
+	height: 25px;
+}
+
+.ilightbox-toolbar.smooth a {
+	width: 27px;
+	height: 25px;
+	background: #000 url('buttons.png') no-repeat 7px 6px;
+}
+
+.ilightbox-toolbar.smooth a:hover {
+	background-color: #51b7ff;
+}
+
+.ilightbox-toolbar.smooth a.ilightbox-close:hover {
+	background-color: #d94947;
+}
+
+.ilightbox-toolbar.smooth a.disabled {
+	opacity: 0.2;
+	filter: alpha(opacity=20);
+	cursor: default;
+	background-color: #000;
+	
+	-webkit-box-shadow: 0 0 25px rgba(0,0,0,.8);
+	        box-shadow: 0 0 25px rgba(0,0,0,.8);
+}
+
+.ilightbox-toolbar.smooth a.ilightbox-fullscreen {
+	background-position: 6px -31px;
+}
+
+.ilightbox-toolbar.smooth a.ilightbox-play {
+	background-position: 8px -55px;
+}
+
+.ilightbox-toolbar.smooth a.ilightbox-pause {
+	background-position: 8px -81px;
+}
+
+.isMobile .ilightbox-toolbar.smooth {
+	background: #000;
+	top: auto;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	text-align: center;
+}
+
+.isMobile .ilightbox-toolbar.smooth a {
+	display: inline-block;
+	float: none;
+	width: 50px;
+	height: 40px;
+	background-size: 50%;
+	background-position: 50%;
+}
+
+.isMobile .ilightbox-toolbar.smooth a.ilightbox-fullscreen {
+	background-image: url('fullscreen-icon-64.png');
+	background-image/*\**/: url('fullscreen-icon-ie.png')\9;  /* IE7-8 */
+}
+
+.isMobile .ilightbox-toolbar.smooth a.ilightbox-close {
+	background-image: url('x-mark-icon-64.png');
+	background-image/*\**/: url('x-mark-icon-ie.png')\9;  /* IE7-8 */
+}
+
+.isMobile .ilightbox-toolbar.smooth a.ilightbox-next-button {
+	background-image: url('arrow-next-icon-64.png');
+	background-image/*\**/: url('arrow-next-icon-ie.png')\9;  /* IE7-8 */
+	background-position: 52% 50%;
+}
+
+.isMobile .ilightbox-toolbar.smooth a.ilightbox-prev-button {
+	background-image: url('arrow-prev-icon-64.png');
+	background-image/*\**/: url('arrow-prev-icon-ie.png')\9;  /* IE7-8 */
+	background-position: 48% 50%;
+}
+
+.isMobile .ilightbox-toolbar.smooth a.ilightbox-play {
+	background-image: url('play-icon-64.png');
+	background-image/*\**/: url('play-icon-ie.png')\9;  /* IE7-8 */
+}
+
+.isMobile .ilightbox-toolbar.smooth a.ilightbox-pause {
+	background-image: url('pause-icon-64.png');
+	background-image/*\**/: url('pause-icon-ie.png')\9;  /* IE7-8 */
+}
+
+.ilightbox-holder.smooth .ilightbox-inner-toolbar .ilightbox-title {
+	font-size: 18px;
+	padding: 10px 12px;
+	padding-right: 60px;
+	color: #acacad;
+}
+
+.ilightbox-holder.smooth .ilightbox-inner-toolbar .ilightbox-toolbar {
+	left: auto;
+	top: 5px;
+	right: 5px;
+}
+
+.ilightbox-holder.smooth .ilightbox-inner-toolbar .ilightbox-toolbar a {
+	float: right;
+}
+
+/* Style thumbnails */
+.ilightbox-thumbnails.smooth.ilightbox-horizontal {
+	height: 100px;
+}
+
+.ilightbox-thumbnails.smooth.ilightbox-horizontal .ilightbox-thumbnails-container {
+	height: 100px;
+}
+
+.ilightbox-thumbnails.smooth.ilightbox-vertical {
+	width: 140px;
+}
+
+.ilightbox-thumbnails.smooth.ilightbox-vertical .ilightbox-thumbnails-container {
+	width: 140px;
+}
+
+.ilightbox-thumbnails.smooth .ilightbox-thumbnails-grid .ilightbox-thumbnail {
+	padding: 10px;
+}
+
+.ilightbox-thumbnails.smooth .ilightbox-thumbnails-grid .ilightbox-thumbnail img {
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.8);
+	        box-shadow: 0 0 10px rgba(0,0,0,.8);
+	
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+}
+
+.ilightbox-thumbnails.smooth  .ilightbox-thumbnails-grid .ilightbox-thumbnail:after {
+	display: block;
+	content: '';
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+	margin: auto;
+	pointer-events: none;
+	
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	
+	-webkit-box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.11);
+	        box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.11);
+}
+
+.ilightbox-thumbnails.smooth.ilightbox-vertical  .ilightbox-thumbnails-grid .ilightbox-thumbnail {
+	margin-bottom: -10px;
+}
+
+.ilightbox-thumbnails.smooth.ilightbox-horizontal  .ilightbox-thumbnails-grid .ilightbox-thumbnail {
+	margin-right: -10px;
+}
+
+.ilightbox-thumbnails.smooth .ilightbox-thumbnails-grid .ilightbox-thumbnail .ilightbox-thumbnail-video {
+	background: url('thumb-overlay-play.png') no-repeat center;
+}
+
+/* Configure arrow buttons */
+.ilightbox-button.smooth.disabled {
+	opacity: 0.1;
+	filter: alpha(opacity=10);
+	cursor: default;
+}
+.ilightbox-button.smooth span {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.ilightbox-button.smooth {
+	bottom: 0;
+	right: 0;
+	left: 0;
+	left/*\**/: 45%\9;  /* IE7-8 */
+	right/*\**/: auto\9;  /* IE7-8 */
+	width: 120px;
+	height: 70px;
+	margin: auto;
+	background: url('arrows_vertical.png') no-repeat 50% -110px;
+	background-color: #000;
+	background-color: rgba(0,0,0,0.5);
+	border: rgba(255,255,255,.2) 1px solid;
+	border/*\**/: rgb(100,100,100) 1px solid\9;  /* IE7-8 */
+}
+.ilightbox-button.ilightbox-next-button.smooth {
+	border-bottom: 0;
+}
+.ilightbox-button.ilightbox-prev-button.smooth {
+	top: 0;
+	bottom: auto;
+	background-position: 50% -15px;
+	border-top: 0;
+}
+.ilightbox-button.smooth.horizontal {
+	right: 0;
+	left: auto;
+	top: 0;
+	bottom: 0;
+	top/*\**/: 41%\9;  /* IE7-8 */
+	bottom/*\**/: auto\9;  /* IE7-8 */
+	width: 70px;
+	height: 120px;
+	background-image: url('arrows_horizontal.png');
+	background-position: -110px 50%;
+	border: rgba(255,255,255,.2) 1px solid;
+	border/*\**/: rgb(100,100,100) 1px solid\9;  /* IE7-8 */
+}
+.ilightbox-button.ilightbox-next-button.smooth.horizontal {
+	border-right: 0;
+}
+.ilightbox-button.ilightbox-prev-button.smooth.horizontal {
+	right: auto;
+	left: 0;
+	background-position: -18px 50%;
+	border-left: 0;
+}

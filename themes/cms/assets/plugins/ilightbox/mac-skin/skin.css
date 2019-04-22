@@ -1,0 +1,304 @@
+.ilightbox-overlay.mac {
+	background: #2B2B2B;
+}
+
+.ilightbox-loader.mac {
+	-webkit-box-shadow: black 0px 0px 85px, black 0px 0px 85px;
+	        box-shadow: black 0px 0px 85px, black 0px 0px 85px;
+}
+.ilightbox-loader.mac div {
+	background: #141414 url('preloader.gif') no-repeat center;
+}
+
+.ilightbox-holder.mac {
+	padding: 2px;
+	background: rgba(35,35,35,.9);
+	background/*\**/: rgb(35,35,35)\9;  /* IE7-8 */
+
+	-webkit-box-shadow: 0 38px 30px -18px rgba(0, 0, 0, .6);
+	-moz-box-shadow: 0 38px 30px -18px rgba(0, 0, 0, .6);
+	box-shadow: 0 38px 30px -18px rgba(0, 0, 0, .6);
+}
+
+.ilightbox-holder.mac .ilightbox-container  .ilightbox-caption {
+	background: url('caption-bg.png');
+	color: #FFF;
+	bottom: 15px;
+	left: 15px;
+	right: 15px;
+	border: rgba(255,255,255,0.8) 1px solid;
+	border/*\**/: rgb(245,245,245) 1px solid\9;  /* IE7-8 */
+
+	-webkit-box-shadow: 0 0 2px rgba(0,0,0,0.5);
+	box-shadow: 0 0 2px rgba(0,0,0,0.5);
+
+	-webkit-border-radius: 3px;
+	        border-radius: 3px;
+}
+
+.ilightbox-holder.mac .ilightbox-container  .ilightbox-social {
+	background: #FFF;
+}
+
+.ilightbox-holder.mac .ilightbox-alert {
+	background: url('alert.png') no-repeat center top;
+	color: #555;
+}
+
+/* Style toolbar */
+.ilightbox-toolbar.mac {
+	top: 15px;
+	left: 15px;
+	background: rgb(65,65,65); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(65,65,65,1) 0%, rgba(65,65,65,1) 40%, rgba(50,50,50,1) 60%, rgba(50,50,50,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(65,65,65,1)), color-stop(40%,rgba(65,65,65,1)), color-stop(60%,rgba(50,50,50,1)), color-stop(100%,rgba(50,50,50,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#414141', endColorstr='#323232',GradientType=0 ); /* IE7-9 */
+	border: rgba(30,30,30,.6) 1px solid;
+	border/*\**/: rgb(30,30,30) 1px solid\9;  /* IE7-8 */
+	overflow: hidden;
+	
+	-webkit-border-radius: 3px;
+	        border-radius: 3px;
+}
+
+.ilightbox-toolbar.mac a {
+	width: 28px;
+	height: 28px;
+	background: no-repeat 50%;
+}
+
+.ilightbox-toolbar.mac a.disabled {
+	opacity: 0.2;
+	filter: alpha(opacity=20);  /* IE7-8 */
+	cursor: default;
+	background-color: transparent !important;
+}
+
+.ilightbox-toolbar.mac a:hover {
+	background-color: #4B4B4B;
+}
+
+.ilightbox-toolbar.mac a.ilightbox-close {
+	background-image: url('close-25.png');
+}
+
+.ilightbox-toolbar.mac a.ilightbox-fullscreen {
+	background-image: url('resize-25.png');
+	right: 35px;
+}
+
+.ilightbox-toolbar.mac a.ilightbox-play {
+	background-image: url('play-25.png');
+	right: 35px;
+}
+
+.ilightbox-toolbar.mac a.ilightbox-pause {
+	background-image: url('pause-25.png');
+	right: 35px;
+}
+
+.isMobile .ilightbox-toolbar.mac {
+	top: auto;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	background: rgb(65,65,65); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(65,65,65,1) 0%, rgba(65,65,65,1) 40%, rgba(50,50,50,1) 60%, rgba(50,50,50,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(65,65,65,1)), color-stop(40%,rgba(65,65,65,1)), color-stop(60%,rgba(50,50,50,1)), color-stop(100%,rgba(50,50,50,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#414141', endColorstr='#323232',GradientType=0 ); /* IE7-9 */
+	border: 0;
+	border-top: rgba(30,30,30,.6) 1px solid;
+	border-top/*\**/: rgb(30,30,30) 1px solid\9;  /* IE7-8 */
+	overflow: hidden;
+	text-align: center;
+	
+	-webkit-border-radius: 3px;
+	        border-radius: 3px;
+}
+
+.isMobile .ilightbox-toolbar.mac a {
+	display: inline-block;
+	float: none;
+	width: 50px;
+	height: 40px;
+	background-size: 50%;
+	background-position: 50% !important;
+}
+
+.isMobile .ilightbox-toolbar.mac a.ilightbox-fullscreen {
+	background-image: url('resize-50.png');
+	background-image/*\**/: url('resize-ie.png')\9;  /* IE7-8 */
+}
+
+.isMobile .ilightbox-toolbar.mac a.ilightbox-close {
+	background-image: url('close-50.png');
+	background-image/*\**/: url('close-ie.png')\9;  /* IE7-8 */
+}
+
+.isMobile .ilightbox-toolbar.mac a.ilightbox-next-button {
+	background-image: url('forward-50.png');
+	background-position: 52% 50% !important;
+	background-image/*\**/: url('forward-ie.png')\9;  /* IE7-8 */
+}
+
+.isMobile .ilightbox-toolbar.mac a.ilightbox-prev-button {
+	background-image: url('back-50.png');
+	background-position: 48% 50% !important;
+	background-image/*\**/: url('back-ie.png')\9;  /* IE7-8 */
+}
+
+.isMobile .ilightbox-toolbar.mac a.ilightbox-play {
+	background-image: url('play-50.png');
+	background-size: 80%;
+	background-position: 70% 50% !important;
+	background-image/*\**/: url('play-ie.png')\9;  /* IE7-8 */
+}
+
+.isMobile .ilightbox-toolbar.mac a.ilightbox-pause {
+	background-image: url('pause-50.png');
+	background-size: 80%;
+	background-image/*\**/: url('pause-ie.png')\9;  /* IE7-8 */
+}
+
+.ilightbox-holder.mac .ilightbox-inner-toolbar .ilightbox-title {
+	font-size: 18px;
+	padding: 10px 8px;
+	color: #000;
+}
+
+.ilightbox-holder.mac .ilightbox-inner-toolbar .ilightbox-toolbar {
+	display: inline-block;
+	left: -15px;
+	top: -15px;
+}
+
+.ilightbox-holder.mac .ilightbox-inner-toolbar .ilightbox-toolbar a {
+	float: left;
+	
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+}
+
+/* Style thumbnails */
+.ilightbox-thumbnails.mac .ilightbox-thumbnails-grid .ilightbox-thumbnail img {
+	box-shadow: 0 0 6px rgba(0, 0, 0, .9);
+	
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+}
+
+.ilightbox-thumbnails.mac .ilightbox-thumbnails-grid .ilightbox-thumbnail .ilightbox-thumbnail-video {
+	background: url('thumb-overlay-play.png') no-repeat center;
+}
+
+/* Configure arrow buttons */
+.ilightbox-button.mac.disabled {
+	opacity: 0.2;
+	filter: alpha(opacity=20);  /* IE7-8 */
+	cursor: default;
+	background: #3b3b3b !important;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#414141', endColorstr='#323232',GradientType=0 ); /* IE7-9 */
+}
+.ilightbox-button.mac span {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.ilightbox-button.mac {
+	bottom: 0;
+	right: 0;
+	left: 0;
+	left/*\**/: 45%\9;  /* IE7-8 */
+	right/*\**/: auto\9;  /* IE7-8 */
+	width: 95px;
+	height: 55px;
+	margin: auto;
+	background: rgb(65,65,65); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(65,65,65,1) 0%, rgba(65,65,65,1) 40%, rgba(50,50,50,1) 60%, rgba(50,50,50,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(65,65,65,1)), color-stop(40%,rgba(65,65,65,1)), color-stop(60%,rgba(50,50,50,1)), color-stop(100%,rgba(50,50,50,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(65,65,65,1) 0%,rgba(65,65,65,1) 40%,rgba(50,50,50,1) 60%,rgba(50,50,50,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#414141', endColorstr='#323232',GradientType=0 ); /* IE7-9 */
+	border: rgba(30,30,30,.6) 1px solid;
+	border/*\**/: rgb(30,30,30) 1px solid\9;  /* IE7-8 */
+
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+		    border-top-left-radius: 5px;
+		    border-top-right-radius: 5px;
+}
+.ilightbox-button.ilightbox-button.mac:hover {
+	background: rgb(75,75,75); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(75,75,75,1) 0%, rgba(75,75,75,1) 40%, rgba(60,60,60,1) 60%, rgba(60,60,60,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(75,75,75,1)), color-stop(40%,rgba(75,75,75,1)), color-stop(60%,rgba(60,60,60,1)), color-stop(100%,rgba(60,60,60,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(75,75,75,1) 0%,rgba(75,75,75,1) 40%,rgba(60,60,60,1) 60%,rgba(60,60,60,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(75,75,75,1) 0%,rgba(75,75,75,1) 40%,rgba(60,60,60,1) 60%,rgba(60,60,60,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(75,75,75,1) 0%,rgba(75,75,75,1) 40%,rgba(60,60,60,1) 60%,rgba(60,60,60,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(75,75,75,1) 0%,rgba(75,75,75,1) 40%,rgba(60,60,60,1) 60%,rgba(60,60,60,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b4b4b', endColorstr='#3c3c3c',GradientType=0 ); /* IE7-9 */
+}
+.ilightbox-button.ilightbox-prev-button.mac {
+	top: 0;
+	bottom: auto;
+
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+		    border-bottom-left-radius: 5px;
+		    border-bottom-right-radius: 5px;
+}
+.ilightbox-button.ilightbox-next-button.mac span {
+	background: url('forward-vertical-50.png') no-repeat 50% 75%;
+}
+.ilightbox-button.ilightbox-prev-button.mac span {
+	background: url('back-vertical-50.png') no-repeat 50% 25%;
+}
+.ilightbox-button.ilightbox-next-button.mac.horizontal,
+.ilightbox-button.ilightbox-prev-button.mac.horizontal {
+	right: 0;
+	left: auto;
+	top: 0;
+	bottom: 0;
+	top/*\**/: 41%\9;  /* IE7-8 */
+	bottom/*\**/: auto\9;  /* IE7-8 */
+	width: 55px;
+	height: 95px;
+
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+		    border-bottom-left-radius: 5px;
+		    border-top-left-radius: 5px;
+}
+.ilightbox-button.ilightbox-prev-button.mac.horizontal {
+	right: auto;
+	left: 0;
+
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+		    border-bottom-right-radius: 5px;
+		    border-top-right-radius: 5px;
+}
+.ilightbox-button.ilightbox-next-button.mac.horizontal span {
+	background: url('forward-50.png') no-repeat 75% 50%;
+}
+.ilightbox-button.ilightbox-prev-button.mac.horizontal span {
+	background: url('back-50.png') no-repeat 25% 50%;
+}
