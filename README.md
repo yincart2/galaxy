@@ -39,6 +39,7 @@ modules                  公用模块
     store                商店模块
     system               系统模块
 star-center              平台后台      
+star-cms                 内容管理平台：可用于公司官方网站
 star-mall                商城前台：如天猫、京东
 star-merchant            商家后台   
 star-store               商店前台  
