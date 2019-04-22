@@ -58,6 +58,7 @@ tests                    contains various tests for the advanced application
 本地测试hosts：
 ```
 127.0.0.1 center.star
+127.0.0.1 cms.star
 127.0.0.1 mall.star
 127.0.0.1 merchant.star
 127.0.0.1 store.star
@@ -73,6 +74,16 @@ apache httpd-vhosts.conf:
   ServerAlias center.star
   DocumentRoot "E:\wamp64\www\galaxy\star-center\web"
   <Directory "E:\wamp64\www\galaxy\star-center\web">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require local
+  </Directory>
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName cms.star
+  ServerAlias cms.star
+  DocumentRoot "E:\wamp64\www\galaxy\star-cms\web"
+  <Directory "E:\wamp64\www\galaxy\star-cms\web">
     Options +Indexes +Includes +FollowSymLinks +MultiViews
     AllowOverride All
     Require local
